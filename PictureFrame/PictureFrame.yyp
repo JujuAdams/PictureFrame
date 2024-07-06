@@ -18,6 +18,7 @@
   },
   "name":"PictureFrame",
   "resources":[
+    {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
     {"id":{"name":"PictureFrame","path":"scripts/PictureFrame/PictureFrame.yy",},},
   ],
