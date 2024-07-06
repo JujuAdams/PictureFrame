@@ -30,12 +30,13 @@
 ///   Returns a struct containing the parameters set above.
 /// 
 /// 
-/// .SetViewMaxScale(maxScale)
-///   Sets the maximum scale applied to the camera to get the view dimensions. Set this to 1 for
-///   pixel art gqames that don't want to use subpixel rendering.
+/// .SetViewParams(maxScale, pixelPerfect)
+///   Sets the maximum scale used to calculate the view size from the camera size. Set this value
+///   to 1 for pixel art games that don't want to use subpixels. The "pixelPerfect" argument when
+///   set to <true> will tell the PictureFrame to use an integer scales.
 /// 
 /// .GetViewMaxScale()
-///   Returns the maximum view scale.
+///   Returns a struct containing the parameters set above.
 /// 
 /// 
 /// .SetWindowParams(width, height, [allowResize=false])
@@ -64,12 +65,12 @@
 ///   Returns a struct containing the parameters set above.
 /// 
 /// 
-/// .SetPixelPerfect(state)
-///   Sets whether PictureFrame should try to set up pixel perfect rendering. This forces
-///   PictureFrame to use integer scaling factors as much as possible.
+/// .SetAppSurfacePixelPerfect(state)
+///   Sets whether PictureFrame should use integer scaling when calculating the rendering size and
+///   position of the application surface.
 /// 
-/// .GetPixelPerfect()
-///   Returns whether the scoped PictureFrame is set up for pixel perfect scaling.
+/// .GetAppSurfacePixelPerfect()
+///   Returns the state of the above.
 /// 
 /// 
 /// .GetCameraWidth()
@@ -106,7 +107,8 @@ function PictureFrame() constructor
         __cameraMaxWidth:  640,
         __cameraMaxHeight: 360,
         
-        __maxViewScale: infinity,
+        __maxViewScale:     infinity,
+        __viewPixelPerfect: true,
         
         //Force "fullscreen" on non-desktop platforms
         __fullscreen: ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))? window_get_fullscreen() : true,
@@ -118,7 +120,7 @@ function PictureFrame() constructor
         __guiTargetWidth:  window_get_width(),
         __guiTargetHeight: window_get_height(),
         
-        __pixelPerfect: true,
+        __surfacePixelPerfect: true,
     };
     
     __output = {
@@ -184,11 +186,13 @@ function PictureFrame() constructor
     
     
     /// @param maxScale
-    static SetViewMaxScale = function(_maxViewScale)
+    static SetViewParams = function(_maxViewScale, _pixelPerfect)
     {
-        if (_maxViewScale != __input.__maxViewScale)
+        if ((_maxViewScale != __input.__maxViewScale)
+        ||  (_pixelPerfect != __input.__pixelPerfect))
         {
-            __input.__maxViewScale = _maxViewScale;
+            __input.__maxViewScale     = _maxViewScale;
+            __input.__viewPixelPerfect = _pixelPerfect;
             
             __dirty = true;
         }
@@ -196,9 +200,12 @@ function PictureFrame() constructor
         return self;
     }
     
-    static GetViewMaxScale = function()
+    static GetViewParams = function()
     {
-        return __input.__maxViewScale;
+        static _result = {};
+        _result.__maxViewScale     = __input.__maxViewScale;
+        _result.__viewPixelPerfect = __input.__viewPixelPerfect;
+        return _result;
     }
     
     
@@ -284,11 +291,11 @@ function PictureFrame() constructor
     
     
     /// @param state
-    static SetPixelPerfect = function(_state)
+    static SetAppSurfacePixelPerfect = function(_state)
     {
-        if (_state != __input.__pixelPerfect)
+        if (_state != __input.__surfacePixelPerfect)
         {
-            __input.__pixelPerfect = _state;
+            __input.__surfacePixelPerfect = _state;
             
             __dirty = true;
         }
@@ -296,9 +303,9 @@ function PictureFrame() constructor
         return self;
     }
     
-    static GetPixelPerfect = function()
+    static GetAppSurfacePixelPerfect = function()
     {
-        return __input.__pixelPerfect;
+        return __input.__surfacePixelPerfect;
     }
     
     
@@ -471,7 +478,7 @@ function PictureFrame() constructor
     
     /// @param [texFilter]
     /// @param [blendEnable=false]
-    static DrawApplicationSurface = function(_filter = (not __pixelPerfect), _blendEnable = false)
+    static DrawApplicationSurface = function(_filter = (not __surfacePixelPerfect), _blendEnable = false)
     {
         Recalculate();
         with(__output)
@@ -559,7 +566,7 @@ function PictureFrame() constructor
             var _outViewScale = min(__maxViewScale, _windowWidth/_outCameraWidth, _windowHeight/_outCameraHeight);
             
             //If we're using pixel perfect scaling for our view then drop down to the nearest integer scale
-            if (__pixelPerfect && (_outViewScale > 1)) _outViewScale = floor(_outViewScale);
+            if (__viewPixelPerfect && (_outViewScale > 1)) _outViewScale = floor(_outViewScale);
             
             //Scale up the view using the same aspect ratio as the camera
             var _outViewWidth  = _outViewScale*_outCameraWidth;
@@ -607,7 +614,7 @@ function PictureFrame() constructor
             var _surfaceScale = min(_outGuiWidth/_outViewWidth, _outGuiHeight/_outViewHeight);
             
             //If we're using pixel perfect scaling then drop down to the nearest integer scale
-            if (__pixelPerfect && (_surfaceScale > 1)) _surfaceScale = floor(_surfaceScale);
+            if (__surfacePixelPerfect && (_surfaceScale > 1)) _surfaceScale = floor(_surfaceScale);
             
             //Centre the application surface on the GUI layer
             var _surfaceDrawWidth  = _surfaceScale*_outViewWidth;
