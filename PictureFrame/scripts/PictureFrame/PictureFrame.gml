@@ -5,6 +5,17 @@
 /// finnicky mathematics of handling reactive scaling for 2D games. Supports safe regions for
 /// cameras and pixel perfect scaling.
 /// 
+/// It is recommend that you disable GameMaker's native application surface drawing and instead
+/// call the .DrawApplicationSurface() method in a Post-Draw or Begin GUI event. You can disable
+/// native application surface drawing by calling application_surface_draw_enable(false) at the
+/// start of your game.
+/// 
+/// 
+/// 
+/// PictureFrame() constructor
+///   Instantiates a PictureFrame struct with the (many) methods listed below. You can create many
+///   PictureFrames if you want.
+/// 
 /// 
 /// .Apply()
 ///   Applies variables from the PictureFrame instance to the camera and view if active, and to the
@@ -12,10 +23,13 @@
 ///   convenient. The exact size of each stage in rendering are determined by PictureFrame using
 ///   the parameters set by other methods.
 /// 
+/// 
 /// .DrawApplicationSurface([texFilter], [blendEnable=false])
-///   Manually draws the application surface. This should typically be called in the Post-Draw or
-///   Begin Draw event. The position and scale of the application surface are calculated by
-///   PictureFrame using the parameters set by other methods.
+///   Manually draws the application surface. This method should be used instead of GameMaker's
+///   native application surface drawing. This should typically be called in the Post-Draw or Begin
+///   Draw event. The position and scale of the application surface are calculated by PictureFrame
+///   using the parameters set by other methods.
+/// 
 /// 
 /// .GetDebugString()
 ///   Returns a string that contains all the output variables calculated by PictureFrame.
@@ -98,6 +112,8 @@
 /// .Recalculate()
 ///   Immediately recalculates output variables. You shouldn't need to call this function but you
 ///   might find a situation where it's helpful.
+
+
 
 function PictureFrame() constructor
 {
