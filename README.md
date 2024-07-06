@@ -4,4 +4,4 @@
 
 <p align="center"><a href="https://github.com/JujuAdams/PictureFrame/releases/">Download the .yymps</a></p>
 
-PictureFrame is a one-script library. You can read the [code and comments here](https://github.com/JujuAdams/PictureFrame/blob/main/PictureFrame/scripts/PictureFrame/PictureFrame.gml).
+<p align="center">PictureFrame is a one-script library. You can read the <a href="https://github.com/JujuAdams/PictureFrame/blob/main/PictureFrame/scripts/PictureFrame/PictureFrame.gml">code and comments here</a>.</p>
