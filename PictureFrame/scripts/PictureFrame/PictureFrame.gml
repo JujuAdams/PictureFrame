@@ -1,9 +1,9 @@
-/// PictureFrame 1.1.0  2024-07-06
+/// PictureFrame 2.0.0  2024-07-07
 /// Juju Adams
 /// 
-/// Camera, view, GUI, window, and application surface dimension calculator. Simplifies the
-/// finnicky mathematics of handling reactive scaling for 2D games. Supports safe regions for
-/// cameras and pixel perfect scaling.
+/// Camera, view, GUI, window, and application surface calculator. Simplifies the finnicky
+/// mathematics of handling reactive scaling for 2D games. Supports safe regions for cameras and
+/// pixel perfect scaling.
 /// 
 /// It is recommend that you disable GameMaker's native application surface drawing and instead
 /// call the .DrawApplicationSurface() method in a Post-Draw or Begin GUI event. You can disable
