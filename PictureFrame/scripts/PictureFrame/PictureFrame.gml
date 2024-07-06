@@ -107,7 +107,7 @@ function PictureFrame() constructor
         __cameraMaxWidth:  640,
         __cameraMaxHeight: 360,
         
-        __maxViewScale:     infinity,
+        __viewMaxScale:     infinity,
         __viewPixelPerfect: true,
         
         //Force "fullscreen" on non-desktop platforms
@@ -176,10 +176,10 @@ function PictureFrame() constructor
     static GetCameraParams = function()
     {
         static _result = {};
-        _result.__cameraMinWidth  = __input.__cameraMinWidth;
-        _result.__cameraMinHeight = __input.__cameraMinHeight;
-        _result.__cameraMaxWidth  = __input.__cameraMaxWidth;
-        _result.__cameraMaxHeight = __input.__cameraMaxHeight;
+        _result.cameraMinWidth  = __input.__cameraMinWidth;
+        _result.cameraMinHeight = __input.__cameraMinHeight;
+        _result.cameraMaxWidth  = __input.__cameraMaxWidth;
+        _result.cameraMaxHeight = __input.__cameraMaxHeight;
         return _result;
     }
     
@@ -188,10 +188,10 @@ function PictureFrame() constructor
     /// @param maxScale
     static SetViewParams = function(_maxViewScale, _pixelPerfect)
     {
-        if ((_maxViewScale != __input.__maxViewScale)
+        if ((_maxViewScale != __input.__viewMaxScale)
         ||  (_pixelPerfect != __input.__pixelPerfect))
         {
-            __input.__maxViewScale     = _maxViewScale;
+            __input.__viewMaxScale     = _maxViewScale;
             __input.__viewPixelPerfect = _pixelPerfect;
             
             __dirty = true;
@@ -203,8 +203,8 @@ function PictureFrame() constructor
     static GetViewParams = function()
     {
         static _result = {};
-        _result.__maxViewScale     = __input.__maxViewScale;
-        _result.__viewPixelPerfect = __input.__viewPixelPerfect;
+        _result.viewMaxScale     = __input.__viewMaxScale;
+        _result.viewPixelPerfect = __input.__viewPixelPerfect;
         return _result;
     }
     
@@ -231,8 +231,8 @@ function PictureFrame() constructor
     static GetWindowParams = function()
     {
         static _result = {};
-        _result.__windowWidth  = __input.__windowWidth;
-        _result.__windowHeight = __input.__windowHeight;
+        _result.windowWidth  = __input.__windowWidth;
+        _result.windowHeight = __input.__windowHeight;
         return _result;
     }
     
@@ -283,8 +283,8 @@ function PictureFrame() constructor
     static GetGuiParams = function()
     {
         static _result = {};
-        _result.__guiTargetWidth  = __input.__guiTargetWidth;
-        _result.__guiTargetHeight = __input.__guiTargetHeight;
+        _result.guiTargetWidth  = __input.__guiTargetWidth;
+        _result.guiTargetHeight = __input.__guiTargetHeight;
         return _result;
     }
     
@@ -537,8 +537,8 @@ function PictureFrame() constructor
             // --- Camera ---
             
             //Start with our output camera being the same size as the window but scaled down by the maximum view scale
-            var _outCameraWidth  = _windowWidth/__maxViewScale;
-            var _outCameraHeight = _windowHeight/__maxViewScale;
+            var _outCameraWidth  = _windowWidth/__viewMaxScale;
+            var _outCameraHeight = _windowHeight/__viewMaxScale;
             
             //Figure out the scaling factor that fits us inside the maximum bounds of the camera
             //If the scaling factor is greater than or equal to 1 then the camera already fits inside the maximum bounds and no scaling is needed
@@ -563,7 +563,7 @@ function PictureFrame() constructor
             
             //Figure out the scaling factor that fits the camera inside the window
             //We limit how scaled up the view can be at the same time here too
-            var _outViewScale = min(__maxViewScale, _windowWidth/_outCameraWidth, _windowHeight/_outCameraHeight);
+            var _outViewScale = min(__viewMaxScale, _windowWidth/_outCameraWidth, _windowHeight/_outCameraHeight);
             
             //If we're using pixel perfect scaling for our view then drop down to the nearest integer scale
             if (__viewPixelPerfect && (_outViewScale > 1)) _outViewScale = floor(_outViewScale);
