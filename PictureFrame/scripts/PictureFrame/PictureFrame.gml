@@ -17,9 +17,8 @@
 ///   PictureFrames if you want.
 /// 
 /// 
-/// .Apply()
-///   Applies variables from the PictureFrame instance to the camera and view if active, and to the
-///   GUI layer, application surface, and window. You don't have to call this method but it very
+/// .Apply([toCamera=true], [toOther=true])
+///   Applies variables from PictureFrame to. You don't have to call this method but it very
 ///   convenient. The exact size of each stage in rendering are determined by PictureFrame using
 ///   the parameters set by other methods. Camera and viewport parameters are applied to the native
 ///   GameMaker view with index 0.
@@ -450,9 +449,9 @@ function PictureFrame() constructor
 	}
     
     
-    static Apply = function()
+    static Apply = function(_toCamera = true, _toOther = true)
     {
-        if (view_enabled && view_visible[0])
+        if (_toCamera && view_enabled && view_visible[0])
         {
             var _camera    = view_camera[0];
             var _oldWidth  = camera_get_view_width( _camera);
@@ -460,34 +459,40 @@ function PictureFrame() constructor
             
             camera_set_view_size(_camera, GetCameraWidth(), GetCameraHeight());
             camera_set_view_pos(_camera, 0.5*(_oldWidth - GetCameraWidth()), 0.5*(_oldHeight - GetCameraHeight()));
-            
-            view_wport[0] = GetViewWidth();
-            view_hport[0] = GetViewHeight();
         }
         
-        if ((surface_get_width(application_surface) != floor(GetViewWidth())) || (surface_get_height(application_surface) != floor(GetViewHeight())))
+        if (_toOther)
         {
-            surface_resize(application_surface, GetViewWidth(), GetViewHeight());
-        }
-        
-        if (GetFullscreen())
-        {
-            if (!window_get_fullscreen()) window_set_fullscreen(true);
-        }
-        else
-        {
-            if (window_get_fullscreen())
+            if (view_enabled && view_visible[0])
             {
-                window_set_fullscreen(false);
+                view_wport[0] = GetViewWidth();
+                view_hport[0] = GetViewHeight();
             }
             
-            if ((window_get_width() != GetWindowWidth()) || (window_get_height() != GetWindowHeight()))
+            if ((surface_get_width(application_surface) != floor(GetViewWidth())) || (surface_get_height(application_surface) != floor(GetViewHeight())))
             {
-                window_set_size(GetWindowWidth(), GetWindowHeight());
+                surface_resize(application_surface, GetViewWidth(), GetViewHeight());
             }
+            
+            if (GetFullscreen())
+            {
+                if (!window_get_fullscreen()) window_set_fullscreen(true);
+            }
+            else
+            {
+                if (window_get_fullscreen())
+                {
+                    window_set_fullscreen(false);
+                }
+                
+                if ((window_get_width() != GetWindowWidth()) || (window_get_height() != GetWindowHeight()))
+                {
+                    window_set_size(GetWindowWidth(), GetWindowHeight());
+                }
+            }
+            
+            display_set_gui_size(GetGuiWidth(), GetGuiHeight());
         }
-        
-        display_set_gui_size(GetGuiWidth(), GetGuiHeight());
         
         return self;
     }
