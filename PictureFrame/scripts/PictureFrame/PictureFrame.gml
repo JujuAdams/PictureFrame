@@ -21,7 +21,8 @@
 ///   Applies variables from the PictureFrame instance to the camera and view if active, and to the
 ///   GUI layer, application surface, and window. You don't have to call this method but it very
 ///   convenient. The exact size of each stage in rendering are determined by PictureFrame using
-///   the parameters set by other methods.
+///   the parameters set by other methods. Camera and viewport parameters are applied to the native
+///   GameMaker view with index 0.
 /// 
 /// 
 /// .DrawApplicationSurface([texFilter], [blendEnable=false])
@@ -559,6 +560,7 @@ function PictureFrame() constructor
             //Figure out the scaling factor that fits us inside the maximum bounds of the camera
             //If the scaling factor is greater than or equal to 1 then the camera already fits inside the maximum bounds and no scaling is needed
             var _cameraScale = min(1, __cameraMaxWidth/_outCameraWidth, __cameraMaxHeight/_outCameraHeight);
+            
             //Shrink down the camera so that it fits inside the maximum bounds
             _outCameraWidth  *= _cameraScale;
             _outCameraHeight *= _cameraScale;
@@ -566,7 +568,8 @@ function PictureFrame() constructor
             //Figure out the s_cameraScalecaling factor that fits us outside the minimum bounds
             //If the scaling factor is less than or equal to 1 then the camera already fits outside the minimum bounds and no scaling is needed
             var _cameraScale = max(1, __cameraMinWidth/_outCameraWidth, __cameraMinHeight/_outCameraHeight);
-            //Expand down the camera so that it fits outside the maximum bounds
+            
+            //Expand down the camera so that it fits outside the minimum bounds
             _outCameraWidth  *= _cameraScale;
             _outCameraHeight *= _cameraScale;
             
@@ -590,7 +593,7 @@ function PictureFrame() constructor
             
             // --- Window ---
             
-            if (!__windowAllowResize || __fullscreen)
+            if ((not __windowAllowResize) || __fullscreen)
             {
                 //If we're in fullscreen mode then the window size is always at the maximum (which is the size of the display)
                 var _outWindowWidth  = _windowWidth;
