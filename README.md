@@ -31,3 +31,39 @@ PictureFrame uses the following input parameters:
 - Whether the application surface should be drawn as "pixel perfect" (a.k.a. at an integer scale)
 
 PictureFrame is suitable for pixel art games and for high resolution games. It can calculate correct camera sizes regardless of device is especially suited for the wide variety of aspect ratios found on mobile devices.
+
+&nbsp;
+
+## Usage
+
+Import the [.yymps](https://github.com/JujuAdams/PictureFrame/releases/) or copy-paste the [one script](https://github.com/JujuAdams/PictureFrame/blob/main/PictureFrame/scripts/PictureFrame/PictureFrame.gml) into your project. PictureFrame uses a method interface for setup. To call these methods, you will need to instantiate a PictureFrame struct:
+
+```gml
+//Instantiate PictureFrame and keep it in memory in a global variable
+global.pictureFrame = new PictureFrame();
+```
+
+You can now configure this PictureFrame struct by calling methods:
+
+```gml
+//Set up parameters for the camera's minimum and maximum size
+global.pictureFrame.SetCameraParam(200, 200, 800, 600);
+```
+
+There are lots of methods you can call. Some of them set input parameters, some of them return input parameters, some of them return calculated output values. The [main PictureFrame script](https://github.com/JujuAdams/PictureFrame/blob/main/PictureFrame/scripts/PictureFrame/PictureFrame.gml) has infomation in its header comment. Here is an example configuration:
+
+```gml
+global.pictureFrame.SetCameraParams(320, 180, 640, 640);
+global.pictureFrame.SetViewParams(3, true);
+global.pictureFrame.SetWindowParams(ResLibGetMaxWidth(), ResLibGetMaxHeight(), true);
+global.pictureFrame.SetFullscreen(window_get_fullscreen());
+global.pictureFrame.SetGuiParams(1920, undefined);
+global.pictureFrame.SetAppSurfacePixelPerfect(true);
+```
+
+Once we're done we can call `.Apply()` to apply the output values calculated by PictureFrame to the game. This will change the camera, viewport, application surface, GUI, and window.
+
+```gml
+//Apply the calculated values to the game
+global.pictureFrame.Apply();
+```
