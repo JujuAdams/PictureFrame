@@ -26,7 +26,7 @@ PictureFrame uses the following input parameters:
 - Whether the viewport should be "pixel perfect" (a.k.a. an integer scale of the camera)
 - Maximum scale for the viewport relative to the camera dimensions
 - Size of the game window
-- Whether the game window should be resized by PictureFrame when calling `.Apply()`
+- Whether the game window can be resized by the player on desktop OSes
 - Either the target width or height for the GUI layer (or neither)
 - Whether the application surface should be drawn as "pixel perfect" (a.k.a. at an integer scale)
 
