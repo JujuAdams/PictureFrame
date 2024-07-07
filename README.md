@@ -27,7 +27,7 @@ PictureFrame uses the following input parameters:
 - Maximum scale for the viewport relative to the camera dimensions
 - Size of the game window
 - Whether the game window can be resized by the player on desktop OSes
-- Either the target width or height for the GUI layer (or neither)
+- Either the target width or target height for the GUI layer (or neither)
 - Whether the application surface should be drawn as "pixel perfect" (a.k.a. at an integer scale)
 
 PictureFrame is suitable for pixel art games and for high resolution games. It can calculate correct camera sizes regardless of device is especially suited for the wide variety of aspect ratios found on mobile devices.
