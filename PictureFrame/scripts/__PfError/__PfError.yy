@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__PfError",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__PfError",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/PictureFrame/(System).yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

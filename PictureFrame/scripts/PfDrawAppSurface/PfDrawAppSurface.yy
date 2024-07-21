@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PfDrawAppSurface",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PfDrawAppSurface",
+  "parent":{
+    "name":"PictureFrame",
+    "path":"folders/PictureFrame.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PfMouseX",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PfMouseX",
+  "parent":{
+    "name":"PictureFrame",
+    "path":"folders/PictureFrame.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
