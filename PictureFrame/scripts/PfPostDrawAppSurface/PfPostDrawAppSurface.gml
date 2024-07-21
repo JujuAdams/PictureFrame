@@ -28,7 +28,22 @@ function PfPostDrawAppSurface(_filter = false, _blendEnable = false, _surface = 
         
         if (surface_exists(_surface))
         {
-            draw_surface_stretched(_surface, surfacePostDrawX, surfacePostDrawY, surfacePostDrawWidth, surfacePostDrawHeight);
+            if (smoothScroll)
+            {
+                var _camera = view_get_camera(0);
+                
+                var _left = 1 + frac(other.cameraX);
+                var _top  = 1 + frac(other.cameraY);
+                
+                var _xScale = surfacePostDrawWidth  / viewWidth;
+                var _yScale = surfacePostDrawHeight / viewHeight;
+                
+                draw_surface_part_ext(_surface, _left, _top, viewWidth, viewHeight, surfacePostDrawX, surfacePostDrawY, _xScale, _yScale, c_white, 1);
+            }
+            else
+            {
+                draw_surface_stretched(_surface, surfacePostDrawX, surfacePostDrawY, surfacePostDrawWidth, surfacePostDrawHeight);
+            }
         }
         
         gpu_set_tex_filter(_oldFilter);

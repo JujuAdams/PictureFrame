@@ -16,6 +16,8 @@
 function PfConfigHighRes(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _cameraMinWidth, _cameraMaxHeight = _cameraMinHeight, _fullscreen = window_get_fullscreen())
 {
     return {
+        smoothScroll: false,
+        
         cameraMinWidth:  _cameraMinWidth,
         cameraMinHeight: _cameraMinHeight,
         

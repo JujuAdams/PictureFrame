@@ -22,6 +22,9 @@
 /// .cameraHeight
 ///     The roomspace width and height of the camera.
 /// 
+/// .smoothScroll
+/// 
+/// 
 /// .viewWidth
 /// .viewHeight
 ///     The width and height of the view used to draw the camera to the application surface.
@@ -219,7 +222,18 @@ function PfCalculate(_configurationStruct)
         var _surfaceGuiWidth  = _surfacePostDrawScaleX*_surfacePostDrawWidth;
         var _surfaceGuiHeight = _surfacePostDrawScaleY*_surfacePostDrawHeight;
         
+        if (smoothScroll)
+        {
+            _outCameraWidth  += 2;
+            _outCameraHeight += 2;
+            
+            _outViewWidth  += 2;
+            _outViewHeight += 2;
+        }
+        
         return {
+            smoothScroll: smoothScroll,
+            
             cameraWidth:  _outCameraWidth,
             cameraHeight: _outCameraHeight,
             
