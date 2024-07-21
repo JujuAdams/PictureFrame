@@ -9,10 +9,9 @@
 /// 
 /// @param cameraWidth
 /// @param cameraHeight
-/// @param [subpixelling=false]
 /// @param [fullscreen]
 
-function PfConfigPixelArt(_cameraWidth, _cameraHeight, _subpixelling = false, _fullscreen = window_get_fullscreen())
+function PfConfigPixelArt(_cameraWidth, _cameraHeight, _fullscreen = window_get_fullscreen())
 {
     return {
         cameraMinWidth:  _cameraWidth,
@@ -21,7 +20,7 @@ function PfConfigPixelArt(_cameraWidth, _cameraHeight, _subpixelling = false, _f
         cameraMaxWidth:  _cameraWidth,
         cameraMaxHeight: _cameraHeight,
         
-        viewMaxScale:     _subpixelling? infinity : 1,
+        viewMaxScale:     1,
         viewPixelPerfect: true,
         
         //Force "fullscreen" on non-desktop platforms
@@ -34,6 +33,6 @@ function PfConfigPixelArt(_cameraWidth, _cameraHeight, _subpixelling = false, _f
         guiTargetWidth:  (_cameraWidth < _cameraHeight)? _cameraWidth : undefined,
         guiTargetHeight: (_cameraWidth < _cameraHeight)? undefined : _cameraHeight,
         
-        surfacePixelPerfect: (not _subpixelling),
+        surfacePixelPerfect: true,
     }
 }
