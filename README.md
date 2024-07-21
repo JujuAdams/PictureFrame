@@ -1,4 +1,4 @@
-<h1 align="center">PictureFrame 2.0.0</h1>
+<h1 align="center">PictureFrame 3.0.0</h1>
 
 <p align="center">Camera/view/GUI/window/application surface calculator for GameMaker</p>
 
@@ -6,11 +6,7 @@
 
 &nbsp;
 
-PictureFrame is a one-script library. You can read the <a href="https://github.com/JujuAdams/PictureFrame/blob/main/PictureFrame/scripts/PictureFrame/PictureFrame.gml">code and comments here</a>.
-
-Getting your game's scaling right in GameMaker is an eternal chore. There are multiple scaling factors applied throughout the render pipeline which are all multiplied together to give you the final image displayed to players. This is hard enough to wrap your head around for simple games. If you're looking to add an extra bit of polish by adapting to different screen resolutions and aspect ratios then organising the various render stages becomes confusing.
-
-PictureFrame is a library that smoothes out the process by providing an API that calculates the dimensions and scaling factors for each stage of the render pipeline. PictureFrame works by calling a handful of functions to set input parameters for the calculator. These parameters define what behaviour is allowed. The `.Apply()` function can then be called to apply the calculated output values to your game, or you can call the getter functions to retrieve specific values for yourself.
+Getting your game's scaling right in GameMaker is an eternal chore. There are multiple scaling factors applied throughout the render pipeline which are all multiplied together to give you the final image displayed to players. This is hard enough to wrap your head around for simple games. If you're looking to add an extra bit of polish by adapting to different screen resolutions and aspect ratios then organising the various render stages becomes very confusing very fast.
 
 PictureFrame will calculate the following output values for you:
 - Camera width/height
