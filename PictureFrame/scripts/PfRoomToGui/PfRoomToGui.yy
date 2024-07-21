@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"PfRoomToGui",
   "parent":{
-    "name":"PictureFrame",
-    "path":"folders/PictureFrame.yy",
+    "name":"Helpers",
+    "path":"folders/PictureFrame/Helpers.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

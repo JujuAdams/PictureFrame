@@ -9,4 +9,4 @@ configStruct.windowHeight = display_get_height() - 160;
 resultStruct = PfCalculate(configStruct);
 PfApply(resultStruct);
 
-camera_set_view_angle(view_get_camera(0), 10);
+//camera_set_view_angle(view_get_camera(0), 10);

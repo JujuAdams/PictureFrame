@@ -4,10 +4,10 @@
 /// the values in the result struct accurately affect the game. A PictureFrame result struct is
 /// made by calling PfCalculate() - please see that function for further information.
 /// 
-/// N.B. Due to GameMaker's native application surface drawing behaviour, it is likely that even
-///      after applying a result struct you will have encounter some graphical defects. You will
-///      very probably want to call PfPostDrawAppSurface() to manually, and correctly, draw the
-///      application surface. Please see PfPostDrawAppSurface() for more details.
+/// N.B. Automatic drawing the application surface will always be disabled by PfApply() by calling
+///      application_surface_draw_enable(false). This means that without further action, your game
+///      will not be visible. You should call PfPostDrawAppSurface() in a Post Draw event to ensure
+///      that your application surface is visible for the player.
 /// 
 /// PfApply() calls the following functions to set native GameMaker values:
 /// 
@@ -45,7 +45,7 @@
 /// - GUI layer scale.
 /// 
 ///   Functions called:
-///     display_set_gui_size(...)
+///     display_set_gui_maximize(...)
 /// 
 /// @param resultStruct
 /// @param [ignoreCamera=false]

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"__PfMacroHacks",
   "parent":{
-    "name":"PictureFrame",
-    "path":"folders/PictureFrame.yy",
+    "name":"(System)",
+    "path":"folders/PictureFrame/(System).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

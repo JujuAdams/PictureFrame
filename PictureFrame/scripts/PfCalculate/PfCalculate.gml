@@ -48,7 +48,8 @@
 ///     edges.
 /// 
 /// .surfacePostDrawScale
-///     The scaling factor between the view and the window (backbuffer).
+///     The scaling factor between the view and the window (backbuffer). This includes the
+///     contribution from the overscan scale from the configuration struct.
 /// 
 /// .surfacePostDrawX
 /// .surfacePostDrawY
@@ -193,11 +194,23 @@ function PfCalculate(_configurationStruct)
         //If we're using pixel perfect scaling then drop down to the nearest integer scale
         if (surfacePixelPerfect && (_surfacePostDrawScale > 1)) _surfacePostDrawScale = floor(_surfacePostDrawScale);
         
-        //Centre the application surface in the window
+        //Calculate the initial windowspace size of the application surface
         var _surfacePostDrawWidth  = _surfacePostDrawScale*_outViewWidth;
         var _surfacePostDrawHeight = _surfacePostDrawScale*_outViewHeight;
-        var _surfacePostDrawX      = 0.5*(_outWindowWidth  - _surfacePostDrawWidth );
-        var _surfacePostDrawY      = 0.5*(_outWindowHeight - _surfacePostDrawHeight);
+        
+        //Calculate the limits of the overscan box
+        var _overscanWidth  = overscanScale*_outWindowWidth;
+        var _overscanHeight = overscanScale*_outWindowHeight;
+        
+        //Figure out another scaling factor if the application surface exceeds the overscan limits
+        var _overscanCorrectionScale = min(1, _overscanWidth/_surfacePostDrawWidth, _overscanHeight/_surfacePostDrawHeight);
+        _surfacePostDrawScale *= _overscanCorrectionScale;
+        _surfacePostDrawWidth  = _surfacePostDrawScale*_outViewWidth;
+        _surfacePostDrawHeight = _surfacePostDrawScale*_outViewHeight;
+        
+        //Centre the application surface in the window
+        var _surfacePostDrawX = 0.5*(_outWindowWidth  - _surfacePostDrawWidth );
+        var _surfacePostDrawY = 0.5*(_outWindowHeight - _surfacePostDrawHeight);
         
         //Convert window coordinates to GUI coordinates
         var _surfacePostDrawScaleX = _outGuiWidth/_outWindowWidth;
@@ -220,8 +233,6 @@ function PfCalculate(_configurationStruct)
             
             guiWidth:  _outGuiWidth,
             guiHeight: _outGuiHeight,
-            
-            surfacePixelPerfect: surfacePixelPerfect,
             
             surfacePostDrawScale:  _surfacePostDrawScale,
             surfacePostDrawX:      _surfacePostDrawX,

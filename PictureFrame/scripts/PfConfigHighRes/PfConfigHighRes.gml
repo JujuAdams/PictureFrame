@@ -36,5 +36,6 @@ function PfConfigHighRes(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _c
         guiTargetHeight: (_cameraMinWidth < _cameraMinHeight)? undefined : _cameraMinHeight,
         
         surfacePixelPerfect: false,
+        overscanScale:  1,
     }
 }

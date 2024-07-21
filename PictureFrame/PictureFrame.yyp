@@ -12,6 +12,7 @@
   "Folders":[
     {"$GMFolder":"","%Name":"PictureFrame","folderPath":"folders/PictureFrame.yy","name":"PictureFrame","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"(System)","folderPath":"folders/PictureFrame/(System).yy","name":"(System)","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Helpers","folderPath":"folders/PictureFrame/Helpers.yy","name":"Helpers","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "IncludedFiles":[],
   "isEcma":false,

@@ -57,6 +57,12 @@
 ///     Determines whether the scaling factor applied to the application surface when drawn to the
 ///     GUI layer should be a whole number. This may sometimes result in black bars appearing
 ///     around the application surface. This only applies when using PfPostDrawAppSurface().
+/// 
+/// .overscanScale
+///     Scaling factor to apply to the application surface and GUI at the end of the render
+///     pipeline. This is useful to adjust for overscan on old monitors and it is a compliance
+///     requirement when releasing on some console platforms. The overscan scale will ignore
+///     .surfacePixelPerfect (see above).
 
 function PfConfigGeneral()
 {
@@ -67,6 +73,8 @@ function PfConfigGeneral()
         windowWidth:       window_get_width(),
         windowHeight:      window_get_height(),
         windowAllowResize: true,
+        
+        overscanScale: 1,
     }
     
     with(_configStruct)
