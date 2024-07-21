@@ -1,5 +1,8 @@
 // Feather disable all
 
+/// Returns the x-coordinate of the mouse in roomspace, after being corrected for all the weird and
+/// wonderful things that PictureFrame does.
+
 function PfMouseX()
 {
     static _system = __PfSystem();

@@ -1,5 +1,9 @@
 // Feather disable all
 
+/// Converts a room-space coordinate to a GUI-space coordinate. This function returns a static
+/// struct which is liable to change unexpectedly. If you need to store the returned coordinates,
+/// please make a copy of the struct.
+/// 
 /// @param x
 /// @param y
 
