@@ -14,26 +14,9 @@ function __PfSystem()
     _system = {};
     with(_system)
     {
-        //var _array = application_get_position();
-        //
-        //var _scaleX = display_get_gui_width() / window_get_width();
-        //var _scaleY = display_get_gui_height() / window_get_height();
-        
         __noAppSurfDrawDisable = true;
         PfApply(PfCalculate(PfConfigGeneral()));
         __noAppSurfDrawDisable = false;
-        
-        //__resultStruct = {
-        //    surfacePixelPerfect:   gpu_get_tex_filter(),
-        //    surfacePostDrawX:      _array[0],
-        //    surfacePostDrawY:      _array[1],
-        //    surfacePostDrawWidth:  _array[2] - _array[0],
-        //    surfacePostDrawHeight: _array[3] - _array[1],
-        //    surfaceGuiX:           _scaleX*_array[0],
-        //    surfaceGuiY:           _scaleY*_array[1],
-        //    surfaceGuiWidth:       _scaleX*(_array[2] - _array[0]),
-        //    surfaceGuiHeight:      _scaleY*(_array[3] - _array[1]),
-        //};
         
         __mouseUpdated = false;
         __mouseX = undefined;

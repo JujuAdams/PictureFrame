@@ -26,6 +26,7 @@
     {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
     {"id":{"name":"__PfError","path":"scripts/__PfError/__PfError.yy",},},
+    {"id":{"name":"__PfMacroHacks","path":"scripts/__PfMacroHacks/__PfMacroHacks.yy",},},
     {"id":{"name":"__PfSystem","path":"scripts/__PfSystem/__PfSystem.yy",},},
     {"id":{"name":"__PfTrace","path":"scripts/__PfTrace/__PfTrace.yy",},},
     {"id":{"name":"PfApply","path":"scripts/PfApply/PfApply.yy",},},

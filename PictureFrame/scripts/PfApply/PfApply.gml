@@ -120,6 +120,6 @@ function PfApply(_resultStruct, _ignoreCamera = false)
             }
         }
         
-        display_set_gui_size(guiWidth, guiHeight);
+        display_set_gui_maximize(windowWidth / guiWidth, windowHeight / guiHeight, surfacePostDrawX, surfacePostDrawY);
     }
 }

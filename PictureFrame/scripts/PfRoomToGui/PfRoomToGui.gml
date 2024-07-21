@@ -55,8 +55,8 @@ function PfRoomToGui(_x, _y)
         }
         
         //If we're outputting to GUI-space then simply multiply up by the GUI size
-        _x = surfaceGuiX + _x*surfaceGuiWidth;
-        _y = surfaceGuiY + _y*surfaceGuiHeight;
+        _x *= surfaceGuiWidth;
+        _y *= surfaceGuiHeight;
         
         //Set values and return!
         _result.x = _x;

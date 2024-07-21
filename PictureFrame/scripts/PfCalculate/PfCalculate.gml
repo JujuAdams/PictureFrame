@@ -58,12 +58,14 @@
 ///     coordinates in the window/backbuffer). These values are in "window space' and will not
 ///     necessarily line up with roomspace coorfinates.
 /// 
-/// .surfaceGuiX
-/// .surfaceGuiY
 /// .surfaceGuiWidth
 /// .surfaceGuiHeight
 ///     The draw position and size for the application surface on the GUI layer. These values are
 ///     in "GUI-space' and will not necessarily line up with roomspace coorfinates.
+/// 
+/// .marginsVisible
+///     Whether any of the margins are visible. You should check this variable before drawing the
+///     margins (using the variables below).
 /// 
 /// .marginGuiLeft
 /// .marginGuiTop
@@ -201,8 +203,6 @@ function PfCalculate(_configurationStruct)
         var _surfacePostDrawScaleX = _outGuiWidth/_outWindowWidth;
         var _surfacePostDrawScaleY = _outGuiHeight/_outWindowHeight;
         
-        var _surfaceGuiX      = _surfacePostDrawScaleX*_surfacePostDrawX;
-        var _surfaceGuiY      = _surfacePostDrawScaleY*_surfacePostDrawY;
         var _surfaceGuiWidth  = _surfacePostDrawScaleX*_surfacePostDrawWidth;
         var _surfaceGuiHeight = _surfacePostDrawScaleY*_surfacePostDrawHeight;
         
@@ -229,15 +229,14 @@ function PfCalculate(_configurationStruct)
             surfacePostDrawWidth:  _surfacePostDrawWidth,
             surfacePostDrawHeight: _surfacePostDrawHeight,
             
-            surfaceGuiX:      _surfaceGuiX,
-            surfaceGuiY:      _surfaceGuiY,
             surfaceGuiWidth:  _surfaceGuiWidth,
             surfaceGuiHeight: _surfaceGuiHeight,
             
-            marginGuiLeft:   _surfaceGuiX,
-            marginGuiTop:    _surfaceGuiY,
-            marginGuiRight:  _surfaceGuiX + _surfaceGuiWidth,
-            marginGuiBottom: _surfaceGuiY + _surfaceGuiHeight,
+            marginsVisible:   ((_surfacePostDrawX > 0) || (_surfacePostDrawY > 0) || (_surfaceGuiWidth < _outGuiWidth) || (_surfaceGuiHeight < _outGuiHeight)),
+            marginGuiLeft:   (-_surfacePostDrawX / _surfacePostDrawScaleX),
+            marginGuiTop:    (-_surfacePostDrawY / _surfacePostDrawScaleY),
+            marginGuiRight:   _surfaceGuiWidth,
+            marginGuiBottom:  _surfaceGuiHeight,
         }
     }
 }
