@@ -1,6 +1,6 @@
 // Feather disable all
 
-configStruct = PfConfigPixelArt(700, 160, true, true);
+configStruct = PfConfigPixelArt(700, 160, true);
 
 //Set the window to get as big as possible without quite filling the entire screen
 configStruct.windowWidth  = display_get_width() - 160;
