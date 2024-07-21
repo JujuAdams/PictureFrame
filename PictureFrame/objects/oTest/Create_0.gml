@@ -1,7 +1,6 @@
 // Feather disable all
 
-configStruct = PfConfigPixelArt(640, 400, undefined, undefined, true);
-configStruct.smoothScroll = true;
+configStruct = PfConfigPixelArt(640, 360, 640, 400, true);
 
 //Set the window to get as big as possible without quite filling the entire screen
 configStruct.windowWidth  = display_get_width() - 160;

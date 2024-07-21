@@ -16,13 +16,13 @@
 function PfConfigHighRes(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _cameraMinWidth, _cameraMaxHeight = _cameraMinHeight, _fullscreen = window_get_fullscreen())
 {
     return {
-        smoothScroll: false,
-        
         cameraMinWidth:  _cameraMinWidth,
         cameraMinHeight: _cameraMinHeight,
         
         cameraMaxWidth:  _cameraMaxWidth,
         cameraMaxHeight: _cameraMaxHeight,
+        
+        cameraOverscan: 0,
         
         viewMaxScale:     infinity,
         viewPixelPerfect: false,
@@ -38,6 +38,6 @@ function PfConfigHighRes(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _c
         guiTargetHeight: (_cameraMinWidth < _cameraMinHeight)? undefined : _cameraMinHeight,
         
         surfacePixelPerfect: false,
-        overscanScale:  1,
+        windowOverscanScale:  1,
     }
 }

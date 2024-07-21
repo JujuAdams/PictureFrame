@@ -20,6 +20,14 @@
 ///     The maximum width and height for the camera. This is an expansion zone that the camera can
 ///     grow into to adapt to different resolutions and aspect ratios.
 /// 
+/// .cameraOverscan
+///     The number of extra pixels, in roomspace, to add around the edges of the camera. A value of
+///     1 will add one pixel to the left, top, right, and bottom edges leading to a 2 pixel
+///     increase in the overall width and height of the camera. Normally you'll want to set this
+///     variable to 0 but you may want to set it to higher values if you're implementing visual
+///     effects that extend beyond the limits of the camera or you're implementing a smooth scroll
+///     effect alongside pixel perfect graphics.
+/// 
 /// .viewMaxScale
 ///     Maximum scaling factor from the camera to the view. For pixel perfect games that don't want
 ///     subpixelling, this value should be set to 1. If you do want subpixelling, or you're making
@@ -58,7 +66,7 @@
 ///     GUI layer should be a whole number. This may sometimes result in black bars appearing
 ///     around the application surface. This only applies when using PfPostDrawAppSurface().
 /// 
-/// .overscanScale
+/// .windowOverscanScale
 ///     Scaling factor to apply to the application surface and GUI at the end of the render
 ///     pipeline. This is useful to adjust for overscan on old monitors and it is a compliance
 ///     requirement when releasing on some console platforms. The overscan scale will ignore
@@ -67,7 +75,7 @@
 function PfConfigGeneral()
 {
     var _configStruct = {
-        smoothScroll: false,
+        cameraOverscan: 0,
         
         //Force "fullscreen" on non-desktop platforms
         fullscreen: ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))? window_get_fullscreen() : true,
@@ -76,7 +84,7 @@ function PfConfigGeneral()
         windowHeight:      window_get_height(),
         windowAllowResize: true,
         
-        overscanScale: 1,
+        windowOverscanScale: 1,
     }
     
     with(_configStruct)

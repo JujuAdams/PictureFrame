@@ -22,8 +22,9 @@
 /// .cameraHeight
 ///     The roomspace width and height of the camera.
 /// 
-/// .smoothScroll
-/// 
+/// .cameraOverscan
+///     The number of extra pixels, in roomspace, to add around the edges of the camera. This is
+///     the same literal value as in the configuration struct and is included for convenience.
 /// 
 /// .viewWidth
 /// .viewHeight
@@ -31,6 +32,10 @@
 /// 
 /// .viewScale
 ///     The scaling factor between the camera and the view.
+/// 
+/// .viewOverscan
+///     The number of extra pixels, in roomspace, to add around the edges of the view. This is
+///     equal to .cameraOverscan multiplied by .viewScale and is provided for convenience.
 /// 
 /// .fullscreen
 ///     Whether the game should be in fullscreen mode. This value is only relevant on desktop
@@ -202,8 +207,8 @@ function PfCalculate(_configurationStruct)
         var _surfacePostDrawHeight = _surfacePostDrawScale*_outViewHeight;
         
         //Calculate the limits of the overscan box
-        var _overscanWidth  = overscanScale*_outWindowWidth;
-        var _overscanHeight = overscanScale*_outWindowHeight;
+        var _overscanWidth  = windowOverscanScale*_outWindowWidth;
+        var _overscanHeight = windowOverscanScale*_outWindowHeight;
         
         //Figure out another scaling factor if the application surface exceeds the overscan limits
         var _overscanCorrectionScale = min(1, _overscanWidth/_surfacePostDrawWidth, _overscanHeight/_surfacePostDrawHeight);
@@ -222,24 +227,21 @@ function PfCalculate(_configurationStruct)
         var _surfaceGuiWidth  = _surfacePostDrawScaleX*_surfacePostDrawWidth;
         var _surfaceGuiHeight = _surfacePostDrawScaleY*_surfacePostDrawHeight;
         
-        if (smoothScroll)
-        {
-            _outCameraWidth  += 2;
-            _outCameraHeight += 2;
-            
-            _outViewWidth  += 2;
-            _outViewHeight += 2;
-        }
+        //Increase the actual size of the camera and view/application surface after we do all maths
+        _outCameraWidth  += 2*cameraOverscan;
+        _outCameraHeight += 2*cameraOverscan;
+        _outViewWidth    += 2*cameraOverscan*_outViewScale;
+        _outViewHeight   += 2*cameraOverscan*_outViewScale;
         
         return {
-            smoothScroll: smoothScroll,
+            cameraWidth:    _outCameraWidth,
+            cameraHeight:   _outCameraHeight,
+            cameraOverscan: cameraOverscan,
             
-            cameraWidth:  _outCameraWidth,
-            cameraHeight: _outCameraHeight,
-            
-            viewWidth:  _outViewWidth,
-            viewHeight: _outViewHeight,
-            viewScale:  _outViewScale,
+            viewWidth:    _outViewWidth,
+            viewHeight:   _outViewHeight,
+            viewScale:    _outViewScale,
+            viewOverscan: cameraOverscan*_outViewScale,
             
             fullscreen:   _fullscreen,
             windowWidth:  _outWindowWidth,

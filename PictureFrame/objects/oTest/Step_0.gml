@@ -16,4 +16,4 @@ if (mouse_check_button_pressed(mb_left))
 cameraX = lerp(cameraX, cameraTargetX, 0.1);
 cameraY = lerp(cameraY, cameraTargetY, 0.1);
 
-camera_set_view_pos(_camera, floor(cameraX), floor(cameraY));
+camera_set_view_pos(_camera, cameraX, cameraY);

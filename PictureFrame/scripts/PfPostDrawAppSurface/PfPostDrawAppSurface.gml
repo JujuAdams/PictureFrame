@@ -14,8 +14,10 @@
 /// @param [texFilter=false]
 /// @param [blendEnable=false]
 /// @param [surface=appSurface]
+/// @param [fracCameraX=0]
+/// @param [fracCameraY=0]
 
-function PfPostDrawAppSurface(_filter = false, _blendEnable = false, _surface = application_surface)
+function PfPostDrawAppSurface(_filter = false, _blendEnable = false, _surface = application_surface, _fracCameraX = 0, _fracCameraY = 0)
 {
     static _system = __PfSystem();
     with(_system.__resultStruct)
@@ -28,22 +30,16 @@ function PfPostDrawAppSurface(_filter = false, _blendEnable = false, _surface = 
         
         if (surface_exists(_surface))
         {
-            if (smoothScroll)
-            {
-                var _camera = view_get_camera(0);
-                
-                var _left = 1 + frac(other.cameraX);
-                var _top  = 1 + frac(other.cameraY);
-                
-                var _xScale = surfacePostDrawWidth  / viewWidth;
-                var _yScale = surfacePostDrawHeight / viewHeight;
-                
-                draw_surface_part_ext(_surface, _left, _top, viewWidth, viewHeight, surfacePostDrawX, surfacePostDrawY, _xScale, _yScale, c_white, 1);
-            }
-            else
-            {
-                draw_surface_stretched(_surface, surfacePostDrawX, surfacePostDrawY, surfacePostDrawWidth, surfacePostDrawHeight);
-            }
+            var _left = viewOverscan + viewScale*frac(_fracCameraX);
+            var _top  = viewOverscan + viewScale*frac(_fracCameraY);
+            
+            var _width  = viewWidth  - 2*viewOverscan;
+            var _height = viewHeight - 2*viewOverscan;
+            
+            var _xScale = surfacePostDrawWidth  / _width;
+            var _yScale = surfacePostDrawHeight / _height;
+            
+            draw_surface_part_ext(_surface, _left, _top, _width, _height, surfacePostDrawX, surfacePostDrawY, _xScale, _yScale, c_white, 1);
         }
         
         gpu_set_tex_filter(_oldFilter);
