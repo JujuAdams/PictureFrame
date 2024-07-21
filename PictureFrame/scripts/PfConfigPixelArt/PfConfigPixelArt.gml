@@ -9,16 +9,18 @@
 /// 
 /// @param cameraWidth
 /// @param cameraHeight
+/// @param [cameraMaxWidth=Min]
+/// @param [cameraMaxHeight=Min]
 /// @param [fullscreen]
 
-function PfConfigPixelArt(_cameraWidth, _cameraHeight, _fullscreen = window_get_fullscreen())
+function PfConfigPixelArt(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _cameraMinWidth, _cameraMaxHeight = _cameraMinHeight, _fullscreen = window_get_fullscreen())
 {
     return {
-        cameraMinWidth:  _cameraWidth,
-        cameraMinHeight: _cameraHeight,
+        cameraMinWidth:  _cameraMinWidth,
+        cameraMinHeight: _cameraMinHeight,
         
-        cameraMaxWidth:  _cameraWidth,
-        cameraMaxHeight: _cameraHeight,
+        cameraMaxWidth:  _cameraMaxWidth,
+        cameraMaxHeight: _cameraMaxHeight,
         
         viewMaxScale:     1,
         viewPixelPerfect: true,
@@ -30,8 +32,8 @@ function PfConfigPixelArt(_cameraWidth, _cameraHeight, _fullscreen = window_get_
         windowHeight:      window_get_height(),
         windowAllowResize: true,
         
-        guiTargetWidth:  (_cameraWidth < _cameraHeight)? _cameraWidth : undefined,
-        guiTargetHeight: (_cameraWidth < _cameraHeight)? undefined : _cameraHeight,
+        guiTargetWidth:  (_cameraMinWidth < _cameraMinHeight)? _cameraMinWidth : undefined,
+        guiTargetHeight: (_cameraMinWidth < _cameraMinHeight)? undefined : _cameraMinHeight,
         
         surfacePixelPerfect: true,
         overscanScale:  1,

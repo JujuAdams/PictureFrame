@@ -61,7 +61,6 @@ function PfApply(_resultStruct, _ignoreCamera = false)
         if (not _ignoreCamera)
         {
             view_enabled = true;
-            view_set_visible(0, true);
             
             var _camera = view_get_camera(0);
             if (_camera < 0)
@@ -70,14 +69,23 @@ function PfApply(_resultStruct, _ignoreCamera = false)
             }
             else
             {
-                var _oldWidth  = camera_get_view_width( _camera);
-                var _oldHeight = camera_get_view_height(_camera);
-                
-                var _x = camera_get_view_x(_camera) - 0.5*(_oldWidth - cameraWidth);
-                var _y = camera_get_view_y(_camera) - 0.5*(_oldHeight - cameraHeight);
-                
-                camera_set_view_pos(_camera, _x, _y);
-                camera_set_view_size(_camera, cameraWidth, cameraHeight);
+                if (view_get_visible(0))
+                {
+                    var _oldWidth  = camera_get_view_width( _camera);
+                    var _oldHeight = camera_get_view_height(_camera);
+                    
+                    var _x = camera_get_view_x(_camera) - 0.5*(_oldWidth - cameraWidth);
+                    var _y = camera_get_view_y(_camera) - 0.5*(_oldHeight - cameraHeight);
+                    
+                    camera_set_view_pos(_camera, _x, _y);
+                    camera_set_view_size(_camera, cameraWidth, cameraHeight);
+                }
+                else
+                {
+                    view_set_visible(0, true);
+                    camera_set_view_pos(_camera, 0, 0);
+                    camera_set_view_size(_camera, cameraWidth, cameraHeight);
+                }
             }
         }
         
