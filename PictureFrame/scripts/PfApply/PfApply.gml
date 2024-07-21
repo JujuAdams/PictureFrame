@@ -6,8 +6,8 @@
 /// 
 /// N.B. Due to GameMaker's native application surface drawing behaviour, it is likely that even
 ///      after applying a result struct you will have encounter some graphical defects. You will
-///      very probably want to call PfDrawAppSurface() to manually, and correctly, draw the
-///      application surface. Please see PfDrawAppSurface() for more details.
+///      very probably want to call PfPostDrawAppSurface() to manually, and correctly, draw the
+///      application surface. Please see PfPostDrawAppSurface() for more details.
 /// 
 /// PfApply() calls the following functions to set native GameMaker values:
 /// 
@@ -54,6 +54,7 @@ function PfApply(_resultStruct, _ignoreCamera = false)
 {
     static _system = __PfSystem();
     _system.__resultStruct = _resultStruct;
+    if (not _system.__noAppSurfDrawDisable) application_surface_draw_enable(false);
     
     with(_resultStruct)
     {

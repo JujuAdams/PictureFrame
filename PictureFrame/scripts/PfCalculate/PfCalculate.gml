@@ -8,8 +8,8 @@
 /// N.B. Because PfCalculate() does a lot of maths and returns a fresh struct every time it is
 ///      called, you should avoid calling this function more often than is necessary.
 /// 
-/// For convenience, you can opt to use PfApply() and PfDrawAppSurface() with the generated result
-/// struct to set the necessary native GameMaker values and draw the application surface
+/// For convenience, you can opt to use PfApply() and PfPostDrawAppSurface() with the generated
+/// result struct to set the necessary native GameMaker values and draw the application surface
 /// respectively. Please see documentation for those functions for more information.
 /// 
 /// @param configurationStruct
@@ -44,24 +44,32 @@
 /// 
 /// .surfacePixelPerfect
 ///     Whether the application surface should be drawn as pixel perfect where possible. This will
-///     cause PfDrawAppSurface() to default to no texture filtering to preserve clean pixel edges.
+///     cause PfPostDrawAppSurface() to default to no texture filtering to preserve clean pixel
+///     edges.
 /// 
-/// .surfaceDrawScale
+/// .surfacePostDrawScale
 ///     The scaling factor between the view and the window (backbuffer).
 /// 
-/// .surfaceDrawX
-/// .surfaceDrawY
-/// .surfaceDrawWidth
-/// .surfaceDrawHeight
+/// .surfacePostDrawX
+/// .surfacePostDrawY
+/// .surfacePostDrawWidth
+/// .surfacePostDrawHeight
+///     The draw position and size for the application surface in the Post Draw event (i.e. the
+///     coordinates in the window/backbuffer). These values are in "window space' and will not
+///     necessarily line up with roomspace coorfinates.
+/// 
+/// .surfaceGuiX
+/// .surfaceGuiY
+/// .surfaceGuiWidth
+/// .surfaceGuiHeight
 ///     The draw position and size for the application surface on the GUI layer. These values are
 ///     in "GUI-space' and will not necessarily line up with roomspace coorfinates.
 /// 
-/// .marginLeft
-/// .marginTop
-/// .marginRight
-/// .marginBottom
-///     The size of the margins around the application surface on the GUI layers. These values are
-///     in "GUI-space' and will not necessarily line up with roomspace coorfinates.
+/// .marginGuiLeft
+/// .marginGuiTop
+/// .marginGuiRight
+/// .marginGuiBottom
+///     The size of the margis around the application surface on the GUI layer.
 
 
 
@@ -178,19 +186,25 @@ function PfCalculate(_configurationStruct)
         // --- Application Surface Drawing ---
         
         //Figure out the scaling factor that fits the application surface inside the GUI dimensions
-        var _surfaceDrawScale = min(_outWindowWidth/_outViewWidth, _outWindowHeight/_outViewHeight);
+        var _surfacePostDrawScale = min(_outWindowWidth/_outViewWidth, _outWindowHeight/_outViewHeight);
         
         //If we're using pixel perfect scaling then drop down to the nearest integer scale
-        if (surfacePixelPerfect && (_surfaceDrawScale > 1)) _surfaceDrawScale = floor(_surfaceDrawScale);
+        if (surfacePixelPerfect && (_surfacePostDrawScale > 1)) _surfacePostDrawScale = floor(_surfacePostDrawScale);
         
-        var _surfaceGuiScaleX = _surfaceDrawScale*_outGuiWidth/_outWindowWidth;
-        var _surfaceGuiScaleY = _surfaceDrawScale*_outGuiHeight/_outWindowHeight;
+        //Centre the application surface in the window
+        var _surfacePostDrawWidth  = _surfacePostDrawScale*_outViewWidth;
+        var _surfacePostDrawHeight = _surfacePostDrawScale*_outViewHeight;
+        var _surfacePostDrawX      = 0.5*(_outWindowWidth  - _surfacePostDrawWidth );
+        var _surfacePostDrawY      = 0.5*(_outWindowHeight - _surfacePostDrawHeight);
         
-        //Centre the application surface on the GUI layer
-        var _surfaceDrawWidth  = _surfaceGuiScaleX*_outViewWidth;
-        var _surfaceDrawHeight = _surfaceGuiScaleY*_outViewHeight;
-        var _surfaceDrawX      = 0.5*(_outGuiWidth  - _surfaceDrawWidth );
-        var _surfaceDrawY      = 0.5*(_outGuiHeight - _surfaceDrawHeight);
+        //Convert window coordinates to GUI coordinates
+        var _surfacePostDrawScaleX = _outGuiWidth/_outWindowWidth;
+        var _surfacePostDrawScaleY = _outGuiHeight/_outWindowHeight;
+        
+        var _surfaceGuiX      = _surfacePostDrawScaleX*_surfacePostDrawX;
+        var _surfaceGuiY      = _surfacePostDrawScaleY*_surfacePostDrawY;
+        var _surfaceGuiWidth  = _surfacePostDrawScaleX*_surfacePostDrawWidth;
+        var _surfaceGuiHeight = _surfacePostDrawScaleY*_surfacePostDrawHeight;
         
         return {
             cameraWidth:  _outCameraWidth,
@@ -208,16 +222,22 @@ function PfCalculate(_configurationStruct)
             guiHeight: _outGuiHeight,
             
             surfacePixelPerfect: surfacePixelPerfect,
-            surfaceDrawScale:    _surfaceDrawScale,
-            surfaceDrawX:        _surfaceDrawX,
-            surfaceDrawY:        _surfaceDrawY,
-            surfaceDrawWidth:    _surfaceDrawWidth,
-            surfaceDrawHeight:   _surfaceDrawHeight,
             
-            marginLeft:   _surfaceDrawX,
-            marginTop:    _surfaceDrawY,
-            marginRight:  _surfaceDrawX + _surfaceDrawWidth,
-            marginBottom: _surfaceDrawY + _surfaceDrawHeight,
+            surfacePostDrawScale:  _surfacePostDrawScale,
+            surfacePostDrawX:      _surfacePostDrawX,
+            surfacePostDrawY:      _surfacePostDrawY,
+            surfacePostDrawWidth:  _surfacePostDrawWidth,
+            surfacePostDrawHeight: _surfacePostDrawHeight,
+            
+            surfaceGuiX:      _surfaceGuiX,
+            surfaceGuiY:      _surfaceGuiY,
+            surfaceGuiWidth:  _surfaceGuiWidth,
+            surfaceGuiHeight: _surfaceGuiHeight,
+            
+            marginGuiLeft:   _surfaceGuiX,
+            marginGuiTop:    _surfaceGuiY,
+            marginGuiRight:  _surfaceGuiX + _surfaceGuiWidth,
+            marginGuiBottom: _surfaceGuiY + _surfaceGuiHeight,
         }
     }
 }

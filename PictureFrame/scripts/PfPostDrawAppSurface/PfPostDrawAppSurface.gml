@@ -5,8 +5,8 @@
 /// function can be created by calling PfCalculate(). Please see that function's documentation for
 /// more information.
 /// 
-/// N.B. When using PfDrawAppSurface() you will almost certainly want to disable GameMaker's native
-///      application surface drawing using application_surface_draw_enable().
+/// N.B. When using PfPostDrawAppSurface() you will almost certainly want to disable GameMaker's
+///      native application surface drawing using application_surface_draw_enable().
 /// 
 /// N.B. Please ensure that the scaling option "Full scale" is selected for the target platform
 ///      in Game Options / Graphics / Scaling. You will encounter scaling issues if this option
@@ -22,11 +22,11 @@
 /// by the function will be stretched to cover the region defined by the result struct. This can
 /// be useful when drawing overlays, e.g. pixel perfect UI, post-processing effects and so on.
 /// 
-/// @param [texFilter]
+/// @param [texFilter=false]
 /// @param [blendEnable=false]
 /// @param [surface=appSurface]
 
-function PfDrawAppSurface(_filter = undefined, _blendEnable = false, _surface = application_surface)
+function PfPostDrawAppSurface(_filter = false, _blendEnable = false, _surface = application_surface)
 {
     static _system = __PfSystem();
     with(_system.__resultStruct)
@@ -34,12 +34,12 @@ function PfDrawAppSurface(_filter = undefined, _blendEnable = false, _surface = 
         var _oldFilter = gpu_get_tex_filter();
         var _oldBlendEnable = gpu_get_blendenable();
         
-        gpu_set_tex_filter(_filter ?? (not surfacePixelPerfect));
+        gpu_set_tex_filter(_filter);
         gpu_set_blendenable(_blendEnable);
         
         if (surface_exists(_surface))
         {
-            draw_surface_stretched(_surface, surfaceDrawX, surfaceDrawY, surfaceDrawWidth, surfaceDrawHeight);
+            draw_surface_stretched(_surface, surfacePostDrawX, surfacePostDrawY, surfacePostDrawWidth, surfacePostDrawHeight);
         }
         
         gpu_set_tex_filter(_oldFilter);

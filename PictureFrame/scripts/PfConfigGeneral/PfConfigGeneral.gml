@@ -56,7 +56,7 @@
 /// .surfacePixelPerfect
 ///     Determines whether the scaling factor applied to the application surface when drawn to the
 ///     GUI layer should be a whole number. This may sometimes result in black bars appearing
-///     around the application surface. This only applies when using PfDrawAppSurface().
+///     around the application surface. This only applies when using PfPostDrawAppSurface().
 
 function PfConfigGeneral()
 {
