@@ -1,22 +1,20 @@
 // Feather disable all
 
-/// Calculates and returns a PictureFrame "result struct" based on a configuration struct (please
-/// see PfConfigGeneral() for more information). The result struct returned by PfCalculate()
-/// contains many variables that define the size and position of various parts of the game window,
-/// game camera, and so on.
+/// Calculates and returns a PictureFrame "result struct" based on an input configuration struct
+/// (please see PfConfigGeneral() for more information). The result struct returned by PfCalculate()
+/// contains many variables that define the size and position of various parts of the render
+/// pipeline.
+/// 
+/// You can either choose to apply the values in the output result struct yourself or you can call
+/// PfApply() (and PfPostDrawAppSurface()) to get PictureFrame to handle things for you. Please see
+/// the documentation for those two functions for more information on how to use them.
 /// 
 /// N.B. Because PfCalculate() does a lot of maths and returns a fresh struct every time it is
 ///      called, you should avoid calling this function more often than is necessary.
 /// 
-/// For convenience, you can opt to use PfApply() and PfPostDrawAppSurface() with the generated
-/// result struct to set the necessary native GameMaker values and draw the application surface
-/// respectively. Please see documentation for those functions for more information.
-/// 
 /// @param configurationStruct
 /// 
-/// 
-/// 
-/// Variables contained in the result struct are as follows:
+/// Variables contained in the returned result struct are as follows:
 /// 
 /// .cameraWisth
 /// .cameraHeight

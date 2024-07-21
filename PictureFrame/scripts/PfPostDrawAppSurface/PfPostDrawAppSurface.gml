@@ -1,15 +1,16 @@
 // Feather disable all
 
-/// Draws the application surface. This function assumes you are using GUI-space coordinates and
-/// you should call this function in a Draw GUI event. The result struct that is required by this
-/// function can be created by calling PfCalculate(). Please see that function's documentation for
-/// more information.
+/// Draws the application surface. This function should only be called in the Post Draw event and
+/// further requires that PfApply() has been called previously to set the necessary values to draw
+/// correctly.
 /// 
 /// The optional arguments for this function will control basic properties of the draw operation.
+/// The "fracCameraX" and "fracCameraY" arguments are optional and allow you to implement a smooth
+/// camera scroll even when drawing pixel perfect graphics without subpixelling.
 /// 
-/// This function can be used to draw surfaces other than the application surface. Surfaces drawn
-/// by the function will be stretched to cover the region defined by the result struct. This can
-/// be useful when drawing overlays, e.g. pixel perfect UI, post-processing effects and so on.
+/// This function can also be used to draw surfaces other than the application surface. Surfaces
+/// drawn by the function will be stretched to cover the region defined by the result struct. This
+/// can be useful when drawing overlays, e.g. pixel perfect UI, post-processing effects and so on.
 /// 
 /// @param [texFilter=false]
 /// @param [blendEnable=false]

@@ -22,7 +22,6 @@
   },
   "name":"PictureFrame",
   "resources":[
-    {"id":{"name":"PictureFrames Notes","path":"notes/PictureFrames Notes/PictureFrames Notes.yy",},},
     {"id":{"name":"oFollowCircle","path":"objects/oFollowCircle/oFollowCircle.yy",},},
     {"id":{"name":"oMarkerCircle","path":"objects/oMarkerCircle/oMarkerCircle.yy",},},
     {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},},
