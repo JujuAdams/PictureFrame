@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"PfConfigPixelPerfect",
+  "%Name":"PfConfigPixelArt",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PfConfigPixelPerfect",
+  "name":"PfConfigPixelArt",
   "parent":{
     "name":"PictureFrame",
     "path":"folders/PictureFrame.yy",

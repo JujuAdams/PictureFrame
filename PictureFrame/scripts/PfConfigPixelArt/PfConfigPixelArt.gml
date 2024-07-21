@@ -4,14 +4,15 @@
 /// You can edit values in the returned struct if you'd like and it will obey all the same rules
 /// as a configuration struct returned by PfConfigGeneral().
 /// 
-/// N.B. Because PfConfigPixelPerfect() returns a fresh struct every time it is called, you should
+/// N.B. Because PfConfigPixelArt() returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
 /// @param cameraWidth
 /// @param cameraHeight
+/// @param [subpixelling=false]
 /// @param [fullscreen]
 
-function PfConfigPixelPerfect(_cameraWidth, _cameraHeight, _fullscreen = window_get_fullscreen())
+function PfConfigPixelArt(_cameraWidth, _cameraHeight, _subpixelling = false, _fullscreen = window_get_fullscreen())
 {
     return {
         cameraMinWidth:  _cameraWidth,
@@ -20,7 +21,7 @@ function PfConfigPixelPerfect(_cameraWidth, _cameraHeight, _fullscreen = window_
         cameraMaxWidth:  _cameraWidth,
         cameraMaxHeight: _cameraHeight,
         
-        viewMaxScale:     1,
+        viewMaxScale:     _subpixelling? infinity : 1,
         viewPixelPerfect: true,
         
         //Force "fullscreen" on non-desktop platforms
@@ -33,6 +34,6 @@ function PfConfigPixelPerfect(_cameraWidth, _cameraHeight, _fullscreen = window_
         guiTargetWidth:  (_cameraWidth < _cameraHeight)? _cameraWidth : undefined,
         guiTargetHeight: (_cameraWidth < _cameraHeight)? undefined : _cameraHeight,
         
-        surfacePixelPerfect: true,
+        surfacePixelPerfect: (not _subpixelling),
     }
 }
