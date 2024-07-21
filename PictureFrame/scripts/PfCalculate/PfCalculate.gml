@@ -82,8 +82,6 @@
 /// .marginGuiBottom
 ///     The size of the margis around the application surface on the GUI layer.
 
-
-
 function PfCalculate(_configurationStruct)
 {
     with(_configurationStruct)
