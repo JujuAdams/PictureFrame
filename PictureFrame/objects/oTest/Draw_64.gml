@@ -16,4 +16,10 @@ with(resultStruct)
         draw_set_color(c_white);
         draw_set_alpha(1);
     }
+    
+    draw_line(surfaceGuiWidth/2-10, surfaceGuiHeight/2-10,
+              surfaceGuiWidth/2+10, surfaceGuiHeight/2+10);
+    
+    draw_line(surfaceGuiWidth/2-10, surfaceGuiHeight/2+10,
+              surfaceGuiWidth/2+10, surfaceGuiHeight/2-10);
 }
