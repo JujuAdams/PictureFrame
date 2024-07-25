@@ -22,9 +22,9 @@
   },
   "name":"PictureFrame",
   "resources":[
+    {"id":{"name":"oDemo","path":"objects/oDemo/oDemo.yy",},},
     {"id":{"name":"oFollowCircle","path":"objects/oFollowCircle/oFollowCircle.yy",},},
     {"id":{"name":"oMarkerCircle","path":"objects/oMarkerCircle/oMarkerCircle.yy",},},
-    {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
     {"id":{"name":"__PfConfigMacros","path":"scripts/__PfConfigMacros/__PfConfigMacros.yy",},},
     {"id":{"name":"__PfError","path":"scripts/__PfError/__PfError.yy",},},
