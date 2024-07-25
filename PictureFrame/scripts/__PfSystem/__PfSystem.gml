@@ -22,8 +22,8 @@ function __PfSystem()
         __mouseX = undefined;
         __mouseY = undefined;
         
-        __windowWidth       = window_get_width();
-        __windowHeight      = window_get_height();
+        __windowWidth  = window_get_width();
+        __windowHeight = window_get_height();
         __windowSizeChanged = false;
         
         time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()

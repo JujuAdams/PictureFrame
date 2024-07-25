@@ -71,6 +71,8 @@
 ///     coordinates in the window/backbuffer). These values are in "window space' and will not
 ///     necessarily line up with roomspace coorfinates.
 /// 
+/// .surfaceGuiX
+/// .surfaceGuiY
 /// .surfaceGuiWidth
 /// .surfaceGuiHeight
 ///     The draw position and size for the application surface on the GUI layer. These values are
