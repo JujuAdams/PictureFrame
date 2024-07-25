@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"PictureFrame",
+  "%Name":"PfApply",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PictureFrame",
+  "name":"PfApply",
   "parent":{
     "name":"PictureFrame",
-    "path":"PictureFrame.yyp",
+    "path":"folders/PictureFrame.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

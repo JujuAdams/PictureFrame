@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PfMouseY",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PfMouseY",
+  "parent":{
+    "name":"Helpers",
+    "path":"folders/PictureFrame/Helpers.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PfWindowSizeChanged",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PfWindowSizeChanged",
+  "parent":{
+    "name":"PictureFrame",
+    "path":"folders/PictureFrame.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

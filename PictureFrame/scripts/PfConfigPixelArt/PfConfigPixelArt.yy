@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PfConfigPixelArt",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PfConfigPixelArt",
+  "parent":{
+    "name":"PictureFrame",
+    "path":"folders/PictureFrame.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

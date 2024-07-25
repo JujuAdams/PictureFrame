@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PfRoomToGui",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PfRoomToGui",
+  "parent":{
+    "name":"Helpers",
+    "path":"folders/PictureFrame/Helpers.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
