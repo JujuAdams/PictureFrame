@@ -11,7 +11,7 @@ function PfMouseX()
     {
         _system.__mouseUpdated = true;
         
-        var _result = PfGuiToRoom(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0));
+        var _result = PfWindowToRoom(window_mouse_get_x(), window_mouse_get_y());
         _system.__mouseX = _result.x;
         _system.__mouseY = _result.y;
     }

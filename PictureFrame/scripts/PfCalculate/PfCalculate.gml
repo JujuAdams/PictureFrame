@@ -220,6 +220,8 @@ function PfCalculate(_configurationStruct)
         var _surfacePostDrawScaleX = _outGuiWidth/_outWindowWidth;
         var _surfacePostDrawScaleY = _outGuiHeight/_outWindowHeight;
         
+        var _surfaceGuiX      = _surfacePostDrawScaleX*_surfacePostDrawX;
+        var _surfaceGuiY      = _surfacePostDrawScaleY*_surfacePostDrawY;
         var _surfaceGuiWidth  = _surfacePostDrawScaleX*_surfacePostDrawWidth;
         var _surfaceGuiHeight = _surfacePostDrawScaleY*_surfacePostDrawHeight;
         
@@ -252,6 +254,8 @@ function PfCalculate(_configurationStruct)
             surfacePostDrawWidth:  _surfacePostDrawWidth,
             surfacePostDrawHeight: _surfacePostDrawHeight,
             
+            surfaceGuiX:      _surfaceGuiX,
+            surfaceGuiY:      _surfaceGuiY,
             surfaceGuiWidth:  _surfaceGuiWidth,
             surfaceGuiHeight: _surfaceGuiHeight,
             

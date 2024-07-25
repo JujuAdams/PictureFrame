@@ -1,13 +1,13 @@
 // Feather disable all
 
-/// Converts a room-space coordinate to a GUI-space coordinate. This function returns a static
+/// Converts a room-space coordinate to a window-space coordinate. This function returns a static
 /// struct which is liable to change unexpectedly. If you need to store the returned coordinates,
 /// please make a copy of the struct.
 /// 
 /// @param x
 /// @param y
 
-function PfRoomToGui(_x, _y)
+function PfRoomToWindow(_x, _y)
 {
     static _system = __PfSystem();
     
@@ -59,8 +59,8 @@ function PfRoomToGui(_x, _y)
         }
         
         //If we're outputting to GUI-space then simply multiply up by the GUI size
-        _x = surfaceGuiX + _x*surfaceGuiWidth;
-        _y = surfaceGuiY + _y*surfaceGuiHeight;
+        _x = surfacePostDrawX + _x*surfacePostDrawWidth;
+        _y = surfacePostDrawY + _y*surfacePostDrawHeight;
         
         //Set values and return!
         _result.x = _x;

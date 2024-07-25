@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__PfConfigMacros",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__PfConfigMacros",
+  "parent":{
+    "name":"PictureFrame",
+    "path":"folders/PictureFrame.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

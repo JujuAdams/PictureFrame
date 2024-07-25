@@ -38,8 +38,8 @@ function PfGuiToRoom(_x, _y)
         }
         
         //Reduce x/y to normalised values in GUI-space
-        _x /= surfaceGuiWidth;
-        _y /= surfaceGuiHeight;
+        _x = (_x - surfaceGuiX) / surfaceGuiWidth;
+        _y = (_x - surfaceGuiY) / surfaceGuiHeight;
         
         if (_viewA == 0) //Skip expensive rotation step if we can
         {

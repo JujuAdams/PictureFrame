@@ -1,13 +1,13 @@
 // Feather disable all
 
-/// Converts a room-space coordinate to a GUI-space coordinate. This function returns a static
+/// Converts a window-space coordinate to a room-space coordinate. This function returns a static
 /// struct which is liable to change unexpectedly. If you need to store the returned coordinates,
 /// please make a copy of the struct.
 /// 
 /// @param x
 /// @param y
 
-function PfRoomToGui(_x, _y)
+function PfWindowToRoom(_x, _y)
 {
     static _system = __PfSystem();
     
@@ -37,30 +37,30 @@ function PfRoomToGui(_x, _y)
             var _viewA = 0;
         }
         
+        //Reduce x/y to normalised values in GUI-space
+        _x = (_x - surfacePostDrawX) / surfacePostDrawWidth;
+        _y = (_y - surfacePostDrawY) / surfacePostDrawHeight;
+        
         if (_viewA == 0) //Skip expensive rotation step if we can
         {
-            //Reduce x/y to normalised values in the viewport
-            _x = (_x - _viewX) / _viewW;
-            _y = (_y - _viewY) / _viewH;
+            //Expand room-space x/y from normalised values in the viewport
+            _x = _viewW*_x + _viewX;
+            _y = _viewH*_y + _viewY;
         }
         else
         {
-            //Perform a rotation, eventually ending up with normalised values as above
+            //Perform a rotation, eventually ending up with room-space coordinates as above
             _viewX += _viewW/2;
             _viewY += _viewH/2;
             
-            var _sin = dsin(-_viewA);
-            var _cos = dcos(-_viewA);
+            var _sin = dsin(_viewA);
+            var _cos = dcos(_viewA);
             
-            var _x0 = _x - _viewX;
-            var _y0 = _y - _viewY;
-            _x = ((_x0*_cos - _y0*_sin) + _viewW/2) / _viewW;
-            _y = ((_x0*_sin + _y0*_cos) + _viewH/2) / _viewH;
+            var _x0 = _x*_viewW - _viewW/2;
+            var _y0 = _y*_viewH - _viewH/2;
+            _x = (_x0*_cos - _y0*_sin) + _viewX;
+            _y = (_x0*_sin + _y0*_cos) + _viewY;
         }
-        
-        //If we're outputting to GUI-space then simply multiply up by the GUI size
-        _x = surfaceGuiX + _x*surfaceGuiWidth;
-        _y = surfaceGuiY + _y*surfaceGuiHeight;
         
         //Set values and return!
         _result.x = _x;
@@ -69,5 +69,5 @@ function PfRoomToGui(_x, _y)
         return _result;
     }
     
-    __PfError("Please call PfApply() before PfRoomToGui()");
+    __PfError("Please call PfApply() before PfGuiToRoom()");
 }
