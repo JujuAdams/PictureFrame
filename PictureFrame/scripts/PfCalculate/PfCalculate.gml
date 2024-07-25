@@ -126,10 +126,6 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         _outCameraWidth  *= _cameraScale;
         _outCameraHeight *= _cameraScale;
         
-        //Round off each axis to the nearest even number of pixels
-        _outCameraWidth  = 2*round(_outCameraWidth/2);
-        _outCameraHeight = 2*round(_outCameraHeight/2);
-        
         //Clip to the maximum bounds in case we've gone too far in one direction
         //This handles edge cases where there is no acceptible solution
         _outCameraWidth  = min(_outCameraWidth,  cameraMaxWidth );
@@ -148,8 +144,12 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         }
         
         //Scale up the view using the same aspect ratio as the camera
-        var _outViewWidth  = _outViewScale*_outCameraWidth;
-        var _outViewHeight = _outViewScale*_outCameraHeight;
+        //We round these values to ensure we have an integer value
+        var _outViewWidth  = round(_outViewScale*_outCameraWidth);
+        var _outViewHeight = round(_outViewScale*_outCameraHeight);
+        
+        //Calculate how much overscan we have
+        var _viewOverscan = cameraOverscan*_outViewScale;
         
         // --- Window ---
         
@@ -234,8 +234,8 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         //Increase the actual size of the camera and view/application surface after we do all maths
         _outCameraWidth  += 2*cameraOverscan;
         _outCameraHeight += 2*cameraOverscan;
-        _outViewWidth    += 2*cameraOverscan*_outViewScale;
-        _outViewHeight   += 2*cameraOverscan*_outViewScale;
+        _outViewWidth    += 2*_viewOverscan;
+        _outViewHeight   += 2*_viewOverscan;
         
         return {
             cameraWidth:    _outCameraWidth,
@@ -245,7 +245,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             viewWidth:    _outViewWidth,
             viewHeight:   _outViewHeight,
             viewScale:    _outViewScale,
-            viewOverscan: cameraOverscan*_outViewScale,
+            viewOverscan: _viewOverscan,
             
             fullscreen:   _fullscreen,
             windowWidth:  _outWindowWidth,
