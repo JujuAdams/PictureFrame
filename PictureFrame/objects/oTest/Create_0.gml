@@ -1,7 +1,7 @@
 // Feather disable all
 
-//Create a new config using a 
-configStruct = PfConfigPixelArt(640, 160, 640, 300);
+//Create a new config using a template config
+configStruct = PfConfigPixelArt(640, 360, 640, 400);
 
 //Set the window to get as big as possible without quite filling the entire screen
 //We're going to force the window to resize so it doesn't matter if this is a "good" size
