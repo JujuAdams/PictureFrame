@@ -1,7 +1,7 @@
 // Feather disable all
 
 #macro PICTURE_FRAME_VERSION  "3.0.0"
-#macro PICTURE_FRAME_DATE     "2024-07-21"
+#macro PICTURE_FRAME_DATE     "2024-07-25"
 
 __PfSystem();
 function __PfSystem()

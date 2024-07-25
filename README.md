@@ -19,11 +19,13 @@ PictureFrame will calculate the following output values for you:
 PictureFrame uses the following input parameters:
 - Camera minimum width/height (the "safe area")
 - Camera maximum width/height
-- Whether the viewport should be "pixel perfect" (a.k.a. an integer scale of the camera)
+- Camera overscan size (useful for smoothing pixel perfect camera movement)
 - Maximum scale for the viewport relative to the camera dimensions
+- Whether the viewport should be pixel perfect (a.k.a. an integer scale of the camera)
+- Whether the game should be displayed fullscreen
 - Size of the game window
-- Whether the game window can be resized by the player on desktop OSes
-- Either the target width or target height for the GUI layer (or neither)
+- The target width and/or target height for the GUI layer (or neither)
 - Whether the application surface should be drawn as "pixel perfect" (a.k.a. at an integer scale)
+- Overscan scale for adapting to CRT monitors (a compliance requirement for PS4 games)
 
 PictureFrame is suitable for pixel art games and for high resolution games. It can calculate correct camera sizes regardless of device is especially suited for the wide variety of aspect ratios found on mobile devices.
