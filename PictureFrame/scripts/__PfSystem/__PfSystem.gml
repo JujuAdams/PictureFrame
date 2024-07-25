@@ -15,16 +15,32 @@ function __PfSystem()
     with(_system)
     {
         __noAppSurfDrawDisable = true;
-        PfApply(PfCalculate(PfConfigGeneral()));
+        PfApply(PfConfigGeneral());
         __noAppSurfDrawDisable = false;
         
         __mouseUpdated = false;
         __mouseX = undefined;
         __mouseY = undefined;
         
+        __windowWidth       = window_get_width();
+        __windowHeight      = window_get_height();
+        __windowSizeChanged = false;
+        
         time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()
         {
             __mouseUpdated = false;
+            
+            if ((__windowWidth != window_get_width()) || (__windowHeight != window_get_height()))
+            {
+                __windowWidth  = window_get_width();
+                __windowHeight = window_get_height();
+                
+                __windowSizeChanged = true;
+            }
+            else
+            {
+                __windowSizeChanged = false;
+            }
         },
         [], -1));
     }

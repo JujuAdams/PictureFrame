@@ -5,14 +5,20 @@
 /// contains many variables that define the size and position of various parts of the render
 /// pipeline.
 /// 
-/// You can either choose to apply the values in the output result struct yourself or you can call
-/// PfApply() (and PfPostDrawAppSurface()) to get PictureFrame to handle things for you. Please see
-/// the documentation for those two functions for more information on how to use them.
+/// This function is provided for people who don't want to use PfApply() and instead want to
+/// set up their render pipeline manually.
+/// 
+/// The "resizeWindow" argument controls whether results should be calculated as though the window
+/// will be resized to avoid black bars. This value is only relevant when the game is not
+/// fullscreened and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
 /// 
 /// N.B. Because PfCalculate() does a lot of maths and returns a fresh struct every time it is
 ///      called, you should avoid calling this function more often than is necessary.
 /// 
 /// @param configurationStruct
+/// @param [resizeWindow=false]
+/// 
+/// 
 /// 
 /// Variables contained in the returned result struct are as follows:
 /// 
@@ -80,7 +86,7 @@
 /// .marginGuiBottom
 ///     The size of the margis around the application surface on the GUI layer.
 
-function PfCalculate(_configurationStruct)
+function PfCalculate(_configurationStruct, _resizeWindow = false)
 {
     with(_configurationStruct)
     {
@@ -147,7 +153,7 @@ function PfCalculate(_configurationStruct)
         
         // --- Window ---
         
-        if (windowAllowResize && (not _fullscreen))
+        if (_resizeWindow && (not _fullscreen))
         {
             //If we're allowed to resize the window then we want to scale up the view dimensions
             var _windowScale = min(_windowWidth/_outViewWidth, _windowHeight/_outViewHeight);

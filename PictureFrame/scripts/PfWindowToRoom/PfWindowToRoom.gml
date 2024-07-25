@@ -4,6 +4,8 @@
 /// struct which is liable to change unexpectedly. If you need to store the returned coordinates,
 /// please make a copy of the struct.
 /// 
+/// N.B. This function requires you to have called PfApply().
+/// 
 /// @param x
 /// @param y
 

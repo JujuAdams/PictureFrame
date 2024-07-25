@@ -2,6 +2,10 @@
 
 /// Returns the x-coordinate of the mouse in roomspace, after being corrected for all the weird and
 /// wonderful things that PictureFrame does.
+/// 
+/// If PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS (which it is out of the box) then the native
+/// GameMaker constant "mouse_x" will be mapped to this function. This means you shouldn't have to
+/// change any code for mouse position detection to work automatically.
 
 function PfMouseX()
 {

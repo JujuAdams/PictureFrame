@@ -1,10 +1,23 @@
 // Feather disable all
 
+//Shortcut to quit the game
 if (keyboard_check_pressed(vk_escape))
 {
     game_end();
 }
 
+//Adapt our pipeline when the window size changes
+if (PfWindowSizeChanged())
+{
+    //Update our configuration
+    configStruct.windowWidth  = window_get_width();
+    configStruct.windowHeight = window_get_height();
+    
+    //Reapply to adapt to the new window size
+    resultStruct = PfApply(configStruct);
+}
+
+//Move the camera when the player clicks
 var _camera = view_get_camera(0);
 
 if (mouse_check_button_pressed(mb_left))

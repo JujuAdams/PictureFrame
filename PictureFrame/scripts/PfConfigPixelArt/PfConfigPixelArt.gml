@@ -30,9 +30,8 @@ function PfConfigPixelArt(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _
         //Force "fullscreen" on non-desktop platforms
         fullscreen: ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))? _fullscreen : true,
         
-        windowWidth:       window_get_width(),
-        windowHeight:      window_get_height(),
-        windowAllowResize: true,
+        windowWidth:  window_get_width(),
+        windowHeight: window_get_height(),
         
         guiTargetWidth:  (_cameraMinWidth < _cameraMinHeight)? _cameraMinWidth : undefined,
         guiTargetHeight: (_cameraMinWidth < _cameraMinHeight)? undefined : _cameraMinHeight,

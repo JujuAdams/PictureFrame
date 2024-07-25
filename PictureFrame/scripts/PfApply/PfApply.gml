@@ -1,13 +1,24 @@
 // Feather disable all
 
-/// Applies a PictureFrame result struct, setting necessary native GameMaker values to ensure that
-/// the values in the result struct accurately affect the game. A PictureFrame result struct is
-/// made by calling PfCalculate() - please see that function for further information.
+/// Applies a PictureFrame configuration struct, setting necessary native GameMaker values to
+/// ensure that the values in the configuration struct accurately affect the game. This function
+/// returns the result struct that is generated internally.
+/// 
+/// The "resizeWindow" argument controls whether PictureFrame should resize the game window when
+/// calling this function. This guarantees that no black bars will appear when the game is
+/// windowed. This value is only relevant when the game is not fullscreened and is therefore only
+/// relevant on desktop platforms (Windows, MacOS, Linux).
 /// 
 /// N.B. Automatic drawing of the application surface will always be disabled by PfApply() by
 ///      calling application_surface_draw_enable(false). This means that without further action,
 ///      your game will not be visible. You should call PfPostDrawAppSurface() in a Post Draw event
 ///      to ensure that your application surface is visible for the player.
+/// 
+/// @param configStruct
+/// @param [resizeWindow=false]
+/// @param [ignoreCamera=false]
+/// 
+/// 
 /// 
 /// PfApply() calls the following functions to set native GameMaker values:
 /// 
@@ -46,15 +57,14 @@
 /// 
 ///   Functions called:
 ///     display_set_gui_maximize(...)
-/// 
-/// @param resultStruct
-/// @param [ignoreCamera=false]
 
-function PfApply(_resultStruct, _ignoreCamera = false)
+function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
 {
     static _system = __PfSystem();
-    _system.__resultStruct = _resultStruct;
     if (not _system.__noAppSurfDrawDisable) application_surface_draw_enable(false);
+    
+    var _resultStruct = PfCalculate(_configStruct, _resizeWindow);
+    _system.__resultStruct = _resultStruct;
     
     with(_resultStruct)
     {
@@ -111,9 +121,10 @@ function PfApply(_resultStruct, _ignoreCamera = false)
                 if (window_get_fullscreen())
                 {
                     window_set_fullscreen(false);
+                    _resizeWindow = true; //Force a resizing of the window
                 }
                 
-                if ((window_get_width() != windowWidth) || (window_get_height() != windowHeight))
+                if (_resizeWindow && ((window_get_width() != windowWidth) || (window_get_height() != windowHeight)))
                 {
                     var _oldWidth  = window_get_width();
                     var _oldHeight = window_get_height();
@@ -130,4 +141,6 @@ function PfApply(_resultStruct, _ignoreCamera = false)
         
         display_set_gui_maximize(windowWidth / guiWidth, windowHeight / guiHeight, surfacePostDrawX, surfacePostDrawY);
     }
+    
+    return _resultStruct;
 }

@@ -12,6 +12,8 @@
 /// N.B. Because PfConfigGeneral() returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
+/// 
+/// 
 /// Variables that the configuration struct hold are as follows:
 /// 
 /// .cameraMinWidth
@@ -52,12 +54,6 @@
 ///     The size of the game window. This value is only relevant when the game is not fullscreened
 ///     and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
 /// 
-/// .windowAllowResize
-///     Whether PfApply() should try to resize the window when called. This guarantees that no
-///     black bars will appear when the game is windowed. This value is only relevant when the game
-///     is not fullscreened and is therefore only relevant on desktop platforms (Windows, MacOS,
-///     Linux).
-/// 
 /// .guiTargetWidth
 /// .guiTargetHeight
 ///     The target width or height for the GUI layer dimensions. To allow PfCalculate() to adapt to
@@ -84,9 +80,8 @@ function PfConfigGeneral()
         //Force "fullscreen" on non-desktop platforms
         fullscreen: ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))? window_get_fullscreen() : true,
         
-        windowWidth:       window_get_width(),
-        windowHeight:      window_get_height(),
-        windowAllowResize: true,
+        windowWidth:  window_get_width(),
+        windowHeight: window_get_height(),
         
         windowOverscanScale: 1,
     }

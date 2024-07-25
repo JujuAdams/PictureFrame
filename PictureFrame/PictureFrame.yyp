@@ -18,7 +18,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.6.0.157",
+    "IDEVersion":"2024.6.2.162",
   },
   "name":"PictureFrame",
   "resources":[
@@ -26,6 +26,7 @@
     {"id":{"name":"oMarkerCircle","path":"objects/oMarkerCircle/oMarkerCircle.yy",},},
     {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
+    {"id":{"name":"__PfConfigMacros","path":"scripts/__PfConfigMacros/__PfConfigMacros.yy",},},
     {"id":{"name":"__PfError","path":"scripts/__PfError/__PfError.yy",},},
     {"id":{"name":"__PfMacroHacks","path":"scripts/__PfMacroHacks/__PfMacroHacks.yy",},},
     {"id":{"name":"__PfSystem","path":"scripts/__PfSystem/__PfSystem.yy",},},
@@ -40,6 +41,9 @@
     {"id":{"name":"PfMouseY","path":"scripts/PfMouseY/PfMouseY.yy",},},
     {"id":{"name":"PfPostDrawAppSurface","path":"scripts/PfPostDrawAppSurface/PfPostDrawAppSurface.yy",},},
     {"id":{"name":"PfRoomToGui","path":"scripts/PfRoomToGui/PfRoomToGui.yy",},},
+    {"id":{"name":"PfRoomToWindow","path":"scripts/PfRoomToWindow/PfRoomToWindow.yy",},},
+    {"id":{"name":"PfWindowSizeChanged","path":"scripts/PfWindowSizeChanged/PfWindowSizeChanged.yy",},},
+    {"id":{"name":"PfWindowToRoom","path":"scripts/PfWindowToRoom/PfWindowToRoom.yy",},},
     {"id":{"name":"sprCheckerboard","path":"sprites/sprCheckerboard/sprCheckerboard.yy",},},
     {"id":{"name":"sprCheckerboardTiles","path":"sprites/sprCheckerboardTiles/sprCheckerboardTiles.yy",},},
     {"id":{"name":"tsCheckerboardTiles","path":"tilesets/tsCheckerboardTiles/tsCheckerboardTiles.yy",},},
