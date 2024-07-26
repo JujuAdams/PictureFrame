@@ -88,8 +88,6 @@ function PfConfigGeneral()
         windowHeight: window_get_height(),
         
         guiStretchOverWindow: false,
-        guiDPIReference: undefined,
-        guiDPIFactor: 1,
         
         windowOverscanScale: 1,
     }

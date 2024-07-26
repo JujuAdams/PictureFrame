@@ -34,8 +34,6 @@ function PfConfigPixelArt(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _
         windowHeight: window_get_height(),
         
         guiStretchOverWindow: false,
-        guiDPIReference: undefined,
-        guiDPIFactor: 1,
         
         guiTargetWidth:  (_cameraMinWidth < _cameraMinHeight)? _cameraMinWidth : undefined,
         guiTargetHeight: (_cameraMinWidth < _cameraMinHeight)? undefined : _cameraMinHeight,
