@@ -6,7 +6,7 @@ if (keyboard_check_pressed(vk_escape))
     game_end();
 }
 
-//
+//Fullscreen toggle
 if (keyboard_check_pressed(vk_f4))
 {
     configStruct.fullscreen = not window_get_fullscreen();
@@ -30,7 +30,7 @@ camera_set_view_pos(_camera, cameraX, cameraY);
 //Adapt our pipeline when the window size changes
 if (PfWindowSizeChanged())
 {
-    //Update our configuration
+    //Update our configuration with the current window state
     configStruct.fullscreen   = window_get_fullscreen();
     configStruct.windowWidth  = window_get_width();
     configStruct.windowHeight = window_get_height();

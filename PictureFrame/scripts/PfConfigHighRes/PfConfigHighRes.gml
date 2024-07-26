@@ -33,6 +33,8 @@ function PfConfigHighRes(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _c
         windowWidth:  window_get_width(),
         windowHeight: window_get_height(),
         
+        guiStretchOverWindow: false,
+        
         guiTargetWidth:  (_cameraMinWidth < _cameraMinHeight)? _cameraMinWidth : undefined,
         guiTargetHeight: (_cameraMinWidth < _cameraMinHeight)? undefined : _cameraMinHeight,
         
