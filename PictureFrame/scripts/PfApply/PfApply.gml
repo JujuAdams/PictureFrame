@@ -139,7 +139,7 @@ function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
             }
         }
         
-        display_set_gui_maximize(windowWidth / guiWidth, windowHeight / guiHeight, surfacePostDrawX, surfacePostDrawY);
+        display_set_gui_maximize(1/windowToGuiScaleX, 1/windowToGuiScaleY, guiX, guiY);
     }
     
     return _resultStruct;

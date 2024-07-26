@@ -54,6 +54,10 @@
 ///     The size of the game window. This value is only relevant when the game is not fullscreened
 ///     and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
 /// 
+/// .guiStretchOverWindow
+///     Whether to stretch the GUI over the entire window. This is <false> by default meaning that
+///     the GUI layer will be stretched over the application surface portion of the window.
+/// 
 /// .guiTargetWidth
 /// .guiTargetHeight
 ///     The target width or height for the GUI layer dimensions. To allow PfCalculate() to adapt to
@@ -82,6 +86,10 @@ function PfConfigGeneral()
         
         windowWidth:  window_get_width(),
         windowHeight: window_get_height(),
+        
+        guiStretchOverWindow: false,
+        guiDPIReference: undefined,
+        guiDPIFactor: 1,
         
         windowOverscanScale: 1,
     }

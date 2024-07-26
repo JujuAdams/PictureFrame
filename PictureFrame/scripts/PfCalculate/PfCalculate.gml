@@ -82,11 +82,15 @@
 ///     Whether any of the margins are visible. You should check this variable before drawing the
 ///     margins (using the variables below).
 /// 
-/// .marginGuiLeft
-/// .marginGuiTop
-/// .marginGuiRight
-/// .marginGuiBottom
-///     The size of the margis around the application surface on the GUI layer.
+/// .marginGuiX1
+/// .marginGuiX2
+/// .marginGuiX3
+/// .marginGuiX4
+/// .marginGuiY1
+/// .marginGuiY2
+/// .marginGuiY3
+/// .marginGuiY4
+///     Coordinates for the margins around the application surface in GUI-space.
 
 function PfCalculate(_configurationStruct, _resizeWindow = false)
 {
@@ -105,6 +109,8 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             var _windowWidth  = windowWidth;
             var _windowHeight = windowHeight;
         }
+        
+        
         
         // --- Camera ---
         
@@ -133,6 +139,8 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         _outCameraWidth  = min(_outCameraWidth,  cameraMaxWidth );
         _outCameraHeight = min(_outCameraHeight, cameraMaxHeight);
         
+        
+        
         // --- View ---
         
         //Figure out the scaling factor that fits the camera inside the window
@@ -153,6 +161,8 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         //Calculate how much overscan we have
         var _viewOverscan = cameraOverscan*_outViewScale;
         
+        
+        
         // --- Window ---
         
         if (_resizeWindow && (not _fullscreen))
@@ -172,31 +182,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             var _outWindowHeight = _windowHeight;
         }
         
-        // --- GUI ---
         
-        if ((guiTargetWidth == undefined) && (guiTargetHeight == undefined))
-        {
-            //We don't have target GUI dimensions, use the window size for the GUI
-            var _outGuiWidth  = _outWindowWidth;
-            var _outGuiHeight = _outWindowHeight;
-        }
-        else if (guiTargetWidth == undefined)
-        {
-            //GUI height is fixed and width is flexible. Scale the GUI width to be in proportion to the GUI height
-            var _outGuiWidth  = (guiTargetHeight/_outWindowHeight)*_outWindowWidth;
-            var _outGuiHeight = guiTargetHeight;
-        }
-        else if (guiTargetHeight == undefined)
-        {
-            //GUI width is fixed and height is flexible. Scale the GUI height to be in proportion to the GUI width
-            var _outGuiWidth  = guiTargetWidth;
-            var _outGuiHeight = (guiTargetWidth/_outWindowWidth)*_outWindowHeight;
-        }
-        else
-        {
-            var _outGuiWidth  = guiTargetWidth;
-            var _outGuiHeight = guiTargetHeight;
-        }
         
         // --- Application Surface Drawing ---
         
@@ -224,20 +210,70 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         var _surfacePostDrawX = 0.5*(_outWindowWidth  - _surfacePostDrawWidth );
         var _surfacePostDrawY = 0.5*(_outWindowHeight - _surfacePostDrawHeight);
         
-        //Convert window coordinates to GUI coordinates
-        var _surfacePostDrawScaleX = _outGuiWidth/_outWindowWidth;
-        var _surfacePostDrawScaleY = _outGuiHeight/_outWindowHeight;
         
-        var _surfaceGuiX      = _surfacePostDrawScaleX*_surfacePostDrawX;
-        var _surfaceGuiY      = _surfacePostDrawScaleY*_surfacePostDrawY;
-        var _surfaceGuiWidth  = _surfacePostDrawScaleX*_surfacePostDrawWidth;
-        var _surfaceGuiHeight = _surfacePostDrawScaleY*_surfacePostDrawHeight;
+        
+        // --- GUI ---
+        
+        if (guiStretchOverWindow)
+        {
+            var _outGuiX = 0;
+            var _outGuiY = 0;
+            
+            var _guiRegionWidth  = _outWindowWidth;
+            var _guiRegionHeight = _outWindowHeight;
+        }
+        else
+        {
+            var _outGuiX = _surfacePostDrawX;
+            var _outGuiY = _surfacePostDrawY;
+            
+            var _guiRegionWidth  = _surfacePostDrawWidth;
+            var _guiRegionHeight = _surfacePostDrawHeight;
+        }
+        
+        if ((guiTargetWidth == undefined) && (guiTargetHeight == undefined))
+        {
+            //We don't have target GUI dimensions, use the window size for the GUI
+            var _outGuiWidth  = _guiRegionWidth;
+            var _outGuiHeight = _guiRegionHeight;
+        }
+        else if (guiTargetWidth == undefined)
+        {
+            //GUI height is fixed and width is flexible. Scale the GUI width to be in proportion to the GUI height
+            var _outGuiWidth  = (guiTargetHeight/_guiRegionHeight)*_guiRegionWidth;
+            var _outGuiHeight = guiTargetHeight;
+        }
+        else if (guiTargetHeight == undefined)
+        {
+            //GUI width is fixed and height is flexible. Scale the GUI height to be in proportion to the GUI width
+            var _outGuiWidth  = guiTargetWidth;
+            var _outGuiHeight = (guiTargetWidth/_guiRegionWidth)*_guiRegionHeight;
+        }
+        else
+        {
+            var _outGuiWidth  = guiTargetWidth;
+            var _outGuiHeight = guiTargetHeight;
+        }
+        //Convert window coordinates to GUI coordinates
+        var _windowToGuiScaleX = _outGuiWidth/_guiRegionWidth;
+        var _windowToGuiScaleY = _outGuiHeight/_guiRegionHeight;
+        
+        var _surfaceGuiX      = _windowToGuiScaleX*(_surfacePostDrawX - _outGuiX);
+        var _surfaceGuiY      = _windowToGuiScaleY*(_surfacePostDrawY - _outGuiY);
+        var _surfaceGuiWidth  = _windowToGuiScaleX*_surfacePostDrawWidth;
+        var _surfaceGuiHeight = _windowToGuiScaleY*_surfacePostDrawHeight;
+        
+        
+        
+        // --- Final Corrections ---
         
         //Increase the actual size of the camera and view/application surface after we do all maths
         _outCameraWidth  += 2*cameraOverscan;
         _outCameraHeight += 2*cameraOverscan;
         _outViewWidth    += 2*_viewOverscan;
         _outViewHeight   += 2*_viewOverscan;
+        
+        
         
         return {
             cameraWidth:    _outCameraWidth,
@@ -253,6 +289,8 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             windowWidth:  _outWindowWidth,
             windowHeight: _outWindowHeight,
             
+            guiX:      _outGuiX,
+            guiY:      _outGuiY,
             guiWidth:  _outGuiWidth,
             guiHeight: _outGuiHeight,
             
@@ -262,16 +300,25 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             surfacePostDrawWidth:  _surfacePostDrawWidth,
             surfacePostDrawHeight: _surfacePostDrawHeight,
             
+            windowToGuiScaleX: _windowToGuiScaleX,
+            windowToGuiScaleY: _windowToGuiScaleY,
+            
             surfaceGuiX:      _surfaceGuiX,
             surfaceGuiY:      _surfaceGuiY,
             surfaceGuiWidth:  _surfaceGuiWidth,
             surfaceGuiHeight: _surfaceGuiHeight,
             
-            marginsVisible:   ((_surfacePostDrawX > 0) || (_surfacePostDrawY > 0) || (_surfaceGuiWidth < _outGuiWidth) || (_surfaceGuiHeight < _outGuiHeight)),
-            marginGuiLeft:   (-_surfacePostDrawX / _surfacePostDrawScaleX),
-            marginGuiTop:    (-_surfacePostDrawY / _surfacePostDrawScaleY),
-            marginGuiRight:   _surfaceGuiWidth,
-            marginGuiBottom:  _surfaceGuiHeight,
+            marginsVisible:  ((_surfacePostDrawX > 0) || (_surfacePostDrawY > 0) || (_surfacePostDrawWidth < _outWindowWidth) || (_surfacePostDrawHeight < _outWindowHeight)),
+            
+            marginGuiX1: _windowToGuiScaleX*(-_outGuiX),
+            marginGuiX2: _surfaceGuiX,
+            marginGuiX3: _surfaceGuiX + _surfaceGuiWidth,
+            marginGuiX4: _windowToGuiScaleX*(_windowWidth - _outGuiX),
+            
+            marginGuiY1: _windowToGuiScaleY*(-_outGuiY),
+            marginGuiY2: _surfaceGuiY,
+            marginGuiY3: _surfaceGuiY + _surfaceGuiHeight,
+            marginGuiY4: _windowToGuiScaleY*(_windowHeight - _outGuiY),
         }
     }
 }
