@@ -38,7 +38,7 @@
 ///     Maximum scaling factor from the camera to the view. For pixel perfect games that don't want
 ///     subpixelling, this value should be set to 1. If you do want subpixelling, or you're making
 ///     a high res game, this value should usually be set to <infinity>. You may rarely want to set
-///     another value if you want tighter control the view scale and subpixelling.
+///     another value if you want tighter control over the view scale and subpixelling.
 /// 
 /// .viewPixelPerfect
 ///     Whether the camera-to-view scale should be a whole number. If you're making a pixel art
@@ -67,8 +67,8 @@
 /// 
 /// .surfacePixelPerfect
 ///     Determines whether the scaling factor applied to the application surface when drawn to the
-///     GUI layer should be a whole number. This may sometimes result in black bars appearing
-///     around the application surface. This only applies when using PfPostDrawAppSurface().
+///     window should be a whole number. If the surface doesn't fit exactly (which is often the
+///     case) then the application surface will be drawn centred in the window.
 /// 
 /// .windowOverscanScale
 ///     Scaling factor to apply to the application surface and GUI at the end of the render

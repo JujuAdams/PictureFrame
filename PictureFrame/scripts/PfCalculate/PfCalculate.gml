@@ -126,7 +126,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         _outCameraWidth  *= _cameraScale;
         _outCameraHeight *= _cameraScale;
         
-        //Figure out the s_cameraScalecaling factor that fits us outside the minimum bounds
+        //Figure out the scaling factor that fits us outside the minimum bounds
         //If the scaling factor is less than or equal to 1 then the camera already fits outside the minimum bounds and no scaling is needed
         var _cameraScale = max(1, cameraMinWidth/_outCameraWidth, cameraMinHeight/_outCameraHeight);
         
@@ -158,7 +158,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         var _outViewWidth  = round(_outViewScale*_outCameraWidth);
         var _outViewHeight = round(_outViewScale*_outCameraHeight);
         
-        //Calculate how much overscan we have
+        //Calculate how much overscan we have in viewspace
         var _viewOverscan = cameraOverscan*_outViewScale;
         
         
@@ -186,7 +186,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         
         // --- Application Surface Drawing ---
         
-        //Figure out the scaling factor that fits the application surface inside the GUI dimensions
+        //Figure out the scaling factor that fits the application surface inside the window dimensions
         var _surfacePostDrawScale = min(_outWindowWidth/_outViewWidth, _outWindowHeight/_outViewHeight);
         
         //If we're using pixel perfect scaling then drop down to the nearest integer scale
@@ -203,6 +203,8 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         //Figure out another scaling factor if the application surface exceeds the overscan limits
         var _overscanCorrectionScale = min(1, _overscanWidth/_surfacePostDrawWidth, _overscanHeight/_surfacePostDrawHeight);
         _surfacePostDrawScale *= _overscanCorrectionScale;
+        
+        //Apply the correction scale
         _surfacePostDrawWidth  = _surfacePostDrawScale*_outViewWidth;
         _surfacePostDrawHeight = _surfacePostDrawScale*_outViewHeight;
         
@@ -254,6 +256,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             var _outGuiWidth  = guiTargetWidth;
             var _outGuiHeight = guiTargetHeight;
         }
+        
         //Convert window coordinates to GUI coordinates
         var _windowToGuiScaleX = _outGuiWidth/_guiRegionWidth;
         var _windowToGuiScaleY = _outGuiHeight/_guiRegionHeight;
