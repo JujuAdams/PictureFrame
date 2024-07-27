@@ -240,14 +240,14 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         else if (guiTargetWidth == undefined)
         {
             //GUI height is fixed and width is flexible. Scale the GUI width to be in proportion to the GUI height
-            var _outGuiWidth  = (guiTargetHeight/_guiRegionHeight)*_guiRegionWidth;
+            var _outGuiWidth  = round((guiTargetHeight/_guiRegionHeight)*_guiRegionWidth);
             var _outGuiHeight = guiTargetHeight;
         }
         else if (guiTargetHeight == undefined)
         {
             //GUI width is fixed and height is flexible. Scale the GUI height to be in proportion to the GUI width
             var _outGuiWidth  = guiTargetWidth;
-            var _outGuiHeight = (guiTargetWidth/_guiRegionWidth)*_guiRegionHeight;
+            var _outGuiHeight = round((guiTargetWidth/_guiRegionWidth)*_guiRegionHeight);
         }
         else
         {
