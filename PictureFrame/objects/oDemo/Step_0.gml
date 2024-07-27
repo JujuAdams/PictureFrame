@@ -10,7 +10,7 @@ if (keyboard_check_pressed(vk_escape))
 if (keyboard_check_pressed(vk_f4))
 {
     configStruct.fullscreen = not window_get_fullscreen();
-    resultStruct = PfApply(configStruct);
+    PfApply(configStruct);
 }
 
 //Move the camera when the player clicks
@@ -36,5 +36,5 @@ if (PfWindowSizeChanged())
     configStruct.windowHeight = window_get_height();
     
     //Reapply to adapt to the new window size
-    resultStruct = PfApply(configStruct);
+    PfApply(configStruct);
 }

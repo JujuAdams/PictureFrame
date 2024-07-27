@@ -9,7 +9,7 @@ configStruct.windowWidth  = display_get_width()  - 160;
 configStruct.windowHeight = display_get_height() - 160;
 
 //We'll use this result struct later to draw the margins
-resultStruct = PfApply(configStruct, true);
+PfApply(configStruct, true);
 
 //Set up some camera tracking variables
 var _camera = view_get_camera(0);

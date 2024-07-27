@@ -36,6 +36,7 @@
     {"id":{"name":"PfConfigGeneral","path":"scripts/PfConfigGeneral/PfConfigGeneral.yy",},},
     {"id":{"name":"PfConfigHighRes","path":"scripts/PfConfigHighRes/PfConfigHighRes.yy",},},
     {"id":{"name":"PfConfigPixelArt","path":"scripts/PfConfigPixelArt/PfConfigPixelArt.yy",},},
+    {"id":{"name":"PfGetApplied","path":"scripts/PfGetApplied/PfGetApplied.yy",},},
     {"id":{"name":"PfGuiToRoom","path":"scripts/PfGuiToRoom/PfGuiToRoom.yy",},},
     {"id":{"name":"PfMouseX","path":"scripts/PfMouseX/PfMouseX.yy",},},
     {"id":{"name":"PfMouseY","path":"scripts/PfMouseY/PfMouseY.yy",},},

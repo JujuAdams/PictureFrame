@@ -12,6 +12,7 @@
 ///   if (PfWindowSizeChanged())
 ///   {
 ///       //Update our configuration
+///       configStruct.fullscreen   = window_get_fullscreen();
 ///       configStruct.windowWidth  = window_get_width();
 ///       configStruct.windowHeight = window_get_height();
 ///       

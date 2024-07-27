@@ -1,6 +1,6 @@
 // Feather disable all
 
-with(resultStruct)
+with(PfGetApplied())
 {
     if (marginsVisible)
     {
