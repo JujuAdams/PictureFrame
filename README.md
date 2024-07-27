@@ -1,4 +1,4 @@
-<h1 align="center">PictureFrame 3.1.0</h1>
+<h1 align="center">PictureFrame 3.2.0</h1>
 
 <p align="center">Camera/view/GUI/window/application surface calculator for GameMaker</p>
 
