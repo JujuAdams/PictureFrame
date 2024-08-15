@@ -20,8 +20,8 @@
 */
 
 const config = {
-	name: 'Vinyl',
-	description: 'Modular audio system for GameMaker 2023.8',
+	name: 'PictureFrame',
+	description: 'Camera/view/GUI/window/application surface calculator for GameMaker',
 	latestVersion: '3.2',
 	otherVersions: [],
 	favicon: 'assets/favicon.ico',
