@@ -5,3 +5,5 @@
 -    [PfCalculate](PfCalculate)
 -    [The PF Struct](StructBasics)
 -    [PfConfigGeneral](PfConfigGeneral)
+-    [PfConfigGeneral](PfConfigPixelArt)
+-    [PfConfigGeneral](PfConfigHighRes)
