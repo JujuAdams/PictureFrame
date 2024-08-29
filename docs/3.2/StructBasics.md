@@ -1,4 +1,0 @@
-# The PictureFrame Struct
-
-&nbsp;
-

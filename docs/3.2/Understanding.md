@@ -1,5 +1,7 @@
 # Understanding Views, Windows and GUI
 
+&nbsp;
+
 It can be difficult to conceptualise the relationship between the window, view and GUI size values. This section will attempt to simplify this.
 
 # Definitions
@@ -12,7 +14,7 @@ In GameMaker:
 -	the **GUI** is a special layer that is not affected by viewport/camera settings.
 -	the **window** defines the amount of space the game takes up on a monitor. This is only relevant on desktop platforms; consoles always run in fullscreen mode.
 
-# An Analogy
+# Height and Width
 
 Let's imagine we're making a film.
 
@@ -22,4 +24,15 @@ To enable the director to see what's on the camera, you would send the footage f
 
 Our director also wants to remember which viewport corresponds to which camera, so they put a sticker with the camera number over each viewport. That's the **GUI**.
 
-![image](../assets/diagram1b.png)
+![image](../assets/diagram1e.png)
+
+
+Now, if were to use PfGetApplied on this scenario, here's what the struct's width and height values would be measuring:
+
+![image](../assets/diagram2.png)
+
+
+# Scales and Resolutions
+
+
+
