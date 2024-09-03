@@ -18,7 +18,7 @@ PictureFrame will calculate the following output values for you:
 - Application surface draw position and draw scale
 - Size of black bar margins around the application surface when the application surface is small than the window
 
-You can then apply these values yourself, or call `PfApply()` to have PictureFrame take care of it for you.
+You can then apply these values yourself, or call `PfApply()` to have PictureFrame take care of it for you. Alternatively, you can call `PfCalculate()` and manage the pipeline yourself using the output.
 
 PictureFrame uses the following input parameters:
 - Camera minimum width/height (the "safe area")
@@ -32,7 +32,25 @@ PictureFrame uses the following input parameters:
 - Whether the application surface should be drawn as "pixel perfect" (a.k.a. at an integer scale)
 - Overscan scale for adapting to CRT monitors (a compliance requirement for PS4 games)
 
-PictureFrame is suitable for pixel art games and for high resolution games. It can calculate correct camera sizes regardless of device is especially suited for the wide variety of aspect ratios found on mobile devices.
+PictureFrame is suitable for pixel art games and for high resolution games. It can calculate correct camera sizes regardless of device is especially suited for the wide variety of aspect ratios found on mobile devices. PictureFrame only supports rendering of one view at a time and does not handle split-screen games.
+
+&nbsp;
+
+# Setting Up
+
+*This guide assumes you'll be using `PfApply()` to set up GameMaker's rendering pipeline. If you're only using `PfCalculate()` then there are no additional considerations: just call the function and use the values as you see fit!*
+
+PictureFrame is easy to set up, just a handful of function calls, but there are a couple essential steps that can be missed. Here's the big caveat one up front: **If you call `PfApply()` then you will need to call `PfPostDrawAppSurface()` in the Post-Draw event.** You can still apply post-processing shaders as you would otherwise when drawing the application surface.
+
+Here are the basic setup steps:
+
+1. At the start of the game, call one of the config struct creator functions. These are `PfConfigPixelArt()`, `PfConfigHighRes()`, and `PfConfigGeneral()`. The latter is the most flexible. All three functions will return the same type of struct, you can read more about what variables can be adjusted in the [script documentation](https://github.com/JujuAdams/PictureFrame/blob/dev/scripts/PfConfigGeneral/PfConfigGeneral.gml).
+
+2. Call `PfApply()` using the config struct we just created. You may want to set the optional `resizeWindow` parameter to `true` the first time you call this function in the flow of your game.
+
+3. Create a Post-Draw event in a persistent object instance and call `PfPostDrawAppSurface()` in that event.
+
+And then run the game and cross your fingers!
 
 &nbsp;
 
@@ -43,8 +61,11 @@ PictureFrame can help you make smooth camera movement even when using a pixel pe
 Solving this problem is a bit fiddly. You'll need to render some extra pixels around the edge of your camera on the application surface. Wen you draw the application surface, you should offset the surface rendering by the fractional part of the camera's position. This is inconvenient at the best of times.
 
 PictureFrame can do all the maths for you:
+
 1. Set `.cameraOverscan` to `1` when creating a PictureFrame config struct (e.g. the struct returned by `PfConfigPixelArt()`)
+
 2. Store your own camera x/y position that is the precise decimal value. When you call `camera_set_view_pos()` to set GameMaker's internal camera position make sure to `floor()` the position so that GameMaker renders at an clean integer position
+
 3. When you call `PfPostDrawAppSurface()` in the Post-Draw event, set the `fracCameraX` and `fracCameraY` parameters to the fractional part of your camera x/y position
 
 You can look at the [`oDemoSmoothCamera` object](https://github.com/JujuAdams/PictureFrame/tree/dev/objects/oDemoSmoothCamera) in the repo for a practical example. Here is an abbreviated copy of the code for quick reference:
