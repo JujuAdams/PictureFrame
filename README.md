@@ -6,6 +6,8 @@
 
 &nbsp;
 
+# Introduction
+
 Getting your game's scaling right in GameMaker is an eternal chore. There are multiple scaling factors applied throughout the render pipeline which are all multiplied together to give you the final image displayed to players. This is hard enough to wrap your head around for simple games. If you're looking to add an extra bit of polish by adapting to different screen resolutions and aspect ratios then organising the various render stages becomes very confusing very fast.
 
 PictureFrame will calculate the following output values for you:
@@ -34,7 +36,7 @@ PictureFrame is suitable for pixel art games and for high resolution games. It c
 
 &nbsp;
 
-### Smooth Camera Movement
+# Smooth Camera Movement
 
 PictureFrame can help you make smooth camera movement even when using a pixel perfect camera. You'll often find that your camera will "jitter" at low speed due to the game needing to rendering pixels that don't neatly fit to the pixel grid. Whilst this is technically accurate it's also visually unpleasant, especially on large screens when the game is scaled up a long way.
 
