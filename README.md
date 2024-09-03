@@ -91,6 +91,6 @@ camera_set_view_pos(_camera, floor(cameraX), floor(cameraY));
 ```gml
 /// Post-Draw Event
 
-//Draw the application surface
+//Draw the application surface using PictureFrame's anti-jitter feature
 PfPostDrawAppSurface(undefined, undefined, undefined, frac(cameraX), frac(cameraY));
 ```
