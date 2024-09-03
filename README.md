@@ -40,7 +40,7 @@ PictureFrame is suitable for pixel art games and for high resolution games. It c
 
 PictureFrame can help you make smooth camera movement even when using a pixel perfect camera. You'll often find that your camera will "jitter" at low speed due to the game needing to rendering pixels that don't neatly fit to the pixel grid. Whilst this is technically accurate it's also visually unpleasant, especially on large screens when the game is scaled up a long way.
 
-Solving this problem is a bit fiddly. You'll need to render some extra pixels around the edge of your camera on the application surface. Wen you draw the application surface, you should offset the surface rendering by the fractional part of the camera's position. This is inconvenient at the best of times.
+Solving this problem manually yourself is a bit fiddly. You'll need to render some extra pixels around the edge of your camera on the application surface. When you draw the application surface, you should offset the surface rendering by the fractional part of the camera's position. This is inconvenient at the best of times and can be hard to fit into an existing rendering pipeline.
 
 PictureFrame can do all the maths for you:
 1. Set `.cameraOverscan` to `1` when creating a PictureFrame config struct (e.g. the struct returned by `PfConfigPixelArt()`)
