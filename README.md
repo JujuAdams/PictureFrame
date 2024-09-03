@@ -20,7 +20,7 @@ PictureFrame will calculate the following output values for you:
 
 You can then apply these values yourself, or call `PfApply()` to have PictureFrame take care of it for you. Alternatively, you can call `PfCalculate()` and manage the pipeline yourself using the output.
 
-PictureFrame uses the following input parameters:
+PictureFrame uses the following input constraints:
 - Camera minimum width/height (the "safe area")
 - Camera maximum width/height
 - Camera overscan size (useful for smoothing pixel perfect camera movement)
@@ -32,7 +32,7 @@ PictureFrame uses the following input parameters:
 - Whether the application surface should be drawn as "pixel perfect" (a.k.a. at an integer scale)
 - Overscan scale for adapting to CRT monitors (a compliance requirement for PS4 games)
 
-PictureFrame is suitable for pixel art games and for high resolution games. It can calculate correct camera sizes regardless of device is especially suited for the wide variety of aspect ratios found on mobile devices. PictureFrame only supports rendering of one view at a time and does not handle split-screen games.
+PictureFrame is suitable for pixel art games or for high resolution games. It can calculate correct camera sizes regardless of device and is especially suited for the wide variety of aspect ratios found on mobile devices. PictureFrame only supports rendering of one view at a time and does not handle split-screen games.
 
 &nbsp;
 
