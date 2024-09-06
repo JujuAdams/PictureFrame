@@ -1,6 +1,7 @@
 -    [Home](README)
 -    [Alternatives](Alternatives)
 -    [Getting Started](GettingStarted)
+-    [Use Cases](UseCases)
 -    [Understanding Cameras/Views](Understanding)
 -    [PfApply](PfApply)
 -    [PFGetApplied](PfGetApplied)

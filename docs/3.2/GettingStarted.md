@@ -2,13 +2,73 @@
 
 &nbsp;
 
-# The Short Version
+## The Short Version
 
 1. Import the .yymps file
 2. Call one of the PfConfig...() functions at initialisation and edit the returned struct to set your desired values.
 3. Call PfApply() or PfCalculate() to apply the configurated struct to your game.
-4. In a Post Draw event somewhere, call PfPostDrawAppSurface() (or your game won't be visible!)
+4. In a Post Draw event of a persistent object, call PfPostDrawAppSurface() (or your game won't be visible!)
 5. To detect a change in window size (e.g. switching from fullscreen to windowed, rotating from window to landscape, or changing resolution), call PfWindowSizeChanged(), then PfApply() (see [PfWindowSizeChanged()](PfWindowSizeChanged) for more details)
 
-# The Long Version
+## Use Case: Pixel-perfect Art
+
+As the name suggests, this is the kind of rendering you want for pixel art games; it'll resize the art to preserve the pixels, without stretching or distorting. It does this by making sure the camera-to-view scale is a whole number, and
+
+1. Import the .yymps file
+2. Call PfConfigPixelArt() at initialisation
+
+## Use Case: HD Resolution
+
+When working with 
+
+## Use Case: Smooth Camera Movement with Pixel-perfect Rendering
+
+When using a pixel-perfect camera on larger screens, you may find the camera "jitters" when it moves as it tries to render pixels that don't fit neatly onto the grid. This happens because the pixels are scaled by integers, but the camera's position is a float. Fortunately, PictureFrame can fix this for you by rendering some extra pixels around the camera, then offsetting the surface rendering to match the camera's fractional value, keeping it nice and smooth.
+
+PictureFrame can do all the maths for you:
+
+1. Set .cameraOverscan to 1 when creating a PictureFrame config struct (e.g. the struct returned by [PfConfigPixelArt()](PfConfigPixelArt))
+
+2. Store your own camera x/y position that is the precise decimal value. When you call camera_set_view_pos() to set GameMaker's internal camera position make sure to floor() the position so that GameMaker renders at an clean integer position
+
+3. When you call PfPostDrawAppSurface() in the Post-Draw event, set the fracCameraX and fracCameraY parameters to the fractional part of your camera x/y position
+
+You can look at the oDemoSmoothCamera object in the repo for a practical example. Here is an abbreviated copy of the code for quick reference:
+
+	/// Create Event
+	//Create a new config using a template config that uses a pixel perfect camera
+	configStruct = PfConfigPixelArt(640, 320, 640, 320);
+	//We'll be taking advantage of the overscan feature for smooth camera movement
+	configStruct.cameraOverscan = 1;
+	//Apply the configuration struct to the pipeline
+	PfApply(configStruct, true);
+	//Set up some camera tracking variables
+	var _camera = view_get_camera(0);
+	cameraX = camera_get_view_x(_camera);
+	cameraY = camera_get_view_y(_camera);
+	cameraTargetX = cameraX;
+	cameraTargetY = cameraY;
+
+	/// Step Event
+	//Move the camera when the player clicks
+	var _camera = view_get_camera(0);
+	if (mouse_check_button_pressed(mb_left))
+	{
+	    cameraTargetX = mouse_x - camera_get_view_width(_camera)/2;
+	    cameraTargetY = mouse_y - camera_get_view_height(_camera)/2;
+	}
+	//Lerp towards the camera target
+	//This will generate decimal camera positions
+	cameraX = lerp(cameraX, cameraTargetX, 0.1);
+	cameraY = lerp(cameraY, cameraTargetY, 0.1);
+	//Set the GameMaker camera position to integer positions
+	camera_set_view_pos(_camera, floor(cameraX), floor(cameraY));
+
+	/// Post-Draw Event
+	//Draw the application surface using PictureFrame's anti-jitter feature
+	PfPostDrawAppSurface(undefined, undefined, undefined, frac(cameraX), frac(cameraY));
+
+
+
+
 
