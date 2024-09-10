@@ -12,14 +12,23 @@
 
 ## Use Case: Pixel-perfect Art
 
-As the name suggests, this is the kind of rendering you want for pixel art games; it'll resize the art to preserve the pixels, without stretching or distorting. It does this by making sure the camera-to-view scale is a whole number, and
+As the name suggests, this is the kind of rendering you want for pixel art games; it'll resize the art to preserve the pixels, without stretching or distorting them. It does this by making sure the camera-to-view scale is a whole number using .viewPixelPerfect, and the same for the scale at which the application surface is rendered to the window (.surfacePixelPerfect).
 
 1. Import the .yymps file
-2. Call PfConfigPixelArt() at initialisation
+2. Call PfConfigPixelArt() at initialisation and edit the struct to set your desired values
+3. Call PfApply() or PfCalculate() to apply the configurated struct to your game.
+4. In a Post Draw event of a persistent object, call PfPostDrawAppSurface() (or your game won't be visible!)
+5. To detect a change in window size (e.g. switching from fullscreen to windowed, rotating from window to landscape, or changing resolution), call PfWindowSizeChanged(), then PfApply() (see [PfWindowSizeChanged()](PfWindowSizeChanged) for more details)
 
 ## Use Case: HD Resolution
 
-When working with 
+PfConfigHighRes() focuses on automatically scaling the camera and view to any aspect ratio, making it great for mobile games. 
+
+1. Import the .yymps file
+2. Call PfConfigPixelArt() at initialisation and edit the struct to set your desired values
+3. Call PfApply() or PfCalculate() to apply the configurated struct to your game.
+4. In a Post Draw event of a persistent object, call PfPostDrawAppSurface() (or your game won't be visible!)
+5. To detect a change in window size (e.g. switching from fullscreen to windowed, rotating from window to landscape, or changing resolution), call PfWindowSizeChanged(), then PfApply() (see [PfWindowSizeChanged()](PfWindowSizeChanged) for more details)
 
 ## Use Case: Smooth Camera Movement with Pixel-perfect Rendering
 
