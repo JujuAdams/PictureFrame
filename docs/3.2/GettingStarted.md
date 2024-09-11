@@ -6,7 +6,7 @@
 
 1. Import the .yymps file
 2. Call one of the PfConfig...() functions at initialisation and edit the returned struct to set your desired values.
-3. Call PfApply() or PfCalculate() to apply the configurated struct to your game.
+3. Call PfApply() to apply the configurated struct to your game.
 4. In a Post Draw event of a persistent object, call PfPostDrawAppSurface() (or your game won't be visible!)
 5. To detect a change in window size (e.g. switching from fullscreen to windowed, rotating from window to landscape, or changing resolution), call PfWindowSizeChanged(), then PfApply() (see [PfWindowSizeChanged()](PfWindowSizeChanged) for more details)
 
@@ -28,7 +28,23 @@ PfConfigHighRes() focuses on automatically scaling the camera and view to any as
 2. Call PfConfigPixelArt() at initialisation and edit the struct to set your desired values
 3. Call PfApply() or PfCalculate() to apply the configurated struct to your game.
 4. In a Post Draw event of a persistent object, call PfPostDrawAppSurface() (or your game won't be visible!)
-5. To detect a change in window size (e.g. switching from fullscreen to windowed, rotating from window to landscape, or changing resolution), call PfWindowSizeChanged(), then PfApply() (see [PfWindowSizeChanged()](PfWindowSizeChanged) for more details)
+
+## Use Case: Detecting Window Size Changes
+
+PictureFrame has a built in function that returns **true** if the window size has changed. This can be useful on both desktop (when moving from fullscreen/windowed, changing resolution, or for allowing the player to resize the window) and mobile (to detect landscape/portrait rotation.) See [PfWindowSizeChanged()](PfWindowSizeChanged) for more details.
+
+	if (PfWindowSizeChanged())
+  		{
+      		//Update our configuration
+      		configStruct.fullscreen   = window_get_fullscreen();
+      		configStruct.windowWidth  = window_get_width();
+      		configStruct.windowHeight = window_get_height();
+      
+      		//Reapply to adapt to the new window size
+      		PfApply(configStruct);
+  	}
+
+
 
 ## Use Case: Smooth Camera Movement with Pixel-perfect Rendering
 
@@ -57,7 +73,7 @@ You can look at the oDemoSmoothCamera object in the repo for a practical example
 	cameraY = camera_get_view_y(_camera);
 	cameraTargetX = cameraX;
 	cameraTargetY = cameraY;
-
+<!-- -->
 	/// Step Event
 	//Move the camera when the player clicks
 	var _camera = view_get_camera(0);
@@ -72,12 +88,8 @@ You can look at the oDemoSmoothCamera object in the repo for a practical example
 	cameraY = lerp(cameraY, cameraTargetY, 0.1);
 	//Set the GameMaker camera position to integer positions
 	camera_set_view_pos(_camera, floor(cameraX), floor(cameraY));
-
+<!-- -->
 	/// Post-Draw Event
 	//Draw the application surface using PictureFrame's anti-jitter feature
 	PfPostDrawAppSurface(undefined, undefined, undefined, frac(cameraX), frac(cameraY));
-
-
-
-
 
