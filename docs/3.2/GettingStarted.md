@@ -8,7 +8,8 @@
 2. Call one of the PfConfig...() functions at initialisation and edit the returned struct to set your desired values.
 3. Call PfApply() to apply the configurated struct to your game.
 4. In a Post Draw event of a persistent object, call PfPostDrawAppSurface() (or your game won't be visible!)
-5. To detect a change in window size (e.g. switching from fullscreen to windowed, rotating from window to landscape, or changing resolution), call PfWindowSizeChanged(), then PfApply() (see [PfWindowSizeChanged()](PfWindowSizeChanged) for more details)
+
+?> You may notice unexpected behaviours with the mouse position after installing PictureFrame. Please check [PfConfigMacros](PfConfigMacros) for more information.
 
 ## Use Case: Pixel-perfect Art
 
@@ -18,7 +19,6 @@ As the name suggests, this is the kind of rendering you want for pixel art games
 2. Call PfConfigPixelArt() at initialisation and edit the struct to set your desired values
 3. Call PfApply() or PfCalculate() to apply the configurated struct to your game.
 4. In a Post Draw event of a persistent object, call PfPostDrawAppSurface() (or your game won't be visible!)
-5. To detect a change in window size (e.g. switching from fullscreen to windowed, rotating from window to landscape, or changing resolution), call PfWindowSizeChanged(), then PfApply() (see [PfWindowSizeChanged()](PfWindowSizeChanged) for more details)
 
 ## Use Case: HD Resolution
 

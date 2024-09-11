@@ -9,4 +9,5 @@
 -    [PfConfigGeneral](PfConfigGeneral)
 -    [PfConfigPixelArt](PfConfigPixelArt)
 -    [PfConfigHighRes](PfConfigHighRes)
+-    [PfConfigMacros](PfConfigMacros)
 -    [Helper Functions](HelperFunctions)
