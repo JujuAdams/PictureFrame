@@ -3,9 +3,9 @@
 	PfConfigHighRes(cameraMinWidth,cameraMinHeight, [cameraMaxWidth=Min], [cameraMaxHeight=Min],[fullscreen])
 
 A convenience function that returns a configuration struct set up for high resolution rendering.
-You can edit values in the returned struct if you'd like and it will obey all the same rules as a configuration struct returned by [PfConfigGeneral()](PfConfigGeneral).
+You can edit values in the returned struct if you'd like and it will obey all the same rules as a configuration struct returned by [`PfConfigGeneral()`](PfConfigGeneral).
  
-?> Because PfConfigHighRes() returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
+?> Because `PfConfigHighRes()` returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
 
 Variables that the configuration struct hold are as follows:
 
@@ -19,6 +19,6 @@ Variables that the configuration struct hold are as follows:
 |`.fullscreen`     |boolean| The fullscreen state for the game. This value is only relevant on desktop platforms (Windows, MacOS, Linux). |
 |`.windowWidth, .windowHeight`|number|The size of the game window. This value is only relevant when the game is not fullscreened and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).        |
 |`.guiStretchOverWindow` |boolean|Whether to stretch the GUI over the entire window. This is **false** by default meaning that the GUI layer will be stretched over the application surface portion of the window.|
-|`.guiTargetWidth,.guiTargetHeight` |number|**Defaults to MinWidth/Height and undefined**. The target width or height for the GUI layer dimensions. To allow [PfCalculate()](PfCalculate) to adapt to different aspect ratios, set one of these variables to **undefined**. In this situation, PictureFrame will adjust the **undefined** dimension to stretch the GUI layer over the window whilst keeping the aspect ratio correct between the GUI width and height.|
+|`.guiTargetWidth,.guiTargetHeight` |number|**Defaults to MinWidth/Height and undefined**. The target width or height for the GUI layer dimensions. To allow [`PfCalculate()`](PfCalculate) to adapt to different aspect ratios, set one of these variables to **undefined**. In this situation, PictureFrame will adjust the **undefined** dimension to stretch the GUI layer over the window whilst keeping the aspect ratio correct between the GUI width and height.|
 |`.surfacePixelPerfect` |boolean|**Defaults to false.** Determines whether the scaling factor applied to the application surface when drawn to the window should be a whole number. If the surface doesn't fit exactly (which is often the case) then the application surface will be drawn centred in the window.|
 |`.windowOverscanScale` |number|**Defaults to 1**. Scaling factor to apply to the application surface and GUI at the end of the render pipeline. This is useful to adjust for overscan on old monitors and it is a compliance requirement when releasing on some console platforms. The overscan scale will ignore .surfacePixelPerfect (see above).|
