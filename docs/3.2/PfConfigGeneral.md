@@ -1,4 +1,4 @@
-# PFConfigGeneral
+# PfConfigGeneral
 
 	PfConfigGeneral()
 
