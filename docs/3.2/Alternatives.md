@@ -7,3 +7,5 @@ PictureFrame might not be the perfect fit for your game. The GameMaker community
 - [Meet The New Camera System (Text Guide)](https://forum.gamemaker.io/index.php?threads/guide-meet-the-new-camera-system.12269/#post-93258)
 
 - [Camera And Viewport Basics (Video)](https://www.youtube.com/watch?v=UNZ97-c3dhY)
+
+- [STANNCam (Plugin)](https://github.com/jack27121/STANNcam/wiki)
