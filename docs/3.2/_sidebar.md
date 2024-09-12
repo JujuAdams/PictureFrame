@@ -1,6 +1,10 @@
 -    [Home](README)
 -    [Alternatives](Alternatives)
 -    [Getting Started](GettingStarted)
+
+---
+
+-    [Config Macros](ConfigMacros)
 -    [PfApply](PfApply)
 -    [PfGetApplied](PfGetApplied)
 -    [PfCalculate](PfCalculate)
@@ -9,5 +13,4 @@
 -    [PfConfigGeneral](PfConfigGeneral)
 -    [PfConfigPixelArt](PfConfigPixelArt)
 -    [PfConfigHighRes](PfConfigHighRes)
--    [PfConfigMacros](PfConfigMacros)
 -    [Helper Functions](HelperFunctions)
