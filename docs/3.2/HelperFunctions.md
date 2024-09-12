@@ -16,9 +16,9 @@ PictureFrame comes with a number of functions designed to quickly and easily cal
 
 Returns the x and y coordinates (respectively) of the mouse in roomspace, after being corrected for all the weird and wonderful things that PictureFrame does.
 
-If PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS (which it is out of the box) then the native GameMaker constants "mouse_x" and "mouse_y" will be mapped to these functions. This means you shouldn't have to change any code for mouse position detection to work automatically.
+If `PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS` (which it is out of the box) then the native GameMaker constants `mouse_x` and `mouse_y` will be mapped to these functions. This means you shouldn't have to change any code for mouse position detection to work automatically.
 
-?> The following functions require [PfApply](PfApply) to have been called in order to work properly.
+?> The following functions require [`PfApply()`](PfApply) to have been called in order to work properly.
 
 ## PfGuiToRoom
 
