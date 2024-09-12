@@ -26,7 +26,7 @@ As the name suggests, this is the kind of rendering you want for pixel art games
 
 ## Use Case: HD Resolution
 
-PfConfigHighRes() focuses on automatically scaling the camera and view to any aspect ratio, making it great for mobile games. 
+`PfConfigHighRes()` focuses on automatically scaling the camera and view to any aspect ratio, making it great for mobile games. 
 
 1. Import the .yymps file
 2. At the start of the game, call `PfConfigHighRes()` at initialisation and edit the struct to set your desired values
