@@ -11,6 +11,8 @@
 
 ?> You may notice unexpected behaviours with the mouse position after installing PictureFrame. Please check [PfConfigMacros](PfConfigMacros) for more information.
 
+&nbsp;
+
 ## Use Case: Pixel-perfect Art
 
 As the name suggests, this is the kind of rendering you want for pixel art games; it'll resize the art to preserve the pixels, without stretching or distorting them. It does this by making sure the camera-to-view scale is a whole number using `.viewPixelPerfect`, and the same for the scale at which the application surface is rendered to the window (`.surfacePixelPerfect`).
@@ -20,6 +22,8 @@ As the name suggests, this is the kind of rendering you want for pixel art games
 3. Call `PfApply()` using the config struct we just created. You may want to set the optional `resizeWindow` parameter to `true` the first time you call this function in the flow of your game
 4. Create a Post-Draw event in a persistent object instance and call `PfPostDrawAppSurface()` in that event (or your game won't be visible!)
 
+&nbsp;
+
 ## Use Case: HD Resolution
 
 PfConfigHighRes() focuses on automatically scaling the camera and view to any aspect ratio, making it great for mobile games. 
@@ -28,6 +32,8 @@ PfConfigHighRes() focuses on automatically scaling the camera and view to any as
 2. At the start of the game, call `PfConfigHighRes()` at initialisation and edit the struct to set your desired values
 3. Call `PfApply()` using the config struct we just created. You may want to set the optional `resizeWindow` parameter to `true` the first time you call this function in the flow of your game
 4. Create a Post-Draw event in a persistent object instance and call `PfPostDrawAppSurface()` in that event (or your game won't be visible!)
+
+&nbsp;
 
 ## Use Case: Detecting Window Size Changes
 
@@ -45,6 +51,8 @@ if (PfWindowSizeChanged())
     PfApply(configStruct);
 }
 ```
+
+&nbsp;
 
 ## Use Case: Smooth Camera Movement with Pixel-perfect Rendering
 
