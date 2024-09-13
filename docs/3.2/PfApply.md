@@ -31,7 +31,7 @@
 Functions called:
 
 ```gml
-view_enabled = true`
+view_enabled = true
 view_set_visible(0, true)
 camera_set_view_pos(view_get_camera(0), ...)
 camera_set_view_size(view_get_camera(0), ...)
