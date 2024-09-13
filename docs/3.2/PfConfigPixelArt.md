@@ -1,6 +1,6 @@
 # PfConfigPixelArt
 
-`PfConfigPixelArt()`
+`PfConfigPixelArt(cameraMinWidth, cameraMinHeight, [cameraMaxWidth=Min], [cameraMaxHeight=Min], [fullscreen])`
 
 **Returns:** Struct, a PictureFrame configuration
 
