@@ -2,14 +2,14 @@
 
 &nbsp;
 
-`PfCalculate(configStruct, [resizewindow = false])`
+`PfCalculate(configStruct, [resizewindow=false])`
 
 **Returns** Struct, a result struct
 
-|Name            |Datatype|Purpose|
-|----------------|--------|-------|
-|`configStruct`  |        |       |
-|`[resizewindow]`|        |       |
+|Name            |Datatype|Purpose                                                                                                           |
+|----------------|--------|------------------------------------------------------------------------------------------------------------------|
+|`configStruct`  |struct  |PictureFrame configuration struct to calculate pipeline values for                                                |
+|`[resizewindow]`|boolean |Whether to allow resizing of the game window to fit the configuration struct. If not specified defaults to `false`|
 
 Calculates and returns a PictureFrame "result struct" based on an input configuration struct (please see [`PfConfigGeneral()`](PfConfigGeneral]) for more information). The result struct returned by `PfCalculate()` contains many variables that define the size and position of various parts of the render pipeline.
 
