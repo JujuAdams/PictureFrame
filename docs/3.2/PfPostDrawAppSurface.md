@@ -6,13 +6,13 @@
 
 **Returns:** N/A (`undefined`)
 
-|Name            |Datatype|Purpose|
-|----------------|--------|-------|
-|`[filter]`      |boolean |       |
-|`[resizeWindow]`|boolean |       |
-|`[surface]`     |surface |       |
-|`[fracCameraX]` |number  |       |
-|`[fracCameraY]` |number  |       |
+|Name           |Datatype|Purpose                                                                                                    |
+|---------------|--------|-----------------------------------------------------------------------------------------------------------|
+|`[filter]`     |boolean |Whether to apply texture filter (bilinear interpolation). If not specified, defaults to `false`            |
+|`[blendEnable]`|boolean |Whether to enable alpha blending. If not specified, defaults to `false`                                    |
+|`[surface]`    |surface |Surface to draw. If not specified, defaults to `application_surface`                                       |
+|`[fracCameraX]`|number  |Fractional part of the camera's x-position. Used to compensate for jitter when using a pixel perfect camera|
+|`[fracCameraY]`|number  |Fractional part of the camera's y-position. Used to compensate for jitter when using a pixel perfect camera|
 
 Draws the application surface. This function should only be called in the Post Draw event and further requires that `PfApply()` has been called previously to set the necessary values to draw correctly. (See [Getting Started](GettingStarted) for more on the correct order to call functions in.)
 
