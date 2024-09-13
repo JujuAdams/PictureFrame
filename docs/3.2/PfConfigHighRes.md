@@ -4,13 +4,13 @@
 
 **Returns:** Struct, a PictureFrame configuration
 
-|Name               |Datatype|Purpose|
-|-------------------|--------|-------|
-|`cameraMinWidth`   |number  |       |
-|`cameraMinHeight`  |number  |       |
-|`[cameraMaxWidth]` |number  |       |
-|`[cameraMaxHeight]`|number  |       |
-|`[fullscreen]`     |boolean |       |
+|Name               |Datatype|Purpose                                                                                                                                                                                 |
+|-------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`cameraMinWidth`   |number  |Minimum width for the camera. This is the "safe area" that is guaranteed to be visible                                                                                                  |
+|`cameraMinHeight`  |number  |Minimum height for the camera. This is the "safe area" that is guaranteed to be visible                                                                                                 |
+|`[cameraMaxWidth]` |number  |Maximum width for the camera. This is an expansion zone that the camera can grow into to adapt to different resolutions and aspect ratios. If not specified, the minimum width is used  |
+|`[cameraMaxHeight]`|number  |Maximum height for the camera. This is an expansion zone that the camera can grow into to adapt to different resolutions and aspect ratios. If not specified, the minimum height is used|
+|`[fullscreen]`     |boolean |Fullscreen state for the game. This value is only relevant on desktop platforms (Windows, MacOS, Linux). If not specified, the fullscreen state for the game will not be changed        |
 
 A convenience function that returns a configuration struct set up for high resolution rendering. You can edit values in the returned struct if you'd like and it will obey all the same rules as a configuration struct returned by [`PfConfigGeneral()`](PfConfigGeneral). This configuration struct can then be passed into `PfApply()` to set up the render pipeline to match the configuration struct as closely as possible, or `PfCalculate()` to generate various positions and sizes for each phase in GameMaker's rendering pipeline.
 
