@@ -6,43 +6,100 @@ PictureFrame comes with a number of functions designed to quickly and easily cal
 
 &nbsp;
 
-## PfMouseX, PfMouseY
+## `PfMouseX`
 
-	PfMouseX
-	returns: number
+`PfMouseX()`
 
-	PfMouseY
-	returns: number
+**Returns:** Number, the corrected mouse x-coordinate in room-space
 
-Returns the x and y coordinates (respectively) of the mouse in roomspace, after being corrected for all the weird and wonderful things that PictureFrame does.
+|Name        |Datatype|Purpose|
+|------------|--------|-------|
+|No arguments|        |       |
 
-If `PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS` (which it is out of the box) then the native GameMaker constants `mouse_x` and `mouse_y` will be mapped to these functions. This means you shouldn't have to change any code for mouse position detection to work automatically.
+Returns the x-coordinate of the mouse in room-space, after being corrected for all the weird and wonderful things that PictureFrame does.
 
-?> The following functions require [`PfApply()`](PfApply) to have been called in order to work properly.
+If `PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS` (which it is out of the box) then the native GameMaker constant `mouse_x` will be mapped to this functions. This means you shouldn't have to change any code for mouse position detection to work automatically.
 
-## PfGuiToRoom
+&nbsp;
 
-	PfRoomToGui(_x,_y)
-	returns: struct
+## `PfMouseY`
+
+`PfMouseY()`
+
+**Returns:** Number, the corrected mouse y-coordinate in room-space
+
+|Name        |Datatype|Purpose|
+|------------|--------|-------|
+|No arguments|        |       |
+
+Returns the y-coordinate of the mouse in room-space, after being corrected for all the weird and wonderful things that PictureFrame does.
+
+If `PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS` (which it is out of the box) then the native GameMaker constant `mouse_y` will be mapped to this functions. This means you shouldn't have to change any code for mouse position detection to work automatically.
+
+&nbsp;
+
+## `PfGuiToRoom`
+
+`PfGuiToRoom(x, y)`
+
+**Returns:** Struct, the transformed coordinates
+
+|Name|Datatype|Purpose                  |
+|----|--------|-------------------------|
+|`x` |number  |x-coordinate in GUI-space|
+|`y` |number  |y-coordinate in GUI-space|
 
 Converts a GUI-space coordinate to a room-space coordinate. This function returns a static struct which is liable to change unexpectedly. If you need to store the returned coordinates, please make a copy of the struct.
 
-## PFRoomToGui
+?> This function requires [`PfApply()`](PfApply) to have been called in order to work properly.
 
-	PfGuiToRoom(_x, _y)
-	returns: struct
+&nbsp;
+
+## `PFRoomToGui`
+
+`PfRoomToGui(x, y)`
+
+**Returns:** Struct, the transformed coordinates
+
+|Name|Datatype|Purpose                   |
+|----|--------|--------------------------|
+|`x` |number  |x-coordinate in room-space|
+|`y` |number  |y-coordinate in room-space|
 
 Converts a room-space coordinate to a GUI-space coordinate. This function returns a struct which is liable to change unexpectedly. If you need to store the returned coordinates, please make a copy of the struct.
 
-## PfRoomToWindow
-	PfRoomToWindow(_x,_y)
-	returns: struct
+?> This function requires [`PfApply()`](PfApply) to have been called in order to work properly.
+
+&nbsp;
+
+## `PfRoomToWindow`
+
+`PfRoomToWindow(x, y)`
+
+**Returns:** Struct, the transformed coordinates
+
+|Name|Datatype|Purpose                   |
+|----|--------|--------------------------|
+|`x` |number  |x-coordinate in room-space|
+|`y` |number  |y-coordinate in room-space|
 
 Converts a room-space coordinate to a window-space coordinate. This function returns a static struct which is liable to change unexpectedly. If you need to store the returned coordinates, please make a copy of the struct.
 
-## PfWindowToRoom
+?> This function requires [`PfApply()`](PfApply) to have been called in order to work properly.
 
-	PfWindowToRoom(_x, _y)
-	returns: struct
+&nbsp;
+
+## `PfWindowToRoom`
+
+`PfWindowToRoom(x, y)`
+
+**Returns:** Struct, the transformed coordinates
+
+|Name|Datatype|Purpose                     |
+|----|--------|----------------------------|
+|`x` |number  |x-coordinate in window-space|
+|`y` |number  |y-coordinate in window-space|
 
 Converts a window-space coordinate to a room-space coordinate. This function returns a static struct which is liable to change unexpectedly. If you need to store the returned coordinates, please make a copy of the struct.
+
+?> This function requires [`PfApply()`](PfApply) to have been called in order to work properly.
