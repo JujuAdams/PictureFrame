@@ -4,8 +4,6 @@
 
 `PfPostDrawAppSurface([filter=false], [blendEnable=false], [surface=application_surface], [fracCameraX=0], [fracCameraY=0])`
 
-&nbsp;
-
 **Returns:** N/A (`undefined`)
 
 |Name           |Datatype|Purpose                                                                                                    |

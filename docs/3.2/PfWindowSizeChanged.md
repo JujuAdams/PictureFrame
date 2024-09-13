@@ -4,8 +4,6 @@
 
 `PfWindowSizeChanged()`
 
-&nbsp;
-
 **Returns:** Boolean, whether the window size or orientation changed
 
 |Name        |Datatype|Purpose|

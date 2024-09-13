@@ -4,8 +4,6 @@
 
 `PfConfigGeneral()`
 
-&nbsp;
-
 **Returns:** Struct, a PictureFrame configuration struct
 
 |Name        |Datatype|Purpose|

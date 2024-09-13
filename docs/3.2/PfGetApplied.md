@@ -4,8 +4,6 @@
 
 `PfGetApplied()`
 
-&nbsp;
-
 **Returns:** Struct, the currently applied result struct
 
 |Name        |Datatype|Purpose|

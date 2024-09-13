@@ -4,8 +4,6 @@
 
 `PfConfigHighRes(cameraMinWidth, cameraMinHeight, [cameraMaxWidth=Min], [cameraMaxHeight=Min], [fullscreen])`
 
-&nbsp;
-
 **Returns:** Struct, a PictureFrame configuration struct
 
 |Name               |Datatype|Purpose                                                                                                                                                                                 |

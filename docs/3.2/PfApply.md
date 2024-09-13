@@ -4,8 +4,6 @@
 
 `PfApply(configStruct, [resizeWindow=false], [ignoreCamera=false])`
 
-&nbsp;
-
 **Returns:** Struct, a PictureFrame result struct
 
 |Name            |Datatype|Purpose                                                                                                                                                          |
