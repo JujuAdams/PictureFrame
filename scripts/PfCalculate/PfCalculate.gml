@@ -15,7 +15,7 @@
 /// N.B. Because PfCalculate() does a lot of maths and returns a fresh struct every time it is
 ///      called, you should avoid calling this function more often than is necessary.
 /// 
-/// @param configurationStruct
+/// @param configStruct
 /// @param [resizeWindow=false]
 /// 
 /// 
