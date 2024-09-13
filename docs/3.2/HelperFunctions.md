@@ -55,7 +55,7 @@ Converts a GUI-space coordinate to a room-space coordinate. This function return
 
 &nbsp;
 
-## `PFRoomToGui`
+## `PfRoomToGui`
 
 `PfRoomToGui(x, y)`
 
