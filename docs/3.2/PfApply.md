@@ -6,11 +6,11 @@
 
 **Returns:** Struct, a PictureFrame result struct
 
-|Name            |Datatype|Purpose|
-|----------------|--------|-------|
-|`configStruct`  |        |       |
-|`[resizeWindow]`|        |       |
-|`[ignoreCamera]`|        |       |
+|Name            |Datatype|Purpose                                                                                                                                                          |
+|----------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`configStruct`  |struct  |PictureFrame configuration struct to apply to the game's render pipeline values                                                                                  |
+|`[resizeWindow]`|boolean |Whether to allow resizing of the game window to fit the configuration struct. If not specified defaults to `false`                                               |
+|`[ignoreCamera]`|boolean |Whether to skip setting values on the camera. Useful if you have a special camera setup that you'd like to remain unchanged. If not specified defaults to `false`|
 
  Applies a PictureFrame configuration struct, setting necessary native GameMaker values to ensure that the values in the configuration struct accurately affect the game. This function returns the result struct that is generated internally. 
 
@@ -30,10 +30,12 @@
 
 Functions called:
 
-`view_enabled = true`
-`view_set_visible(0, true)`
-`camera_set_view_pos(view_get_camera(0), ...)`
-`camera_set_view_size(view_get_camera(0), ...)`
+```gml
+view_enabled = true`
+view_set_visible(0, true)
+camera_set_view_pos(view_get_camera(0), ...)
+camera_set_view_size(view_get_camera(0), ...)
+```
 
 &nbsp;
 
@@ -43,8 +45,10 @@ Functions called:
 
 Functions called:
 
-`view_set_wport(0, ...)`
-`view_set_hport(0, ...)`
+```gml
+view_set_wport(0, ...)
+view_set_hport(0, ...)
+```
 
 &nbsp;
 
@@ -54,7 +58,9 @@ Functions called:
 
 Functions called:
 
-`surface_resize(application_surface, ...)`
+```gml
+surface_resize(application_surface, ...)
+```
 
 &nbsp;
 
@@ -64,8 +70,10 @@ If the window's size changes then the window will be resized keeping the centre 
 
 Functions called:
 
-`window_set_fullscreen(...)`
-`window_set_rectangle(...)`
+```gml
+window_set_fullscreen(...)
+window_set_rectangle(...)
+```
 
 &nbsp;
 
@@ -73,7 +81,9 @@ Functions called:
 
 Functions called:
 
-`display_set_gui_maximize(...)`
+```gml
+display_set_gui_maximize(...)
+```
 
 &nbsp;
 
