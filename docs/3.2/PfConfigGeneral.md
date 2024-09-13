@@ -1,5 +1,7 @@
 # PfConfigGeneral
 
+&nbsp;
+
 `PfConfigGeneral()`
 
 **Returns:** Struct, a PictureFrame configuration
@@ -11,6 +13,8 @@
 Returns a template PictureFrame "configuration struct". You should edit the returned configuration struct to reflect the needs of your game. This configuration struct can then be passed into `PfApply()` to set up the render pipeline to match the configuration struct as closely as possible, or `PfCalculate()` to generate various positions and sizes for each phase in GameMaker's rendering pipeline. The configuration struct is rather complex and if you're looking for easier "quick start" behaviour than you may want to consider calling either [`PfConfigPixelArt()`](PfConfigPixelArt) or [`PfConfigHighRes()`](PfConfigHighRes) instead. They return a similar struct to `PfConfigGeneral()` but pre-configured for common use cases.
 
 ?> Because `PfConfigGeneral()` returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
+
+&nbsp;
 
 Variables that the configuration struct hold are as follows:
 

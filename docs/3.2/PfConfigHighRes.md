@@ -1,5 +1,7 @@
 # PfConfigHighRes
 
+&nbsp;
+
 `PfConfigHighRes(cameraMinWidth, cameraMinHeight, [cameraMaxWidth=Min], [cameraMaxHeight=Min], [fullscreen])`
 
 **Returns:** Struct, a PictureFrame configuration
@@ -15,6 +17,8 @@
 A convenience function that returns a configuration struct set up for high resolution rendering. You can edit values in the returned struct if you'd like and it will obey all the same rules as a configuration struct returned by [`PfConfigGeneral()`](PfConfigGeneral). This configuration struct can then be passed into `PfApply()` to set up the render pipeline to match the configuration struct as closely as possible, or `PfCalculate()` to generate various positions and sizes for each phase in GameMaker's rendering pipeline.
 
 ?> Because `PfConfigHighRes()` returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
+
+&nbsp;
 
 Variables that the configuration struct hold are as follows:
 
