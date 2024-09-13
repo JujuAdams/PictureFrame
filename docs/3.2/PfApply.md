@@ -4,7 +4,7 @@
 
 `PfApply(configStruct, [resizeWindow=false], [ignoreCamera=false])`
 
-**Returns:** 
+**Returns:** Struct, a PictureFrame result struct
 
 |Name            |Datatype|Purpose|
 |----------------|--------|-------|
@@ -72,3 +72,25 @@ Functions called:
 Functions called:
 
 `display_set_gui_maximize(...)`
+
+&nbsp;
+
+Variables that the result struct holds are as follows:
+
+|Name                                               |Datatype|Purpose                                                     |
+|---------------------------------------------------|--------|------------------------------------------------------------|
+|`.cameraWidth`<br>`.cameraHeight`                  |number  |Roomspace width and height of the camera            |
+|`.cameraOverscan`                                  |number  |Number of extra pixels, in roomspace, to add around the edges of the camera. This is the same literal value as in the configuration struct and is included for convenience|
+|`.viewWidth`<br>`.viewHeight`                      |number  |Width and height of the view used to draw the camera to the application surface|
+|`.viewScale`                                       |number  |Scaling factor between the camera and the view|
+|`.viewOverscan`                                    |number  |Number of extra pixels, in roomspace, to add around the edges of the view. This is equal to .cameraOverscan multiplied by .viewScale and is provided for convenience|
+|`.fullscreen`                                      |boolean |Whether the game should be in fullscreen mode. This value is only relevant on desktop platforms (Windows, MacOS, Linux). On other platforms, this will always be `true`|
+|`.windowWidth`<br>`windowHeight`                   |number  |Dimensions of the window. If the `.fullscreen` variable (see above) is `true` then these values will be the same as the display's width and height|
+|`.surfacePixelPerfect`                             |boolean |Whether the application surface should be drawn as pixel perfect where possible. This will cause [`PfPostDrawAppSurface()`](PfPostDrawAppSurface) to default to no texture filtering to preserve clean pixel edges|
+|`.surfacePostDrawScale`                            |number  |Scaling factor between the view and the window (backbuffer). This includes the contribution from the overscan scale from the configuration struct|
+|`.surfacePostDrawX`<br>`.surfacePostDrawY`         |number  |Draw position for the application surface in the Post Draw event (i.e. the coordinates in the window/backbuffer). These values are in "window space' and will not necessarily line up with roomspace coordinates|
+|`.surfacePostDrawWidth`<br>`.surfacePostDrawHeight`|number  |Size for the application surface in the Post Draw event (see above.) These values are in "window space' and will not necessarily line up with roomspace coordinates|
+|`.surfaceGuiX`<br>`.surfaceGuiY`                   |number  |Draw position for the application surface on the GUI layer. These values are in "GUI-space' and will not necessarily line up with roomspace coordinates|
+|`.surfaceGuiWidth`<br>`.surfaceGuiHeight`          |number  |Size for the publication surface on the GUI layer. These values are in "GUI-space' and will not necessarily line up with roomspace coordinates|
+|`.marginsVisible`                                  |boolean |Whether any of the margins are visible. You should check this variable before drawing the margins (using the variables below)|
+|`.marginGuiX1`<br>`.marginGuiY1`<br>…<br>`.marginGuiX4`<br>`.marginGuiY4`|number|Coordinates for the margins around the application surface, in GUI-space|

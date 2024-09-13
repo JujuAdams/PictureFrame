@@ -16,7 +16,7 @@ Returns a template PictureFrame "configuration struct". You should edit the retu
 
 &nbsp;
 
-Variables that the configuration struct hold are as follows:
+Variables that the configuration struct holds are as follows:
 
 |Name                                   |Datatype|Value|Purpose                                                     |
 |---------------------------------------|--------|-----|------------------------------------------------------------|
