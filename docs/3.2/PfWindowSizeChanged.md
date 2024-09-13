@@ -1,6 +1,14 @@
+# PfPostDrawAppSurface
 
-	PfWindowSizeChanged()
-	returns: boolean
+&nbsp;
+
+`PfWindowSizeChanged()`
+
+**Returns:** Boolean, whether the window size or orientation changed
+
+|Name|Datatype|Purpose|
+|----|--------|-------|
+|None|boolean |       |
 
 Returns whether the game window changed size this frame. This function will return `true` only if the frame that window size changed. You can use this information to allow the game to rescale to the new window dimensions. This is handy on desktop platforms whether you may want the player to be able to expand or contract the window. It further helpful on mobile platforms where a device rotation to and from landscape and portrait is reflected as a window size change.
 

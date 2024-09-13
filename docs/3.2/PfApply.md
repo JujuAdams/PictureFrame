@@ -75,6 +75,8 @@ Functions called:
 
 &nbsp;
 
+## Result Struct
+
 Variables that the result struct holds are as follows:
 
 |Name                                               |Datatype|Purpose                                                     |

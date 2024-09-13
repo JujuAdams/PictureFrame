@@ -2,7 +2,17 @@
 
 &nbsp;
 
-	 PfPostDrawAppSurface([_filter = false], [_blendEnable = false], [_surface = application_surface], [_fracCameraX = 0], [_fracCameraY = 0])
+`PfPostDrawAppSurface([filter=false], [blendEnable=false], [surface=application_surface], [fracCameraX=0], [fracCameraY=0])`
+
+**Returns:** Struct, a PictureFrame result struct
+
+|Name            |Datatype|Purpose|
+|----------------|--------|-------|
+|`[filter]`      |boolean |       |
+|`[resizeWindow]`|boolean |       |
+|`[surface]`     |surface |       |
+|`[fracCameraX]` |number  |       |
+|`[fracCameraY]` |number  |       |
 
 Draws the application surface. This function should only be called in the Post Draw event and further requires that `PfApply()` has been called previously to set the necessary values to draw correctly. (See [Getting Started](GettingStarted) for more on the correct order to call functions in.)
 
