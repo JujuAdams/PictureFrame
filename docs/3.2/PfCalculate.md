@@ -4,6 +4,8 @@
 
 `PfCalculate(configStruct, [resizewindow=false])`
 
+&nbsp;
+
 **Returns** Struct, a result struct
 
 |Name            |Datatype|Purpose                                                                                                           |

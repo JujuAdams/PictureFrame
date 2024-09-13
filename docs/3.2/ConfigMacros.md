@@ -4,6 +4,8 @@
 
 There is only one configuration macro in PictureFrame at the moment:
 
+&nbsp;
+
 ## `PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS`
 
 *Typical value:* `true`
