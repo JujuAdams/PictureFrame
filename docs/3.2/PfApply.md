@@ -22,7 +22,7 @@
 
 `PfApply()` calls the following functions to set native GameMaker values:
 
-### Camera position/size
+### Camera
 
 `PfApply()` presumes that you are using GameMaker's native view system and that you're using view 0 for your game view. If a camera's width or height changes then it will resize, keeping the centre of the view static.
 
@@ -35,7 +35,7 @@ Functions called:
 
 &nbsp;
 
-### View width/height
+### View
 
 `PfApply()` presumes that you are using GameMaker's native view system and that you're using view 0 for your game view.
 
@@ -46,7 +46,7 @@ Functions called:
 
 &nbsp;
 
-### Application surface size
+### Application Surface
 
 `PfApply()` will set the size of the application surface to match the size of the view.
 
@@ -56,7 +56,7 @@ Functions called:
 
 &nbsp;
 
-### Fullscreen/window position/size
+### Window
 
 If the window's size changes then the window will be resized keeping the centre of the window static on the display. `PfApply()` will only adjust the window when on desktop platforms (Windows, MacOS, Linux).
 
@@ -67,7 +67,7 @@ Functions called:
 
 &nbsp;
 
-### GUI layer scale
+### GUI Layer
 
 Functions called:
 
