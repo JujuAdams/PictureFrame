@@ -4,7 +4,7 @@
 
 `PfPostDrawAppSurface([filter=false], [blendEnable=false], [surface=application_surface], [fracCameraX=0], [fracCameraY=0])`
 
-**Returns:** Struct, a PictureFrame result struct
+**Returns:** N/A (`undefined`)
 
 |Name            |Datatype|Purpose|
 |----------------|--------|-------|
