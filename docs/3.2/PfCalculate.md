@@ -21,6 +21,8 @@ The `resizeWindow` argument controls whether results should be calculated as tho
 
 &nbsp;
 
+## Result Struct
+
 Variables that the result struct holds are as follows:
 
 |Name                                               |Datatype|Purpose                                                     |

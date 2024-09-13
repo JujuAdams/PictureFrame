@@ -4,7 +4,7 @@
 
 `PfConfigPixelArt(cameraMinWidth, cameraMinHeight, [cameraMaxWidth=Min], [cameraMaxHeight=Min], [fullscreen])`
 
-**Returns:** Struct, a PictureFrame configuration
+**Returns:** Struct, a PictureFrame configuration struct
 
 |Name               |Datatype|Purpose                                                                                                                                                                                 |
 |-------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -19,6 +19,8 @@ A convenience function that returns a configuration struct set up for pixel-perf
 ?> Because `PfConfigPixelArt()` returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
 
 &nbsp;
+
+## Configuration Struct
 
 Variables that the configuration struct hold are as follows:
 

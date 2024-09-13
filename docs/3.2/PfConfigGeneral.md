@@ -4,7 +4,7 @@
 
 `PfConfigGeneral()`
 
-**Returns:** Struct, a PictureFrame configuration
+**Returns:** Struct, a PictureFrame configuration struct
 
 |Name        |Datatype|Purpose|
 |------------|--------|-------|
@@ -15,6 +15,8 @@ Returns a template PictureFrame "configuration struct". You should edit the retu
 ?> Because `PfConfigGeneral()` returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
 
 &nbsp;
+
+## Configuration Struct
 
 Variables that the configuration struct holds are as follows:
 
