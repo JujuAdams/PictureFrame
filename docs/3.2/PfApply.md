@@ -20,6 +20,8 @@
 
 &nbsp;
 
+## Native Function Calls
+
 `PfApply()` calls the following functions to set native GameMaker values:
 
 ### Camera
