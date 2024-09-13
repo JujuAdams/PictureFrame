@@ -5,12 +5,12 @@
 ---
 
 -    [Config Macros](ConfigMacros)
--    [PfApply](PfApply)
--    [PfGetApplied](PfGetApplied)
--    [PfCalculate](PfCalculate)
--    [PfPostDrawAppSurface](PfPostDrawAppSurface)
--    [PfWindowSizeChanged](PfWindowSizeChanged)
 -    [PfConfigGeneral](PfConfigGeneral)
 -    [PfConfigPixelArt](PfConfigPixelArt)
 -    [PfConfigHighRes](PfConfigHighRes)
+-    [PfApply](PfApply)
+-    [PfGetApplied](PfGetApplied)
+-    [PfPostDrawAppSurface](PfPostDrawAppSurface)
+-    [PfWindowSizeChanged](PfWindowSizeChanged)
+-    [PfCalculate](PfCalculate)
 -    [Helper Functions](HelperFunctions)
