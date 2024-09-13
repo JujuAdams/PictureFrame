@@ -4,7 +4,7 @@
 
 `PfApply(configStruct, [resizeWindow=false], [ignoreCamera=false])`
 
-**Returns:**
+**Returns:** 
 
 |Name            |Datatype|Purpose|
 |----------------|--------|-------|
@@ -18,33 +18,57 @@
 
 !> Automatic drawing of the application surface will always be disabled by `PfApply()` by calling `application_surface_draw_enable(false)`. This means that without further action, your game will not be visible. You should call [`PfPostDrawAppSurface()`](PfPostDrawAppSurface) in a Post Draw event to ensure that your application surface is visible for the player.
 
+&nbsp;
+
 `PfApply()` calls the following functions to set native GameMaker values:
 
-* Camera position and size. `PfApply()` presumes that you are using GameMaker's native view system and that you're using view 0 for your game view. If a camera's width or height changes then it will resize, keeping the centre of the view static.
+### Camera position/size
 
-	Functions called:
-		`view_enabled = true`
-		`view_set_visible(0, true)`
-		`camera_set_view_pos(view_get_camera(0), ...)`
-		`camera_set_view_size(view_get_camera(0), ...)`
+`PfApply()` presumes that you are using GameMaker's native view system and that you're using view 0 for your game view. If a camera's width or height changes then it will resize, keeping the centre of the view static.
 
-* View width and height. `PfApply()` presumes that you are using GameMaker's native view system and that you're using view 0 for your game view.
-	Functions called:
- 		`view_set_wport(0, ...)`
-		`view_set_hport(0, ...)`
+Functions called:
 
-* Application surface size. PfApply() will set the size of the application surface to match the size of the view.
+`view_enabled = true`
+`view_set_visible(0, true)`
+`camera_set_view_pos(view_get_camera(0), ...)`
+`camera_set_view_size(view_get_camera(0), ...)`
 
-	Functions called:
-    	`surface_resize(application_surface, ...)`
+&nbsp;
 
-* Window position and size, including fullscreen state. If the window's size changes then the window will be resized keeping the centre of the window static on the display. `PfApply()` will only adjust the window when on desktop platforms (Windows, MacOS, Linux).
+### View width/height
 
-	Functions called:
-    	`window_set_fullscreen(...)`
-    	`window_set_rectangle(...)`
+`PfApply()` presumes that you are using GameMaker's native view system and that you're using view 0 for your game view.
 
-* GUI layer scale.
+Functions called:
 
-	Functions called:
-  		`display_set_gui_maximize(...)`
+`view_set_wport(0, ...)`
+`view_set_hport(0, ...)`
+
+&nbsp;
+
+### Application surface size
+
+`PfApply()` will set the size of the application surface to match the size of the view.
+
+Functions called:
+
+`surface_resize(application_surface, ...)`
+
+&nbsp;
+
+### Fullscreen/window position/size
+
+If the window's size changes then the window will be resized keeping the centre of the window static on the display. `PfApply()` will only adjust the window when on desktop platforms (Windows, MacOS, Linux).
+
+Functions called:
+
+`window_set_fullscreen(...)`
+`window_set_rectangle(...)`
+
+&nbsp;
+
+### GUI layer scale
+
+Functions called:
+
+`display_set_gui_maximize(...)`
