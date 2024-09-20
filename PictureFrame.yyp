@@ -14,11 +14,13 @@
     {"$GMFolder":"","%Name":"(System)","folderPath":"folders/PictureFrame/(System).yy","name":"(System)","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Helpers","folderPath":"folders/PictureFrame/Helpers.yy","name":"Helpers","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
-  "IncludedFiles":[],
+  "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"pictureframe_license.txt","CopyToMask":-1,"filePath":"datafiles","name":"pictureframe_license.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+  ],
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.6.2.162",
+    "IDEVersion":"2024.8.1.171",
   },
   "name":"PictureFrame",
   "resources":[
@@ -28,6 +30,7 @@
     {"id":{"name":"oMarkerCircle","path":"objects/oMarkerCircle/oMarkerCircle.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
     {"id":{"name":"__PfConfigMacros","path":"scripts/__PfConfigMacros/__PfConfigMacros.yy",},},
+    {"id":{"name":"__PfConstants","path":"scripts/__PfConstants/__PfConstants.yy",},},
     {"id":{"name":"__PfError","path":"scripts/__PfError/__PfError.yy",},},
     {"id":{"name":"__PfMacroHacks","path":"scripts/__PfMacroHacks/__PfMacroHacks.yy",},},
     {"id":{"name":"__PfSystem","path":"scripts/__PfSystem/__PfSystem.yy",},},

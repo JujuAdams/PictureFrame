@@ -1,8 +1,5 @@
 // Feather disable all
 
-#macro PICTURE_FRAME_VERSION  "3.2.0"
-#macro PICTURE_FRAME_DATE     "2024-07-27"
-
 __PfSystem();
 function __PfSystem()
 {
@@ -30,7 +27,9 @@ function __PfSystem()
         {
             __mouseUpdated = false;
             
-            if ((__windowWidth != window_get_width()) || (__windowHeight != window_get_height()))
+            if (((__windowWidth != window_get_width()) || (__windowHeight != window_get_height()))
+            && (window_get_width() != 0)
+            && (window_get_height() != 0))
             {
                 __windowWidth  = window_get_width();
                 __windowHeight = window_get_height();
