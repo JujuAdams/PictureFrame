@@ -30,7 +30,9 @@ function __PfSystem()
         {
             __mouseUpdated = false;
             
-            if ((__windowWidth != window_get_width()) || (__windowHeight != window_get_height()))
+            if (((__windowWidth != window_get_width()) || (__windowHeight != window_get_height()))
+            && (window_get_width() != 0)
+            && (window_get_height() != 0))
             {
                 __windowWidth  = window_get_width();
                 __windowHeight = window_get_height();
