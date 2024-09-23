@@ -37,8 +37,8 @@ function PfPostDrawAppSurface(_filter = false, _blendEnable = false, _surface = 
             var _width  = viewWidth  - 2*viewOverscan;
             var _height = viewHeight - 2*viewOverscan;
             
-            var _xScale = surfacePostDrawWidth  / _width;
-            var _yScale = surfacePostDrawHeight / _height;
+            var _xScale = _width / surface_get_width(_surface);
+            var _yScale = _height / surface_get_height(_surface);
             
             draw_surface_part_ext(_surface, _left, _top, _width, _height, surfacePostDrawX, surfacePostDrawY, _xScale, _yScale, c_white, 1);
         }
