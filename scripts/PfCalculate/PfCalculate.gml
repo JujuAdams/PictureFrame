@@ -114,25 +114,25 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         
         // --- Camera ---
         
-        //Start with our result camera being the same size as the window
-        var _outCameraWidth  = _windowWidth;
-        var _outCameraHeight = _windowHeight;
+        //Figure out the maximum size window we can fit inside the boundary
+        //This is mostly useful for high res, non-pixel art setups
+        var _outCameraWidth  = clamp(_windowWidth,  cameraMinWidth,  cameraMaxWidth); 
+        var _outCameraHeight = clamp(_windowHeight, cameraMinHeight, cameraMaxHeight); 
         
-        //Figure out the scaling factor that fits us inside the maximum bounds of the camera
-        //If the scaling factor is greater than or equal to 1 then the camera already fits inside the maximum bounds and no scaling is needed
-        var _cameraScale = min(1, cameraMaxWidth/_outCameraWidth, cameraMaxHeight/_outCameraHeight);
+        //Calculate the scaling factors for each axis
+        var _scaleWidth  = _windowWidth  / _outCameraWidth;
+        var _scaleHeight = _windowHeight / _outCameraHeight;
         
-        //Shrink down the camera so that it fits inside the maximum bounds
-        _outCameraWidth  *= _cameraScale;
-        _outCameraHeight *= _cameraScale;
-        
-        //Figure out the scaling factor that fits us outside the minimum bounds
-        //If the scaling factor is less than or equal to 1 then the camera already fits outside the minimum bounds and no scaling is needed
-        var _cameraScale = max(1, cameraMinWidth/_outCameraWidth, cameraMinHeight/_outCameraHeight);
-        
-        //Expand down the camera so that it fits outside the minimum bounds
-        _outCameraWidth  *= _cameraScale;
-        _outCameraHeight *= _cameraScale;
+        if (_scaleWidth <= _scaleHeight)
+        {
+            //Recalculate the width based on the lower scaling factor
+            _outCameraWidth = clamp(floor(_windowWidth / _scaleHeight), cameraMinWidth, cameraMaxWidth);
+        }
+        else
+        {
+            //Recalculate the height based on the lower scaling factor
+            _outCameraHeight = clamp(floor(_windowHeight / _scaleWidth), cameraMinHeight, cameraMaxHeight);
+        }
         
         //Clip to the maximum bounds in case we've gone too far in one direction
         //This handles edge cases where there is no acceptible solution
