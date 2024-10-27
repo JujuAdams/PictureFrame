@@ -34,11 +34,11 @@ function PfPostDrawAppSurface(_filter = false, _blendEnable = false, _surface = 
             var _left = viewOverscan + viewScale*frac(_fracCameraX);
             var _top  = viewOverscan + viewScale*frac(_fracCameraY);
             
-            var _width  = viewWidth  - 2*viewOverscan;
-            var _height = viewHeight - 2*viewOverscan;
+            var _width  = surface_get_width( _surface) - 2*viewOverscan;
+            var _height = surface_get_height(_surface) - 2*viewOverscan;
             
-            var _xScale = _width / surface_get_width(_surface);
-            var _yScale = _height / surface_get_height(_surface);
+            var _xScale = surfacePostDrawWidth  / _width;
+            var _yScale = surfacePostDrawHeight / _height;
             
             draw_surface_part_ext(_surface, _left, _top, _width, _height, surfacePostDrawX, surfacePostDrawY, _xScale, _yScale, c_white, 1);
         }
