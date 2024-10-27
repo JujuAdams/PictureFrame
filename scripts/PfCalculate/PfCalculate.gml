@@ -114,30 +114,27 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         
         // --- Camera ---
         
-        //Start with our result camera being the same size as the window
-        var _outCameraWidth  = _windowWidth;
-        var _outCameraHeight = _windowHeight;
+        //Figure out the scaling factor that fits us inside the target bounds
+        //If we've using a pixel-perfect view then floor the scale to ensure that the view is a whole multiple of the target width/height
+        var _targetScale = min(_windowWidth/cameraTargetWidth, _windowHeight/cameraTargetHeight);
+        if (viewPixelPerfect) _targetScale = floor(_targetScale);
+        var _outCameraWidth  = _windowWidth/_targetScale;
+        var _outCameraHeight = _windowHeight/_targetScale;
         
-        //Figure out the scaling factor that fits us inside the maximum bounds of the camera
-        //If the scaling factor is greater than or equal to 1 then the camera already fits inside the maximum bounds and no scaling is needed
-        var _cameraScale = min(1, cameraMaxWidth/_outCameraWidth, cameraMaxHeight/_outCameraHeight);
-        
-        //Shrink down the camera so that it fits inside the maximum bounds
-        _outCameraWidth  *= _cameraScale;
-        _outCameraHeight *= _cameraScale;
-        
-        //Figure out the scaling factor that fits us outside the minimum bounds
+        //Figure out the scaling factor that fits us outside the minimum bounds, if needed
         //If the scaling factor is less than or equal to 1 then the camera already fits outside the minimum bounds and no scaling is needed
-        var _cameraScale = max(1, cameraMinWidth/_outCameraWidth, cameraMinHeight/_outCameraHeight);
+        //We apply the same scaling factor in both axes to try to keep the aspect ratio consistent
+        var _minScale = max(1, cameraMinWidth/_outCameraWidth, cameraMinHeight/_outCameraHeight);
+        _outCameraWidth  = max(_minScale*_outCameraWidth,  cameraMinWidth);
+        _outCameraHeight = max(_minScale*_outCameraHeight, cameraMinHeight);
         
-        //Expand down the camera so that it fits outside the minimum bounds
-        _outCameraWidth  *= _cameraScale;
-        _outCameraHeight *= _cameraScale;
+        //Work out how much extra space we have and add that to the camera
+        _outCameraWidth  += max(0, (_windowWidth  / _targetScale) - _outCameraWidth);
+        _outCameraHeight += max(0, (_windowHeight / _targetScale) - _outCameraHeight);
         
-        //Clip to the maximum bounds in case we've gone too far in one direction
-        //This handles edge cases where there is no acceptible solution
-        _outCameraWidth  = min(_outCameraWidth,  cameraMaxWidth );
-        _outCameraHeight = min(_outCameraHeight, cameraMaxHeight);
+        //Apply max size limits and round camera bounds down to the nearest whole pixel
+        _outCameraWidth  = floor(min(_outCameraWidth,  cameraMaxWidth));
+        _outCameraHeight = floor(min(_outCameraHeight, cameraMaxHeight));
         
         
         
