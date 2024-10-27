@@ -7,20 +7,23 @@
 /// N.B. Because PfConfigPixelArt() returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
-/// @param cameraWidth
-/// @param cameraHeight
-/// @param [cameraMaxWidth=Min]
-/// @param [cameraMaxHeight=Min]
+/// @param [targetWidth]
+/// @param [targetHeight]
 /// @param [fullscreen]
+/// @param [minWidth]
+/// @param [minHeight]
+/// @param [maxWidth=Min]
+/// @param [maxHeight=Min]
 
-function PfConfigPixelArt(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _cameraMinWidth, _cameraMaxHeight = _cameraMinHeight, _fullscreen = window_get_fullscreen())
+function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _minWidth = _targetWidth, _minHeight = _targetHeight, _maxWidth = _targetWidth, _maxHeight = _targetHeight)
 {
     return {
-        cameraMinWidth:  _cameraMinWidth,
-        cameraMinHeight: _cameraMinHeight,
-        
-        cameraMaxWidth:  _cameraMaxWidth,
-        cameraMaxHeight: _cameraMaxHeight,
+        cameraTargetWidth:  _targetWidth,
+        cameraTargetHeight: _targetHeight,
+        cameraMinWidth:     _minWidth,
+        cameraMinHeight:    _minHeight,
+        cameraMaxWidth:     _maxWidth,
+        cameraMaxHeight:    _maxHeight,
         
         cameraOverscan: 0,
         
@@ -34,8 +37,8 @@ function PfConfigPixelArt(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _
         windowHeight: window_get_height(),
         
         guiStretchOverWindow: false,
-        guiTargetWidth:  (_cameraMinWidth < _cameraMinHeight)? _cameraMinWidth : undefined,
-        guiTargetHeight: (_cameraMinWidth < _cameraMinHeight)? undefined : _cameraMinHeight,
+        guiTargetWidth:  (_targetWidth < _targetHeight)? _targetWidth : undefined,
+        guiTargetHeight: (_targetWidth < _targetHeight)? undefined : _targetHeight,
         
         surfacePixelPerfect: true,
         windowOverscanScale:  1,

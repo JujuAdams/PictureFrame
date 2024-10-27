@@ -16,6 +16,10 @@
 /// 
 /// Variables that the configuration struct hold are as follows:
 /// 
+/// .cameraTargetWidth
+/// .cameraTargetHeight
+/// 
+/// 
 /// .cameraMinWidth
 /// .cameraMinHeight
 ///     The minimum width and height for the camera. This is the "safe area" that is guaranteed to
@@ -97,12 +101,14 @@ function PfConfigGeneral()
         if (view_enabled && view_get_visible(0))
         {
             var _camera = view_get_camera(0);
-            cameraMinWidth  = camera_get_view_width(_camera);
-            cameraMinHeight = camera_get_view_height(_camera);
-            cameraMaxWidth  = cameraMinWidth;
-            cameraMaxHeight = cameraMinHeight;
+            cameraTargetWidth  = camera_get_view_width(_camera);
+            cameraTargetHeight = camera_get_view_height(_camera);
+            cameraMinWidth     = cameraTargetWidth;
+            cameraMinHeight    = cameraTargetHeight;
+            cameraMaxWidth     = cameraTargetWidth;
+            cameraMaxHeight    = cameraTargetHeight;
             
-            viewMaxScale = min(view_get_wport(0) / cameraMinWidth, view_get_hport(0) / cameraMinHeight);
+            viewMaxScale = min(view_get_wport(0) / cameraTargetWidth, view_get_hport(0) / cameraTargetHeight);
             
             //Set the view to pixel perfect if it's a whole scale of the camera
             viewPixelPerfect = (floor(viewMaxScale) == viewMaxScale);
@@ -112,10 +118,12 @@ function PfConfigGeneral()
         }
         else
         {
-            cameraMinWidth  = surface_get_width(application_surface);
-            cameraMinHeight = surface_get_height(application_surface);
-            cameraMaxWidth  = cameraMinWidth;
-            cameraMaxHeight = cameraMinHeight;
+            cameraTargetWidth  = surface_get_width(application_surface);
+            cameraTargetHeight = surface_get_height(application_surface);
+            cameraMinWidth     = cameraTargetWidth;
+            cameraMinHeight    = cameraTargetHeight;
+            cameraMaxWidth     = cameraTargetWidth;
+            cameraMaxHeight    = cameraTargetHeight;
             
             viewMaxScale     = infinity;
             viewPixelPerfect = false;
@@ -126,11 +134,11 @@ function PfConfigGeneral()
         if (windowWidth > windowHeight)
         {
             guiTargetWidth  = undefined;
-            guiTargetHeight = cameraMinWidth;
+            guiTargetHeight = cameraTargetWidth;
         }
         else
         {
-            guiTargetWidth  = cameraMinHeight;
+            guiTargetWidth  = cameraTargetHeight;
             guiTargetHeight = undefined;
         }
     }
