@@ -114,6 +114,11 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         
         // --- Camera ---
         
+        var _cameraMinWidth  = cameraMinWidth  ?? cameraTargetWidth;
+        var _cameraMinHeight = cameraMinHeight ?? cameraTargetHeight;
+        var _cameraMaxWidth  = cameraMaxWidth  ?? cameraTargetWidth;
+        var _cameraMaxHeight = cameraMaxHeight ?? cameraTargetHeight;
+        
         //Figure out the scaling factor that fits us inside the target bounds
         //If we've using a pixel-perfect view then floor the scale to ensure that the view is a whole multiple of the target width/height
         var _targetScale = min(_windowWidth/cameraTargetWidth, _windowHeight/cameraTargetHeight);
@@ -124,17 +129,17 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         //Figure out the scaling factor that fits us outside the minimum bounds, if needed
         //If the scaling factor is less than or equal to 1 then the camera already fits outside the minimum bounds and no scaling is needed
         //We apply the same scaling factor in both axes to try to keep the aspect ratio consistent
-        var _minScale = max(1, cameraMinWidth/_outCameraWidth, cameraMinHeight/_outCameraHeight);
-        _outCameraWidth  = max(_minScale*_outCameraWidth,  cameraMinWidth);
-        _outCameraHeight = max(_minScale*_outCameraHeight, cameraMinHeight);
+        var _minScale = max(1, _cameraMinWidth/_outCameraWidth, _cameraMinHeight/_outCameraHeight);
+        _outCameraWidth  = max(_minScale*_outCameraWidth,  _cameraMinWidth);
+        _outCameraHeight = max(_minScale*_outCameraHeight, _cameraMinHeight);
         
         //Work out how much extra space we have and add that to the camera
         _outCameraWidth  += max(0, (_windowWidth  / _targetScale) - _outCameraWidth);
         _outCameraHeight += max(0, (_windowHeight / _targetScale) - _outCameraHeight);
         
         //Apply max size limits and round camera bounds down to the nearest whole pixel
-        _outCameraWidth  = floor(min(_outCameraWidth,  cameraMaxWidth));
-        _outCameraHeight = floor(min(_outCameraHeight, cameraMaxHeight));
+        _outCameraWidth  = floor(min(_outCameraWidth,  _cameraMaxWidth));
+        _outCameraHeight = floor(min(_outCameraHeight, _cameraMaxHeight));
         
         
         

@@ -18,17 +18,21 @@
 /// 
 /// .cameraTargetWidth
 /// .cameraTargetHeight
-/// 
+///     The target "ideal" camera width and height. PictureFrame will attempt to set the camera to
+///     this width and height, adjusting the rendering pipeline within the constraints set by the
+///     configuration struct.
 /// 
 /// .cameraMinWidth
 /// .cameraMinHeight
 ///     The minimum width and height for the camera. This is the "safe area" that is guaranteed to
-///     be visible.
+///     be visible. Set either of these variables to `undefined` to use the target width/height
+///     value.
 /// 
 /// .cameraMaxWidth
 /// .cameraMaxHeight
 ///     The maximum width and height for the camera. This is an expansion zone that the camera can
-///     grow into to adapt to different resolutions and aspect ratios.
+///     grow into to adapt to different resolutions and aspect ratios. Set either of these
+///     variables to `undefined` to use the target width/height value.
 /// 
 /// .cameraOverscan
 ///     The number of extra pixels, in roomspace, to add around the edges of the camera. A value of
@@ -103,10 +107,10 @@ function PfConfigGeneral()
             var _camera = view_get_camera(0);
             cameraTargetWidth  = camera_get_view_width(_camera);
             cameraTargetHeight = camera_get_view_height(_camera);
-            cameraMinWidth     = cameraTargetWidth;
-            cameraMinHeight    = cameraTargetHeight;
-            cameraMaxWidth     = cameraTargetWidth;
-            cameraMaxHeight    = cameraTargetHeight;
+            cameraMinWidth     = undefined;
+            cameraMinHeight    = undefined;
+            cameraMaxWidth     = undefined;
+            cameraMaxHeight    = undefined;
             
             viewMaxScale = min(view_get_wport(0) / cameraTargetWidth, view_get_hport(0) / cameraTargetHeight);
             
@@ -120,10 +124,10 @@ function PfConfigGeneral()
         {
             cameraTargetWidth  = surface_get_width(application_surface);
             cameraTargetHeight = surface_get_height(application_surface);
-            cameraMinWidth     = cameraTargetWidth;
-            cameraMinHeight    = cameraTargetHeight;
-            cameraMaxWidth     = cameraTargetWidth;
-            cameraMaxHeight    = cameraTargetHeight;
+            cameraMinWidth     = undefined;
+            cameraMinHeight    = undefined;
+            cameraMaxWidth     = undefined;
+            cameraMaxHeight    = undefined;
             
             viewMaxScale     = infinity;
             viewPixelPerfect = false;

@@ -15,7 +15,7 @@
 /// @param [maxWidth=Min]
 /// @param [maxHeight=Min]
 
-function PfConfigHighRes(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _minWidth = _targetWidth, _minHeight = _targetHeight, _maxWidth = _targetWidth, _maxHeight = _targetHeight)
+function PfConfigHighRes(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _minWidth = undefined, _minHeight = undefined, _maxWidth = undefined, _maxHeight = undefined)
 {
     return {
         cameraTargetWidth:  _targetWidth,
