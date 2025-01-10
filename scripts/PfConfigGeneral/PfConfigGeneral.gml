@@ -95,6 +95,8 @@ function PfConfigGeneral()
         windowWidth:  window_get_width(),
         windowHeight: window_get_height(),
         
+        guiCenter: false,
+        guiCenterPixelPerfect: false,
         guiStretchOverWindow: false,
         
         windowOverscanScale: 1,
