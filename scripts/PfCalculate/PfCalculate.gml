@@ -207,12 +207,12 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         _surfacePostDrawScale *= _overscanCorrectionScale;
         
         //Apply the correction scale
-        _surfacePostDrawWidth  = _surfacePostDrawScale*_outViewWidth;
-        _surfacePostDrawHeight = _surfacePostDrawScale*_outViewHeight;
+        _surfacePostDrawWidth  = floor(_surfacePostDrawScale*_outViewWidth);
+        _surfacePostDrawHeight = floor(_surfacePostDrawScale*_outViewHeight);
         
         //Centre the application surface in the window
-        var _surfacePostDrawX = 0.5*(_outWindowWidth  - _surfacePostDrawWidth );
-        var _surfacePostDrawY = 0.5*(_outWindowHeight - _surfacePostDrawHeight);
+        var _surfacePostDrawX = floor(0.5*(_outWindowWidth  - _surfacePostDrawWidth ));
+        var _surfacePostDrawY = floor(0.5*(_outWindowHeight - _surfacePostDrawHeight));
         
         
         
@@ -230,8 +230,8 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
                 _scale = floor(_scale);
             }
             
-            var _outGuiX = 0.5*(_windowWidth  - _scale*_outGuiWidth);
-            var _outGuiY = 0.5*(_windowHeight - _scale*_outGuiHeight);
+            var _outGuiX = floor(0.5*(_windowWidth  - _scale*_outGuiWidth));
+            var _outGuiY = floor(0.5*(_windowHeight - _scale*_outGuiHeight));
             
             //Convert window coordinates to GUI coordinates
             var _windowToGuiScaleX = 1 / _scale;
