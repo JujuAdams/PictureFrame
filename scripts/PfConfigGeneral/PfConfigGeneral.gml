@@ -24,9 +24,9 @@
 /// 
 /// .cameraMinWidth
 /// .cameraMinHeight
-///     The minimum width and height for the camera. This is the "safe area" that is guaranteed to
-///     be visible. Set either of these variables to `undefined` to use the target width/height
-///     value.
+///     The minimum width and height for the camera. This is the "safe area" that is required to be
+///     be visible for the game to function properly. Set either of these variables to `undefined`
+///     to use the target width/height value.
 /// 
 /// .cameraMaxWidth
 /// .cameraMaxHeight
@@ -45,13 +45,13 @@
 /// .viewMaxScale
 ///     Maximum scaling factor from the camera to the view. For pixel perfect games that don't want
 ///     subpixelling, this value should be set to 1. If you do want subpixelling, or you're making
-///     a high res game, this value should usually be set to <infinity>. You may rarely want to set
+///     a high res game, this value should usually be set to `infinity`. You may rarely want to set
 ///     another value if you want tighter control over the view scale and subpixelling.
 /// 
 /// .viewPixelPerfect
 ///     Whether the camera-to-view scale should be a whole number. If you're making a pixel art
 ///     game, whether you want subpixelling or not, this variable should almost certainly be set
-///     to <true>.
+///     to `true`.
 /// 
 /// .fullscreen
 ///     The fullscreen state for the game. This value is only relevant on desktop platforms
@@ -68,8 +68,8 @@
 /// 
 /// .guiTargetWidth
 /// .guiTargetHeight
-///     The target width or height for the GUI layer dimensions. To allow PfCalculate() to adapt to
-///     different aspect ratios, set one of these variables to <undefined>. In this situation,
+///     The target width or height for the GUI layer dimensions. To allow `PfCalculate()` to adapt
+///     to different aspect ratios, set one of these variables to <undefined>. In this situation,
 ///     PictureFrame will adjust the <undefined> dimension to stretch the GUI layer over the window
 ///     whilst keeping the aspect ratio correct between the GUI width and height.
 /// 
@@ -82,7 +82,7 @@
 ///     Scaling factor to apply to the application surface and GUI at the end of the render
 ///     pipeline. This is useful to adjust for overscan on old monitors and it is a compliance
 ///     requirement when releasing on some console platforms. The overscan scale will ignore
-///     .surfacePixelPerfect (see above).
+///     `.surfacePixelPerfect` (see above).
 
 function PfConfigGeneral()
 {

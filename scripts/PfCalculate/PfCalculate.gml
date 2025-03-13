@@ -24,7 +24,7 @@
 /// 
 /// .cameraWisth
 /// .cameraHeight
-///     The roomspace width and height of the camera.
+///     The roomspace width and height of the camera. This includes overscan pixels, if defined.
 /// 
 /// .cameraOverscan
 ///     The number of extra pixels, in roomspace, to add around the edges of the camera. This is
@@ -32,14 +32,19 @@
 /// 
 /// .viewWidth
 /// .viewHeight
-///     The width and height of the view used to draw the camera to the application surface.
+///     The width and height of the view used to draw the camera to the application surface. This
+///     includes overscan pixels, if defined. When using `PfApply()`, the application surface size
+///     will match the view width and height.
 /// 
 /// .viewScale
-///     The scaling factor between the camera and the view.
+///     The scaling factor between the camera and the view. A scaling factor of 2 means that there
+///     will be 2 pixels on the view for every 1 pixel in roomspace on the camera. A view scale of
+///     exactly 1 is therefore a pixel perfect view.
 /// 
 /// .viewOverscan
-///     The number of extra pixels, in roomspace, to add around the edges of the view. This is
-///     equal to .cameraOverscan multiplied by .viewScale and is provided for convenience.
+///     The number of extra pixels, in viewspace, that have been added around the edges of the
+///     view. This is equal to `.cameraOverscan` multiplied by `.viewScale` and is provided for
+///     convenience.
 /// 
 /// .fullscreen
 ///     Whether the game should be in fullscreen mode. This value is only relevant on desktop
@@ -47,8 +52,8 @@
 /// 
 /// .windowWidth
 /// .windowHeight
-///     The dimensions of the window. If the .fullscreen variable (see above) is <true> then these
-///     values will be the same as the display's width and height
+///     The dimensions of the window. If the `.fullscreen` variable (see above) is `true` then
+///     these values will be the same as the display's width and height.
 /// 
 /// .guiWidth
 /// .guiHeight
