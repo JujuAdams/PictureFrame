@@ -344,13 +344,15 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             marginsVisible:  ((_surfacePostDrawX > 0) || (_surfacePostDrawY > 0) || (_surfacePostDrawWidth < _outWindowWidth) || (_surfacePostDrawHeight < _outWindowHeight)),
             
             marginGuiX1: _windowToGuiScaleX*(-_outGuiX),
-            marginGuiX2: _surfaceGuiX,
-            marginGuiX3: _surfaceGuiX + _surfaceGuiWidth,
-            marginGuiX4: _windowToGuiScaleX*(_windowWidth - _outGuiX),
-            
             marginGuiY1: _windowToGuiScaleY*(-_outGuiY),
+            
+            marginGuiX2: _surfaceGuiX,
             marginGuiY2: _surfaceGuiY,
+            
+            marginGuiX3: _surfaceGuiX + _surfaceGuiWidth,
             marginGuiY3: _surfaceGuiY + _surfaceGuiHeight,
+            
+            marginGuiX4: _windowToGuiScaleX*(_windowWidth  - _outGuiX),
             marginGuiY4: _windowToGuiScaleY*(_windowHeight - _outGuiY),
         }
     }

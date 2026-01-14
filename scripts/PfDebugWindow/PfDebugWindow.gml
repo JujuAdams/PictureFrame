@@ -70,7 +70,49 @@ function PfDebugWindow(_configStruct = undefined)
     
     dbg_view("PictureFrame", true);
     
-    dbg_section("GameMaker State", true);
+    dbg_section("Config Struct", false);
+    
+    dbg_text("");
+    
+    if (_configStruct == undefined)
+    {
+        dbg_text("No config struct provided");
+    }
+    else
+    {
+        dbg_button("Apply config struct", function()
+        {
+            static _system = __PfSystem();
+            PfApply(_system.__debugConfig);
+        });
+        
+        dbg_text_input(ref_create(_debugConfig, "cameraTargetWidth"    ), ".cameraTargetWidth",   "f");
+        dbg_text_input(ref_create(_debugConfig, "cameraTargetHeight"   ), ".cameraTargetHeight",  "f");
+        dbg_text_input(ref_create(_debugConfig, "cameraMinWidth"       ), ".cameraMinWidth",      "f");
+        dbg_text_input(ref_create(_debugConfig, "cameraMinHeight"      ), ".cameraMinHeight",     "f");
+        dbg_text_input(ref_create(_debugConfig, "cameraMaxWidth"       ), ".cameraMaxWidth",      "f");
+        dbg_text_input(ref_create(_debugConfig, "cameraMaxHeight"      ), ".cameraMaxHeight",     "f");
+        dbg_text_input(ref_create(_debugConfig, "cameraOverscan"       ), ".cameraOverscan",      "i");
+        dbg_text_separator("");
+        dbg_text_input(ref_create(_debugConfig, "viewMaxScale"         ), ".viewMaxScale",        "f");
+        dbg_checkbox(  ref_create(_debugConfig, "viewPixelPerfect"     ), ".viewPixelPerfect"        );
+        dbg_text_separator("");
+        dbg_checkbox(  ref_create(_debugConfig, "fullscreen"           ), ".fullscreen"              );
+        dbg_text_input(ref_create(_debugConfig, "windowWidth"          ), ".windowWidth",         "i");
+        dbg_text_input(ref_create(_debugConfig, "windowHeight"         ), ".windowHeight",        "i");
+        dbg_text_separator("");
+        dbg_checkbox(  ref_create(_debugConfig, "guiStretchOverWindow" ), ".guiStretchOverWindow"    );
+        dbg_text_input(ref_create(_debugConfig, "guiTargetWidth"       ), ".guiTargetWidth",      "f");
+        dbg_text_input(ref_create(_debugConfig, "guiTargetHeight"      ), ".guiTargetHeight",     "f");
+        dbg_checkbox(  ref_create(_debugConfig, "guiCenter"            ), ".guiCenter"               );
+        dbg_checkbox(  ref_create(_debugConfig, "guiCenterPixelPerfect"), ".guiCenterPixelPerfect"   );
+        dbg_text_separator("");
+        dbg_checkbox(  ref_create(_debugConfig, "surfacePixelPerfect"  ), ".surfacePixelPerfect"     );
+        dbg_text_input(ref_create(_debugConfig, "windowOverscanScale"  ), ".windowOverscanScale", "f");
+    }
+    
+    dbg_text("");
+    dbg_section("GameMaker State", false);
     
     dbg_text($"Camera ID     = "); dbg_same_line(); dbg_text(ref_create(_debugState, "camera"));
     dbg_text($"Camera X      = "); dbg_same_line(); dbg_text(ref_create(_debugState, "cameraX"));
@@ -92,9 +134,9 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text($"Window height = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowHeight"));
     dbg_text($"Fullscreen    = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowFullscreen"));
     dbg_text($"Show Border   = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowShowBorder"));
-    dbg_text("");
     
-    dbg_section("Result Struct", true);
+    dbg_text("");
+    dbg_section("Result Struct", false);
     
     dbg_text($".cameraWidth    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "cameraWidth"));
     dbg_text($".cameraHeight   = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "cameraHeight"));
@@ -130,43 +172,4 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text($".marginGuiY3    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiY3"));
     dbg_text($".marginGuiX4    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiX4"));
     dbg_text($".marginGuiY4    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiY4"));
-    dbg_text("");
-    
-    dbg_section("Config Struct", true);
-    
-    dbg_text("");
-    
-    if (_configStruct == undefined)
-    {
-        dbg_text("No config struct provided");
-    }
-    else
-    {
-        dbg_button("Apply config struct", function()
-        {
-            static _system = __PfSystem();
-            PfApply(_system.__debugConfig);
-        });
-        
-        dbg_text_input(ref_create(_debugConfig, "cameraTargetWidth"   ), ".cameraTargetWidth",   "f");
-        dbg_text_input(ref_create(_debugConfig, "cameraTargetHeight"  ), ".cameraTargetHeight",  "f");
-        dbg_text_input(ref_create(_debugConfig, "cameraMinWidth"      ), ".cameraMinWidth",      "f");
-        dbg_text_input(ref_create(_debugConfig, "cameraMinHeight"     ), ".cameraMinHeight",     "f");
-        dbg_text_input(ref_create(_debugConfig, "cameraMaxWidth"      ), ".cameraMaxWidth",      "f");
-        dbg_text_input(ref_create(_debugConfig, "cameraMaxHeight"     ), ".cameraMaxHeight",     "f");
-        dbg_text_input(ref_create(_debugConfig, "cameraOverscan"      ), ".cameraOverscan",      "i");
-        dbg_text_separator("");
-        dbg_text_input(ref_create(_debugConfig, "viewMaxScale"        ), ".viewMaxScale",        "f");
-        dbg_checkbox(  ref_create(_debugConfig, "viewPixelPerfect"    ), ".viewPixelPerfect"        );
-        dbg_text_separator("");
-        dbg_checkbox(  ref_create(_debugConfig, "fullscreen"          ), ".fullscreen"              );
-        dbg_text_input(ref_create(_debugConfig, "windowWidth"         ), ".windowWidth",         "i");
-        dbg_text_input(ref_create(_debugConfig, "windowHeight"        ), ".windowHeight",        "i");
-        dbg_text_separator("");
-        dbg_checkbox(  ref_create(_debugConfig, "guiStretchOverWindow"), ".guiStretchOverWindow"    );
-        dbg_text_input(ref_create(_debugConfig, "guiTargetWidth"      ), ".guiTargetWidth",      "f");
-        dbg_text_input(ref_create(_debugConfig, "guiTargetHeight"     ), ".guiTargetHeight",     "f");
-        dbg_checkbox(  ref_create(_debugConfig, "surfacePixelPerfect" ), ".surfacePixelPerfect"     );
-        dbg_text_input(ref_create(_debugConfig, "windowOverscanScale" ), ".windowOverscanScale", "f");
-    }
 }

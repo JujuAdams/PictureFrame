@@ -9,10 +9,10 @@
 /// windowed. This value is only relevant when the game is not fullscreened and is therefore only
 /// relevant on desktop platforms (Windows, MacOS, Linux).
 /// 
-/// N.B. Automatic drawing of the application surface will always be disabled by PfApply() by
-///      calling application_surface_draw_enable(false). This means that without further action,
-///      your game will not be visible. You should call PfPostDrawAppSurface() in a Post Draw event
-///      to ensure that your application surface is visible for the player.
+/// N.B. Automatic drawing of the application surface will always be disabled by `PfApply()` by
+///      calling `application_surface_draw_enable(false)`. This means that without further action,
+///      your game will not be visible. You should call `PfPostDrawAppSurface()` in a Post Draw
+///      event to ensure that your application surface is visible for the player.
 /// 
 /// @param configStruct
 /// @param [resizeWindow=false]
