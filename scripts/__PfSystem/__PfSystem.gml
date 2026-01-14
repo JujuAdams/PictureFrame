@@ -11,6 +11,8 @@ function __PfSystem()
     _system = {};
     with(_system)
     {
+        __resultStruct = undefined;
+        
         __noAppSurfDrawDisable = true;
         PfApply(PfConfigGeneral());
         __noAppSurfDrawDisable = false;
@@ -23,7 +25,8 @@ function __PfSystem()
         __windowHeight = window_get_height();
         __windowSizeChanged = false;
         
-        __debugResult = undefined;
+        __debugState  = {};
+        __debugResult = {};
         __debugConfig = undefined;
         
         time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()
