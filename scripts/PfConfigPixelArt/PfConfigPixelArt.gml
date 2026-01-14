@@ -43,6 +43,6 @@ function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_
         guiTargetHeight: (_targetWidth < _targetHeight)? undefined : _targetHeight,
         
         surfacePixelPerfect: true,
-        windowOverscanScale:  1,
+        windowOverscanScale: 1,
     }
 }

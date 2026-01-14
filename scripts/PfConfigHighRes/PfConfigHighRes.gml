@@ -43,6 +43,6 @@ function PfConfigHighRes(_targetWidth, _targetHeight, _fullscreen = window_get_f
         guiTargetHeight: (_targetWidth < _targetHeight)? undefined : _targetHeight,
         
         surfacePixelPerfect: false,
-        windowOverscanScale:  1,
+        windowOverscanScale: 1,
     }
 }

@@ -16,7 +16,7 @@ if (keyboard_check_pressed(vk_f4))
 //Move the camera when the player clicks
 var _camera = view_get_camera(0);
 
-if (mouse_check_button_pressed(mb_left))
+if (mouse_check_button_pressed(mb_left) && (not is_mouse_over_debug_overlay()))
 {
     cameraTargetX = mouse_x - camera_get_view_width(_camera)/2;
     cameraTargetY = mouse_y - camera_get_view_height(_camera)/2;

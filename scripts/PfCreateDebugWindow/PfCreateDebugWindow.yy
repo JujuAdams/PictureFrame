@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PfCreateDebugWindow",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PfCreateDebugWindow",
+  "parent":{
+    "name":"PictureFrame",
+    "path":"folders/PictureFrame.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

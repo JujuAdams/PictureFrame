@@ -88,12 +88,12 @@
 ///     margins (using the variables below).
 /// 
 /// .marginGuiX1
-/// .marginGuiX2
-/// .marginGuiX3
-/// .marginGuiX4
 /// .marginGuiY1
+/// .marginGuiX2
 /// .marginGuiY2
+/// .marginGuiX3
 /// .marginGuiY3
+/// .marginGuiX4
 /// .marginGuiY4
 ///     Coordinates for the margins around the application surface in GUI-space.
 
@@ -326,6 +326,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             guiWidth:  _outGuiWidth,
             guiHeight: _outGuiHeight,
             
+            surfacePixelPerfect:   surfacePixelPerfect,
             surfacePostDrawScale:  _surfacePostDrawScale,
             surfacePostDrawX:      _surfacePostDrawX,
             surfacePostDrawY:      _surfacePostDrawY,
