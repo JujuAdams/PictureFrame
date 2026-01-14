@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"PfCreateDebugWindow",
+  "%Name":"PfDebugWindow",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PfCreateDebugWindow",
+  "name":"PfDebugWindow",
   "parent":{
     "name":"PictureFrame",
     "path":"folders/PictureFrame.yy",

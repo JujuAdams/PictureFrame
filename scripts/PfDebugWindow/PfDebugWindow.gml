@@ -4,7 +4,7 @@
 /// 
 /// @param [configStruct=none]
 
-function PfCreateDebugWindow(_configStruct = undefined)
+function PfDebugWindow(_configStruct = undefined)
 {
     static _system = __PfSystem();
     

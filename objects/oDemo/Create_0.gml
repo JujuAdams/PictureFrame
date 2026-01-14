@@ -18,4 +18,4 @@ cameraY = camera_get_view_y(_camera);
 cameraTargetX = cameraX;
 cameraTargetY = cameraY;
 
-PfCreateDebugWindow(configStruct);
+PfDebugWindow(configStruct);
