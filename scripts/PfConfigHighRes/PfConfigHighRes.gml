@@ -36,11 +36,12 @@ function PfConfigHighRes(_targetWidth, _targetHeight, _fullscreen = window_get_f
         windowWidth:  window_get_width(),
         windowHeight: window_get_height(),
         
-        guiCenter: false,
-        guiCenterPixelPerfect: false,
         guiStretchOverWindow: false,
-        guiTargetWidth:  (_targetWidth < _targetHeight)? _targetWidth : undefined,
-        guiTargetHeight: (_targetWidth < _targetHeight)? undefined : _targetHeight,
+        
+        guiTargetWidth:  _targetWidth,
+        guiTargetHeight: _targetHeight,
+        guiLockWidth:    (_targetWidth <  _targetHeight),
+        guiLockHeight:   (_targetWidth >= _targetHeight),
         
         surfacePixelPerfect: false,
         windowOverscanScale: 1,

@@ -104,8 +104,8 @@ function PfDebugWindow(_configStruct = undefined)
         dbg_checkbox(  ref_create(_debugConfig, "guiStretchOverWindow" ), ".guiStretchOverWindow"    );
         dbg_text_input(ref_create(_debugConfig, "guiTargetWidth"       ), ".guiTargetWidth",      "f");
         dbg_text_input(ref_create(_debugConfig, "guiTargetHeight"      ), ".guiTargetHeight",     "f");
-        dbg_checkbox(  ref_create(_debugConfig, "guiCenter"            ), ".guiCenter"               );
-        dbg_checkbox(  ref_create(_debugConfig, "guiCenterPixelPerfect"), ".guiCenterPixelPerfect"   );
+        dbg_checkbox(  ref_create(_debugConfig, "guiLockWidth"         ), ".guiLockWidth"            );
+        dbg_checkbox(  ref_create(_debugConfig, "guiLockHeight"        ), ".guiLockHeight"           );
         dbg_text_separator("");
         dbg_checkbox(  ref_create(_debugConfig, "surfacePixelPerfect"  ), ".surfacePixelPerfect"     );
         dbg_text_input(ref_create(_debugConfig, "windowOverscanScale"  ), ".windowOverscanScale", "f");

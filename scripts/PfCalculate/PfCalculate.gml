@@ -223,72 +223,56 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         
         // --- GUI ---
         
-        if (guiCenter)
+        if (guiStretchOverWindow)
         {
-            var _outGuiWidth  = guiTargetWidth;
-            var _outGuiHeight = guiTargetHeight;
+            var _outGuiX = 0;
+            var _outGuiY = 0;
             
-            var _scale = _surfacePostDrawScale;
-            _scale *= min(_surfacePostDrawWidth / (_scale*_outGuiWidth), _surfacePostDrawHeight / (_scale*_outGuiHeight));
-            if ((_scale > 1) && guiCenterPixelPerfect)
-            {
-                _scale = floor(_scale);
-            }
-            
-            var _outGuiX = floor(0.5*(_windowWidth  - _scale*_outGuiWidth));
-            var _outGuiY = floor(0.5*(_windowHeight - _scale*_outGuiHeight));
-            
-            //Convert window coordinates to GUI coordinates
-            var _windowToGuiScaleX = 1 / _scale;
-            var _windowToGuiScaleY = 1 / _scale;
+            var _guiRegionWidth  = _outWindowWidth;
+            var _guiRegionHeight = _outWindowHeight;
         }
         else
         {
-            if (guiStretchOverWindow)
-            {
-                var _outGuiX = 0;
-                var _outGuiY = 0;
-                
-                var _guiRegionWidth  = _outWindowWidth;
-                var _guiRegionHeight = _outWindowHeight;
-            }
-            else
-            {
-                var _outGuiX = _surfacePostDrawX;
-                var _outGuiY = _surfacePostDrawY;
-                
-                var _guiRegionWidth  = _surfacePostDrawWidth;
-                var _guiRegionHeight = _surfacePostDrawHeight;
-            }
+            var _outGuiX = _surfacePostDrawX;
+            var _outGuiY = _surfacePostDrawY;
             
-            if ((guiTargetWidth == undefined) && (guiTargetHeight == undefined))
+            var _guiRegionWidth  = _surfacePostDrawWidth;
+            var _guiRegionHeight = _surfacePostDrawHeight;
+        }
+        
+        if (guiLockWidth)
+        {
+            if (guiLockHeight)
             {
-                //We don't have target GUI dimensions, use the window size for the GUI
-                var _outGuiWidth  = _guiRegionWidth;
-                var _outGuiHeight = _guiRegionHeight;
-            }
-            else if (guiTargetWidth == undefined)
-            {
-                //GUI height is fixed and width is flexible. Scale the GUI width to be in proportion to the GUI height
-                var _outGuiWidth  = round((guiTargetHeight/_guiRegionHeight)*_guiRegionWidth);
+                var _outGuiWidth  = guiTargetWidth;
                 var _outGuiHeight = guiTargetHeight;
             }
-            else if (guiTargetHeight == undefined)
+            else
             {
                 //GUI width is fixed and height is flexible. Scale the GUI height to be in proportion to the GUI width
                 var _outGuiWidth  = guiTargetWidth;
                 var _outGuiHeight = round((guiTargetWidth/_guiRegionWidth)*_guiRegionHeight);
             }
-            else
+        }
+        else
+        {
+            if (guiLockHeight)
             {
-                var _outGuiWidth  = guiTargetWidth;
+                //GUI height is fixed and width is flexible. Scale the GUI width to be in proportion to the GUI height
+                var _outGuiWidth  = round((guiTargetHeight/_guiRegionHeight)*_guiRegionWidth);
                 var _outGuiHeight = guiTargetHeight;
             }
-            
-            //Convert window coordinates to GUI coordinates
-            var _windowToGuiScaleX = _outGuiWidth/_guiRegionWidth;
-            var _windowToGuiScaleY = _outGuiHeight/_guiRegionHeight;
+            else
+            {
+                //We don't have target GUI dimensions, use the region size for the GUI
+                var _outGuiWidth  = _guiRegionWidth;
+                var _outGuiHeight = _guiRegionHeight;
+            }
         }
+        
+        //Convert window coordinates to GUI coordinates
+        var _windowToGuiScaleX = _outGuiWidth/_guiRegionWidth;
+        var _windowToGuiScaleY = _outGuiHeight/_guiRegionHeight;
         
         var _surfaceGuiX      = _windowToGuiScaleX*(_surfacePostDrawX - _outGuiX);
         var _surfaceGuiY      = _windowToGuiScaleY*(_surfacePostDrawY - _outGuiY);

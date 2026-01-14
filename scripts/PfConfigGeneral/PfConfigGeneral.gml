@@ -94,12 +94,9 @@ function PfConfigGeneral()
         
         windowWidth:  window_get_width(),
         windowHeight: window_get_height(),
-        
-        guiCenter: false,
-        guiCenterPixelPerfect: false,
-        guiStretchOverWindow: false,
-        
         windowOverscanScale: 1,
+        
+        guiStretchOverWindow: false,
     }
     
     with(_configStruct)
@@ -137,16 +134,10 @@ function PfConfigGeneral()
             surfacePixelPerfect = false;
         }
         
-        if (windowWidth > windowHeight)
-        {
-            guiTargetWidth  = undefined;
-            guiTargetHeight = cameraTargetWidth;
-        }
-        else
-        {
-            guiTargetWidth  = cameraTargetHeight;
-            guiTargetHeight = undefined;
-        }
+        guiTargetWidth  = cameraTargetWidth;
+        guiTargetHeight = cameraTargetHeight;
+        guiLockWidth    = (cameraTargetWidth <  cameraTargetHeight);
+        guiLockHeight   = (cameraTargetWidth >= cameraTargetHeight);
     }
     
     return _configStruct;
