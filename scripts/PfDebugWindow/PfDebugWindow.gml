@@ -47,12 +47,24 @@ function PfDebugWindow(_configStruct = undefined)
                 viewEnabled = view_enabled;
                 viewVisible = view_get_visible(_view);
                 
+                appSurfWidth  = surface_get_width(application_surface);
+                appSurfHeight = surface_get_height(application_surface);
+                
+                guiWidth  = display_get_gui_width();
+                guiHeight = display_get_gui_height();
+                
                 windowX          = window_get_x();
                 windowY          = window_get_y();
                 windowWidth      = window_get_width();
                 windowHeight     = window_get_height();
                 windowFullscreen = window_get_fullscreen();
                 windowShowBorder = window_get_showborder();
+                
+                displayWidth     = display_get_width();
+                displayHeight    = display_get_height();
+                displayFrequency = display_get_frequency();
+                displayDPI       = display_get_dpi_x();
+                
             }
         },
         [], -1));
@@ -86,6 +98,7 @@ function PfDebugWindow(_configStruct = undefined)
             PfApply(_system.__debugConfig);
         });
         
+        dbg_text("");
         dbg_text_input(ref_create(_debugConfig, "cameraTargetWidth"    ), ".cameraTargetWidth",   "f");
         dbg_text_input(ref_create(_debugConfig, "cameraTargetHeight"   ), ".cameraTargetHeight",  "f");
         dbg_text_input(ref_create(_debugConfig, "cameraMinWidth"       ), ".cameraMinWidth",      "f");
@@ -114,6 +127,13 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text("");
     dbg_section("GameMaker State", false);
     
+    dbg_text("");
+    dbg_button("Toggle fullscreen", function()
+    {
+        window_set_fullscreen(not window_get_fullscreen());
+    });
+    
+    dbg_text("");
     dbg_text($"Camera ID     = "); dbg_same_line(); dbg_text(ref_create(_debugState, "camera"));
     dbg_text($"Camera X      = "); dbg_same_line(); dbg_text(ref_create(_debugState, "cameraX"));
     dbg_text($"Camera Y      = "); dbg_same_line(); dbg_text(ref_create(_debugState, "cameraY"));
@@ -128,16 +148,30 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text($"View visible  = "); dbg_same_line(); dbg_text(ref_create(_debugState, "viewVisible"));
     dbg_text($"Views enabled = "); dbg_same_line(); dbg_text(ref_create(_debugState, "viewEnabled"));
     dbg_text_separator("");
+    dbg_text($"App surf width  = "); dbg_same_line(); dbg_text(ref_create(_debugState, "appSurfWidth"));
+    dbg_text($"App surf height = "); dbg_same_line(); dbg_text(ref_create(_debugState, "appSurfHeight"));
+    dbg_text_separator("");
+    dbg_text($"(GUI X     = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfaceGuiX")); dbg_same_line(); dbg_text(")");
+    dbg_text($"(GUI Y     = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfaceGuiY")); dbg_same_line(); dbg_text(")");
+    dbg_text($"GUI width  = "); dbg_same_line(); dbg_text(ref_create(_debugState,  "guiWidth"));
+    dbg_text($"GUI height = "); dbg_same_line(); dbg_text(ref_create(_debugState,  "guiHeight"));
+    dbg_text_separator("");
     dbg_text($"Window X      = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowX"));
     dbg_text($"Window Y      = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowY"));
     dbg_text($"Window width  = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowWidth"));
     dbg_text($"Window height = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowHeight"));
     dbg_text($"Fullscreen    = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowFullscreen"));
     dbg_text($"Show Border   = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowShowBorder"));
+    dbg_text_separator("");
+    dbg_text($"Display width     = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayWidth"));
+    dbg_text($"Display height    = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayHeight"));
+    dbg_text($"Display frequency = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayFrequency"));
+    dbg_text($"Display DPI       = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayDPI"));
     
     dbg_text("");
     dbg_section("Result Struct", false);
     
+    dbg_text("");
     dbg_text($".cameraWidth    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "cameraWidth"));
     dbg_text($".cameraHeight   = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "cameraHeight"));
     dbg_text($".cameraOverscan = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "cameraOverscan"));
@@ -172,4 +206,5 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text($".marginGuiY3    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiY3"));
     dbg_text($".marginGuiX4    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiX4"));
     dbg_text($".marginGuiY4    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiY4"));
+    dbg_text("");
 }
