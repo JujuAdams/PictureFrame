@@ -105,7 +105,7 @@ function PfConfigGeneral()
         cameraOverscan: 0,
         
         //Force "fullscreen" on non-desktop platforms
-        fullscreen: ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))? window_get_fullscreen() : true,
+        fullscreen: __PF_ON_DESKTOP? window_get_fullscreen() : true,
         
         windowWidth:  window_get_width(),
         windowHeight: window_get_height(),

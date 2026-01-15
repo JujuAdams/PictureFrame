@@ -110,7 +110,7 @@ function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
             surface_resize(application_surface, viewWidth, viewHeight);
         }
         
-        if ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))
+        if (__PF_ON_DESKTOP)
         {
             if (fullscreen)
             {

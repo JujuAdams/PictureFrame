@@ -41,6 +41,7 @@
     {"id":{"name":"PfConfigGeneral","path":"scripts/PfConfigGeneral/PfConfigGeneral.yy",},},
     {"id":{"name":"PfConfigHighRes","path":"scripts/PfConfigHighRes/PfConfigHighRes.yy",},},
     {"id":{"name":"PfConfigPixelArt","path":"scripts/PfConfigPixelArt/PfConfigPixelArt.yy",},},
+    {"id":{"name":"PfConfigSetWindowVars","path":"scripts/PfConfigSetWindowVars/PfConfigSetWindowVars.yy",},},
     {"id":{"name":"PfDebugWindow","path":"scripts/PfDebugWindow/PfDebugWindow.yy",},},
     {"id":{"name":"PfGetApplied","path":"scripts/PfGetApplied/PfGetApplied.yy",},},
     {"id":{"name":"PfGuiToRoom","path":"scripts/PfGuiToRoom/PfGuiToRoom.yy",},},

@@ -31,9 +31,7 @@ camera_set_view_pos(_camera, cameraX, cameraY);
 if (PfWindowSizeChanged())
 {
     //Update our configuration with the current window state
-    configStruct.fullscreen   = window_get_fullscreen();
-    configStruct.windowWidth  = window_get_width();
-    configStruct.windowHeight = window_get_height();
+    PfConfigSetWindowVars(configStruct);
     
     //Reapply to adapt to the new window size
     PfApply(configStruct);

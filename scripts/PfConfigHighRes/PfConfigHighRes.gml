@@ -33,7 +33,7 @@ function PfConfigHighRes(_targetWidth, _targetHeight, _fullscreen = window_get_f
         viewPixelPerfect: false,
         
         //Force "fullscreen" on non-desktop platforms
-        fullscreen: ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))? _fullscreen : true,
+        fullscreen: __PF_ON_DESKTOP? _fullscreen : true,
         
         windowWidth:  window_get_width(),
         windowHeight: window_get_height(),

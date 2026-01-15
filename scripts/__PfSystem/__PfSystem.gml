@@ -1,6 +1,9 @@
 // Feather disable all
 
+#macro __PF_ON_DESKTOP  ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))
+
 __PfSystem();
+
 function __PfSystem()
 {
     static _system = undefined;

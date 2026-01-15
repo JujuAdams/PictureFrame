@@ -105,7 +105,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
 {
     with(_configurationStruct)
     {
-        var _fullscreen = ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))? fullscreen : true;
+        var _fullscreen = __PF_ON_DESKTOP? fullscreen : true;
         
         //If we're in fullscreen mode then use the whole display as the max window size
         if (_fullscreen)
