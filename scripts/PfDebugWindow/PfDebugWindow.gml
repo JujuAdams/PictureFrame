@@ -14,15 +14,15 @@ function PfDebugWindow(_configStruct = undefined)
         {
             static _system = __PfSystem();
             
-            var _currentResult = _system.__resultStruct;
-            var _debugResult   = _system.__debugResult;
+            var _currentLayout = _system.__layoutStruct;
+            var _debugLayout   = _system.__debugLayout;
             
-            var _namesArray = struct_get_names(_currentResult);
+            var _namesArray = struct_get_names(_currentLayout);
             var _i = 0;
             repeat(array_length(_namesArray))
             {
                 var _name = _namesArray[_i];
-                _debugResult[$ _name] = _currentResult[$ _name];
+                _debugLayout[$ _name] = _currentLayout[$ _name];
                 ++_i;
             }
             
@@ -69,7 +69,7 @@ function PfDebugWindow(_configStruct = undefined)
     })();
     
     var _debugState  = _system.__debugState;
-    var _debugResult = _system.__debugResult;
+    var _debugLayout = _system.__debugLayout;
     
     dbg_view("PictureFrame", true);
     
@@ -156,8 +156,8 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text($"App surf width  = "); dbg_same_line(); dbg_text(ref_create(_debugState, "appSurfWidth"));
     dbg_text($"App surf height = "); dbg_same_line(); dbg_text(ref_create(_debugState, "appSurfHeight"));
     dbg_text_separator("");
-    dbg_text($"(GUI X     = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfaceGuiX")); dbg_same_line(); dbg_text(")");
-    dbg_text($"(GUI Y     = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfaceGuiY")); dbg_same_line(); dbg_text(")");
+    dbg_text($"(GUI X     = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfaceGuiX")); dbg_same_line(); dbg_text(")");
+    dbg_text($"(GUI Y     = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfaceGuiY")); dbg_same_line(); dbg_text(")");
     dbg_text($"GUI width  = "); dbg_same_line(); dbg_text(ref_create(_debugState,  "guiWidth"));
     dbg_text($"GUI height = "); dbg_same_line(); dbg_text(ref_create(_debugState,  "guiHeight"));
     dbg_text_separator("");
@@ -177,39 +177,39 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_section("Result Struct", false);
     
     dbg_text("");
-    dbg_text($".cameraWidth    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "cameraWidth"));
-    dbg_text($".cameraHeight   = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "cameraHeight"));
-    dbg_text($".cameraOverscan = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "cameraOverscan"));
-    dbg_text($".viewWidth      = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "viewWidth"));
-    dbg_text($".viewHeight     = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "viewHeight"));
-    dbg_text($".viewScale      = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "viewScale"));
-    dbg_text($".viewOverscan   = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "viewOverscan"));
+    dbg_text($".cameraWidth    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "cameraWidth"));
+    dbg_text($".cameraHeight   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "cameraHeight"));
+    dbg_text($".cameraOverscan = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "cameraOverscan"));
+    dbg_text($".viewWidth      = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "viewWidth"));
+    dbg_text($".viewHeight     = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "viewHeight"));
+    dbg_text($".viewScale      = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "viewScale"));
+    dbg_text($".viewOverscan   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "viewOverscan"));
     dbg_text_separator("");
-    dbg_text($".fullscreen   = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "fullscreen"));
-    dbg_text($".windowWidth  = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "windowWidth"));
-    dbg_text($".windowHeight = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "windowHeight"));
-    dbg_text($".guiWidth     = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "guiWidth"));
-    dbg_text($".guiHeight    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "guiHeight"));
+    dbg_text($".fullscreen   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "fullscreen"));
+    dbg_text($".windowWidth  = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "windowWidth"));
+    dbg_text($".windowHeight = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "windowHeight"));
+    dbg_text($".guiWidth     = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "guiWidth"));
+    dbg_text($".guiHeight    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "guiHeight"));
     dbg_text_separator("");
-    dbg_text($".surfacePixelPerfect   = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfacePixelPerfect"));
-    dbg_text($".surfacePostDrawScale  = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfacePostDrawScale"));
-    dbg_text($".surfacePostDrawX      = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfacePostDrawX"));
-    dbg_text($".surfacePostDrawY      = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfacePostDrawY"));
-    dbg_text($".surfacePostDrawWidth  = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfacePostDrawWidth"));
-    dbg_text($".surfacePostDrawHeight = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfacePostDrawHeight"));
-    dbg_text($".surfaceGuiX           = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfaceGuiX"));
-    dbg_text($".surfaceGuiY           = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfaceGuiY"));
-    dbg_text($".surfaceGuiWidth       = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfaceGuiWidth"));
-    dbg_text($".surfaceGuiHeight      = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "surfaceGuiHeight"));
+    dbg_text($".surfacePixelPerfect   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfacePixelPerfect"));
+    dbg_text($".surfacePostDrawScale  = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfacePostDrawScale"));
+    dbg_text($".surfacePostDrawX      = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfacePostDrawX"));
+    dbg_text($".surfacePostDrawY      = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfacePostDrawY"));
+    dbg_text($".surfacePostDrawWidth  = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfacePostDrawWidth"));
+    dbg_text($".surfacePostDrawHeight = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfacePostDrawHeight"));
+    dbg_text($".surfaceGuiX           = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfaceGuiX"));
+    dbg_text($".surfaceGuiY           = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfaceGuiY"));
+    dbg_text($".surfaceGuiWidth       = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfaceGuiWidth"));
+    dbg_text($".surfaceGuiHeight      = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfaceGuiHeight"));
     dbg_text_separator("");
-    dbg_text($".marginsVisible = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginsVisible"));
-    dbg_text($".marginGuiX1    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiX1"));
-    dbg_text($".marginGuiY1    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiY1"));
-    dbg_text($".marginGuiX2    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiX2"));
-    dbg_text($".marginGuiY2    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiY2"));
-    dbg_text($".marginGuiX3    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiX3"));
-    dbg_text($".marginGuiY3    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiY3"));
-    dbg_text($".marginGuiX4    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiX4"));
-    dbg_text($".marginGuiY4    = "); dbg_same_line(); dbg_text(ref_create(_debugResult, "marginGuiY4"));
+    dbg_text($".marginsVisible = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginsVisible"));
+    dbg_text($".marginWestX1    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginWestX1"));
+    dbg_text($".marginNorthY1    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginNorthY1"));
+    dbg_text($".marginWestX2    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginWestX2"));
+    dbg_text($".marginNorthY2    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginNorthY2"));
+    dbg_text($".marginEastX1    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginEastX1"));
+    dbg_text($".marginSouthY1    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginSouthY1"));
+    dbg_text($".marginEastX2    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginEastX2"));
+    dbg_text($".marginSouthY2    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginSouthY2"));
     dbg_text("");
 }

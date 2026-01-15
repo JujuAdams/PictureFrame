@@ -9,7 +9,7 @@
 /// camera scroll even when drawing pixel perfect graphics without subpixelling.
 /// 
 /// This function can also be used to draw surfaces other than the application surface. Surfaces
-/// drawn by the function will be stretched to cover the region defined by the result struct. This
+/// drawn by the function will be stretched to cover the region defined by the layout struct. This
 /// can be useful when drawing overlays, e.g. pixel perfect UI, post-processing effects and so on.
 /// 
 /// @param [texFilter=false]
@@ -21,7 +21,7 @@
 function PfPostDrawAppSurface(_filter = false, _blendEnable = false, _surface = application_surface, _fracCameraX = 0, _fracCameraY = 0)
 {
     static _system = __PfSystem();
-    with(_system.__resultStruct)
+    with(_system.__layoutStruct)
     {
         var _oldFilter = gpu_get_tex_filter();
         var _oldBlendEnable = gpu_get_blendenable();

@@ -1,17 +1,17 @@
 // Feather disable all
 
-/// Calculates and returns a PictureFrame "result struct" based on an input configuration struct
-/// (please see `PfConfigGeneral()` for more information). The result struct returned by
+/// Calculates and returns a PictureFrame "layout struct" based on an input configuration struct
+/// (please see `PfConfigGeneral()` for more information). The layout struct returned by
 /// `PfCalculate()` contains many variables that define the size and position of various parts of
 /// the render pipeline.
 /// 
 /// This function is provided for people who don't want to use `PfApply()` and instead want to
 /// set up their render pipeline manually.
 /// 
-/// The `resizeWindow` parameter controls whether results should be calculated as though the
-/// window will be resized. This value is only relevant when the game is not fullscreened and is
-/// therefore only relevant on desktop platforms. If this parameter is set to `false` (which it is
-/// by default) then this function will ignore the `.trimBlackBars` option in the input
+/// The `resizeWindow` parameter controls whether the layout struct should be calculated as though
+/// the window will be resized. This value is only relevant when the game is not fullscreened and
+/// is therefore only relevant on desktop platforms. If this parameter is set to `false` (which it
+/// is by default) then this function will ignore the `.trimBlackBars` option in the input
 /// configuration struct.
 /// 
 /// N.B. Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is
@@ -22,7 +22,7 @@
 /// 
 /// 
 /// 
-/// Variables contained in the returned result struct are as follows:
+/// Variables contained in the returned layout struct are as follows:
 /// 
 /// .cameraWisth
 /// .cameraHeight
@@ -93,15 +93,16 @@
 ///     Whether any of the margins are visible. You should check this variable before drawing the
 ///     margins (using the variables below).
 /// 
-/// .marginGuiX1
-/// .marginGuiY1
-/// .marginGuiX2
-/// .marginGuiY2
-/// .marginGuiX3
-/// .marginGuiY3
-/// .marginGuiX4
-/// .marginGuiY4
-///     Coordinates for the margins around the application surface in GUI-space.
+/// .marginWestX1
+/// .marginWestX2
+/// .marginEastX1
+/// .marginEastX2
+/// .marginNorthY1
+/// .marginNorthY2
+/// .marginSouthY1
+/// .marginSouthY2
+///     Coordinates for the margins around the application surface. The coordinates are in
+///     GUI-space.
 
 function PfCalculate(_configurationStruct, _resizeWindow = false)
 {
@@ -366,17 +367,15 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             
             marginsVisible:  ((_surfacePostDrawX > 0) || (_surfacePostDrawY > 0) || (_surfacePostDrawWidth < _outWindowWidth) || (_surfacePostDrawHeight < _outWindowHeight)),
             
-            marginGuiX1: _windowToGuiScaleX*(-_outGuiX),
-            marginGuiY1: _windowToGuiScaleY*(-_outGuiY),
+            marginWestX1: _windowToGuiScaleX*(-_outGuiX),                //Left side of the window
+            marginWestX2: _surfaceGuiX,                                  //Left side of the application surface
+            marginEastX1: _surfaceGuiX + _surfaceGuiWidth,               //Right side of the application surface
+            marginEastX2: _windowToGuiScaleX*(_windowWidth  - _outGuiX), //Right side of the window
             
-            marginGuiX2: _surfaceGuiX,
-            marginGuiY2: _surfaceGuiY,
-            
-            marginGuiX3: _surfaceGuiX + _surfaceGuiWidth,
-            marginGuiY3: _surfaceGuiY + _surfaceGuiHeight,
-            
-            marginGuiX4: _windowToGuiScaleX*(_windowWidth  - _outGuiX),
-            marginGuiY4: _windowToGuiScaleY*(_windowHeight - _outGuiY),
+            marginNorthY1: _windowToGuiScaleY*(-_outGuiY),                //Top of the window
+            marginNorthY2: _surfaceGuiY,                                  //Top of the application surface
+            marginSouthY1: _surfaceGuiY + _surfaceGuiHeight,              //Bottom of the application surface
+            marginSouthY2: _windowToGuiScaleY*(_windowHeight - _outGuiY), //Bottom of the window
         }
     }
 }

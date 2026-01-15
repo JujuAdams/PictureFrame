@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"PfGetAppliedResultStruct",
+  "%Name":"PfGetAppliedLayoutStruct",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PfGetAppliedResultStruct",
+  "name":"PfGetAppliedLayoutStruct",
   "parent":{
     "name":"PictureFrame",
     "path":"folders/PictureFrame.yy",
