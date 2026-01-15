@@ -55,6 +55,10 @@
 ///     The dimensions of the window. If the `.fullscreen` variable (see above) is `true` then
 ///     these values will be the same as the display's width and height.
 /// 
+/// .guiX
+/// .guiY
+///     The coordinates of the top-left corner of the GUI layer in windowspace.
+/// 
 /// .guiWidth
 /// .guiHeight
 ///     The width and height of the GUI layer.
@@ -223,7 +227,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         
         // --- GUI ---
         
-        if (guiStretchOverWindow)
+        if (guiWindowStretch)
         {
             var _outGuiX = 0;
             var _outGuiY = 0;
@@ -240,11 +244,43 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             var _guiRegionHeight = _surfacePostDrawHeight;
         }
         
-        if (guiLockWidth)
+        if (guiMode == 0)
         {
-            if (guiLockHeight)
+            //Use the 1:1 region size
+            var _outGuiWidth  = _guiRegionWidth;
+            var _outGuiHeight = _guiRegionHeight;
+        }
+        else if (guiMode == 1)
+        {
+            //Use the camera size
+            var _outGuiWidth  = _outCameraWidth;
+            var _outGuiHeight = _outCameraHeight;
+        }
+        else if (guiMode == 2)
+        {
+            //Use the application surface / view size
+            var _outGuiWidth  = _outViewWidth;
+            var _outGuiHeight = _outViewHeight;
+        }
+        else if (guiMode == 3)
+        {
+            //Use the target size (which will usually stretch things)
+            var _outGuiWidth  = guiTargetWidth;
+            var _outGuiHeight = guiTargetHeight;
+        }
+        else if ((guiMode == 4) || (guiMode == 5) || (guiMode == 6))
+        {
+            var _stretchWidth = (guiMode == 4);
+            
+            if (guiMode == 6)
             {
-                var _outGuiWidth  = guiTargetWidth;
+                _stretchWidth = (abs(ln(_guiRegionWidth / guiTargetWidth)) > abs(ln(_guiRegionHeight / guiTargetHeight)));
+            }
+            
+            if (_stretchWidth)
+            {
+                //GUI height is fixed and width is flexible. Scale the GUI width to be in proportion to the GUI height
+                var _outGuiWidth  = round((guiTargetHeight/_guiRegionHeight)*_guiRegionWidth);
                 var _outGuiHeight = guiTargetHeight;
             }
             else
@@ -256,19 +292,12 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         }
         else
         {
-            if (guiLockHeight)
-            {
-                //GUI height is fixed and width is flexible. Scale the GUI width to be in proportion to the GUI height
-                var _outGuiWidth  = round((guiTargetHeight/_guiRegionHeight)*_guiRegionWidth);
-                var _outGuiHeight = guiTargetHeight;
-            }
-            else
-            {
-                //We don't have target GUI dimensions, use the region size for the GUI
-                var _outGuiWidth  = _guiRegionWidth;
-                var _outGuiHeight = _guiRegionHeight;
-            }
+            __PfError($".guiMode <{guiMode}> not supported");
         }
+        
+        //Apply scaling
+        _outGuiWidth  /= guiScale;
+        _outGuiHeight /= guiScale;
         
         //Convert window coordinates to GUI coordinates
         var _windowToGuiScaleX = _outGuiWidth/_guiRegionWidth;

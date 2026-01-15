@@ -1,10 +1,11 @@
 // Feather disable all
 
 /// Convenience function that returns a configuration struct set up for pixel-perfect rendering.
-/// You can edit values in the returned struct if you'd like and it will obey all the same rules
-/// as a configuration struct returned by PfConfigGeneral().
+/// This function will set the size of the GUI layer to be the same as the size of the camera
+/// (`.guiMode` is set to `1`). You can further edit values in the returned struct if you'd like
+/// and it will obey all the samerules as a configuration struct returned by `PfConfigGeneral()`.
 /// 
-/// N.B. Because PfConfigPixelArt() returns a fresh struct every time it is called, you should
+/// N.B. Because `PfConfigPixelArt()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
 /// @param [targetWidth]
@@ -12,8 +13,8 @@
 /// @param [fullscreen]
 /// @param [minWidth]
 /// @param [minHeight]
-/// @param [maxWidth=Min]
-/// @param [maxHeight=Min]
+/// @param [maxWidth=min]
+/// @param [maxHeight=min]
 
 function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _minWidth = undefined, _minHeight = undefined, _maxWidth = undefined, _maxHeight = undefined)
 {
@@ -36,12 +37,11 @@ function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_
         windowWidth:  window_get_width(),
         windowHeight: window_get_height(),
         
-        guiStretchOverWindow: false,
-        
-        guiTargetWidth:  _targetWidth,
-        guiTargetHeight: _targetHeight,
-        guiLockWidth:    (_targetWidth <  _targetHeight),
-        guiLockHeight:   (_targetWidth >= _targetHeight),
+        guiWindowStretch: false,
+        guiMode:          1,
+        guiTargetWidth:   _targetWidth,
+        guiTargetHeight:  _targetHeight,
+        guiScale:         1,
         
         surfacePixelPerfect: true,
         windowOverscanScale: 1,

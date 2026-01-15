@@ -114,11 +114,11 @@ function PfDebugWindow(_configStruct = undefined)
         dbg_text_input(ref_create(_debugConfig, "windowWidth"          ), ".windowWidth",         "i");
         dbg_text_input(ref_create(_debugConfig, "windowHeight"         ), ".windowHeight",        "i");
         dbg_text_separator("");
-        dbg_checkbox(  ref_create(_debugConfig, "guiStretchOverWindow" ), ".guiStretchOverWindow"    );
-        dbg_text_input(ref_create(_debugConfig, "guiTargetWidth"       ), ".guiTargetWidth",      "f");
-        dbg_text_input(ref_create(_debugConfig, "guiTargetHeight"      ), ".guiTargetHeight",     "f");
-        dbg_checkbox(  ref_create(_debugConfig, "guiLockWidth"         ), ".guiLockWidth"            );
-        dbg_checkbox(  ref_create(_debugConfig, "guiLockHeight"        ), ".guiLockHeight"           );
+        dbg_checkbox(  ref_create(_debugConfig, "guiWindowStretch"     ), ".guiWindowStretch"        );
+        dbg_text_input(ref_create(_debugConfig, "guiMode"              ), ".guiMode [0 -> 6]",    "i");
+        dbg_text_input(ref_create(_debugConfig, "guiTargetWidth"       ), ".guiTargetWidth",      "i");
+        dbg_text_input(ref_create(_debugConfig, "guiTargetHeight"      ), ".guiTargetHeight",     "i");
+        dbg_text_input(ref_create(_debugConfig, "guiScale"             ), ".guiScale",            "f");
         dbg_text_separator("");
         dbg_checkbox(  ref_create(_debugConfig, "surfacePixelPerfect"  ), ".surfacePixelPerfect"     );
         dbg_text_input(ref_create(_debugConfig, "windowOverscanScale"  ), ".windowOverscanScale", "f");

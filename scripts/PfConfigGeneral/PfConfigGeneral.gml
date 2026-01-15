@@ -1,20 +1,21 @@
 // Feather disable all
 
 /// Returns a template PictureFrame "configuration struct". This configuration struct can then be
-/// passed into PfCalculate() to generate various positions and sizes for each phase in GameMaker's
-/// rendering pipeline. The configuration struct is rather complex and if you're looking for easier
-/// "quick start" behaviour than you may want to consider calling either PfConfigPixelArt() or
-/// PfConfigHighRes() instead. They return a similar struct to PfConfigGeneral() but pre-configured
-/// for common use cases.
+/// passed into `PfCalculate()` to generate various positions and sizes for each phase in
+/// GameMaker's rendering pipeline. The configuration struct is rather complex and if you're
+/// looking for easier "quick start" behaviour than you may want to consider calling either
+/// `PfConfigPixelArt()` or `PfConfigHighRes()` instead. They return a similar struct to
+/// `PfConfigGeneral()` but pre-configured for common use cases.
 /// 
 /// You should edit the returned configuration struct to reflect the needs of your game.
 /// 
-/// N.B. Because PfConfigGeneral() returns a fresh struct every time it is called, you should
+/// N.B. Because a `PfConfigGeneral()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
 /// 
 /// 
-/// Variables that the configuration struct hold are as follows:
+/// The following variables will be in the returned configuration struct. The values after the
+/// equals signs are the default values set for the struct.
 /// 
 /// .cameraTargetWidth
 /// .cameraTargetHeight
@@ -62,16 +63,30 @@
 ///     The size of the game window. This value is only relevant when the game is not fullscreened
 ///     and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
 /// 
-/// .guiStretchOverWindow
-///     Whether to stretch the GUI over the entire window. This is <false> by default meaning that
+/// .guiWindowStretch
+///     Whether to stretch the GUI over the entire window. This is `false` by default meaning that
 ///     the GUI layer will be stretched over the application surface portion of the window.
+/// 
+/// .guiMode
+///     Selects the logic used to determine the GUI layer's width and height. The default value is
+///     `1` which will cause the GUI layer size to be the same as the camera. This variable must be
+///     set to one of the following values:
+///       0 = GUI size is the unadjusted windowspace size
+///       1 = GUI size is the same as the camera
+///       2 = GUI size is the same as the application surface / view
+///       3 = GUI size is equal to the target size
+///       4 = GUI size stretches the target width and keeps the target height consistent
+///       5 = GUI size stretches the target height and keeps the target width consistent
+///       6 = GUI size decides which target axis to stretch
 /// 
 /// .guiTargetWidth
 /// .guiTargetHeight
-///     The target width or height for the GUI layer dimensions. To allow `PfCalculate()` to adapt
-///     to different aspect ratios, set one of these variables to <undefined>. In this situation,
-///     PictureFrame will adjust the <undefined> dimension to stretch the GUI layer over the window
-///     whilst keeping the aspect ratio correct between the GUI width and height.
+///     Target GUI dimensions. These will only be used for certain GUI modes - see above.
+/// 
+/// .guiScale
+///     Scaling factor to apply to graphics drawn on the GUI layer. To apply no scaling, use a
+///     value of `1`. Increasing this value will, perhaps counter-intuitively, reduce the GUI
+///     layer's width and height.
 /// 
 /// .surfacePixelPerfect
 ///     Determines whether the scaling factor applied to the application surface when drawn to the
@@ -96,7 +111,11 @@ function PfConfigGeneral()
         windowHeight: window_get_height(),
         windowOverscanScale: 1,
         
-        guiStretchOverWindow: false,
+        guiWindowStretch: false,
+        guiMode:          3,
+        guiTargetWidth:   display_get_gui_width(),
+        guiTargetHeight:  display_get_gui_height(),
+        guiScale:         1,
     }
     
     with(_configStruct)
@@ -133,11 +152,6 @@ function PfConfigGeneral()
             
             surfacePixelPerfect = false;
         }
-        
-        guiTargetWidth  = cameraTargetWidth;
-        guiTargetHeight = cameraTargetHeight;
-        guiLockWidth    = (cameraTargetWidth <  cameraTargetHeight);
-        guiLockHeight   = (cameraTargetWidth >= cameraTargetHeight);
     }
     
     return _configStruct;
