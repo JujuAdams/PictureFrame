@@ -76,8 +76,6 @@ function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
     var _resultStruct = PfCalculate(_configStruct, _resizeWindow);
     _system.__resultStruct = _resultStruct;
     
-    __PfTrace(json_stringify(_resultStruct, true));
-    
     with(_resultStruct)
     {
         if (not _ignoreCamera)
