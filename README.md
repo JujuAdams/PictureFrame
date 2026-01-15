@@ -18,7 +18,7 @@ PictureFrame will calculate the following output values for you:
 - Application surface draw position and draw scale
 - Size of black bar margins around the application surface when the application surface is small than the window
 
-You can then apply these values yourself, or call `PfApply()` to have PictureFrame take care of it for you. Alternatively, you can call `PfCalculate()` and manage the pipeline yourself using the output.
+You can call `PfCalculate()` to read these values so you can manage the pipeline yourself ... or you can call `PfApply()` to have PictureFrame take care of it all for you.
 
 PictureFrame uses the following input parameters:
 - Camera minimum width/height (the "safe area")
