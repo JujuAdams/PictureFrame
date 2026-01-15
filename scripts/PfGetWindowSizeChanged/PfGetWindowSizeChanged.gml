@@ -9,7 +9,7 @@
 /// 
 /// Example:
 /// 
-///   if (PfWindowSizeChanged())
+///   if (PfGetWindowSizeChanged())
 ///   {
 ///       // Update our configuration to reflect the new window state
 ///       PfConfigSetWindowVars();
@@ -19,7 +19,7 @@
 ///       PfApply(configStruct, false);
 ///   }
 
-function PfWindowSizeChanged()
+function PfGetWindowSizeChanged()
 {
     static _system = __PfSystem();
     

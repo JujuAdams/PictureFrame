@@ -28,7 +28,7 @@ cameraY = lerp(cameraY, cameraTargetY, 0.1);
 camera_set_view_pos(_camera, cameraX, cameraY);
 
 //Adapt our pipeline when the window size changes
-if (PfWindowSizeChanged())
+if (PfGetWindowSizeChanged())
 {
     //Update our configuration to reflect the new window state
     PfConfigSetWindowVars(configStruct);

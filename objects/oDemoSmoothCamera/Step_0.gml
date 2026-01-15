@@ -28,7 +28,7 @@ cameraY = lerp(cameraY, cameraTargetY, 0.1);
 camera_set_view_pos(_camera, floor(cameraX), floor(cameraY));
 
 //Adapt our pipeline when the window size changes
-if (PfWindowSizeChanged())
+if (PfGetWindowSizeChanged())
 {
     //Update our configuration with the current window state
     configStruct.fullscreen   = window_get_fullscreen();
