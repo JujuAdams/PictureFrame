@@ -1,7 +1,7 @@
 // Feather disable all
 
 //Create a new config using a template config
-configStruct = PfConfigPixelArt(640, 160, 640, 320);
+configStruct = PfConfigPixelArt(640, 180, undefined, 640, 160, 640, 320);
 
 //We'll be taking advantage of the overscan feature for smooth camera movement
 configStruct.cameraOverscan = 1;
@@ -20,3 +20,5 @@ cameraX = camera_get_view_x(_camera);
 cameraY = camera_get_view_y(_camera);
 cameraTargetX = cameraX;
 cameraTargetY = cameraY;
+
+PfDebugWindow(configStruct);
