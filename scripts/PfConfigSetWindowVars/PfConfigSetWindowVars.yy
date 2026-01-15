@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PfConfigSetWindowVars",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PfConfigSetWindowVars",
+  "parent":{
+    "name":"PictureFrame",
+    "path":"folders/PictureFrame.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
