@@ -1,6 +1,15 @@
 // Feather disable all
 
-/// Creates a debug view using GameMaker's native `dbg_*` functions.
+/// Creates a debug view for PictureFrame using GameMaker's native `dbg_*` functions. You should
+/// call this function once to create the view. If you want to change which configuration struct is
+/// being targeted then call the function using the new struct reference.
+/// 
+/// If you provide a configuration struct when calling `PfDebugWindow()` then you can edit that
+/// struct in the debug view. You can execute `PfApply()` struct to the render state by clicking
+/// the appropriate button.
+/// 
+/// Additionally, the debug view shows the current window state as reported by GameMaker and the
+/// layout struct that was generated the last time `PfApply()` was called.
 /// 
 /// @param [configStruct=none]
 
@@ -14,16 +23,33 @@ function PfDebugWindow(_configStruct = undefined)
         {
             static _system = __PfSystem();
             
+            //TODO - Don't think we need this copying behaviour
+            
             var _currentLayout = _system.__layoutStruct;
             var _debugLayout   = _system.__debugLayout;
             
-            var _namesArray = struct_get_names(_currentLayout);
-            var _i = 0;
-            repeat(array_length(_namesArray))
+            if (_currentLayout == undefined)
             {
-                var _name = _namesArray[_i];
-                _debugLayout[$ _name] = _currentLayout[$ _name];
-                ++_i;
+                //Clear out the debug layout struct
+                var _namesArray = struct_get_names(_debugLayout);
+                var _i = 0;
+                repeat(array_length(_namesArray))
+                {
+                    struct_remove(_debugLayout, _namesArray[_i]);
+                    ++_i;
+                }
+            }
+            else
+            {
+                //Copy content from the current layout to the debug struct
+                var _namesArray = struct_get_names(_currentLayout);
+                var _i = 0;
+                repeat(array_length(_namesArray))
+                {
+                    var _name = _namesArray[_i];
+                    _debugLayout[$ _name] = _currentLayout[$ _name];
+                    ++_i;
+                }
             }
             
             with(_system.__debugState)
@@ -174,7 +200,7 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text($"Display DPI       = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayDPI"));
     
     dbg_text("");
-    dbg_section("Result Struct", false);
+    dbg_section("Layout Struct", false);
     
     dbg_text("");
     dbg_text($".cameraWidth    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "cameraWidth"));

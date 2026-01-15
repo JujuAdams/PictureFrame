@@ -45,7 +45,7 @@
     {"id":{"name":"PfDebugWindow","path":"scripts/PfDebugWindow/PfDebugWindow.yy",},},
     {"id":{"name":"PfGetAppliedConfigStruct","path":"scripts/PfGetAppliedConfigStruct/PfGetAppliedConfigStruct.yy",},},
     {"id":{"name":"PfGetAppliedLayoutStruct","path":"scripts/PfGetAppliedLayoutStruct/PfGetAppliedLayoutStruct.yy",},},
-    {"id":{"name":"PfGetWindowSizeChanged","path":"scripts/PfGetWindowSizeChanged/PfGetWindowSizeChanged.yy",},},
+    {"id":{"name":"PfGetWindowStateChanged","path":"scripts/PfGetWindowStateChanged/PfGetWindowStateChanged.yy",},},
     {"id":{"name":"PfGuiToRoom","path":"scripts/PfGuiToRoom/PfGuiToRoom.yy",},},
     {"id":{"name":"PfMouseX","path":"scripts/PfMouseX/PfMouseX.yy",},},
     {"id":{"name":"PfMouseY","path":"scripts/PfMouseY/PfMouseY.yy",},},
