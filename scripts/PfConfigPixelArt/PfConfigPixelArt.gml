@@ -13,10 +13,10 @@
 /// @param [fullscreen]
 /// @param [minWidth]
 /// @param [minHeight]
-/// @param [maxWidth=min]
-/// @param [maxHeight=min]
+/// @param [maxWidth]
+/// @param [maxHeight]
 
-function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _minWidth = undefined, _minHeight = undefined, _maxWidth = undefined, _maxHeight = undefined)
+function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _minWidth = -1, _minHeight = -1, _maxWidth = -1, _maxHeight = -1)
 {
     return {
         cameraTargetWidth:  _targetWidth,

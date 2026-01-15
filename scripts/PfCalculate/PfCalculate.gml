@@ -134,10 +134,10 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         
         // --- Camera ---
         
-        var _cameraMinWidth  = cameraMinWidth  ?? cameraTargetWidth;
-        var _cameraMinHeight = cameraMinHeight ?? cameraTargetHeight;
-        var _cameraMaxWidth  = cameraMaxWidth  ?? cameraTargetWidth;
-        var _cameraMaxHeight = cameraMaxHeight ?? cameraTargetHeight;
+        var _cameraMinWidth  = (cameraMinWidth  > 0)? cameraMinWidth  : cameraTargetWidth;
+        var _cameraMinHeight = (cameraMinHeight > 0)? cameraMinHeight : cameraTargetHeight;
+        var _cameraMaxWidth  = (cameraMaxWidth  > 0)? cameraMaxWidth  : cameraTargetWidth;
+        var _cameraMaxHeight = (cameraMaxHeight > 0)? cameraMaxHeight : cameraTargetHeight;
         
         //Figure out the scaling factor that fits us inside the target bounds
         //If we've using a pixel-perfect view then floor the scale to ensure that the view is a whole multiple of the target width/height
