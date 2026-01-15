@@ -10,9 +10,9 @@
 /// 
 /// The `resizeWindow` parameter controls whether results should be calculated as though the
 /// window will be resized. This value is only relevant when the game is not fullscreened and is
-/// therefore only relevant on desktop platforms (Windows, MacOS, Linux). If this parameter is set
-/// to `false` (which it is by default) then this function will ignore the `.trimBlackBars` option
-/// in the input configuration struct.
+/// therefore only relevant on desktop platforms. If this parameter is set to `false` (which it is
+/// by default) then this function will ignore the `.trimBlackBars` option in the input
+/// configuration struct.
 /// 
 /// N.B. Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is
 ///      called, you should avoid calling this function more often than is necessary.
