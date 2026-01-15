@@ -11,13 +11,12 @@
 /// 
 ///   if (PfWindowSizeChanged())
 ///   {
-///       //Update our configuration
-///       configStruct.fullscreen   = window_get_fullscreen();
-///       configStruct.windowWidth  = window_get_width();
-///       configStruct.windowHeight = window_get_height();
+///       // Update our configuration to reflect the new window state
+///       PfConfigSetWindowVars();
 ///       
-///       //Reapply to adapt to the new window size
-///       PfApply(configStruct);
+///       // Reapply the configuration struct to adapt to the new window size. We don't want to
+///       // resize the window otherwise we'll get nasty glitching
+///       PfApply(configStruct, false);
 ///   }
 
 function PfWindowSizeChanged()

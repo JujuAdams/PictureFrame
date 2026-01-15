@@ -1,7 +1,6 @@
 // Feather disable all
 
-/// Updates window variables in the configuration struct. You should call this before `PfApply()`
-/// unless you have specific state that you'd like to set.
+/// Updates window variables in the configuration struct.
 
 function PfConfigSetWindowVars(_configStruct)
 {

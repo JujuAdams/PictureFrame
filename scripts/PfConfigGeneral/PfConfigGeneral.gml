@@ -76,13 +76,13 @@
 ///     Selects the logic used to determine the GUI layer's width and height. The default value is
 ///     `1` which will cause the GUI layer size to be the same as the camera. This variable must be
 ///     set to one of the following values:
-///       0 = GUI size is the unadjusted windowspace size
-///       1 = GUI size is the same as the camera
-///       2 = GUI size is the same as the application surface / view
-///       3 = GUI size is equal to the target size
-///       4 = GUI size stretches the target width and keeps the target height consistent
-///       5 = GUI size stretches the target height and keeps the target width consistent
-///       6 = GUI size decides which target axis to stretch
+///         `0` = GUI size is the unadjusted windowspace size
+///         `1` = GUI size is the same as the camera
+///         `2` = GUI size is the same as the application surface / view
+///         `3` = GUI size is equal to the target size
+///         `4` = GUI size stretches the target width and keeps the target height consistent
+///         `5` = GUI size stretches the target height and keeps the target width consistent
+///         `6` = GUI size decides which target axis to stretch
 /// 
 /// .guiTargetWidth
 /// .guiTargetHeight

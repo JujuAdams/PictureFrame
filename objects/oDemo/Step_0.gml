@@ -30,9 +30,10 @@ camera_set_view_pos(_camera, cameraX, cameraY);
 //Adapt our pipeline when the window size changes
 if (PfWindowSizeChanged())
 {
-    //Update our configuration with the current window state
+    //Update our configuration to reflect the new window state
     PfConfigSetWindowVars(configStruct);
     
-    //Reapply to adapt to the new window size
+    //Reapply the configuration struct to adapt to the new window size. We don't want to
+    //resize the window otherwise we'll get nasty glitching
     PfApply(configStruct);
 }

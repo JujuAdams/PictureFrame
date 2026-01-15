@@ -19,7 +19,7 @@
 /// 
 /// 
 /// 
-/// PfApply() calls the following functions to set native GameMaker values:
+/// `PfApply()` calls the following functions to set native GameMaker values:
 /// 
 /// - Camera position and size. `PfApply()` presumes that you are using GameMaker's native view
 ///   system and that you're using view[0] for your game view. If `PfApply()` causes a camera's
