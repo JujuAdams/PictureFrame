@@ -1,6 +1,9 @@
 // Feather disable all
 
-/// Updates window variables in the configuration struct. Variables adjusted are:
+/// Updates window variables in the configuration struct. This is helpful to call after detecting
+/// a window state change with `PfGetWindowStateChanged()` to refresh a config struct.
+/// 
+/// Variables adjusted are:
 /// 
 /// .fullscreen
 ///     The fullscreen state for the game.

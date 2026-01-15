@@ -1,11 +1,14 @@
 // Feather disable all
 
-/// Returns a template PictureFrame "configuration struct". This configuration struct can then be
-/// passed into `PfCalculate()` to generate various positions and sizes for each phase in
-/// GameMaker's rendering pipeline. The configuration struct is rather complex and if you're
-/// looking for easier "quick start" behaviour than you may want to consider calling either
-/// `PfConfigPixelArt()` or `PfConfigHighRes()` instead. They return a similar struct to
-/// `PfConfigGeneral()` but pre-configured for common use cases.
+/// Returns a template PictureFrame "configuration struct". The config struct is a set of
+/// constraints that are fed into an algorithm that determines the best parameters for rendering.
+/// A config struct can be passed into `PfApply()` to automatically set up a rendering pipeline
+/// or it can be passed into `PfCalculate()` to generate data that you can apply manually.
+/// 
+/// Config structs are rather complex and if you're looking for easier "quick start" behaviour
+/// than you may want to consider calling either `PfConfigPixelArt()` or `PfConfigHighRes()` 
+/// instead. They each return a config struct pre-configured for a particular common use case
+/// (which can be edited in the exact same way as a config struct returned by `PfConfigGeneral()`).
 /// 
 /// You should edit the returned configuration struct to reflect the needs of your game.
 /// 
@@ -14,14 +17,13 @@
 /// 
 /// 
 /// 
-/// The following variables will be in the returned configuration struct. The values after the
-/// equals signs are the default values set for the struct.
+/// The following variables will be in the returned configuration struct:
 /// 
 /// .cameraTargetWidth
 /// .cameraTargetHeight
 ///     The target "ideal" camera width and height. PictureFrame will attempt to set the camera to
-///     this width and height, adjusting the rendering pipeline within the constraints set by the
-///     configuration struct.
+///     this width and height, adjusting the rendering pipeline within the various constraints
+///     defined in the struct.
 /// 
 /// .cameraMinWidth
 /// .cameraMinHeight
