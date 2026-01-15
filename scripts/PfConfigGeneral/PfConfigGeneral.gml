@@ -63,6 +63,11 @@
 ///     The size of the game window. This value is only relevant when the game is not fullscreened
 ///     and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
 /// 
+/// .trimBlackBars
+///     Whether the window should be reduced in size to remove black bars if possible. This option
+///     will be ignored if the `resizeWindow` parameter is set to `false` for `PfApply()` or
+///     `PfCalculate()`.
+/// 
 /// .guiWindowStretch
 ///     Whether to stretch the GUI over the entire window. This is `false` by default meaning that
 ///     the GUI layer will be stretched over the application surface portion of the window.
@@ -107,8 +112,9 @@ function PfConfigGeneral()
         //Force "fullscreen" on non-desktop platforms
         fullscreen: __PF_ON_DESKTOP? window_get_fullscreen() : true,
         
-        windowWidth:  window_get_width(),
-        windowHeight: window_get_height(),
+        trimBlackBars:       true,
+        windowWidth:         window_get_width(),
+        windowHeight:        window_get_height(),
         windowOverscanScale: 1,
         
         guiWindowStretch: false,

@@ -35,8 +35,9 @@ function PfConfigHighRes(_targetWidth, _targetHeight, _fullscreen = window_get_f
         //Force "fullscreen" on non-desktop platforms
         fullscreen: __PF_ON_DESKTOP? _fullscreen : true,
         
-        windowWidth:  window_get_width(),
-        windowHeight: window_get_height(),
+        trimBlackBars: true,
+        windowWidth:   window_get_width(),
+        windowHeight:  window_get_height(),
         
         guiWindowStretch: false,
         guiMode:          6,

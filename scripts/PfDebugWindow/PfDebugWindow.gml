@@ -117,6 +117,7 @@ function PfDebugWindow(_configStruct = undefined)
         dbg_checkbox(  ref_create(_configStruct, "fullscreen"           ), ".fullscreen"              );
         dbg_text_input(ref_create(_configStruct, "windowWidth"          ), ".windowWidth",         "i");
         dbg_text_input(ref_create(_configStruct, "windowHeight"         ), ".windowHeight",        "i");
+        dbg_checkbox(  ref_create(_configStruct, "trimBlackBars"        ), ".trimBlackBars"           );
         dbg_text_separator("");
         dbg_checkbox(  ref_create(_configStruct, "guiWindowStretch"     ), ".guiWindowStretch"        );
         dbg_text_input(ref_create(_configStruct, "guiMode"              ), ".guiMode [0 -> 6]",    "i");

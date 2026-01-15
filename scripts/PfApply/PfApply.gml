@@ -4,10 +4,9 @@
 /// ensure that the values in the configuration struct accurately affect the game. This function
 /// returns the result struct that is generated internally.
 /// 
-/// The "resizeWindow" argument controls whether PictureFrame should resize the game window when
-/// calling this function. This guarantees that no black bars will appear when the game is
-/// windowed. This value is only relevant when the game is not fullscreened and is therefore only
-/// relevant on desktop platforms (Windows, MacOS, Linux).
+/// The optional `resizeWindow` parameter controls whether PictureFrame should resize the game
+/// window when calling this function. This parameter defaults to `false`. This value is only
+/// relevant when the game is not fullscreened and is therefore only relevant on desktop platforms.
 /// 
 /// N.B. Automatic drawing of the application surface will always be disabled by `PfApply()` by
 ///      calling `application_surface_draw_enable(false)`. This means that without further action,
@@ -61,10 +60,23 @@
 function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
 {
     static _system = __PfSystem();
-    if (not _system.__noAppSurfDrawDisable) application_surface_draw_enable(false);
+    
+    //Force a resize if we're swapping from fullscreen to window
+    if (__PF_ON_DESKTOP && (not _configStruct.fullscreen) && window_get_fullscreen())
+    {
+        _resizeWindow = true;
+    }
+    
+    //Disable automatic application surface drawing
+    if (not _system.__noAppSurfDrawDisable)
+    {
+        application_surface_draw_enable(false);
+    }
     
     var _resultStruct = PfCalculate(_configStruct, _resizeWindow);
     _system.__resultStruct = _resultStruct;
+    
+    __PfTrace(json_stringify(_resultStruct, true));
     
     with(_resultStruct)
     {
@@ -114,14 +126,16 @@ function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
         {
             if (fullscreen)
             {
-                if (not window_get_fullscreen()) window_set_fullscreen(true);
+                if (not window_get_fullscreen())
+                {
+                    window_set_fullscreen(true);
+                }
             }
             else
             {
                 if (window_get_fullscreen())
                 {
                     window_set_fullscreen(false);
-                    _resizeWindow = true; //Force a resizing of the window
                 }
                 
                 if (_resizeWindow && ((window_get_width() != windowWidth) || (window_get_height() != windowHeight)))

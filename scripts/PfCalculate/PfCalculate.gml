@@ -1,18 +1,20 @@
 // Feather disable all
 
 /// Calculates and returns a PictureFrame "result struct" based on an input configuration struct
-/// (please see PfConfigGeneral() for more information). The result struct returned by PfCalculate()
-/// contains many variables that define the size and position of various parts of the render
-/// pipeline.
+/// (please see `PfConfigGeneral()` for more information). The result struct returned by
+/// `PfCalculate()` contains many variables that define the size and position of various parts of
+/// the render pipeline.
 /// 
-/// This function is provided for people who don't want to use PfApply() and instead want to
+/// This function is provided for people who don't want to use `PfApply()` and instead want to
 /// set up their render pipeline manually.
 /// 
-/// The "resizeWindow" argument controls whether results should be calculated as though the window
-/// will be resized to avoid black bars. This value is only relevant when the game is not
-/// fullscreened and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
+/// The `resizeWindow` parameter controls whether results should be calculated as though the
+/// window will be resized. This value is only relevant when the game is not fullscreened and is
+/// therefore only relevant on desktop platforms (Windows, MacOS, Linux). If this parameter is set
+/// to `false` (which it is by default) then this function will ignore the `.trimBlackBars` option
+/// in the input configuration struct.
 /// 
-/// N.B. Because PfCalculate() does a lot of maths and returns a fresh struct every time it is
+/// N.B. Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is
 ///      called, you should avoid calling this function more often than is necessary.
 /// 
 /// @param configStruct
@@ -112,6 +114,9 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         {
             var _windowWidth  = display_get_width();
             var _windowHeight = display_get_height();
+            
+            //Can never resize the window if we're going into fullscreen
+            _resizeWindow = false;
         }
         else
         {
@@ -176,7 +181,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         
         // --- Window ---
         
-        if (_resizeWindow && (not _fullscreen))
+        if (_resizeWindow && trimBlackBars)
         {
             //If we're allowed to resize the window then we want to scale up the view dimensions
             var _windowScale = min(_windowWidth/_outViewWidth, _windowHeight/_outViewHeight);
