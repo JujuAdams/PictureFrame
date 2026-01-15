@@ -367,10 +367,10 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             
             marginsVisible:  ((_surfacePostDrawX > 0) || (_surfacePostDrawY > 0) || (_surfacePostDrawWidth < _outWindowWidth) || (_surfacePostDrawHeight < _outWindowHeight)),
             
-            marginWestX1: _windowToGuiScaleX*(-_outGuiX),                //Left side of the window
-            marginWestX2: _surfaceGuiX,                                  //Left side of the application surface
-            marginEastX1: _surfaceGuiX + _surfaceGuiWidth,               //Right side of the application surface
-            marginEastX2: _windowToGuiScaleX*(_windowWidth  - _outGuiX), //Right side of the window
+            marginWestX1: _windowToGuiScaleX*(-_outGuiX),                 //Left side of the window
+            marginWestX2: _surfaceGuiX,                                   //Left side of the application surface
+            marginEastX1: _surfaceGuiX + _surfaceGuiWidth,                //Right side of the application surface
+            marginEastX2: _windowToGuiScaleX*(_windowWidth  - _outGuiX),  //Right side of the window
             
             marginNorthY1: _windowToGuiScaleY*(-_outGuiY),                //Top of the window
             marginNorthY2: _surfaceGuiY,                                  //Top of the application surface
