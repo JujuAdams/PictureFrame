@@ -11,5 +11,5 @@
 //                                                                        //
 ////////////////////////////////////////////////////////////////////////////
 
-#macro PICTURE_FRAME_VERSION  "4.0.0 (alpha)"
-#macro PICTURE_FRAME_DATE     "2024-10-27"
+#macro PICTURE_FRAME_VERSION  "4.1.0 (alpha)"
+#macro PICTURE_FRAME_DATE     "2026-01-15"
