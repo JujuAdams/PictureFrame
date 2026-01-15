@@ -5,7 +5,7 @@
 /// 
 /// N.B. You shouldn't edit the result struct as this may cause rendering errors.
 
-function PfGetApplied()
+function PfGetAppliedResultStruct()
 {
     static _system = __PfSystem();
     return _system.__resultStruct;
