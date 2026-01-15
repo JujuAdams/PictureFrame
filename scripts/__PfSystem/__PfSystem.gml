@@ -14,6 +14,7 @@ function __PfSystem()
     _system = {};
     with(_system)
     {
+        __configStruct = undefined;
         __resultStruct = undefined;
         
         __noAppSurfDrawDisable = true;

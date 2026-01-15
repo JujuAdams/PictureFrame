@@ -74,6 +74,8 @@ function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
     }
     
     var _resultStruct = PfCalculate(_configStruct, _resizeWindow);
+    
+    _system.__configStruct = variable_clone(_configStruct);
     _system.__resultStruct = _resultStruct;
     
     with(_resultStruct)
