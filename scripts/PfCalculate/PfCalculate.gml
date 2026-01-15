@@ -118,10 +118,15 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             //Can never resize the window if we're going into fullscreen
             _resizeWindow = false;
         }
-        else
+        else if (_resizeWindow)
         {
             var _windowWidth  = windowWidth;
             var _windowHeight = windowHeight;
+        }
+        else
+        {
+            var _windowWidth  = window_get_width();
+            var _windowHeight = window_get_height();
         }
         
         
