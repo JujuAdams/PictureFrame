@@ -72,7 +72,7 @@
 /// 
 /// .trimBlackBars
 ///     Whether the window should be reduced in size to remove black bars if possible. Like above,
-///     This value will only be applied when using `PfApply()` if the `tryResizeWindow` optional
+///     this value will only be applied when using `PfApply()` if the `tryResizeWindow` optional
 ///     parameter is set to `true`.
 /// 
 /// .guiWindowStretch
@@ -117,7 +117,7 @@ function PfConfigGeneral()
         cameraOverscan: 0,
         
         //Force "fullscreen" on non-desktop platforms
-        fullscreen: __PF_ON_DESKTOP? window_get_fullscreen() : true,
+        fullscreen: PICTURE_FRAME_ON_DESKTOP? window_get_fullscreen() : true,
         
         trimBlackBars:       true,
         windowWidth:         window_get_width(),

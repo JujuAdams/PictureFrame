@@ -84,7 +84,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _ignoreCamera = false)
     static _system = __PfSystem();
     
     //Force a resize if we're swapping from fullscreen to window
-    if (__PF_ON_DESKTOP && (not _configStruct.fullscreen) && window_get_fullscreen())
+    if (PICTURE_FRAME_ON_DESKTOP && (not _configStruct.fullscreen) && window_get_fullscreen())
     {
         _tryResizeWindow = true;
     }
@@ -154,7 +154,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _ignoreCamera = false)
         }
         
         //Handle fullscreen transition and window size on desktop
-        if (__PF_ON_DESKTOP)
+        if (PICTURE_FRAME_ON_DESKTOP)
         {
             if (fullscreen)
             {

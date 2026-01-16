@@ -58,7 +58,7 @@
 /// 
 /// .fullscreen
 ///     Whether the game should be in fullscreen mode. This value is only relevant on desktop
-///     platforms (Windows, MacOS, Linux). On other platforms, this will always be <true>.
+///     platforms (Windows, MacOS, Linux). On other platforms, this will always be `true`.
 /// 
 /// .windowWidth
 /// .windowHeight
@@ -75,7 +75,7 @@
 /// 
 /// .surfacePixelPerfect
 ///     Whether the application surface should be drawn as pixel perfect where possible. This will
-///     cause PfPostDrawAppSurface() to default to no texture filtering to preserve clean pixel
+///     cause `PfPostDrawAppSurface()` to default to no texture filtering to preserve clean pixel
 ///     edges.
 /// 
 /// .surfacePostDrawScale
@@ -116,7 +116,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
 {
     with(_configurationStruct)
     {
-        var _fullscreen = __PF_ON_DESKTOP? fullscreen : true;
+        var _fullscreen = PICTURE_FRAME_ON_DESKTOP? fullscreen : true;
         
         //If we're in fullscreen mode then use the whole display as the max window size
         if (_fullscreen)

@@ -8,8 +8,8 @@
 /// N.B. Because `PfConfigPixelArt()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
-/// @param [targetWidth]
-/// @param [targetHeight]
+/// @param targetWidth
+/// @param targetHeight
 /// @param [fullscreen]
 /// @param [minWidth]
 /// @param [minHeight]
@@ -32,7 +32,7 @@ function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_
         viewPixelPerfect: true,
         
         //Force "fullscreen" on non-desktop platforms
-        fullscreen: __PF_ON_DESKTOP? _fullscreen : true,
+        fullscreen: PICTURE_FRAME_ON_DESKTOP? _fullscreen : true,
         
         trimBlackBars: true,
         windowWidth:   window_get_width(),
