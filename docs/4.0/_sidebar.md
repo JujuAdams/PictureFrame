@@ -17,4 +17,4 @@
 -    [`PfGetWindowStateChanged()`](PfGetWindowStateChanged)
 -    [`PfDebugWindow()`](PfDebugWindow)
 -    [`PfCalculate()`](PfCalculate)
--    [Helper Functions](HelperFunctions)
+-    [Position Helpers](PositionHelpers)
