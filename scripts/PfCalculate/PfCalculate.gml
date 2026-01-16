@@ -8,17 +8,25 @@
 /// This function is provided for people who don't want to use `PfApply()` and instead want to
 /// set up their render pipeline manually.
 /// 
+/// N.B. Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is
+///      called, you should avoid calling this function more often than is necessary.
+/// 
 /// The `tryResizeWindow` parameter applies when the game is already windowed or is transitioning
 /// from fullscreen to a windowed state (as such, it only applies on desktop platforms). When
 /// `tryResizeWindow` is set to `true`, the function will calculate the layout struct with the
 /// presumption that the size of the window can change. If the `.trimBlackBars` option has been set
 /// to `true` then unnecessary extra space will be removed.
 /// 
-/// N.B. Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is
-///      called, you should avoid calling this function more often than is necessary.
+/// You may use the remaining optional arguments to override the current window state. This has
+/// limited uses in production but may be useful when testing.
 /// 
 /// @param configStruct
 /// @param [tryResizeWindow=false]
+/// @param [isFullscreen]
+/// @param [currentWindowWidth]
+/// @param [currentWindowHeight]
+/// @param [displayWidth]
+/// @param [displayHeight]
 /// 
 /// 
 /// 
@@ -104,7 +112,7 @@
 ///     Coordinates for the margins around the application surface. The coordinates are in
 ///     GUI-space.
 
-function PfCalculate(_configurationStruct, _tryResizeWindow = false)
+function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFullscreen = window_get_fullscreen(), _currentWindowWidth = window_get_width(), _currentWindowHeight = window_get_height(), _currentDisplayWidth = display_get_width(), _currentDisplayHeight = display_get_height())
 {
     with(_configurationStruct)
     {
@@ -113,8 +121,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false)
         //If we're in fullscreen mode then use the whole display as the max window size
         if (_fullscreen)
         {
-            var _windowWidth  = display_get_width();
-            var _windowHeight = display_get_height();
+            var _windowWidth  = _currentDisplayWidth;
+            var _windowHeight = _currentDisplayHeight;
             
             //Can never resize the window if we're going into fullscreen
             _tryResizeWindow = false;
@@ -123,7 +131,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false)
         {
             //If we're transitioning from fullscreen to windows then we necessarily need to resize
             //the window.
-            if (window_get_fullscreen())
+            if (_currentFullscreen)
             {
                 _tryResizeWindow = true;
             }
@@ -135,14 +143,14 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false)
             }
             else
             {
-                var _windowWidth  = window_get_width();
-                var _windowHeight = window_get_height();
+                var _windowWidth  = _currentWindowWidth;
+                var _windowHeight = _currentWindowHeight;
             }
         }
         
-        
-        
-        // --- Camera ---
+        ///////
+        // Camera
+        ///////
         
         var _cameraMinWidth  = (cameraMinWidth  > 0)? cameraMinWidth  : cameraTargetWidth;
         var _cameraMinHeight = (cameraMinHeight > 0)? cameraMinHeight : cameraTargetHeight;
@@ -171,9 +179,9 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false)
         _outCameraWidth  = floor(min(_outCameraWidth,  _cameraMaxWidth));
         _outCameraHeight = floor(min(_outCameraHeight, _cameraMaxHeight));
         
-        
-        
-        // --- View ---
+        ///////
+        // View
+        ///////
         
         //Figure out the scaling factor that fits the camera inside the window
         //We limit how scaled up the view can be at the same time here too
@@ -193,9 +201,9 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false)
         //Calculate how much overscan we have in viewspace
         var _viewOverscan = cameraOverscan*_outViewScale;
         
-        
-        
-        // --- Window ---
+        ///////
+        // Window
+        ///////
         
         if (_tryResizeWindow && trimBlackBars)
         {
@@ -214,9 +222,9 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false)
             var _outWindowHeight = _windowHeight;
         }
         
-        
-        
-        // --- Application Surface Drawing ---
+        ///////
+        // Application Surface Drawing
+        ///////
         
         //Figure out the scaling factor that fits the application surface inside the window dimensions
         var _surfacePostDrawScale = min(_outWindowWidth/_outViewWidth, _outWindowHeight/_outViewHeight);
@@ -244,9 +252,9 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false)
         var _surfacePostDrawX = floor(0.5*(_outWindowWidth  - _surfacePostDrawWidth ));
         var _surfacePostDrawY = floor(0.5*(_outWindowHeight - _surfacePostDrawHeight));
         
-        
-        
-        // --- GUI ---
+        ///////
+        // GUI Layer
+        ///////
         
         if (guiWindowStretch)
         {
@@ -329,17 +337,15 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false)
         var _surfaceGuiWidth  = _windowToGuiScaleX*_surfacePostDrawWidth;
         var _surfaceGuiHeight = _windowToGuiScaleY*_surfacePostDrawHeight;
         
-        
-        
-        // --- Final Corrections ---
+        ///////
+        // Final Corrections
+        ///////
         
         //Increase the actual size of the camera and view/application surface after we do all maths
         _outCameraWidth  += 2*cameraOverscan;
         _outCameraHeight += 2*cameraOverscan;
         _outViewWidth    += 2*_viewOverscan;
         _outViewHeight   += 2*_viewOverscan;
-        
-        
         
         return {
             cameraWidth:    _outCameraWidth,
