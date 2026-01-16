@@ -4,13 +4,13 @@
 
 **What platforms does PictureFrame support?**
 
-Everything apart from HTML5. You might run into edge cases on platforms that I don't regularly test; please [report any bugs](https://github.com/JujuAdams/PictureFrame/issues) if and when you find them.
+PictureFrame supports Windows, MacOS, Linux, Nintendo Switch, Sony PlayStation 4/5, Xbox Series X/S, iOS, tvOS, and Android. You might run into edge cases on platforms that I don't regularly test; please [report any bugs](https://github.com/JujuAdams/PictureFrame/issues) if and when you find them.
 
 &nbsp;
 
 **What versions of GameMaker does PictureFrame support?**
 
-PictureFrame supports GameMaker 2024.8, and in theory supports every version of GameMaker later than that. Later versions of GameMaker may change functionality in a way that PictureFrame is not forwards-compatible with, but PictureFrame uses only native GameMaker audio functions so is in the best possible position for long-term compatibility.
+PictureFrame supports GameMaker 2024.14, and in theory supports every version of GameMaker later than that. Later versions of GameMaker may change functionality in a way that PictureFrame is not forwards-compatible with, but PictureFrame uses only native GameMaker audio functions so is in the best possible position for long-term compatibility.
 
 &nbsp;
 
@@ -52,7 +52,7 @@ Please make a [bug report](https://github.com/JujuAdams/PictureFrame/issues). I 
 
 **Who made PictureFrame?**
 
-PictureFrame is built and maintained by [Juju](https://www.jujuadams.com/) who has been writing and rewriting audio systems for a long time. I've worked on a lot of [commercial GameMaker games](http://www.jujuadams.com/) over the years. PictureFrame is the product of practical experience working as a consultant.
+PictureFrame is built and maintained by [Juju](https://www.jujuadams.com/) who has been writing and rewriting camera systems for a long time. I've worked on a lot of [commercial GameMaker games](http://www.jujuadams.com/) over the years. PictureFrame is the product of practical experience working as a consultant.
 
 &nbsp;
 
