@@ -34,7 +34,13 @@ PictureFrame uses the following input parameters:
 
 PictureFrame is suitable for pixel art games and for high resolution games. It can calculate correct camera sizes regardless of device is especially suited for the wide variety of aspect ratios found on mobile devices. PictureFrame only supports rendering of one view at a time and does not handle split-screen games.
 
-&nbsp;
+## What does PictureFrame not do?
+
+PictureFrame is unconcerned with where your camera is pointing. Camera control is a complex topic and contributes to gamefeel in a significant way. It is regrettably a common mistake for library makers to confuse managing the render pipeline with camera control. PictureFrame can tell you the width and height of the camera but it does not go further than that.
+
+PictureFrame also does support multiple cameras and viewports, nor does it support HTML5 or Opera GX (at the moment at least).
+
+nbsp;
 
 # Setting Up
 
