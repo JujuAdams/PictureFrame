@@ -36,7 +36,7 @@ PictureFrame is suitable for pixel art games and for high resolution games. It c
 
 ## What does PictureFrame not do?
 
-PictureFrame is unconcerned with where your camera is pointing. Camera control is a complex topic and contributes to gamefeel in a significant way. It is regrettably a common mistake for library makers to confuse managing the render pipeline with camera control. PictureFrame can tell you the width and height of the camera but it does not go further than that.
+PictureFrame is unconcerned with where your camera is pointing. Camera control is a complex topic and contributes to gamefeel in a significant way and this library steers clear of interfering with that part of your game. It is regrettably a common mistake for library makers to confuse managing the render pipeline with camera control. PictureFrame can tell you the width and height of the camera but it does not go further than that.
 
 PictureFrame also does support multiple cameras and viewports, nor does it support HTML5 or Opera GX (at the moment at least).
 
