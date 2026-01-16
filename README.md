@@ -40,7 +40,7 @@ PictureFrame is unconcerned with where your camera is pointing. Camera control i
 
 PictureFrame also does support multiple cameras and viewports, nor does it support HTML5 or Opera GX (at the moment at least).
 
-nbsp;
+&nbsp;
 
 # Setting Up
 
