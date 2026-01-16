@@ -1,6 +1,6 @@
 <h1 align="center">PictureFrame 4.1.0 (alpha)</h1>
 
-<p align="center">Camera/view/GUI/window/application surface calculator for GameMaker 2024.14</p>
+<p align="center">Render pipeline calculator for GameMaker 2024.14</p>
 
 <p align="center"><a href="https://github.com/JujuAdams/PictureFrame/releases/">Download the .yymps</a></p>
 
