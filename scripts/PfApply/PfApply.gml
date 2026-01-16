@@ -16,10 +16,10 @@
 ///      called, you should avoid calling this function more often than is necessary.
 /// 
 /// There are some optional parameters that affect how the layout struct is applied. The
-/// `resizeWindow` parameter controls whether the layout struct should be calculated as though
-/// the window will be resized. This value is only relevant when the game is not fullscreened and
-/// is therefore only relevant on desktop platforms. If this parameter is set to `false` (which it
-/// is by default) then this function will ignore the `.trimBlackBars` option in the input
+/// `tryResizeWindow` parameter applies when the game is already windowed or is transitioning from
+/// fullscreen to a windowed state (as such, it only applies on desktop platforms). When
+/// `tryResizeWindow` is set to `true`, the function will change the size and position of the
+/// window, including trimming extra space if the `.trimBlackBars` option has been set in the input
 /// configuration struct.
 /// 
 /// `ignoreCamera` is an optional parameter that allows you to avoid changing any parameters for
@@ -29,7 +29,7 @@
 /// set whatever values you need.
 /// 
 /// @param configStruct
-/// @param [resizeWindow=false]
+/// @param [tryResizeWindow=false]
 /// @param [ignoreCamera=false]
 /// 
 /// 
@@ -79,14 +79,14 @@
 ///     Functions called:
 ///         display_set_gui_maximize(...)
 
-function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
+function PfApply(_configStruct, _tryResizeWindow = false, _ignoreCamera = false)
 {
     static _system = __PfSystem();
     
     //Force a resize if we're swapping from fullscreen to window
     if (__PF_ON_DESKTOP && (not _configStruct.fullscreen) && window_get_fullscreen())
     {
-        _resizeWindow = true;
+        _tryResizeWindow = true;
     }
     
     //Disable automatic application surface drawing
@@ -95,7 +95,7 @@ function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
         application_surface_draw_enable(false);
     }
     
-    var _layoutStruct = PfCalculate(_configStruct, _resizeWindow);
+    var _layoutStruct = PfCalculate(_configStruct, _tryResizeWindow);
     
     _system.__configStruct = variable_clone(_configStruct);
     _system.__layoutStruct = _layoutStruct;
@@ -170,7 +170,7 @@ function PfApply(_configStruct, _resizeWindow = false, _ignoreCamera = false)
                     window_set_fullscreen(false);
                 }
                 
-                if (_resizeWindow && ((window_get_width() != windowWidth) || (window_get_height() != windowHeight)))
+                if (_tryResizeWindow && ((window_get_width() != windowWidth) || (window_get_height() != windowHeight)))
                 {
                     var _oldWidth  = window_get_width();
                     var _oldHeight = window_get_height();

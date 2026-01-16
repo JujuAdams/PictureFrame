@@ -65,13 +65,14 @@
 /// .windowWidth
 /// .windowHeight
 ///     The desired size of the game window. This value is only relevant when the game is not
-///     fullscreened and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
-///     These values will only be applied when using `PfApply()` if the `resizeWindow` optional
-///     parameter is set to `true`.
+///     fullscreened and is therefore only relevant on desktop platforms. These values will only be
+///     applied when using `PfApply()` if the window needs to be resized (either the game is
+///     already windowed and the `tryResizeWindow` optional parameter is set to `true`, or the game
+///     is transitioning from fullscreen to windowed).
 /// 
 /// .trimBlackBars
 ///     Whether the window should be reduced in size to remove black bars if possible. Like above,
-///     This value will only be applied when using `PfApply()` if the `resizeWindow` optional
+///     This value will only be applied when using `PfApply()` if the `tryResizeWindow` optional
 ///     parameter is set to `true`.
 /// 
 /// .guiWindowStretch

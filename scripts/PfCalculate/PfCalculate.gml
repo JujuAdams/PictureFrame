@@ -8,17 +8,17 @@
 /// This function is provided for people who don't want to use `PfApply()` and instead want to
 /// set up their render pipeline manually.
 /// 
-/// The `resizeWindow` parameter controls whether the layout struct should be calculated as though
-/// the window will be resized. This value is only relevant when the game is not fullscreened and
-/// is therefore only relevant on desktop platforms. If this parameter is set to `false` (which it
-/// is by default) then this function will ignore the `.trimBlackBars` option in the input
-/// configuration struct.
+/// The `tryResizeWindow` parameter applies when the game is already windowed or is transitioning
+/// from fullscreen to a windowed state (as such, it only applies on desktop platforms). When
+/// `tryResizeWindow` is set to `true`, the function will calculate the layout struct with the
+/// presumption that the size of the window can change. If the `.trimBlackBars` option has been set
+/// to `true` then unnecessary extra space will be removed.
 /// 
 /// N.B. Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is
 ///      called, you should avoid calling this function more often than is necessary.
 /// 
 /// @param configStruct
-/// @param [resizeWindow=false]
+/// @param [tryResizeWindow=false]
 /// 
 /// 
 /// 
@@ -104,7 +104,7 @@
 ///     Coordinates for the margins around the application surface. The coordinates are in
 ///     GUI-space.
 
-function PfCalculate(_configurationStruct, _resizeWindow = false)
+function PfCalculate(_configurationStruct, _tryResizeWindow = false)
 {
     with(_configurationStruct)
     {
@@ -117,17 +117,27 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
             var _windowHeight = display_get_height();
             
             //Can never resize the window if we're going into fullscreen
-            _resizeWindow = false;
-        }
-        else if (_resizeWindow)
-        {
-            var _windowWidth  = windowWidth;
-            var _windowHeight = windowHeight;
+            _tryResizeWindow = false;
         }
         else
         {
-            var _windowWidth  = window_get_width();
-            var _windowHeight = window_get_height();
+            //If we're transitioning from fullscreen to windows then we necessarily need to resize
+            //the window.
+            if (window_get_fullscreen())
+            {
+                _tryResizeWindow = true;
+            }
+            
+            if (_tryResizeWindow)
+            {
+                var _windowWidth  = windowWidth;
+                var _windowHeight = windowHeight;
+            }
+            else
+            {
+                var _windowWidth  = window_get_width();
+                var _windowHeight = window_get_height();
+            }
         }
         
         
@@ -187,7 +197,7 @@ function PfCalculate(_configurationStruct, _resizeWindow = false)
         
         // --- Window ---
         
-        if (_resizeWindow && trimBlackBars)
+        if (_tryResizeWindow && trimBlackBars)
         {
             //If we're allowed to resize the window then we want to scale up the view dimensions
             var _windowScale = min(_windowWidth/_outViewWidth, _windowHeight/_outViewHeight);
