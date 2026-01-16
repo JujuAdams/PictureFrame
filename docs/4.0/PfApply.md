@@ -2,21 +2,25 @@
 
 &nbsp;
 
-`PfApply(configStruct, [resizeWindow=false], [ignoreCamera=false])`
+`PfApply(configStruct, [tryResizeWindow=false], [ignoreCamera=false])`
 
-**Returns:** Struct, a PictureFrame result struct
+**Returns:** Struct, a PictureFrame layout struct
 
-|Name            |Datatype|Purpose                                                                                                                                                          |
-|----------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`configStruct`  |struct  |PictureFrame configuration struct to apply to the game's render pipeline values                                                                                  |
-|`[resizeWindow]`|boolean |Whether to allow resizing of the game window to fit the configuration struct. If not specified defaults to `false`                                               |
-|`[ignoreCamera]`|boolean |Whether to skip setting values on the camera. Useful if you have a special camera setup that you'd like to remain unchanged. If not specified defaults to `false`|
+|Name               |Datatype|Purpose                                                                                                                                                          |
+|-------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`configStruct`     |struct  |PictureFrame configuration struct to apply to the game's render pipeline values                                                                                  |
+|`[tryResizeWindow]`|boolean |Whether to allow resizing of the game window to fit the configuration struct. If not specified defaults to `false`                                               |
+|`[ignoreCamera]`   |boolean |Whether to skip setting values on the camera. Useful if you have a special camera setup that you'd like to remain unchanged. If not specified defaults to `false`|
 
- Applies a PictureFrame configuration struct, setting necessary native GameMaker values to ensure that the values in the configuration struct accurately affect the game. This function returns the result struct that is generated internally. 
+Applies a PictureFrame configuration struct to the render state for the game, setting up cameras, views, window size etc.  This function calls `PfCalculate()` to generate a layout struct and then uses values from the layout struct to call various GameMaker functions. The layout struct is then returned by `PfApply()` for you to use elsewhere. You can also get the currently applied config and layout structs with `PfGetAppliedConfigStruct()` and `PfGetAppliedLayoutStruct()` respectively.
 
- The `resizeWindow` argument controls whether PictureFrame should resize the game window when calling this function. This guarantees that no black bars will appear when the game is windowed. This value is only relevant when the game is not fullscreened and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
+!> Automatic drawing of the application surface will always be disabled by `PfApply()` by calling `application_surface_draw_enable(false)`. This means that without further action, your game will not be visible. You should call `PfPostDrawAppSurface()` in a Post Draw event to ensure that your application surface is visible for the player.
 
-!> Automatic drawing of the application surface will always be disabled by `PfApply()` by calling `application_surface_draw_enable(false)`. This means that without further action, your game will not be visible. You should call [`PfPostDrawAppSurface()`](PfPostDrawAppSurface) in a Post Draw event to ensure that your application surface is visible for the player.
+!> Because `PfApply()` runs a lot of logic and returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
+
+There are some optional parameters that affect how the layout struct is applied. The `tryResizeWindow` parameter applies when the game is already windowed or is transitioning from fullscreen to a windowed state (as such, it only applies on desktop platforms). When `tryResizeWindow` is set to `true`, the function will change the size and position of the window, including trimming extra space if the `.trimBlackBars` option has been set in the input configuration struct.
+
+`ignoreCamera` is an optional parameter that allows you to avoid changing any parameters for the camera in the room. This is helpful if you have something specific set up that needs additional careful handling. If you set `ignoreCamera` to `true` then you can use the two camera size variables, `.cameraWidt
 
 &nbsp;
 
@@ -26,7 +30,7 @@
 
 ### Camera
 
-`PfApply()` presumes that you are using GameMaker's native view system and that you're using view 0 for your game view. If a camera's width or height changes then it will resize, keeping the centre of the view static.
+These will only be adjusted if the `ignoreCamera` parameter is set to `false` (which it is by default). `PfApply()` presumes that you are using GameMaker's native view system and that you're using view[0] for your game view. If `PfApply()` causes a camera's width or height to change then it will resize keeping the centre of the camera pointing at the same location.
 
 Functions called:
 
@@ -39,22 +43,9 @@ camera_set_view_size(view_get_camera(0), ...)
 
 &nbsp;
 
-### View
-
-`PfApply()` presumes that you are using GameMaker's native view system and that you're using view 0 for your game view.
-
-Functions called:
-
-```gml
-view_set_wport(0, ...)
-view_set_hport(0, ...)
-```
-
-&nbsp;
-
 ### Application Surface
 
-`PfApply()` will set the size of the application surface to match the size of the view.
+`PfApply()` will set the size of the application surface to match the size of the view. For pixel perfect configurations, the size of the view is usually the same size as the camera but edge cases exist and this isn't guaranteed.
 
 Functions called:
 
@@ -64,7 +55,22 @@ surface_resize(application_surface, ...)
 
 &nbsp;
 
-### Window
+### View
+
+`PfApply()` presumes that you are using GameMaker's native view system and that you're using view[0] for your game view. If you are using a custom system of some kind then you should use the layout struct returned by `PfApply()` to update that system.
+
+Functions called:
+
+```gml
+view_set_xport(0, 0)
+view_set_yport(0, 0)
+view_set_wport(0, ...)
+view_set_hport(0, ...)
+```
+
+&nbsp;
+
+### Window & Fullscreen
 
 If the window's size changes then the window will be resized keeping the centre of the window static on the display. `PfApply()` will only adjust the window when on desktop platforms (Windows, MacOS, Linux).
 
@@ -79,6 +85,8 @@ window_set_rectangle(...)
 
 ### GUI Layer
 
+The exact size that gets set is controlled by the `.guiMode` variable found in the configuration struct.
+
 Functions called:
 
 ```gml
@@ -87,24 +95,26 @@ display_set_gui_maximize(...)
 
 &nbsp;
 
-## Result Struct
+## Layout Struct
 
-Variables that the result struct holds are as follows:
+Variables that the layout struct holds are as follows:
 
 |Name                                               |Datatype|Purpose                                                     |
 |---------------------------------------------------|--------|------------------------------------------------------------|
-|`.cameraWidth`<br>`.cameraHeight`                  |number  |Roomspace width and height of the camera            |
+|`.cameraWidth`<br>`.cameraHeight`                  |number  |Roomspace width and height of the camera. This includes overscan pixels, if defined|
 |`.cameraOverscan`                                  |number  |Number of extra pixels, in roomspace, to add around the edges of the camera. This is the same literal value as in the configuration struct and is included for convenience|
-|`.viewWidth`<br>`.viewHeight`                      |number  |Width and height of the view used to draw the camera to the application surface|
-|`.viewScale`                                       |number  |Scaling factor between the camera and the view|
-|`.viewOverscan`                                    |number  |Number of extra pixels, in roomspace, to add around the edges of the view. This is equal to .cameraOverscan multiplied by .viewScale and is provided for convenience|
+|`.viewWidth`<br>`.viewHeight`                      |number  |Width and height of the view used to draw the camera to the application surface. This includes overscan pixels, if defined. When using `PfApply()`, the application surface size will match the view width and height|
+|`.viewScale`                                       |number  |Scaling factor between the camera and the view. A scaling factor of 2 means that there will be 2 pixels on the view for every 1 pixel in roomspace on the camera. A view scale of exactly 1 is therefore a pixel perfect view|
+|`.viewOverscan`                                    |number  |Number of extra pixels, in viewspace, that have been added around the edges of the view. This is equal to `.cameraOverscan` multiplied by `.viewScale` and is provided for convenience|
 |`.fullscreen`                                      |boolean |Whether the game should be in fullscreen mode. This value is only relevant on desktop platforms (Windows, MacOS, Linux). On other platforms, this will always be `true`|
 |`.windowWidth`<br>`windowHeight`                   |number  |Dimensions of the window. If the `.fullscreen` variable (see above) is `true` then these values will be the same as the display's width and height|
-|`.surfacePixelPerfect`                             |boolean |Whether the application surface should be drawn as pixel perfect where possible. This will cause [`PfPostDrawAppSurface()`](PfPostDrawAppSurface) to default to no texture filtering to preserve clean pixel edges|
+|`.guiX`<br>`guiY`                                  |number  |Coordinates of the top-left corner of the GUI layer in windowspace|
+|`.guiWidth`<br>`guiHeight`                         |number  |Width and height of the GUI layer|
+|`.surfacePixelPerfect`                             |boolean |Whether the application surface should be drawn as pixel perfect where possible. This will cause `PfPostDrawAppSurface()` to default to no texture filtering to preserve clean pixel edges|
 |`.surfacePostDrawScale`                            |number  |Scaling factor between the view and the window (backbuffer). This includes the contribution from the overscan scale from the configuration struct|
 |`.surfacePostDrawX`<br>`.surfacePostDrawY`         |number  |Draw position for the application surface in the Post Draw event (i.e. the coordinates in the window/backbuffer). These values are in "window space' and will not necessarily line up with roomspace coordinates|
 |`.surfacePostDrawWidth`<br>`.surfacePostDrawHeight`|number  |Size for the application surface in the Post Draw event (see above.) These values are in "window space' and will not necessarily line up with roomspace coordinates|
 |`.surfaceGuiX`<br>`.surfaceGuiY`                   |number  |Draw position for the application surface on the GUI layer. These values are in "GUI-space' and will not necessarily line up with roomspace coordinates|
 |`.surfaceGuiWidth`<br>`.surfaceGuiHeight`          |number  |Size for the publication surface on the GUI layer. These values are in "GUI-space' and will not necessarily line up with roomspace coordinates|
 |`.marginsVisible`                                  |boolean |Whether any of the margins are visible. You should check this variable before drawing the margins (using the variables below)|
-|`.marginGuiX1`<br>`.marginGuiY1`<br>…<br>`.marginGuiX4`<br>`.marginGuiY4`|number|Coordinates for the margins around the application surface, in GUI-space|
+|`.marginWestX1`<br>…<br>`.marginSouthY2`           |number  |Coordinates for the margins around the application surface, in GUI-space|
