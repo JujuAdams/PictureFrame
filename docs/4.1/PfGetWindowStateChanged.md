@@ -18,7 +18,7 @@ Example:
 if (PfGetWindowStateChanged())
 {
     // Update our configuration to reflect the new window state
-    PfConfigSetWindowVars();
+    PfConfigSetWindowVars(configStruct);
     
     // Reapply the configuration struct to adapt to the new window size. We don't want to
     // resize the window otherwise we'll get nasty glitching
