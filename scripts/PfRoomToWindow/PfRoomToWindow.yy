@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"PfRoomToWindow",
   "parent":{
-    "name":"Helpers",
-    "path":"folders/PictureFrame/Helpers.yy",
+    "name":"Position Helpers",
+    "path":"folders/PictureFrame/Position Helpers.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

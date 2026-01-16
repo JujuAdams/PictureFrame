@@ -97,7 +97,7 @@ function PfDebugWindow(_configStruct = undefined)
     var _debugState  = _system.__debugState;
     var _debugLayout = _system.__debugLayout;
     
-    dbg_view("PictureFrame", true);
+    dbg_view("PictureFrame Debug", true);
     
     dbg_section("Config Struct", false);
     

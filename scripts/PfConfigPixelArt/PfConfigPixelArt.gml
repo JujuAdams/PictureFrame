@@ -3,7 +3,7 @@
 /// Convenience function that returns a configuration struct set up for pixel-perfect rendering.
 /// This function will set the size of the GUI layer to be the same as the size of the camera
 /// (`.guiMode` is set to `1`). You can further edit values in the returned struct if you'd like
-/// and it will obey all the samerules as a configuration struct returned by `PfConfigGeneral()`.
+/// and it will obey all the same rules as a configuration struct returned by `PfConfigGeneral()`.
 /// 
 /// N.B. Because `PfConfigPixelArt()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.

@@ -49,6 +49,4 @@ function PfPostDrawAppSurface(_filter = undefined, _blendEnable = false, _surfac
         gpu_set_tex_filter(_oldFilter);
         gpu_set_blendenable(_oldBlendEnable);
     }
-    
-    return self;
 }

@@ -22,6 +22,5 @@
 function PfGetWindowStateChanged()
 {
     static _system = __PfSystem();
-    
     return _system.__windowStateChanged;
 }

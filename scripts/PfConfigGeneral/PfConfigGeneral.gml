@@ -7,10 +7,11 @@
 /// 
 /// Config structs are rather complex and if you're looking for easier "quick start" behaviour
 /// than you may want to consider calling either `PfConfigPixelArt()` or `PfConfigHighRes()` 
-/// instead. They each return a config struct pre-configured for a particular common use case
-/// (which can be edited in the exact same way as a config struct returned by `PfConfigGeneral()`).
+/// instead. They each return a config struct pre-built for a particular common use case (which can
+/// be edited in the exact same way as a config struct returned by `PfConfigGeneral()`).
 /// 
-/// You should edit the returned configuration struct to reflect the needs of your game.
+/// You should edit the configuration struct returned by this function to reflect the needs of your
+/// game.
 /// 
 /// N.B. Because a `PfConfigGeneral()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
@@ -39,36 +40,39 @@
 /// 
 /// .cameraOverscan
 ///     The number of extra pixels, in roomspace, to add around the edges of the camera. A value of
-///     1 will add one pixel to the left, top, right, and bottom edges leading to a 2 pixel
+///     `1` will add one pixel to the left, top, right, and bottom edges leading to a 2 pixel
 ///     increase in the overall width and height of the camera. Normally you'll want to set this
-///     variable to 0 but you may want to set it to higher values if you're implementing visual
+///     variable to `0` but you may want to set it to higher values if you're implementing visual
 ///     effects that extend beyond the limits of the camera or you're implementing a smooth scroll
-///     effect alongside pixel perfect graphics.
+///     effect alongside pixel-perfect graphics.
 /// 
 /// .viewMaxScale
 ///     Maximum scaling factor from the camera to the view. For pixel perfect games that don't want
-///     subpixelling, this value should be set to 1. If you do want subpixelling, or you're making
-///     a high res game, this value should usually be set to `infinity`. You may rarely want to set
-///     another value if you want tighter control over the view scale and subpixelling.
+///     subpixelling, this value should be set to exactly `1`. If you do want subpixelling, or
+///     you're making a high res game, this value should usually be set to `infinity`. You may
+///     rarely want to set another value if you want tighter control over the view scale and
+///     subpixelling.
 /// 
 /// .viewPixelPerfect
 ///     Whether the camera-to-view scale should be a whole number. If you're making a pixel art
 ///     game, whether you want subpixelling or not, this variable should almost certainly be set
-///     to `true`.
+///     to `true`. Games at high resolutions will likely be fine with this set to `false`.
 /// 
 /// .fullscreen
-///     The fullscreen state for the game. This value is only relevant on desktop platforms
+///     The desired fullscreen state for the game. This value is only relevant on desktop platforms
 ///     (Windows, MacOS, Linux).
 /// 
 /// .windowWidth
 /// .windowHeight
-///     The size of the game window. This value is only relevant when the game is not fullscreened
-///     and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
+///     The desired size of the game window. This value is only relevant when the game is not
+///     fullscreened and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
+///     These values will only be applied when using `PfApply()` if the `resizeWindow` optional
+///     parameter is set to `true`.
 /// 
 /// .trimBlackBars
-///     Whether the window should be reduced in size to remove black bars if possible. This option
-///     will be ignored if the `resizeWindow` parameter is set to `false` for `PfApply()` or
-///     `PfCalculate()`.
+///     Whether the window should be reduced in size to remove black bars if possible. Like above,
+///     This value will only be applied when using `PfApply()` if the `resizeWindow` optional
+///     parameter is set to `true`.
 /// 
 /// .guiWindowStretch
 ///     Whether to stretch the GUI over the entire window. This is `false` by default meaning that
