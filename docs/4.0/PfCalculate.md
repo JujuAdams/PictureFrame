@@ -6,10 +6,15 @@
 
 **Returns** Struct, a layout struct
 
-|Name               |Datatype|Purpose                                                                                                           |
-|-------------------|--------|------------------------------------------------------------------------------------------------------------------|
-|`configStruct`     |struct  |PictureFrame configuration struct to calculate pipeline values for                                                |
-|`[tryResizeWindow]`|boolean |Whether to allow resizing of the game window to fit the configuration struct. If not specified defaults to `false`|
+|Name                   |Datatype|Purpose                                                                                                           |
+|-----------------------|--------|------------------------------------------------------------------------------------------------------------------|
+|`configStruct`         |struct  |PictureFrame configuration struct to calculate pipeline values for                                                |
+|`[tryResizeWindow]`    |boolean |Whether to allow resizing of the game window to fit the configuration struct. If not specified defaults to `false`|
+|`[isFullscreen]`       |boolean |                                                                                                                  |
+|`[currentWindowWidth]` |number  |                                                                                                                  |
+|`[currentWindowHeight]`|number  |                                                                                                                  |
+|`[displayWidth]`       |number  |                                                                                                                  |
+|`[displayHeight]`      |number  |                                                                                                                  |
 
 Calculates and returns a PictureFrame "layout struct" based on an input configuration struct (please see `PfConfigGeneral()` for more information). The layout struct returned by `PfCalculate()` contains many variables that define the size and position of various parts of the render pipeline.
 
@@ -55,7 +60,7 @@ To help visualise what the different struct variables represent, it can be helpf
 
 ![image](../assets/diagram1h.png)
 
-Now, if were to use PfGetApplied on this scenario, here's what the struct's width and height values would be measuring:
+Now, if were to use `PfGetAppliedLayoutStruct()` on this scenario, here's what the struct's width and height values would be measuring:
 
 ![image](../assets/diagram2c.png)
 
