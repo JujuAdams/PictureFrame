@@ -10,7 +10,7 @@ Everything apart from HTML5. You might run into edge cases on platforms that I d
 
 **What versions of GameMaker does PictureFrame support?**
 
-PictureFrame supports GameMaker 2024.8, and in theory supports every version of GameMaker later than that. Later versions of GameMaker may change functionality in a way that PictureFrame is not forwards-compatible with, but PictureFrame uses only native GameMaker audio functions so is in the best possible position for long-term compatibility.
+PictureFrame supports GameMaker 2024.8, and in theory supports every version of GameMaker later than that. Later versions of GameMaker may change functionality in a way that PictureFrame is not forwards-compatible with, but PictureFrame uses only native GameMaker functions so is in the best possible position for long-term compatibility.
 
 &nbsp;
 
