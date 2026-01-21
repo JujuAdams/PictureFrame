@@ -114,7 +114,11 @@
 function PfConfigGeneral()
 {
     var _configStruct = {
-        cameraOverscan: 0,
+        cameraMinWidth:  -1,
+        cameraMinHeight: -1,
+        cameraMaxWidth:  -1,
+        cameraMaxHeight: -1,
+        cameraOverscan:   0,
         
         //Force "fullscreen" on non-desktop platforms
         fullscreen: PICTURE_FRAME_ON_DESKTOP? window_get_fullscreen() : true,
@@ -135,30 +139,24 @@ function PfConfigGeneral()
     {
         if (view_enabled && view_get_visible(0))
         {
+            //If there's a view already set then inherit those properties
             var _camera = view_get_camera(0);
             cameraTargetWidth  = camera_get_view_width(_camera);
             cameraTargetHeight = camera_get_view_height(_camera);
-            cameraMinWidth     = -1;
-            cameraMinHeight    = -1;
-            cameraMaxWidth     = -1;
-            cameraMaxHeight    = -1;
             
             viewMaxScale = min(view_get_wport(0) / cameraTargetWidth, view_get_hport(0) / cameraTargetHeight);
             
             //Set the view to pixel perfect if it's a whole scale of the camera
             viewPixelPerfect = (floor(viewMaxScale) == viewMaxScale);
             
-            //Application surface pixel perfect drawing follows whether the view is pixel perfect too
+            //In the general case, application surface pixel perfect drawing follows whether the view is pixel perfect too
             surfacePixelPerfect = viewPixelPerfect;
         }
         else
         {
+            //Otherwise use the application surface if there's no camera
             cameraTargetWidth  = surface_get_width(application_surface);
             cameraTargetHeight = surface_get_height(application_surface);
-            cameraMinWidth     = -1;
-            cameraMinHeight    = -1;
-            cameraMaxWidth     = -1;
-            cameraMaxHeight    = -1;
             
             viewMaxScale     = infinity;
             viewPixelPerfect = false;

@@ -12,9 +12,6 @@
 ///      your game will not be visible. You should call `PfPostDrawAppSurface()` in a Post Draw
 ///      event to ensure that your application surface is visible for the player.
 /// 
-/// N.B. Because `PfApply()` runs a lot of logic and returns a fresh struct every time it is
-///      called, you should avoid calling this function more often than is necessary.
-/// 
 /// There are some optional parameters that affect how the layout struct is applied. The
 /// `tryResizeWindow` parameter applies when the game is already windowed or is transitioning from
 /// fullscreen to a windowed state (as such, it only applies on desktop platforms). When
@@ -27,6 +24,9 @@
 /// additional careful handling. If you set `ignoreCamera` to `true` then you can use the two
 /// camera size variables, `.cameraWidth` and `.cameraHeight`, from the returned layout struct to
 /// set whatever values you need.
+/// 
+/// N.B. Because `PfApply()` runs a lot of logic and returns a fresh struct every time it is
+///      called, you should avoid calling this function more often than is necessary.
 /// 
 /// @param configStruct
 /// @param [tryResizeWindow=false]

@@ -7,7 +7,7 @@
 //                       DO NOT EDIT THIS SCRIPT                          //
 //                       Bad things might happen.                         //
 //                                                                        //
-//        Customisation options can be found in `__PfConfigMacros()`      //
+//            Customisation options can be found in `__PfConfig()`        //
 //                                                                        //
 ////////////////////////////////////////////////////////////////////////////
 

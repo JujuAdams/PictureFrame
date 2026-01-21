@@ -30,7 +30,7 @@
     {"id":{"name":"oFollowCircle","path":"objects/oFollowCircle/oFollowCircle.yy",},},
     {"id":{"name":"oMarkerCircle","path":"objects/oMarkerCircle/oMarkerCircle.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
-    {"id":{"name":"__PfConfigMacros","path":"scripts/__PfConfigMacros/__PfConfigMacros.yy",},},
+    {"id":{"name":"__PfConfig","path":"scripts/__PfConfig/__PfConfig.yy",},},
     {"id":{"name":"__PfConstants","path":"scripts/__PfConstants/__PfConstants.yy",},},
     {"id":{"name":"__PfError","path":"scripts/__PfError/__PfError.yy",},},
     {"id":{"name":"__PfMacroHacks","path":"scripts/__PfMacroHacks/__PfMacroHacks.yy",},},

@@ -6,10 +6,8 @@
 /// the render pipeline.
 /// 
 /// This function is provided for people who don't want to use `PfApply()` and instead want to
-/// set up their render pipeline manually.
-/// 
-/// N.B. Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is
-///      called, you should avoid calling this function more often than is necessary.
+/// set up their render pipeline manually. If you're looking for the easiest out-of-the-box
+/// experience then you can skip this function and just use `PfApply()`.
 /// 
 /// The `tryResizeWindow` parameter applies when the game is already windowed or is transitioning
 /// from fullscreen to a windowed state (as such, it only applies on desktop platforms). When
@@ -19,6 +17,9 @@
 /// 
 /// You may use the remaining optional arguments to override the current window state. This has
 /// limited uses in production but may be useful when testing.
+/// 
+/// N.B. Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is
+///      called, you should avoid calling this function more often than is necessary.
 /// 
 /// @param configStruct
 /// @param [tryResizeWindow=false]
