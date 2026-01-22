@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"PfConfigPixelArt",
+  "%Name":"PfConfigMixels",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PfConfigPixelArt",
+  "name":"PfConfigMixels",
   "parent":{
     "name":"Config Structs",
     "path":"folders/PictureFrame/Config Structs.yy",

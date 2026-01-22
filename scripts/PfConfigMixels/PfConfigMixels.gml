@@ -1,20 +1,13 @@
 // Feather disable all
 
-/// Convenience function that returns a configuration struct set up for pixel-perfect rendering.
-/// This function will set the size of the GUI layer to be the same as the size of the camera
-/// (`.guiMode` is set to `1`).
+/// Convenience function that returns a configuration struct set up for pixel art games that want
+/// to allow for smooth rotation and scaling of graphics (a.k.a. "mixels"). This function will set
+/// the size of the GUI layer to be the same as the size of the camera (`.guiMode` is set to `1`).
 /// 
 /// You can further edit values in the returned struct if you'd like and it will obey all the same
 /// rules as a configuration struct returned by `PfConfigGeneral()`.
 /// 
-/// On most platforms, the application surface will be drawn to the window such that it maintains
-/// pixel-perfect rendering (`.surfacePixelPerfect` is set to `true`). However, on mobile you'll
-/// usually want the application surface to fill the entire usable area of the screen. As a result,
-/// the `.surfacePixelPerfect` property will be set to `false` when `PfConfigPixelArt()` is called
-/// on iOS and Android devices. You can override this behaviour yourself on any platform by setting
-/// `.surfacePixelPerfect` on the returned struct.
-/// 
-/// N.B. Because `PfConfigPixelArt()` returns a fresh struct every time it is called, you should
+/// N.B. Because `PfConfigMixels()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
 /// @param targetWidth
@@ -25,7 +18,7 @@
 /// @param [maxWidth]
 /// @param [maxHeight]
 
-function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _minWidth = -1, _minHeight = -1, _maxWidth = -1, _maxHeight = -1)
+function PfConfigMixels(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _minWidth = -1, _minHeight = -1, _maxWidth = -1, _maxHeight = -1)
 {
     return {
         cameraTargetWidth:  _targetWidth,
@@ -35,9 +28,9 @@ function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_
         cameraMaxWidth:     _maxWidth,
         cameraMaxHeight:    _maxHeight,
         
-        cameraOverscan: 0,
+        cameraOverscan: 1,
         
-        viewMaxScale:     1,
+        viewMaxScale:     infinity,
         viewPixelPerfect: true,
         
         //Force "fullscreen" on non-desktop platforms
@@ -53,7 +46,7 @@ function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_
         guiTargetHeight:  _targetHeight,
         guiScale:         1,
         
-        surfacePixelPerfect: not PICTURE_FRAME_ON_MOBILE,
+        surfacePixelPerfect: false,
         windowOverscanScale: 1,
     }
 }

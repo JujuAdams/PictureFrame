@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"PfConfigHighRes",
   "parent":{
-    "name":"PictureFrame",
-    "path":"folders/PictureFrame.yy",
+    "name":"Config Structs",
+    "path":"folders/PictureFrame/Config Structs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
