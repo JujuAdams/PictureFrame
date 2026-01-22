@@ -10,7 +10,7 @@
 /// On most platforms, the application surface will be drawn to the window such that it maintains
 /// pixel-perfect rendering (`.surfacePixelPerfect` is set to `true`). However, on mobile you'll
 /// usually want the application surface to fill the entire usable area of the screen. As a result,
-/// the `.surfacePixelPerfect` property will be set to `false` when `PfConfigPixelArt()` is called
+/// the `.surfacePixelPerfect` variable will be set to `false` when `PfConfigPixelArt()` is called
 /// on iOS and Android devices. You can override this behaviour yourself on any platform by setting
 /// `.surfacePixelPerfect` on the returned struct.
 /// 
@@ -36,6 +36,7 @@ function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_
         cameraMaxHeight:    _maxHeight,
         
         cameraOverscan: 0,
+        cameraIgnore:   false,
         
         viewMaxScale:     1,
         viewPixelPerfect: true,

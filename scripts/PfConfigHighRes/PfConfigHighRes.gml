@@ -30,6 +30,7 @@ function PfConfigHighRes(_targetWidth, _targetHeight, _fullscreen = window_get_f
         cameraMaxHeight:    _maxHeight,
         
         cameraOverscan: 0,
+        cameraIgnore:   false,
         
         viewMaxScale:     infinity,
         viewPixelPerfect: false,

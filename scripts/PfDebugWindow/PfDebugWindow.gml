@@ -136,6 +136,7 @@ function PfDebugWindow(_configStruct = undefined)
         dbg_text_input(ref_create(_configStruct, "cameraMaxWidth"       ), ".cameraMaxWidth",      "f");
         dbg_text_input(ref_create(_configStruct, "cameraMaxHeight"      ), ".cameraMaxHeight",     "f");
         dbg_text_input(ref_create(_configStruct, "cameraOverscan"       ), ".cameraOverscan",      "i");
+        dbg_checkbox(  ref_create(_configStruct, "cameraIgnore"         ), ".cameraIgnore"            );
         dbg_text_separator("");
         dbg_text_input(ref_create(_configStruct, "viewMaxScale"         ), ".viewMaxScale",        "f");
         dbg_checkbox(  ref_create(_configStruct, "viewPixelPerfect"     ), ".viewPixelPerfect"        );
@@ -206,6 +207,7 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text($".cameraWidth    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "cameraWidth"));
     dbg_text($".cameraHeight   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "cameraHeight"));
     dbg_text($".cameraOverscan = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "cameraOverscan"));
+    dbg_text($".cameraIgnore   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "cameraIgnore"));
     dbg_text($".viewWidth      = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "viewWidth"));
     dbg_text($".viewHeight     = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "viewHeight"));
     dbg_text($".viewScale      = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "viewScale"));
@@ -229,13 +231,13 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text($".surfaceGuiHeight      = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "surfaceGuiHeight"));
     dbg_text_separator("");
     dbg_text($".marginsVisible = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginsVisible"));
-    dbg_text($".marginWestX1    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginWestX1"));
-    dbg_text($".marginNorthY1    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginNorthY1"));
-    dbg_text($".marginWestX2    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginWestX2"));
-    dbg_text($".marginNorthY2    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginNorthY2"));
-    dbg_text($".marginEastX1    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginEastX1"));
-    dbg_text($".marginSouthY1    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginSouthY1"));
-    dbg_text($".marginEastX2    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginEastX2"));
-    dbg_text($".marginSouthY2    = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginSouthY2"));
+    dbg_text($".marginWestX1   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginWestX1"));
+    dbg_text($".marginWestX2   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginWestX2"));
+    dbg_text($".marginEastX1   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginEastX1"));
+    dbg_text($".marginEastX2   = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginEastX2"));
+    dbg_text($".marginNorthY1  = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginNorthY1"));
+    dbg_text($".marginNorthY2  = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginNorthY2"));
+    dbg_text($".marginSouthY1  = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginSouthY1"));
+    dbg_text($".marginSouthY2  = "); dbg_same_line(); dbg_text(ref_create(_debugLayout, "marginSouthY2"));
     dbg_text("");
 }

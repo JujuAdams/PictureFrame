@@ -19,28 +19,29 @@
 /// window, including trimming extra space if the `.trimBlackBars` option has been set in the input
 /// configuration struct.
 /// 
-/// `ignoreCamera` is an optional parameter that allows you to avoid changing any parameters for
-/// the camera in the room. This is helpful if you have something specific set up that needs
-/// additional careful handling. If you set `ignoreCamera` to `true` then you can use the two
+/// `cameraIgnoreForce` is an optional parameter that allows you to override the `.cameraIgnore`
+/// variable in the layout struct. If set to `true` or `false` then that behaviour will be
+/// enforced. Regardless of whether the native GameMaker is ignored, you can still use the two
 /// camera size variables, `.cameraWidth` and `.cameraHeight`, from the returned layout struct to
-/// set whatever values you need.
+/// setup whatever you need yourself.
 /// 
 /// N.B. Because `PfApply()` runs a lot of logic and returns a fresh struct every time it is
 ///      called, you should avoid calling this function more often than is necessary.
 /// 
 /// @param configStruct
 /// @param [tryResizeWindow=false]
-/// @param [ignoreCamera=false]
+/// @param [cameraIgnoreForce]
 /// 
 /// 
 /// 
 /// `PfApply()` calls the following functions to set native GameMaker values:
 ///   
-///   - Camera position and size. These will only be adjusted if the `ignoreCamera` parameter is
-///     set to `false` (which it is by default). `PfApply()` presumes that you are using
-///     GameMaker's native view system and that you're using view[0] for your game view. If
-///     `PfApply()` causes a camera's width or height to change then it will resize keeping the
-///     centre of the camera pointing at the same location.
+///   - Camera position and size. These will only be adjusted if the `.cameraIgnore` variable in
+///     the layout struct is set to `false` or the optional `cameraIgnoreForce` parameter for
+///     this function is set to `false`. `PfApply()` presumes that you are using GameMaker's native
+///     view system and that you're using view[0] for your game view and will set up view[0] for
+///     rendering. If `PfApply()` causes a camera's width or height to change then it will resize
+///     keeping the centre of the camera pointing at the same roomspace position.
 ///     
 ///     Functions called:
 ///         view_enabled = true
@@ -58,6 +59,8 @@
 ///   - Viewport dimensions. `PfApply()` presumes that you are using GameMaker's native view system
 ///     and that you're using view[0] for your game view. If you are using a custom system of some
 ///     kind then you should use the layout struct returned by `PfApply()` to update that system.
+///     Viewport dimensions will only be adjusted if `view_enable` is set to `true` and view[0] is
+///     visible (both of these conditions might be met, see "Camera position and size" above).
 ///     
 ///     Functions called:
 ///         view_set_xport(0, 0)
@@ -79,7 +82,7 @@
 ///     Functions called:
 ///         display_set_gui_maximize(...)
 
-function PfApply(_configStruct, _tryResizeWindow = false, _ignoreCamera = false)
+function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = undefined)
 {
     static _system = __PfSystem();
     
@@ -102,7 +105,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _ignoreCamera = false)
     
     with(_layoutStruct)
     {
-        if (not _ignoreCamera)
+        if (not (_cameraIgnoreForce ?? cameraIgnore))
         {
             view_enabled = true;
             

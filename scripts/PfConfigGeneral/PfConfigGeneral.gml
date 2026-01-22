@@ -46,6 +46,11 @@
 ///     effects that extend beyond the limits of the camera or you're implementing a smooth scroll
 ///     effect alongside pixel-perfect graphics.
 /// 
+/// .cameraIgnore
+///     Whether to never set native GameMaker camera and view properties. This variable only
+///     affects what values are set by `PfApply()` and does not change any calculations (camera
+///     dimensions, view dimensions, etc.).
+/// 
 /// .viewMaxScale
 ///     Maximum scaling factor from the camera to the view. For pixel perfect games that don't want
 ///     subpixelling, this value should be set to exactly `1`. If you do want subpixelling, or
@@ -119,6 +124,7 @@ function PfConfigGeneral()
         cameraMaxWidth:  -1,
         cameraMaxHeight: -1,
         cameraOverscan:   0,
+        cameraIgnore:     false,
         
         //Force "fullscreen" on non-desktop platforms
         fullscreen: PICTURE_FRAME_ON_DESKTOP? window_get_fullscreen() : true,

@@ -28,7 +28,8 @@ function PfConfigMixels(_targetWidth, _targetHeight, _fullscreen = window_get_fu
         cameraMaxWidth:     _maxWidth,
         cameraMaxHeight:    _maxHeight,
         
-        cameraOverscan: 1,
+        cameraOverscan: 0,
+        cameraIgnore:   false,
         
         viewMaxScale:     infinity,
         viewPixelPerfect: true,

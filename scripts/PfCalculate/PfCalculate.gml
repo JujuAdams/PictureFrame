@@ -41,6 +41,10 @@
 ///     The number of extra pixels, in roomspace, to add around the edges of the camera. This is
 ///     the same literal value as in the configuration struct and is included for convenience.
 /// 
+/// .cameraIgnore
+///     Whether to never set native GameMaker camera/view properties. The size of the camera will
+///     still be calculated when calling `PfApply()` but those values will not be applied.
+/// 
 /// .viewWidth
 /// .viewHeight
 ///     The width and height of the view used to draw the camera to the application surface. This
@@ -352,6 +356,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             cameraWidth:    _outCameraWidth,
             cameraHeight:   _outCameraHeight,
             cameraOverscan: cameraOverscan,
+            cameraIgnore:   cameraIgnore,
             
             viewWidth:    _outViewWidth,
             viewHeight:   _outViewHeight,
