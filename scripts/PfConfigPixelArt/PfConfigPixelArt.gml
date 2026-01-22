@@ -5,6 +5,13 @@
 /// (`.guiMode` is set to `1`). You can further edit values in the returned struct if you'd like
 /// and it will obey all the same rules as a configuration struct returned by `PfConfigGeneral()`.
 /// 
+/// On most platforms, the application surface will be drawn to the window such that it maintains
+/// pixel-perfect rendering (`.surfacePixelPerfect` is set to `true`). However, on mobile you'll
+/// usually want the application surface to fill the entire usable area of the screen. As a result,
+/// the `.surfacePixelPerfect` property will be set to `false` when `PfConfigPixelArt()` is called
+/// on iOS and Android devices. You can override this behaviour yourself on any platform by setting
+/// `.surfacePixelPerfect` on the returned struct.
+/// 
 /// N.B. Because `PfConfigPixelArt()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
@@ -44,7 +51,7 @@ function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_
         guiTargetHeight:  _targetHeight,
         guiScale:         1,
         
-        surfacePixelPerfect: true,
+        surfacePixelPerfect: not PICTURE_FRAME_ON_MOBILE,
         windowOverscanScale: 1,
     }
 }

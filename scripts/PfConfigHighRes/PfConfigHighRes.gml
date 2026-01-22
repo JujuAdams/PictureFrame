@@ -9,8 +9,8 @@
 /// N.B. Because `PfConfigHighRes()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
-/// @param [targetWidth]
-/// @param [targetHeight]
+/// @param targetWidth
+/// @param targetHeight
 /// @param [fullscreen]
 /// @param [minWidth]
 /// @param [minHeight]

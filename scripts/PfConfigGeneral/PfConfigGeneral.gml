@@ -86,10 +86,10 @@
 ///         `0` = GUI size is the unadjusted windowspace size
 ///         `1` = GUI size is the same as the camera
 ///         `2` = GUI size is the same as the application surface / view
-///         `3` = GUI size is equal to the target size
-///         `4` = GUI size stretches the target width and keeps the target height consistent
-///         `5` = GUI size stretches the target height and keeps the target width consistent
-///         `6` = GUI size decides which target axis to stretch
+///         `3` = GUI size is equal to the target camera size (this may sometimes stretch the GUI)
+///         `4` = GUI size stretches the target GUI width and keeps the target GUI height constant
+///         `5` = GUI size stretches the target GUI height and keeps the target GUI width constant
+///         `6` = PictureFrame decides which target GUI axis to change and keeps the other
 /// 
 /// .guiTargetWidth
 /// .guiTargetHeight
