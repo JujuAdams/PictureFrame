@@ -53,8 +53,11 @@ function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_
         guiTargetWidth:   _targetWidth,
         guiTargetHeight:  _targetHeight,
         guiScale:         1,
+        guiAvoidNotch:    true,
         
+        surfaceAvoidNotch:   true,
         surfacePixelPerfect: not PICTURE_FRAME_ON_MOBILE,
+        
         windowOverscanScale: 1,
     }
 }

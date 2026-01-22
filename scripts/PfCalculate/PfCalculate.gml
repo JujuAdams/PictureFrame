@@ -119,6 +119,8 @@
 
 function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFullscreen = window_get_fullscreen(), _currentWindowWidth = window_get_width(), _currentWindowHeight = window_get_height(), _currentDisplayWidth = display_get_width(), _currentDisplayHeight = display_get_height())
 {
+    static _system = __PfSystem();
+    
     with(_configurationStruct)
     {
         var _fullscreen = PICTURE_FRAME_ON_DESKTOP? fullscreen : true;
@@ -126,8 +128,10 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         //If we're in fullscreen mode then use the whole display as the max window size
         if (_fullscreen)
         {
-            var _windowWidth  = _currentDisplayWidth;
-            var _windowHeight = _currentDisplayHeight;
+            var _windowWidthBig    = _currentDisplayWidth;
+            var _windowHeightBig   = _currentDisplayHeight;
+            var _windowWidthSmall  = _windowWidthBig  - (_system.__displayMarginLeft + _system.__displayMarginRight);
+            var _windowHeightSmall = _windowHeightBig - (_system.__displayMarginTop + _system.__displayMarginBottom);
             
             //Can never resize the window if we're going into fullscreen
             _tryResizeWindow = false;
@@ -143,19 +147,34 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             
             if (_tryResizeWindow)
             {
-                var _windowWidth  = windowWidth;
-                var _windowHeight = windowHeight;
+                var _windowWidthBig  = windowWidth;
+                var _windowHeightBig = windowHeight;
             }
             else
             {
-                var _windowWidth  = _currentWindowWidth;
-                var _windowHeight = _currentWindowHeight;
+                var _windowWidthBig  = _currentWindowWidth;
+                var _windowHeightBig = _currentWindowHeight;
             }
+            
+            var _windowWidthSmall  = _windowWidthBig;
+            var _windowHeightSmall = _windowHeightBig;
         }
         
         ///////
         // Camera
         ///////
+        
+        //Find the region that the application surface needs to fit into
+        if (surfaceAvoidNotch)
+        {
+            var _surfaceRegionWidth  = _windowWidthSmall;
+            var _surfaceRegionHeight = _windowHeightSmall;
+        }
+        else
+        {
+            var _surfaceRegionWidth  = _windowWidthBig;
+            var _surfaceRegionHeight = _windowHeightBig;
+        }
         
         var _cameraMinWidth  = (cameraMinWidth  > 0)? cameraMinWidth  : cameraTargetWidth;
         var _cameraMinHeight = (cameraMinHeight > 0)? cameraMinHeight : cameraTargetHeight;
@@ -164,10 +183,10 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         
         //Figure out the scaling factor that fits us inside the target bounds
         //If we've using a pixel-perfect view then floor the scale to ensure that the view is a whole multiple of the target width/height
-        var _targetScale = min(_windowWidth/cameraTargetWidth, _windowHeight/cameraTargetHeight);
+        var _targetScale = min(_surfaceRegionWidth/cameraTargetWidth, _surfaceRegionHeight/cameraTargetHeight);
         if (viewPixelPerfect) _targetScale = floor(_targetScale);
-        var _outCameraWidth  = _windowWidth/_targetScale;
-        var _outCameraHeight = _windowHeight/_targetScale;
+        var _outCameraWidth  = _surfaceRegionWidth/_targetScale;
+        var _outCameraHeight = _surfaceRegionHeight/_targetScale;
         
         //Figure out the scaling factor that fits us outside the minimum bounds, if needed
         //If the scaling factor is less than or equal to 1 then the camera already fits outside the minimum bounds and no scaling is needed
@@ -177,8 +196,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         _outCameraHeight = max(_minScale*_outCameraHeight, _cameraMinHeight);
         
         //Work out how much extra space we have and add that to the camera
-        _outCameraWidth  += max(0, (_windowWidth  / _targetScale) - _outCameraWidth);
-        _outCameraHeight += max(0, (_windowHeight / _targetScale) - _outCameraHeight);
+        _outCameraWidth  += max(0, (_surfaceRegionWidth  / _targetScale) - _outCameraWidth);
+        _outCameraHeight += max(0, (_surfaceRegionHeight / _targetScale) - _outCameraHeight);
         
         //Apply max size limits and round camera bounds down to the nearest whole pixel
         _outCameraWidth  = floor(min(_outCameraWidth,  _cameraMaxWidth));
@@ -190,7 +209,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         
         //Figure out the scaling factor that fits the camera inside the window
         //We limit how scaled up the view can be at the same time here too
-        var _outViewScale = min(viewMaxScale, _windowWidth/_outCameraWidth, _windowHeight/_outCameraHeight);
+        var _outViewScale = min(viewMaxScale, _surfaceRegionWidth/_outCameraWidth, _surfaceRegionHeight/_outCameraHeight);
         
         //If we're using pixel perfect scaling for our view then drop down to the nearest integer scale
         if ((_outViewScale > 1) && viewPixelPerfect)
@@ -213,7 +232,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         if (_tryResizeWindow && trimBlackBars)
         {
             //If we're allowed to resize the window then we want to scale up the view dimensions
-            var _windowScale = min(_windowWidth/_outViewWidth, _windowHeight/_outViewHeight);
+            var _windowScale = min(_surfaceRegionWidth/_outViewWidth, _surfaceRegionHeight/_outViewHeight);
             
             if (surfacePixelPerfect && (_windowScale > 1)) _windowScale = floor(_windowScale);
             
@@ -223,8 +242,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         else
         {
             //Otherwise use the window dimenstions as they are
-            var _outWindowWidth  = _windowWidth;
-            var _outWindowHeight = _windowHeight;
+            var _outWindowWidth  = _surfaceRegionWidth;
+            var _outWindowHeight = _surfaceRegionHeight;
         }
         
         ///////
@@ -257,6 +276,13 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         var _surfacePostDrawX = floor(0.5*(_outWindowWidth  - _surfacePostDrawWidth ));
         var _surfacePostDrawY = floor(0.5*(_outWindowHeight - _surfacePostDrawHeight));
         
+        //Correct for the display margins
+        if (_fullscreen && surfaceAvoidNotch)
+        {
+            _surfacePostDrawX += _system.__displayMarginLeft;
+            _surfacePostDrawY += _system.__displayMarginTop;
+        }
+        
         ///////
         // GUI Layer
         ///////
@@ -268,6 +294,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             
             var _guiRegionWidth  = _outWindowWidth;
             var _guiRegionHeight = _outWindowHeight;
+            
         }
         else
         {
@@ -276,6 +303,16 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             
             var _guiRegionWidth  = _surfacePostDrawWidth;
             var _guiRegionHeight = _surfacePostDrawHeight;
+        }
+        
+        //Correct for the display margins
+        if (_fullscreen && guiAvoidNotch && (guiWindowStretch || (not surfaceAvoidNotch)))
+        {
+            _outGuiX += _system.__displayMarginLeft;
+            _outGuiY += _system.__displayMarginTop;
+            
+            _guiRegionWidth  -= _system.__displayMarginLeft + _system.__displayMarginRight;
+            _guiRegionHeight -= _system.__displayMarginTop + _system.__displayMarginBottom;
         }
         
         if (guiMode == 0)

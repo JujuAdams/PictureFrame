@@ -15,6 +15,11 @@ function __PfSystem()
         __configStruct = undefined;
         __layoutStruct = undefined;
         
+        __displayMarginLeft   = 0;
+        __displayMarginTop    = 0;
+        __displayMarginRight  = 0;
+        __displayMarginBottom = 0;
+        
         __noAppSurfDrawDisable = true;
         PfApply(PfConfigGeneral());
         __noAppSurfDrawDisable = false;
@@ -33,6 +38,15 @@ function __PfSystem()
         
         time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()
         {
+            if (not instance_exists(__PfObject))
+            {
+                instance_activate_object(__PfObject);
+                if (not instance_exists(__PfObject))
+                {
+                    instance_create_depth(0, 0, 0, __PfObject);
+                }
+            }
+            
             __mouseUpdated = false;
             
             if (__fullscreen != window_get_fullscreen())

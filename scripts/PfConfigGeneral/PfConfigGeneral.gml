@@ -139,6 +139,9 @@ function PfConfigGeneral()
         guiTargetWidth:   display_get_gui_width(),
         guiTargetHeight:  display_get_gui_height(),
         guiScale:         1,
+        guiAvoidNotch:    true,
+        
+        surfaceAvoidNotch: true,
     }
     
     with(_configStruct)

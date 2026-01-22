@@ -84,10 +84,14 @@ function PfDebugWindow(_configStruct = undefined)
                 windowFullscreen = window_get_fullscreen();
                 windowShowBorder = window_get_showborder();
                 
-                displayWidth     = display_get_width();
-                displayHeight    = display_get_height();
-                displayFrequency = display_get_frequency();
-                displayDPI       = display_get_dpi_x();
+                displayWidth        = display_get_width();
+                displayHeight       = display_get_height();
+                displayFrequency    = display_get_frequency();
+                displayDPI          = display_get_dpi_x();
+                displayMarginLeft   = _system.__displayMarginLeft;
+                displayMarginTop    = _system.__displayMarginTop;
+                displayMarginRight  = _system.__displayMarginRight;
+                displayMarginBottom = _system.__displayMarginBottom;
                 
             }
         },
@@ -151,7 +155,9 @@ function PfDebugWindow(_configStruct = undefined)
         dbg_text_input(ref_create(_configStruct, "guiTargetWidth"       ), ".guiTargetWidth",      "i");
         dbg_text_input(ref_create(_configStruct, "guiTargetHeight"      ), ".guiTargetHeight",     "i");
         dbg_text_input(ref_create(_configStruct, "guiScale"             ), ".guiScale",            "f");
+        dbg_checkbox(  ref_create(_configStruct, "guiAvoidNotch"        ), ".guiAvoidNotch"           );
         dbg_text_separator("");
+        dbg_checkbox(  ref_create(_configStruct, "surfaceAvoidNotch"    ), ".surfaceAvoidNotch"       );
         dbg_checkbox(  ref_create(_configStruct, "surfacePixelPerfect"  ), ".surfacePixelPerfect"     );
         dbg_text_input(ref_create(_configStruct, "windowOverscanScale"  ), ".windowOverscanScale", "f");
     }
@@ -195,10 +201,14 @@ function PfDebugWindow(_configStruct = undefined)
     dbg_text($"Fullscreen    = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowFullscreen"));
     dbg_text($"Show Border   = "); dbg_same_line(); dbg_text(ref_create(_debugState, "windowShowBorder"));
     dbg_text_separator("");
-    dbg_text($"Display width     = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayWidth"));
-    dbg_text($"Display height    = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayHeight"));
-    dbg_text($"Display frequency = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayFrequency"));
-    dbg_text($"Display DPI       = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayDPI"));
+    dbg_text($"Display width         = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayWidth"));
+    dbg_text($"Display height        = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayHeight"));
+    dbg_text($"Display frequency     = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayFrequency"));
+    dbg_text($"Display DPI           = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayDPI"));
+    dbg_text($"Display margin left   = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayMarginLeft"));
+    dbg_text($"Display margin top    = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayMarginTop"));
+    dbg_text($"Display margin right  = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayMarginRight"));
+    dbg_text($"Display margin bottom = "); dbg_same_line(); dbg_text(ref_create(_debugState, "displayMarginBottom"));
     
     dbg_text("");
     dbg_section("Layout Struct", false);

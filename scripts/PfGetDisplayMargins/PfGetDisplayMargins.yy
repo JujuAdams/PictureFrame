@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PfGetDisplayMargins",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PfGetDisplayMargins",
+  "parent":{
+    "name":"PictureFrame",
+    "path":"folders/PictureFrame.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

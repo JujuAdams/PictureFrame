@@ -47,8 +47,11 @@ function PfConfigHighRes(_targetWidth, _targetHeight, _fullscreen = window_get_f
         guiTargetWidth:   _targetWidth,
         guiTargetHeight:  _targetHeight,
         guiScale:         1,
+        guiAvoidNotch:    true,
         
+        surfaceAvoidNotch:   true,
         surfacePixelPerfect: false,
+        
         windowOverscanScale: 1,
     }
 }

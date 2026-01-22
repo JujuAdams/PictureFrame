@@ -26,6 +26,7 @@
   },
   "name":"PictureFrame",
   "resources":[
+    {"id":{"name":"__PfObject","path":"objects/__PfObject/__PfObject.yy",},},
     {"id":{"name":"oDemo","path":"objects/oDemo/oDemo.yy",},},
     {"id":{"name":"oDemoSmoothCamera","path":"objects/oDemoSmoothCamera/oDemoSmoothCamera.yy",},},
     {"id":{"name":"oFollowCircle","path":"objects/oFollowCircle/oFollowCircle.yy",},},
@@ -47,6 +48,7 @@
     {"id":{"name":"PfDebugWindow","path":"scripts/PfDebugWindow/PfDebugWindow.yy",},},
     {"id":{"name":"PfGetAppliedConfigStruct","path":"scripts/PfGetAppliedConfigStruct/PfGetAppliedConfigStruct.yy",},},
     {"id":{"name":"PfGetAppliedLayoutStruct","path":"scripts/PfGetAppliedLayoutStruct/PfGetAppliedLayoutStruct.yy",},},
+    {"id":{"name":"PfGetDisplayMargins","path":"scripts/PfGetDisplayMargins/PfGetDisplayMargins.yy",},},
     {"id":{"name":"PfGetWindowStateChanged","path":"scripts/PfGetWindowStateChanged/PfGetWindowStateChanged.yy",},},
     {"id":{"name":"PfGuiToRoom","path":"scripts/PfGuiToRoom/PfGuiToRoom.yy",},},
     {"id":{"name":"PfMouseX","path":"scripts/PfMouseX/PfMouseX.yy",},},
