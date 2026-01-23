@@ -88,10 +88,10 @@ function PfDebugWindow(_configStruct = undefined)
                 displayHeight       = display_get_height();
                 displayFrequency    = display_get_frequency();
                 displayDPI          = display_get_dpi_x();
-                displayMarginLeft   = _system.__displayMarginLeft;
-                displayMarginTop    = _system.__displayMarginTop;
-                displayMarginRight  = _system.__displayMarginRight;
-                displayMarginBottom = _system.__displayMarginBottom;
+                displayMarginLeft   = __PfNotchGetLeft();
+                displayMarginTop    = __PfNotchGetTop();
+                displayMarginRight  = __PfNotchGetRight();
+                displayMarginBottom = __PfNotchGetBottom();
                 
             }
         },
