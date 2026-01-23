@@ -16,15 +16,15 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":-1,"filename":"PfNotch.ext","final":"","functions":[
+    {"$GMExtensionFile":"","%Name":"","constants":[],"copyToTargets":-1,"filename":"PfNotch.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"__PfNotchGetLeft","argCount":0,"args":[],"documentation":"","externalName":"NotchGetLeft","help":"","hidden":false,"kind":4,"name":"__PfNotchGetLeft","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"__PfNotchGetTop","argCount":0,"args":[],"documentation":"","externalName":"NotchGetTop","help":"","hidden":false,"kind":4,"name":"__PfNotchGetTop","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"__PfNotchGetRight","argCount":0,"args":[],"documentation":"","externalName":"NotchGetRight","help":"","hidden":false,"kind":4,"name":"__PfNotchGetRight","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"__PfNotchGetBottom","argCount":0,"args":[],"documentation":"","externalName":"NotchGetBottom","help":"","hidden":false,"kind":4,"name":"__PfNotchGetBottom","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":4,"name":"","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+      ],"init":"","kind":4,"name":"","order":[],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":null,
-  "hasConvertedCodeInjection":false,
+  "hasConvertedCodeInjection":true,
   "helpfile":"",
   "HTML5CodeInjection":"",
   "html5Props":false,

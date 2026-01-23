@@ -1,5 +1,8 @@
 @interface PfNotch : NSObject {}
 
--(double)GetNotchLeft;
+-(double)NotchGetLeft;
+-(double)NotchGetTop;
+-(double)NotchGetRight;
+-(double)NotchGetBottom;
 
 @end
