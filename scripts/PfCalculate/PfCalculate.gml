@@ -124,14 +124,18 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
     with(_configurationStruct)
     {
         var _fullscreen = PICTURE_FRAME_ON_DESKTOP? fullscreen : true;
+        var _windowHasMargins = PICTURE_FRAME_ON_MOBILE && _fullscreen;
+        
+        var _displayMarginWidth  = _system.__displayMarginLeft + _system.__displayMarginRight;
+        var _displayMarginHeight = _system.__displayMarginTop + _system.__displayMarginBottom;
         
         //If we're in fullscreen mode then use the whole display as the max window size
         if (_fullscreen)
         {
             var _windowWidthBig    = _currentDisplayWidth;
             var _windowHeightBig   = _currentDisplayHeight;
-            var _windowWidthSmall  = _windowWidthBig  - (_system.__displayMarginLeft + _system.__displayMarginRight);
-            var _windowHeightSmall = _windowHeightBig - (_system.__displayMarginTop + _system.__displayMarginBottom);
+            var _windowWidthSmall  = _windowWidthBig  - _displayMarginWidth;
+            var _windowHeightSmall = _windowHeightBig - _displayMarginHeight;
             
             //Can never resize the window if we're going into fullscreen
             _tryResizeWindow = false;
@@ -165,10 +169,10 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         ///////
         
         //Find the region that the application surface needs to fit into
-        if (surfaceAvoidNotch)
+        if (_fullscreen && surfaceAvoidNotch)
         {
-            var _surfaceRegionWidth  = _windowWidthSmall;
-            var _surfaceRegionHeight = _windowHeightSmall;
+            var _surfaceRegionWidth  = _windowWidthBig  - _displayMarginWidth;
+            var _surfaceRegionHeight = _windowHeightBig - _displayMarginHeight;
         }
         else
         {
@@ -242,8 +246,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         else
         {
             //Otherwise use the window dimenstions as they are
-            var _outWindowWidth  = _surfaceRegionWidth;
-            var _outWindowHeight = _surfaceRegionHeight;
+            var _outWindowWidth  = _windowWidthBig;
+            var _outWindowHeight = _windowHeightBig;
         }
         
         ///////
@@ -277,7 +281,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         var _surfacePostDrawY = floor(0.5*(_outWindowHeight - _surfacePostDrawHeight));
         
         //Correct for the display margins
-        if (_fullscreen && surfaceAvoidNotch)
+        if (_windowHasMargins && surfaceAvoidNotch)
         {
             _surfacePostDrawX += _system.__displayMarginLeft;
             _surfacePostDrawY += _system.__displayMarginTop;
@@ -294,7 +298,6 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             
             var _guiRegionWidth  = _outWindowWidth;
             var _guiRegionHeight = _outWindowHeight;
-            
         }
         else
         {
@@ -306,13 +309,13 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         }
         
         //Correct for the display margins
-        if (_fullscreen && guiAvoidNotch && (guiWindowStretch || (not surfaceAvoidNotch)))
+        if (_windowHasMargins && guiAvoidNotch && (guiWindowStretch || (not surfaceAvoidNotch)))
         {
             _outGuiX += _system.__displayMarginLeft;
             _outGuiY += _system.__displayMarginTop;
             
-            _guiRegionWidth  -= _system.__displayMarginLeft + _system.__displayMarginRight;
-            _guiRegionHeight -= _system.__displayMarginTop + _system.__displayMarginBottom;
+            _guiRegionWidth  -= _displayMarginWidth;
+            _guiRegionHeight -= _displayMarginHeight;
         }
         
         if (guiMode == 0)
@@ -426,15 +429,15 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             
             marginsVisible:  ((_surfacePostDrawX > 0) || (_surfacePostDrawY > 0) || (_surfacePostDrawWidth < _outWindowWidth) || (_surfacePostDrawHeight < _outWindowHeight)),
             
-            marginWestX1: _windowToGuiScaleX*(-_outGuiX),                 //Left side of the window
-            marginWestX2: _surfaceGuiX,                                   //Left side of the application surface
-            marginEastX1: _surfaceGuiX + _surfaceGuiWidth,                //Right side of the application surface
-            marginEastX2: _windowToGuiScaleX*(_windowWidth  - _outGuiX),  //Right side of the window
+            marginWestX1: _windowToGuiScaleX*(-_outGuiX),                  //Left side of the window
+            marginWestX2: _surfaceGuiX,                                    //Left side of the application surface
+            marginEastX1: _surfaceGuiX + _surfaceGuiWidth,                 //Right side of the application surface
+            marginEastX2: _windowToGuiScaleX*(_outWindowWidth - _outGuiX), //Right side of the window
             
-            marginNorthY1: _windowToGuiScaleY*(-_outGuiY),                //Top of the window
-            marginNorthY2: _surfaceGuiY,                                  //Top of the application surface
-            marginSouthY1: _surfaceGuiY + _surfaceGuiHeight,              //Bottom of the application surface
-            marginSouthY2: _windowToGuiScaleY*(_windowHeight - _outGuiY), //Bottom of the window
+            marginNorthY1: _windowToGuiScaleY*(-_outGuiY),                   //Top of the window
+            marginNorthY2: _surfaceGuiY,                                     //Top of the application surface
+            marginSouthY1: _surfaceGuiY + _surfaceGuiHeight,                 //Bottom of the application surface
+            marginSouthY2: _windowToGuiScaleY*(_outWindowHeight - _outGuiY), //Bottom of the window
         }
     }
 }
