@@ -10,7 +10,7 @@
   "androidProps":true,
   "androidsourcedir":"",
   "author":"",
-  "classname":"",
+  "classname":"PfNotch",
   "copyToTargets":12,
   "description":"",
   "exportToGame":true,
