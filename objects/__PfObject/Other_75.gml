@@ -4,22 +4,11 @@ if (async_load[? "type"] == "DisplayLayoutInfo")
 {
     with(__PfSystem())
     {
-        var _displayMarginLeft   = async_load[? "safeinsetleft"  ];
-        var _displayMarginTop    = async_load[? "safeinsettop"   ];
-        var _displayMarginRight  = async_load[? "safeinsetright" ];
-        var _displayMarginBottom = async_load[? "safeinsetbottom"];
+        __windowStateChanged = true;
         
-        if ((_displayMarginLeft   != __displayMarginLeft  )
-        ||  (_displayMarginTop    != __displayMarginTop   )
-        ||  (_displayMarginRight  != __displayMarginRight )
-        ||  (_displayMarginBottom != __displayMarginBottom))
-        {
-            __windowStateChanged = true;
-            
-            __displayMarginLeft   = _displayMarginLeft;
-            __displayMarginTop    = _displayMarginTop;
-            __displayMarginRight  = _displayMarginRight;
-            __displayMarginBottom = _displayMarginBottom;
-        }
+        __displayMarginLeft   = async_load[? "safeinsetleft"  ];
+        __displayMarginTop    = async_load[? "safeinsettop"   ];
+        __displayMarginRight  = async_load[? "safeinsetright" ];
+        __displayMarginBottom = async_load[? "safeinsetbottom"];
     }
 }
