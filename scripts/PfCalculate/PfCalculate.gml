@@ -132,10 +132,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         //If we're in fullscreen mode then use the whole display as the max window size
         if (_fullscreen)
         {
-            var _windowWidthBig    = _currentDisplayWidth;
-            var _windowHeightBig   = _currentDisplayHeight;
-            var _windowWidthSmall  = _windowWidthBig  - _displayMarginWidth;
-            var _windowHeightSmall = _windowHeightBig - _displayMarginHeight;
+            var _windowWidth  = _currentDisplayWidth;
+            var _windowHeight = _currentDisplayHeight;
             
             //Can never resize the window if we're going into fullscreen
             _tryResizeWindow = false;
@@ -151,17 +149,14 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             
             if (_tryResizeWindow)
             {
-                var _windowWidthBig  = windowWidth;
-                var _windowHeightBig = windowHeight;
+                var _windowWidth  = windowWidth;
+                var _windowHeight = windowHeight;
             }
             else
             {
-                var _windowWidthBig  = _currentWindowWidth;
-                var _windowHeightBig = _currentWindowHeight;
+                var _windowWidth  = _currentWindowWidth;
+                var _windowHeight = _currentWindowHeight;
             }
-            
-            var _windowWidthSmall  = _windowWidthBig;
-            var _windowHeightSmall = _windowHeightBig;
         }
         
         ///////
@@ -171,13 +166,13 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         //Find the region that the application surface needs to fit into
         if (_fullscreen && surfaceAvoidNotch)
         {
-            var _surfaceRegionWidth  = _windowWidthBig  - _displayMarginWidth;
-            var _surfaceRegionHeight = _windowHeightBig - _displayMarginHeight;
+            var _surfaceRegionWidth  = _windowWidth  - _displayMarginWidth;
+            var _surfaceRegionHeight = _windowHeight - _displayMarginHeight;
         }
         else
         {
-            var _surfaceRegionWidth  = _windowWidthBig;
-            var _surfaceRegionHeight = _windowHeightBig;
+            var _surfaceRegionWidth  = _windowWidth;
+            var _surfaceRegionHeight = _windowHeight;
         }
         
         var _cameraMinWidth  = (cameraMinWidth  > 0)? cameraMinWidth  : cameraTargetWidth;
@@ -246,8 +241,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         else
         {
             //Otherwise use the window dimenstions as they are
-            var _outWindowWidth  = _windowWidthBig;
-            var _outWindowHeight = _windowHeightBig;
+            var _outWindowWidth  = _windowWidth;
+            var _outWindowHeight = _windowHeight;
         }
         
         ///////
@@ -255,7 +250,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         ///////
         
         //Figure out the scaling factor that fits the application surface inside the window dimensions
-        var _surfacePostDrawScale = min(_outWindowWidth/_outViewWidth, _outWindowHeight/_outViewHeight);
+        var _surfacePostDrawScale = min(_surfaceRegionWidth/_outViewWidth, _surfaceRegionHeight/_outViewHeight);
         
         //If we're using pixel perfect scaling then drop down to the nearest integer scale
         if (surfacePixelPerfect && (_surfacePostDrawScale > 1)) _surfacePostDrawScale = floor(_surfacePostDrawScale);
@@ -265,8 +260,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         var _surfacePostDrawHeight = _surfacePostDrawScale*_outViewHeight;
         
         //Calculate the limits of the overscan box
-        var _overscanWidth  = windowOverscanScale*_outWindowWidth;
-        var _overscanHeight = windowOverscanScale*_outWindowHeight;
+        var _overscanWidth  = windowOverscanScale*_surfaceRegionWidth;
+        var _overscanHeight = windowOverscanScale*_surfaceRegionHeight;
         
         //Figure out another scaling factor if the application surface exceeds the overscan limits
         var _overscanCorrectionScale = min(1, _overscanWidth/_surfacePostDrawWidth, _overscanHeight/_surfacePostDrawHeight);
@@ -277,8 +272,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         _surfacePostDrawHeight = floor(_surfacePostDrawScale*_outViewHeight);
         
         //Centre the application surface in the window
-        var _surfacePostDrawX = floor(0.5*(_outWindowWidth  - _surfacePostDrawWidth ));
-        var _surfacePostDrawY = floor(0.5*(_outWindowHeight - _surfacePostDrawHeight));
+        var _surfacePostDrawX = floor(0.5*(_surfaceRegionWidth  - _surfacePostDrawWidth ));
+        var _surfacePostDrawY = floor(0.5*(_surfaceRegionHeight - _surfacePostDrawHeight));
         
         //Correct for the display margins
         if (_windowHasMargins && surfaceAvoidNotch)
