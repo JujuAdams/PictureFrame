@@ -85,13 +85,13 @@
 ///     the GUI layer will be stretched over the application surface portion of the window.
 /// 
 /// .guiMode
-///     Selects the logic used to determine the GUI layer's width and height. The default value is
-///     `1` which will cause the GUI layer size to be the same as the camera. This variable must be
-///     set to one of the following values:
+///     Selects the logic used to determine the GUI layer's coordinate space width and height. The
+///     default value is `1` which will cause the GUI layer size to be the same as the camera. This
+///     variable must be set to one of the following values:
 ///         `0` = GUI size is the unadjusted windowspace size
 ///         `1` = GUI size is the same as the camera
 ///         `2` = GUI size is the same as the application surface / view
-///         `3` = GUI size is equal to the target camera size (this may sometimes stretch the GUI)
+///         `3` = GUI size is equal to the target camera size (this often stretches GUI graphics)
 ///         `4` = GUI size stretches the target GUI width and keeps the target GUI height constant
 ///         `5` = GUI size stretches the target GUI height and keeps the target GUI width constant
 ///         `6` = PictureFrame decides which target GUI axis to change and keeps the other
@@ -104,6 +104,23 @@
 ///     Scaling factor to apply to graphics drawn on the GUI layer. To apply no scaling, use a
 ///     value of `1`. Increasing this value will, perhaps counter-intuitively, reduce the GUI
 ///     layer's width and height.
+/// 
+/// .guiAvoidNotch
+///     Whether the GUI layer's coordinate space should avoid the device's notch or camera cut-out.
+///     You will still be able to draw GUI graphics in areas of the display around the notch so be
+///     careful with how you draw graphics on the GUI layer.
+///     
+///     N.B. If you have this variable to set `false` and are running on Android, please ensure
+///          that you have the "Display Layout" option set to `LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS`
+///          in your project's Game Options.
+/// 
+/// .surfaceAvoidNotch
+///     Whether the application surface should avoid the device's notch or camera cut-out. This
+///     will slightly reduce the available display area for the application surface.
+///     
+///     N.B. If you have this variable to set `false` and are running on Android, please ensure
+///          that you have the "Display Layout" option set to `LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS`
+///          in your project's Game Options.
 /// 
 /// .surfacePixelPerfect
 ///     Determines whether the scaling factor applied to the application surface when drawn to the
