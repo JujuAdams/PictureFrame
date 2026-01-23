@@ -153,8 +153,8 @@ function PfConfigGeneral()
         
         guiWindowStretch: false,
         guiMode:          3,
-        guiTargetWidth:   display_get_gui_width(),
-        guiTargetHeight:  display_get_gui_height(),
+        guiTargetWidth:   __PF_display_get_gui_width(),
+        guiTargetHeight:  __PF_display_get_gui_height(),
         guiScale:         1,
         guiAvoidNotch:    true,
         

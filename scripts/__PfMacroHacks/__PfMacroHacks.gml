@@ -8,6 +8,8 @@
 #macro window_views_mouse_get_y    __PfWindowViewsMouseGetY
 #macro window_view_mouse_get_x     __PfWindowViewMouseGetX
 #macro window_view_mouse_get_y     __PfWindowViewMouseGetY
+#macro display_get_gui_width       __PfDisplayGetGuiWidth
+#macro display_get_gui_height      __PfDisplayGetGuiHeight
 
 #macro __PF_mouse_x                    window_views_mouse_get_x() //Using mouse_x here causes an infinite loop
 #macro __PF_mouse_y                    window_views_mouse_get_y() //Using mouse_y here causes an infinite loop
@@ -15,6 +17,8 @@
 #macro __PF_window_views_mouse_get_y   window_views_mouse_get_y
 #macro __PF_window_view_mouse_get_x    window_view_mouse_get_x
 #macro __PF_window_view_mouse_get_y    window_view_mouse_get_y
+#macro __PF_display_get_gui_width      display_get_gui_width 
+#macro __PF_display_get_gui_height     display_get_gui_height
 
 function __PfDeviceMouseX(_device)
 {
@@ -101,5 +105,33 @@ function __PfWindowViewMouseGetY(_view)
     else
     {
         return __PF_window_view_mouse_get_y(_view);
+    }
+}
+
+function __PfDisplayGetGuiWidth()
+{
+    static _system = __PfSystem();
+    
+    if (not PICTURE_FRAME_FIX_NATIVE_DISPLAY_GUI_FUNCTIONS)
+    {
+        return __PF_display_get_gui_width();
+    }
+    else
+    {
+        return _system.__layoutStruct.guiWidth;
+    }
+}
+
+function __PfDisplayGetGuiHeight()
+{
+    static _system = __PfSystem();
+    
+    if (not PICTURE_FRAME_FIX_NATIVE_DISPLAY_GUI_FUNCTIONS)
+    {
+        return __PF_display_get_gui_height();
+    }
+    else
+    {
+        return _system.__layoutStruct.guiHeight;
     }
 }

@@ -26,3 +26,15 @@ with(PfGetAppliedLayoutStruct())
         draw_set_alpha(1);
     }
 }
+
+draw_set_color(c_red);
+draw_circle(10, 10, 10, false);
+draw_set_color(c_lime);
+draw_circle(display_get_gui_width() - 10, 10, 10, false);
+draw_set_color(c_blue);
+draw_circle(10, display_get_gui_height() - 10, 10, false);
+draw_set_color(c_yellow);
+draw_circle(display_get_gui_width() - 10, display_get_gui_height() - 10, 10, false);
+draw_set_color(c_white);
+
+draw_text(10, 10, $"{display_get_gui_width()},{display_get_gui_height()}");

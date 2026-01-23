@@ -74,8 +74,8 @@ function PfDebugWindow(_configStruct = undefined)
                 appSurfWidth  = surface_get_width(application_surface);
                 appSurfHeight = surface_get_height(application_surface);
                 
-                guiWidth  = display_get_gui_width();
-                guiHeight = display_get_gui_height();
+                guiWidth  = __PF_display_get_gui_width();
+                guiHeight = __PF_display_get_gui_height();
                 
                 windowX          = window_get_x();
                 windowY          = window_get_y();

@@ -14,3 +14,11 @@
 /// to operate using the normal native GameMaker behaviour.
 
 #macro PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS  true
+
+/// GameMaker's native GUI layer width/height getter functions have unfortunate behaviour that
+/// makes them return incorrect values after calling `display_set_gui_maximize()`. This means
+/// `display_get_gui_width()` and `display_get_gui_height()` will return inaccurate values after
+/// calling `PfApply()`. Using a similar method to above, PictureFrame can automatically fix
+/// `display_get_gui_width()` and `display_get_gui_height()` for you. 
+
+#macro PICTURE_FRAME_FIX_NATIVE_DISPLAY_GUI_FUNCTIONS  true
