@@ -1,6 +1,6 @@
 {
   "$GMExtension":"",
-  "%Name":"PfNotch",
+  "%Name":"__PfNotch",
   "androidactivityinject":null,
   "androidclassname":"PfNotch",
   "androidcodeinjection":"",
@@ -42,7 +42,7 @@
   "maccompilerflags":"",
   "maclinkerflags":"",
   "macsourcedir":"",
-  "name":"PfNotch",
+  "name":"__PfNotch",
   "options":[],
   "optionsFile":"options.json",
   "packageId":"",
