@@ -107,8 +107,8 @@
 /// 
 /// .guiAvoidNotch
 ///     Whether the GUI layer's coordinate space should avoid the device's notch or camera cut-out.
-///     You will still be able to draw GUI graphics in areas of the display around the notch so be
-///     careful with how you draw graphics on the GUI layer.
+///     You will still be able to draw GUI graphics in areas of the display around the notch if you
+///     use negative coordinates etc. so be careful with how you draw graphics on the GUI layer.
 ///     
 ///     N.B. If you have this variable to set `false` and are running on Android, please ensure
 ///          that you have the "Display Layout" option set to `LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS`

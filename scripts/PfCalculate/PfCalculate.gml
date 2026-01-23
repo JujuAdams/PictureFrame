@@ -313,29 +313,43 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         
         if (guiWindowStretch)
         {
-            var _outGuiX = 0;
-            var _outGuiY = 0;
-            
-            var _guiRegionWidth  = _outWindowWidth;
-            var _guiRegionHeight = _outWindowHeight;
+            //Correct for the display margins
+            if (_displayHasMargins && guiAvoidNotch)
+            {
+                var _outGuiX = _displayMarginLeft;
+                var _outGuiY = _displayMarginTop;
+                
+                var _guiRegionWidth  = _outWindowWidth  - _displayMarginWidth;
+                var _guiRegionHeight = _outWindowHeight - _displayMarginHeight;
+            }
+            else
+            {
+                var _outGuiX = 0;
+                var _outGuiY = 0;
+                
+                var _guiRegionWidth  = _outWindowWidth;
+                var _guiRegionHeight = _outWindowHeight;
+            }
         }
         else
         {
-            var _outGuiX = _surfacePostDrawX;
-            var _outGuiY = _surfacePostDrawY;
-            
-            var _guiRegionWidth  = _surfacePostDrawWidth;
-            var _guiRegionHeight = _surfacePostDrawHeight;
-        }
-        
-        //Correct for the display margins
-        if (_displayHasMargins && guiAvoidNotch && (guiWindowStretch || (not surfaceAvoidNotch)))
-        {
-            _outGuiX += _displayMarginLeft;
-            _outGuiY += _displayMarginTop;
-            
-            _guiRegionWidth  -= _displayMarginWidth;
-            _guiRegionHeight -= _displayMarginHeight;
+            //Correct for the display margins
+            if (_displayHasMargins && guiAvoidNotch)
+            {
+                var _outGuiX = max(_surfacePostDrawX, _displayMarginLeft);
+                var _outGuiY = max(_surfacePostDrawY, _displayMarginTop);
+                
+                var _guiRegionWidth  = min(_surfacePostDrawX + _surfacePostDrawWidth,  _outWindowWidth  - _displayMarginRight ) - _outGuiX;
+                var _guiRegionHeight = min(_surfacePostDrawY + _surfacePostDrawHeight, _outWindowHeight - _displayMarginBottom) - _outGuiY;
+            }
+            else
+            {
+                var _outGuiX = _surfacePostDrawX;
+                var _outGuiY = _surfacePostDrawY;
+                
+                var _guiRegionWidth  = _surfacePostDrawWidth;
+                var _guiRegionHeight = _surfacePostDrawHeight;
+            }
         }
         
         if (guiMode == 0)
