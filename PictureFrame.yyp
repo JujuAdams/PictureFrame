@@ -26,7 +26,7 @@
   },
   "name":"PictureFrame",
   "resources":[
-    {"id":{"name":"__PfObject","path":"objects/__PfObject/__PfObject.yy",},},
+    {"id":{"name":"PfNotch","path":"extensions/PfNotch/PfNotch.yy",},},
     {"id":{"name":"oDemo","path":"objects/oDemo/oDemo.yy",},},
     {"id":{"name":"oDemoSmoothCamera","path":"objects/oDemoSmoothCamera/oDemoSmoothCamera.yy",},},
     {"id":{"name":"oFollowCircle","path":"objects/oFollowCircle/oFollowCircle.yy",},},

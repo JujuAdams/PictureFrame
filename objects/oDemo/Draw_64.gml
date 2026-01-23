@@ -37,4 +37,4 @@ draw_set_color(c_yellow);
 draw_circle(display_get_gui_width() - 10, display_get_gui_height() - 10, 10, false);
 draw_set_color(c_white);
 
-draw_text(10, 10, $"{display_get_gui_width()},{display_get_gui_height()}");
+draw_text(10, 10, $"{display_get_gui_width()},{display_get_gui_height()}\n{__PfNotchGetLeft()},{__PfNotchGetTop()},{__PfNotchGetRight()},{__PfNotchGetBottom()}");

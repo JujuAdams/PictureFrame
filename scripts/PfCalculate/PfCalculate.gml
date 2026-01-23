@@ -119,15 +119,17 @@
 
 function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFullscreen = window_get_fullscreen(), _currentWindowWidth = window_get_width(), _currentWindowHeight = window_get_height(), _currentDisplayWidth = display_get_width(), _currentDisplayHeight = display_get_height())
 {
-    static _system = __PfSystem();
-    
     with(_configurationStruct)
     {
-        var _fullscreen = PICTURE_FRAME_ON_DESKTOP? fullscreen : true;
-        var _windowHasMargins = PICTURE_FRAME_ON_MOBILE && _fullscreen;
+        var _displayMarginLeft   = __PfNotchGetLeft();
+        var _displayMarginTop    = __PfNotchGetTop();
+        var _displayMarginRight  = __PfNotchGetRight();
+        var _displayMarginBottom = __PfNotchGetBottom();
+        var _displayMarginWidth  = _displayMarginLeft + _displayMarginRight;
+        var _displayMarginHeight = _displayMarginTop + _displayMarginBottom;
         
-        var _displayMarginWidth  = _system.__displayMarginLeft + _system.__displayMarginRight;
-        var _displayMarginHeight = _system.__displayMarginTop + _system.__displayMarginBottom;
+        var _fullscreen = PICTURE_FRAME_ON_DESKTOP? fullscreen : true;
+        var _displayHasMargins = PICTURE_FRAME_ON_MOBILE && _fullscreen;
         
         //If we're in fullscreen mode then use the whole display as the max window size
         if (_fullscreen)
@@ -272,14 +274,37 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         _surfacePostDrawHeight = floor(_surfacePostDrawScale*_outViewHeight);
         
         //Centre the application surface in the window
-        var _surfacePostDrawX = floor(0.5*(_surfaceRegionWidth  - _surfacePostDrawWidth ));
-        var _surfacePostDrawY = floor(0.5*(_surfaceRegionHeight - _surfacePostDrawHeight));
+        var _surfacePostDrawX = floor(0.5*(_outWindowWidth - _surfacePostDrawWidth));
+        var _surfacePostDrawY = floor(0.5*(_outWindowHeight - _surfacePostDrawHeight));
         
-        //Correct for the display margins
-        if (_windowHasMargins && surfaceAvoidNotch)
+        //Correct for the display margins. This code will try to keep the application surface in
+        //the centre of the display, integrating the notch area into the black bars around the edge
+        //of the surface. However, if the application surface overlaps the notch then the surface
+        //will be pushed to one side or another to avoid unsightly asymmetric black bars (instead
+        //there will be one big black bar where the notch is).
+        if (_displayHasMargins && surfaceAvoidNotch)
         {
-            _surfacePostDrawX += _system.__displayMarginLeft;
-            _surfacePostDrawY += _system.__displayMarginTop;
+            if (_surfacePostDrawX < _displayMarginLeft)
+            {
+                //We overlap the notch on the left, force ourselves all the way to the right
+                _surfacePostDrawX = _currentDisplayWidth - _displayMarginRight - _surfacePostDrawWidth;
+            }
+            else if (_surfacePostDrawX + _surfacePostDrawWidth > _currentDisplayWidth - _displayMarginRight)
+            {
+                //We overlap the notch on the right, force ourselves all the way to the left
+                _surfacePostDrawX = 0;
+            }
+            
+            if (_surfacePostDrawY < _displayMarginTop)
+            {
+                //We overlap the notch at the top, force ourselves all the way to the bottom
+                _surfacePostDrawY = _currentDisplayHeight - _displayMarginBottom - _surfacePostDrawHeight;
+            }
+            else if (_surfacePostDrawY + _surfacePostDrawHeight > _currentDisplayHeight - _displayMarginBottom)
+            {
+                //We overlap the notch at the bottom, force ourselves all the way to the top
+                _surfacePostDrawY = 0;
+            }
         }
         
         ///////
@@ -304,10 +329,10 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         }
         
         //Correct for the display margins
-        if (_windowHasMargins && guiAvoidNotch && (guiWindowStretch || (not surfaceAvoidNotch)))
+        if (_displayHasMargins && guiAvoidNotch && (guiWindowStretch || (not surfaceAvoidNotch)))
         {
-            _outGuiX += _system.__displayMarginLeft;
-            _outGuiY += _system.__displayMarginTop;
+            _outGuiX += _displayMarginLeft;
+            _outGuiY += _displayMarginTop;
             
             _guiRegionWidth  -= _displayMarginWidth;
             _guiRegionHeight -= _displayMarginHeight;
