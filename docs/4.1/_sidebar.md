@@ -10,6 +10,7 @@
 -    [`PfConfigGeneral()`](PfConfigGeneral)
 -    [`PfConfigPixelArt()`](PfConfigPixelArt)
 -    [`PfConfigHighRes()`](PfConfigHighRes)
+-    [`PfConfigMixels()`](PfConfigMixels)
 -    [`PfConfigSetWindowVars()`](PfConfigSetWindowVars)
 -    [`PfApply()`](PfApply)
 -    [`PfGetAppliedConfigStruct()`](PfGetAppliedConfigStruct)
