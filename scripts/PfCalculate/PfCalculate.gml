@@ -177,32 +177,34 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             var _surfaceRegionHeight = _windowHeight;
         }
         
+        //TODO - Remove target width/height, rename target to min
         var _cameraMinWidth  = (cameraMinWidth  > 0)? cameraMinWidth  : cameraTargetWidth;
         var _cameraMinHeight = (cameraMinHeight > 0)? cameraMinHeight : cameraTargetHeight;
         var _cameraMaxWidth  = (cameraMaxWidth  > 0)? cameraMaxWidth  : cameraTargetWidth;
         var _cameraMaxHeight = (cameraMaxHeight > 0)? cameraMaxHeight : cameraTargetHeight;
         
-        //Figure out the scaling factor that fits us inside the target bounds
-        //If we've using a pixel-perfect view then floor the scale to ensure that the view is a whole multiple of the target width/height
+        //Find the scaling factor that fits the target camera size inside the surface region
         var _targetScale = min(_surfaceRegionWidth/cameraTargetWidth, _surfaceRegionHeight/cameraTargetHeight);
-        if (viewPixelPerfect) _targetScale = floor(_targetScale);
-        var _outCameraWidth  = _surfaceRegionWidth/_targetScale;
-        var _outCameraHeight = _surfaceRegionHeight/_targetScale;
+        _targetScale = (viewPixelPerfect && (_targetScale > 1))? floor(_targetScale) : _targetScale;
         
-        //Figure out the scaling factor that fits us outside the minimum bounds, if needed
-        //If the scaling factor is less than or equal to 1 then the camera already fits outside the minimum bounds and no scaling is needed
-        //We apply the same scaling factor in both axes to try to keep the aspect ratio consistent
-        var _minScale = max(1, _cameraMinWidth/_outCameraWidth, _cameraMinHeight/_outCameraHeight);
-        _outCameraWidth  = max(_minScale*_outCameraWidth,  _cameraMinWidth);
-        _outCameraHeight = max(_minScale*_outCameraHeight, _cameraMinHeight);
-        
-        //Work out how much extra space we have and add that to the camera
-        _outCameraWidth  += max(0, (_surfaceRegionWidth  / _targetScale) - _outCameraWidth);
-        _outCameraHeight += max(0, (_surfaceRegionHeight / _targetScale) - _outCameraHeight);
-        
-        //Apply max size limits and round camera bounds down to the nearest whole pixel
-        _outCameraWidth  = floor(min(_outCameraWidth,  _cameraMaxWidth));
-        _outCameraHeight = floor(min(_outCameraHeight, _cameraMaxHeight));
+        if (surfacePixelPerfect)
+        {
+            //Greedily eat up extra space
+            var _outCameraWidth  = floor(min(_surfaceRegionWidth/_targetScale,  _cameraMaxWidth));
+            var _outCameraHeight = floor(min(_surfaceRegionHeight/_targetScale, _cameraMaxHeight));
+        }
+        else
+        {
+            //The surface will eventually be drawn stretched over the entire surface region. This
+            //means we get better coverage by keeping the aspect ratio of the surface the same as
+            //the region. To do this, we fit the surface region inside the max bounds of the camera
+            _targetScale = max(_surfaceRegionWidth/_cameraMaxWidth, _surfaceRegionHeight/_cameraMaxHeight);
+            
+            //TODO - Handle edge case where the generated camera dimensions violate the minimum width/height
+            
+            var _outCameraWidth  = floor(_surfaceRegionWidth/_targetScale);
+            var _outCameraHeight = floor(_surfaceRegionHeight/_targetScale);
+        }
         
         ///////
         // View
