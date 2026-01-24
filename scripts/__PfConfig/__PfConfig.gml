@@ -19,6 +19,6 @@
 /// makes them return incorrect values after calling `display_set_gui_maximize()`. This means
 /// `display_get_gui_width()` and `display_get_gui_height()` will return inaccurate values after
 /// calling `PfApply()`. Using a similar method to above, PictureFrame can automatically fix
-/// `display_get_gui_width()` and `display_get_gui_height()` for you. 
+/// `display_get_gui_width()` and `display_get_gui_height()` for you if you set this macro to `true`. 
 
 #macro PICTURE_FRAME_FIX_NATIVE_DISPLAY_GUI_FUNCTIONS  true
