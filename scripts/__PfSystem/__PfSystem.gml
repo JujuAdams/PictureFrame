@@ -1,5 +1,7 @@
 // Feather disable all
 
+#macro __PF_IOS_FUDGE_FACTOR  0.66
+
 __PfSystem();
 
 function __PfSystem()
