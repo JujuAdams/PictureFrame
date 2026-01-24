@@ -152,7 +152,7 @@ function PfConfigGeneral()
         windowOverscanScale: 1,
         
         guiWindowStretch: false,
-        guiMode:          3,
+        guiMode:          6,
         guiTargetWidth:   __PF_display_get_gui_width(),
         guiTargetHeight:  __PF_display_get_gui_height(),
         guiScale:         1,
