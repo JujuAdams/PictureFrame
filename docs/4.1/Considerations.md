@@ -8,9 +8,9 @@ GameMaker offers a lot of relatively low-level tools for customising the render 
 
 PictureFrame has a handful of version compatibility requirements:
 
-- You must use GameMaker 2024.14 or later.
-- You must use Android SDK 34 or later.
-- You must use iOS 11 or later.
+- You must use GameMaker 2024.14 or later
+- You must use Android SDK 34 or later. When running on Android you must set the “Display Layout” option set to `LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS` in your project’s Game Options
+- You must use iOS 11 or later
 
 Outside of this, PictureFrame is only limited by whatever GameMaker mandates.
 
