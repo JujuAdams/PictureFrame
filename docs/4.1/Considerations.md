@@ -2,11 +2,17 @@
 
 &nbsp;
 
+GameMaker offers a lot of relatively low-level tools for customising the render pipeline. You can adjust cameras, view, the application surface, the GUI layer coordinate space, window dimensions, window borders, display update frequency ... I'm probably forgetting a few. The point of PictureFrame is to avoid having to tweak all of these values which is always time-consuming and often frustrating, especially when deploying across multiple platforms. However, part of the trade-off is that PictureFrame is dealing with a lot of systems and as such expects things to be set up in a certain way. This page goes through the assumptions that PictureFrame makes.
+
+&nbsp;
+
 PictureFrame has a handful of version compatibility requirements:
 
 - You must use GameMaker 2024.14 or later.
 - You must use Android SDK 34 or later.
 - You must use iOS 11 or later.
+
+Outside of this, PictureFrame is only limited by whatever GameMaker mandates.
 
 &nbsp;
 
