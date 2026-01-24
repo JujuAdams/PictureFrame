@@ -8,7 +8,7 @@
 {
     if (@available(iOS 11.0, *))
     {
-        return [[UIScreen mainScreen] nativeScale]*UIApplication.sharedApplication.keyWindow.safeAreaInsets.left;
+        return UIApplication.sharedApplication.keyWindow.safeAreaInsets.left;
     }
     else
     {
@@ -20,7 +20,7 @@
 {
     if (@available(iOS 11.0, *))
     {
-        return [[UIScreen mainScreen] nativeScale]*UIApplication.sharedApplication.keyWindow.safeAreaInsets.top;
+        return UIApplication.sharedApplication.keyWindow.safeAreaInsets.top;
     }
     else
     {
@@ -32,7 +32,7 @@
 {
     if (@available(iOS 11.0, *))
     {
-        return [[UIScreen mainScreen] nativeScale]*UIApplication.sharedApplication.keyWindow.safeAreaInsets.right;
+        return UIApplication.sharedApplication.keyWindow.safeAreaInsets.right;
     }
     else
     {
@@ -44,7 +44,31 @@
 {
     if (@available(iOS 11.0, *))
     {
-        return [[UIScreen mainScreen] nativeScale]*UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom;
+        return UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom;
+    }
+    else
+    {
+        return 0.0;
+    }
+}
+
+-(double)ViewGetWidth
+{
+    if (@available(iOS 11.0, *))
+    {
+        return UIApplication.sharedApplication.keyWindow.frame.size.width;
+    }
+    else
+    {
+        return 0.0;
+    }
+}
+
+-(double)ViewGetHeight
+{
+    if (@available(iOS 11.0, *))
+    {
+        return UIApplication.sharedApplication.keyWindow.frame.size.height;
     }
     else
     {

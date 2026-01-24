@@ -16,12 +16,14 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"","%Name":"","constants":[],"copyToTargets":-1,"filename":"PfNotch.ext","final":"","functions":[
-        {"$GMExtensionFunction":"","%Name":"__PfNotchGetLeft","argCount":0,"args":[],"documentation":"","externalName":"NotchGetLeft","help":"","hidden":false,"kind":4,"name":"__PfNotchGetLeft","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-        {"$GMExtensionFunction":"","%Name":"__PfNotchGetTop","argCount":0,"args":[],"documentation":"","externalName":"NotchGetTop","help":"","hidden":false,"kind":4,"name":"__PfNotchGetTop","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-        {"$GMExtensionFunction":"","%Name":"__PfNotchGetRight","argCount":0,"args":[],"documentation":"","externalName":"NotchGetRight","help":"","hidden":false,"kind":4,"name":"__PfNotchGetRight","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-        {"$GMExtensionFunction":"","%Name":"__PfNotchGetBottom","argCount":0,"args":[],"documentation":"","externalName":"NotchGetBottom","help":"","hidden":false,"kind":4,"name":"__PfNotchGetBottom","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":4,"name":"","order":[],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":-1,"filename":"PfNotch.ext","final":"","functions":[
+        {"$GMExtensionFunction":"","%Name":"__PfNotchGetLeftRaw","argCount":0,"args":[],"documentation":"","externalName":"NotchGetLeft","help":"","hidden":false,"kind":4,"name":"__PfNotchGetLeftRaw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+        {"$GMExtensionFunction":"","%Name":"__PfNotchGetTopRaw","argCount":0,"args":[],"documentation":"","externalName":"NotchGetTop","help":"","hidden":false,"kind":4,"name":"__PfNotchGetTopRaw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+        {"$GMExtensionFunction":"","%Name":"__PfNotchGetRightRaw","argCount":0,"args":[],"documentation":"","externalName":"NotchGetRight","help":"","hidden":false,"kind":4,"name":"__PfNotchGetRightRaw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+        {"$GMExtensionFunction":"","%Name":"__PfNotchGetBottomRaw","argCount":0,"args":[],"documentation":"","externalName":"NotchGetBottom","help":"","hidden":false,"kind":4,"name":"__PfNotchGetBottomRaw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+        {"$GMExtensionFunction":"","%Name":"__PfGetDisplayWidthRaw","argCount":0,"args":[],"documentation":"","externalName":"ViewGetWidth","help":"","hidden":false,"kind":4,"name":"__PfGetDisplayWidthRaw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+        {"$GMExtensionFunction":"","%Name":"__PfGetDisplayHeightRaw","argCount":0,"args":[],"documentation":"","externalName":"ViewGetHeight","help":"","hidden":false,"kind":4,"name":"__PfGetDisplayHeightRaw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+      ],"init":"","kind":4,"name":"","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":null,
   "hasConvertedCodeInjection":true,
