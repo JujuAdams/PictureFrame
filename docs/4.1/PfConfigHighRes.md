@@ -8,15 +8,17 @@
 
 |Name               |Datatype|Purpose                                                                                                                                                                                 |
 |-------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`targetWidth`      |number  |                                                                                                                                                                                        |
-|`targetHeight`     |number  |                                                                                                                                                                                        |
+|`targetWidth`      |number  |Target "ideal" camera width in roomspace                                                                                                                                                |
+|`targetHeight`     |number  |Target "ideal" camera height in roomspace                                                                                                                                               |
 |`[fullscreen]`     |boolean |Fullscreen state for the game. This value is only relevant on desktop platforms (Windows, MacOS, Linux). If not specified, the fullscreen state for the game will not be changed        |
 |`[cameraMinWidth]` |number  |Minimum width for the camera. This is the "safe area" that is guaranteed to be visible                                                                                                  |
 |`[cameraMinHeight]`|number  |Minimum height for the camera. This is the "safe area" that is guaranteed to be visible                                                                                                 |
 |`[cameraMaxWidth]` |number  |Maximum width for the camera. This is an expansion zone that the camera can grow into to adapt to different resolutions and aspect ratios. If not specified, the minimum width is used  |
 |`[cameraMaxHeight]`|number  |Maximum height for the camera. This is an expansion zone that the camera can grow into to adapt to different resolutions and aspect ratios. If not specified, the minimum height is used|
 
-Convenience function that returns a configuration struct set up for high resolution rendering. This function will try to stretch the size of the GUI layer so that its size is close to the target width/height but adjusted to match the aspect ratio of the camera (`.guiMode` is set to `6`). You can edit values in the returned struct if you'd like and it will obey all the same rules as a configuration struct returned by `PfConfigGeneral()`.
+Convenience function that returns a configuration struct set up for high resolution rendering. This function will try to stretch the size of the GUI layer so that its size is close to the target width/height but adjusted to match the aspect ratio of the camera (`.guiMode` is set to `6`).
+
+You can edit values in the returned struct if you'd like and it will obey all the same rules as a configuration struct returned by `PfConfigGeneral()`.
 
 !> Because `PfConfigHighRes()` returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
 
