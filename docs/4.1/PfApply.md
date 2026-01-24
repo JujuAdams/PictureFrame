@@ -108,9 +108,9 @@ Variables that the layout struct holds are as follows:
 |`.viewScale`                                       |number  |Scaling factor between the camera and the view. A scaling factor of 2 means that there will be 2 pixels on the view for every 1 pixel in roomspace on the camera. A view scale of exactly 1 is therefore a pixel perfect view|
 |`.viewOverscan`                                    |number  |Number of extra pixels, in viewspace, that have been added around the edges of the view. This is equal to `.cameraOverscan` multiplied by `.viewScale` and is provided for convenience|
 |`.fullscreen`                                      |boolean |Whether the game should be in fullscreen mode. This value is only relevant on desktop platforms (Windows, MacOS, Linux). On other platforms, this will always be `true`|
-|`.windowWidth`<br>`windowHeight`                   |number  |Dimensions of the window. If the `.fullscreen` variable (see above) is `true` then these values will be the same as the display's width and height|
-|`.guiX`<br>`guiY`                                  |number  |Coordinates of the top-left corner of the GUI layer in windowspace|
-|`.guiWidth`<br>`guiHeight`                         |number  |Width and height of the GUI layer|
+|`.windowWidth`<br>`.windowHeight`                  |number  |Dimensions of the window. If the `.fullscreen` variable (see above) is `true` then these values will be the same as the display's width and height|
+|`.guiX`<br>`.guiY`                                 |number  |Coordinates of the top-left corner of the GUI layer in windowspace|
+|`.guiWidth`<br>`.guiHeight`                        |number  |Width and height of the GUI layer|
 |`.surfacePixelPerfect`                             |boolean |Whether the application surface should be drawn as pixel perfect where possible. This will cause `PfPostDrawAppSurface()` to default to no texture filtering to preserve clean pixel edges|
 |`.surfacePostDrawScale`                            |number  |Scaling factor between the view and the window (backbuffer). This includes the contribution from the overscan scale from the configuration struct|
 |`.surfacePostDrawX`<br>`.surfacePostDrawY`         |number  |Draw position for the application surface in the Post Draw event (i.e. the coordinates in the window/backbuffer). These values are in "window space' and will not necessarily line up with roomspace coordinates|
