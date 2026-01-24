@@ -4,13 +4,27 @@
 
 **What platforms does PictureFrame support?**
 
-PictureFrame supports Windows, MacOS, Linux, Nintendo Switch, Sony PlayStation 4/5, Xbox Series X/S, iOS, tvOS, and Android. You might run into edge cases on platforms that I don't regularly test; please [report any bugs](https://github.com/JujuAdams/PictureFrame/issues) if and when you find them.
+PictureFrame supports Windows, MacOS, Linux, Nintendo Switch, Sony PlayStation 4/5, Xbox Series X/S, iOS, tvOS, and Android. PictureFrame does not support HTML5, Opera GX, or Reddit. You might run into edge cases on platforms that I don't regularly test; please [report any bugs](https://github.com/JujuAdams/PictureFrame/issues) if and when you find them.
 
 &nbsp;
 
 **What versions of GameMaker does PictureFrame support?**
 
 PictureFrame supports GameMaker 2024.14, and in theory supports every version of GameMaker later than that. Later versions of GameMaker may change functionality in a way that PictureFrame is not forwards-compatible with, but PictureFrame uses only native GameMaker functions so is in the best possible position for long-term compatibility.
+
+&nbsp;
+
+**Are there any platform-specific SDK versions I have to use?**
+
+PictureFrame requires that you use Android SDK 34 and iOS 11 for your games. Other platforms have no limitations (other than what GameMaker itself enforces).
+
+&nbsp;
+
+**Is PictureFrame compatible with post-processing effects and shaders?**
+
+Yes. The standard way to use post-processing effects in GameMaker is to set a shader and draw the application surface manually. If you have used [`PfApply()`](PfApply) (which is the typical use case) then it is required that you call [`PfPostDrawAppSurface()`](PfPostDrawAppSurface) in a Post-Draw event. All this function really does is draw a surface. To use post-processing effects you should set a shader before calling `PfPostDrawAppSurface()` and the shader will be applied to the drawn surface.
+
+If you haven't used `PfApply()` then post-processing effects will work as normal.
 
 &nbsp;
 
