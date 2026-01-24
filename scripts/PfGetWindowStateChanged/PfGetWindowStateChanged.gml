@@ -7,6 +7,13 @@
 /// where a device rotation to and from landscape and portrait is reflected as a window size
 /// change.
 /// 
+/// Window state that is tracked is:
+/// 
+/// - Window width/height
+/// - Fullscreen state
+/// - Device orientation (on mobile devices)
+/// - Device inset areas e.g. for notch or display cutouts
+/// 
 /// Example:
 /// 
 ///   if (PfGetWindowStateChanged())
