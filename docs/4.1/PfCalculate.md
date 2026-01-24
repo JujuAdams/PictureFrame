@@ -10,21 +10,21 @@
 |-----------------------|--------|------------------------------------------------------------------------------------------------------------------|
 |`configStruct`         |struct  |PictureFrame configuration struct to calculate pipeline values for                                                |
 |`[tryResizeWindow]`    |boolean |Whether to allow resizing of the game window to fit the configuration struct. If not specified defaults to `false`|
-|`[isFullscreen]`       |boolean |                                                                                                                  |
-|`[currentWindowWidth]` |number  |                                                                                                                  |
-|`[currentWindowHeight]`|number  |                                                                                                                  |
-|`[displayWidth]`       |number  |                                                                                                                  |
-|`[displayHeight]`      |number  |                                                                                                                  |
+|`[isFullscreen]`       |boolean |Overrides the current fullscreen state used for calculations                                                      |
+|`[currentWindowWidth]` |number  |Overrides the current window width used for calculations                                                          |
+|`[currentWindowHeight]`|number  |Overrides the current window height used for calculations                                                         |
+|`[displayWidth]`       |number  |Overrides the current display width  used for calculations                                                        |
+|`[displayHeight]`      |number  |Overrides the current display height used for calculations                                                        |
 
 Calculates and returns a PictureFrame "layout struct" based on an input configuration struct (please see `PfConfigGeneral()` for more information). The layout struct returned by `PfCalculate()` contains many variables that define the size and position of various parts of the render pipeline.
 
-This function is provided for people who don't want to use `PfApply()` and instead want to set up their render pipeline manually.
-
-!> Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
+This function is provided for people who don't want to use `PfApply()` and instead want to set up their render pipeline manually. If you're looking for the easiest out-of-the-box experience then you can skip this function and just use `PfApply()`.
 
 The `tryResizeWindow` parameter applies when the game is already windowed or is transitioning from fullscreen to a windowed state (as such, it only applies on desktop platforms). When `tryResizeWindow` is set to `true`, the function will calculate the layout struct with the presumption that the size of the window can change. If the `.trimBlackBars` option has been set to `true` then unnecessary extra space will be removed.
 
 You may use the remaining optional arguments to override the current window state. This has limited uses in production but may be useful when testing.
+
+!> Because `PfCalculate()` does a lot of maths and returns a fresh struct every time it is called, you should avoid calling this function more often than is necessary.
 
 &nbsp;
 
@@ -36,6 +36,7 @@ Variables that the layout struct holds are as follows:
 |---------------------------------------------------|--------|------------------------------------------------------------|
 |`.cameraWidth`<br>`.cameraHeight`                  |number  |Roomspace width and height of the camera. This includes overscan pixels, if defined|
 |`.cameraOverscan`                                  |number  |Number of extra pixels, in roomspace, to add around the edges of the camera. This is the same literal value as in the configuration struct and is included for convenience|
+|`.cameraIgnore`                                    |boolean |Whether to not set camera and view properties when calling `PfApply()`|
 |`.viewWidth`<br>`.viewHeight`                      |number  |Width and height of the view used to draw the camera to the application surface. This includes overscan pixels, if defined. When using `PfApply()`, the application surface size will match the view width and height|
 |`.viewScale`                                       |number  |Scaling factor between the camera and the view. A scaling factor of 2 means that there will be 2 pixels on the view for every 1 pixel in roomspace on the camera. A view scale of exactly 1 is therefore a pixel perfect view|
 |`.viewOverscan`                                    |number  |Number of extra pixels, in viewspace, that have been added around the edges of the view. This is equal to `.cameraOverscan` multiplied by `.viewScale` and is provided for convenience|
@@ -47,6 +48,7 @@ Variables that the layout struct holds are as follows:
 |`.surfacePostDrawScale`                            |number  |Scaling factor between the view and the window (backbuffer). This includes the contribution from the overscan scale from the configuration struct|
 |`.surfacePostDrawX`<br>`.surfacePostDrawY`         |number  |Draw position for the application surface in the Post Draw event (i.e. the coordinates in the window/backbuffer). These values are in "window space' and will not necessarily line up with roomspace coordinates|
 |`.surfacePostDrawWidth`<br>`.surfacePostDrawHeight`|number  |Size for the application surface in the Post Draw event (see above.) These values are in "window space' and will not necessarily line up with roomspace coordinates|
+|`.windowToGuiScaleX`<br>`.windowToGuiScaleY`       |number  |Scaling factor to convert window coordinates to GUI layer coordinates|
 |`.surfaceGuiX`<br>`.surfaceGuiY`                   |number  |Draw position for the application surface on the GUI layer. These values are in "GUI-space' and will not necessarily line up with roomspace coordinates|
 |`.surfaceGuiWidth`<br>`.surfaceGuiHeight`          |number  |Size for the publication surface on the GUI layer. These values are in "GUI-space' and will not necessarily line up with roomspace coordinates|
 |`.marginsVisible`                                  |boolean |Whether any of the margins are visible. You should check this variable before drawing the margins (using the variables below)|
