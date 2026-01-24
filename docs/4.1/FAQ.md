@@ -6,6 +6,8 @@
 
 PictureFrame supports Windows, MacOS, Linux, Nintendo Switch, Sony PlayStation 4/5, Xbox Series X/S, iOS, tvOS, and Android. PictureFrame does not support HTML5, Opera GX, or Reddit. You might run into edge cases on platforms that I don't regularly test; please [report any bugs](https://github.com/JujuAdams/PictureFrame/issues) if and when you find them.
 
+?> When running on Android you must set the “Display Layout” option set to `LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS` in your project’s Game Options.
+
 &nbsp;
 
 **What versions of GameMaker does PictureFrame support?**
