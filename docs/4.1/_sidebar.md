@@ -1,6 +1,7 @@
 -    [Home](README)
 -    [Alternatives](Alternatives)
 -    [FAQ](FAQ)
+-    [Considerations For Use](Considerations)
 -    [Getting Started](GettingStarted)
 
 ---
