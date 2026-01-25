@@ -30,6 +30,12 @@ If you haven't used `PfApply()` then post-processing effects will work as normal
 
 &nbsp;
 
+**What algorithm does PictureFrame use?**
+
+The code that PictureFrame uses to calculate various properties of the render pipeline can be found in [`PfCalculate()`](https://github.com/JujuAdams/PictureFrame/blob/main/scripts/PfCalculate/PfCalculate.gml). This script has detailed comments which explain how values are computed.
+
+&nbsp;
+
 **How is PictureFrame licensed? Can I use it for commercial projects?**
 
 [PictureFrame is released under the MIT license](https://github.com/JujuAdams/PictureFrame/blob/master/LICENSE). This means you can use it for whatever purpose you want, including commercial projects. It'd mean a lot to me if you'd drop my name in the credits (Juju Adams) and/or say thanks, but you're under no obligation to do so.
