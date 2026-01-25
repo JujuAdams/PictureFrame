@@ -22,3 +22,6 @@
 /// `display_get_gui_width()` and `display_get_gui_height()` for you if you set this macro to `true`. 
 
 #macro PICTURE_FRAME_FIX_NATIVE_DISPLAY_GUI_FUNCTIONS  true
+
+/// 
+#macro PICTURE_FRAME_IOS_INSET_SCALE  0.66

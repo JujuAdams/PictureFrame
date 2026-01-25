@@ -8,7 +8,7 @@ function __PfNotchGetLeft()
     }
     else if (os_type == os_ios)
     {
-        return (display_get_orientation() != display_landscape_flipped)? 0 : ceil(__PF_IOS_FUDGE_FACTOR * __PfNotchGetLeftRaw());
+        return (display_get_orientation() != display_landscape_flipped)? 0 : ceil(PICTURE_FRAME_IOS_INSET_SCALE * __PfNotchGetLeftRaw());
     }
     else
     {
