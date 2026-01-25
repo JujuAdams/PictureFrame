@@ -121,6 +121,12 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
 {
     with(_configurationStruct)
     {
+        ///////
+        // 1. Determine the inset sizes
+        ///////
+        
+        //Get the size of the display inset for each side of the device's display. This only
+        //applies to iOS and Android devices, for other platforms these will be set to 0
         var _displayMarginLeft   = __PfNotchGetLeft();
         var _displayMarginTop    = __PfNotchGetTop();
         var _displayMarginRight  = __PfNotchGetRight();
@@ -128,7 +134,15 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         var _displayMarginWidth  = _displayMarginLeft + _displayMarginRight;
         var _displayMarginHeight = _displayMarginTop + _displayMarginBottom;
         
+        ///////
+        // 2. Fullscreen and window size
+        ///////
+        
+        //Do we want to be in fullscreen? If we're not on desktop then we have to be
         var _fullscreen = PICTURE_FRAME_ON_DESKTOP? fullscreen : true;
+        
+        //Are we going to respect the display insets? This variable is possibly unnecessary but it
+        //makes later code easier to read
         var _displayHasMargins = PICTURE_FRAME_ON_MOBILE && _fullscreen;
         
         //If we're in fullscreen mode then use the whole display as the max window size
@@ -143,7 +157,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         else
         {
             //If we're transitioning from fullscreen to windows then we necessarily need to resize
-            //the window.
+            //the window
             if (_currentFullscreen)
             {
                 _tryResizeWindow = true;
@@ -156,28 +170,39 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             }
             else
             {
+                //If we're not going to resize the window then we have to use the current window size
                 var _windowWidth  = _currentWindowWidth;
                 var _windowHeight = _currentWindowHeight;
             }
         }
         
         ///////
-        // Camera
+        // 3. Camera size
         ///////
         
-        //Find the region that the application surface needs to fit into
-        if (_fullscreen && surfaceAvoidNotch)
+        // The camera size is constrained by the size of the application surface which in turn is
+        // constrained by the size of the window. We only have one camera so we presume that the camera
+        // will take up the entirety of the application surface. Additionally, we want to optimise our
+        // camera size such that the application surface will take up as much room as possible i.e.
+        // leave the smallest possible black bars (or none at all).
+        
+        if (_displayHasMargins && surfaceAvoidNotch)
         {
+            //If the application surface needs to avoid the display insets then substract the total inset
+            //width/height from the window
             var _surfaceRegionWidth  = _windowWidth  - _displayMarginWidth;
             var _surfaceRegionHeight = _windowHeight - _displayMarginHeight;
         }
         else
         {
+            //Otherwise use the entire window
             var _surfaceRegionWidth  = _windowWidth;
             var _surfaceRegionHeight = _windowHeight;
         }
         
         //TODO - Remove target width/height, rename target to min
+        
+        //Resolve the actual maximum camera width/height
         var _cameraMinWidth  = (cameraMinWidth  > 0)? cameraMinWidth  : cameraTargetWidth;
         var _cameraMinHeight = (cameraMinHeight > 0)? cameraMinHeight : cameraTargetHeight;
         var _cameraMaxWidth  = (cameraMaxWidth  > 0)? cameraMaxWidth  : cameraTargetWidth;
@@ -185,11 +210,16 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         
         //Find the scaling factor that fits the target camera size inside the surface region
         var _targetScale = min(_surfaceRegionWidth/cameraTargetWidth, _surfaceRegionHeight/cameraTargetHeight);
-        _targetScale = (viewPixelPerfect && (_targetScale > 1))? floor(_targetScale) : _targetScale;
+        
+        //Force the scale down to the nearest integer (providing we're not very squished already)
+        if (viewPixelPerfect && (_targetScale > 1))
+        {
+            _targetScale = floor(_targetScale);
+        }
         
         if (surfacePixelPerfect)
         {
-            //Greedily eat up extra space
+            //Greedily eat up extra space by expanding the camera out to its maximum extents
             var _outCameraWidth  = floor(min(_surfaceRegionWidth/_targetScale,  _cameraMaxWidth));
             var _outCameraHeight = floor(min(_surfaceRegionHeight/_targetScale, _cameraMaxHeight));
         }
@@ -207,21 +237,28 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         }
         
         ///////
-        // View
+        // 4. Viewport
         ///////
         
-        //Figure out the scaling factor that fits the camera inside the window
-        //We limit how scaled up the view can be at the same time here too
+        // The viewport is defined as the space on the application surface where the camera is rendered
+        // to. We only have one camera so the camera necessarily fills up the entire application surface.
+        // However, the scaling factor to apply to the camera when it renders to the applicatiom surface
+        // still needs to be calculated. You can think of this as a measure of "units to pixels" where
+        // "units" is the roomspace size of the camera and "pixels" is the size of the viewport on the
+        // application surface.
+        
+        //Figure out the scaling factor that fits the camera inside the window. We limit how scaled up the
+        //view can be at the same time here too
         var _outViewScale = min(viewMaxScale, _surfaceRegionWidth/_outCameraWidth, _surfaceRegionHeight/_outCameraHeight);
         
         //If we're using pixel perfect scaling for our view then drop down to the nearest integer scale
-        if ((_outViewScale > 1) && viewPixelPerfect)
+        if (viewPixelPerfect && (_outViewScale > 1))
         {
             _outViewScale = floor(_outViewScale);
         }
         
-        //Scale up the view using the same aspect ratio as the camera
-        //We round these values to ensure we have an integer value
+        //Scale up the view using the same aspect ratio as the camera. We round these values to ensure we
+        //have an integer value
         var _outViewWidth  = round(_outViewScale*_outCameraWidth);
         var _outViewHeight = round(_outViewScale*_outCameraHeight);
         
@@ -229,29 +266,14 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         var _viewOverscan = cameraOverscan*_outViewScale;
         
         ///////
-        // Window
+        // 5. Application Surface Render Size
         ///////
         
-        if (_tryResizeWindow && trimBlackBars)
-        {
-            //If we're allowed to resize the window then we want to scale up the view dimensions
-            var _windowScale = min(_surfaceRegionWidth/_outViewWidth, _surfaceRegionHeight/_outViewHeight);
-            
-            if (surfacePixelPerfect && (_windowScale > 1)) _windowScale = floor(_windowScale);
-            
-            var _outWindowWidth  = _windowScale*_outViewWidth;
-            var _outWindowHeight = _windowScale*_outViewHeight;
-        }
-        else
-        {
-            //Otherwise use the window dimenstions as they are
-            var _outWindowWidth  = _windowWidth;
-            var _outWindowHeight = _windowHeight;
-        }
-        
-        ///////
-        // Application Surface Drawing
-        ///////
+        // The application surface itself has the same size as the viewport. However, when drawing the
+        // application surface in the Post Draw event, it is not necessarily the case that the surface
+        // will be draw at a 1:1 scale. Instead, we need to calculate a suitable drawing size for the
+        // surface such that it is as large as possible in the window whilst optionally retaining
+        // pixel-perfect scaling
         
         //Figure out the scaling factor that fits the application surface inside the window dimensions
         var _surfacePostDrawScale = min(_surfaceRegionWidth/_outViewWidth, _surfaceRegionHeight/_outViewHeight);
@@ -275,15 +297,36 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         _surfacePostDrawWidth  = floor(_surfacePostDrawScale*_outViewWidth);
         _surfacePostDrawHeight = floor(_surfacePostDrawScale*_outViewHeight);
         
+        ///////
+        // 6. Window
+        ///////
+        
+        // The final window size can now be calculated if we're trying to resize it.
+        
+        if (_tryResizeWindow && trimBlackBars)
+        {
+            var _outWindowWidth  = _surfacePostDrawWidth;
+            var _outWindowHeight = _surfacePostDrawHeight;
+        }
+        else
+        {
+            var _outWindowWidth  = _windowWidth;
+            var _outWindowHeight = _windowHeight;
+        }
+        
+        ///////
+        // 7. Application Surface Position
+        ///////
+        
         //Centre the application surface in the window
         var _surfacePostDrawX = floor(0.5*(_outWindowWidth - _surfacePostDrawWidth));
         var _surfacePostDrawY = floor(0.5*(_outWindowHeight - _surfacePostDrawHeight));
         
-        //Correct for the display margins. This code will try to keep the application surface in
-        //the centre of the display, integrating the notch area into the black bars around the edge
-        //of the surface. However, if the application surface overlaps the notch then the surface
-        //will be pushed to one side or another to avoid unsightly asymmetric black bars (instead
-        //there will be one big black bar where the notch is).
+        // Correct for the display margins. This code will try to keep the application surface in
+        // the centre of the display, integrating the notch area into the black bars around the edge
+        // of the surface. However, if the application surface overlaps the notch then the surface
+        // will be pushed to one side or another to avoid unsightly asymmetric black bars (instead
+        // there will be one big black bar where the notch is).
         if (_displayHasMargins && surfaceAvoidNotch)
         {
             if (_surfacePostDrawX < _displayMarginLeft)
@@ -310,45 +353,49 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         }
         
         ///////
-        // GUI Layer
+        // 8. GUI Layer
         ///////
+        
+        // The last major block of work is to determine the coordinate space for the GUI layer. This
+        // was a lot more complex than I anticipated because there's doesn't seem to be an established
+        // "correct" was of setting up the GUI layer that a clear majority of developers use.
         
         if (guiWindowStretch)
         {
-            //Correct for the display margins
+            //Stretch the GUI layer over the entire window, ignoring where the application surface is
             if (_displayHasMargins && guiAvoidNotch)
             {
+                //Correct for the display margins
                 var _outGuiX = _displayMarginLeft;
                 var _outGuiY = _displayMarginTop;
-                
                 var _guiRegionWidth  = _outWindowWidth  - _displayMarginWidth;
                 var _guiRegionHeight = _outWindowHeight - _displayMarginHeight;
             }
             else
             {
+                //Otherwise we should use the entire window
                 var _outGuiX = 0;
                 var _outGuiY = 0;
-                
                 var _guiRegionWidth  = _outWindowWidth;
                 var _guiRegionHeight = _outWindowHeight;
             }
         }
         else
         {
-            //Correct for the display margins
+            //Stretch the GUI layer over the application surface
             if (_displayHasMargins && guiAvoidNotch)
             {
+                //Try to position ourselves on the application surface but dodge the display insets
                 var _outGuiX = max(_surfacePostDrawX, _displayMarginLeft);
                 var _outGuiY = max(_surfacePostDrawY, _displayMarginTop);
-                
                 var _guiRegionWidth  = min(_surfacePostDrawX + _surfacePostDrawWidth,  _outWindowWidth  - _displayMarginRight ) - _outGuiX;
                 var _guiRegionHeight = min(_surfacePostDrawY + _surfacePostDrawHeight, _outWindowHeight - _displayMarginBottom) - _outGuiY;
             }
             else
             {
+                //Otherwise use the application surface position
                 var _outGuiX = _surfacePostDrawX;
                 var _outGuiY = _surfacePostDrawY;
-                
                 var _guiRegionWidth  = _surfacePostDrawWidth;
                 var _guiRegionHeight = _surfacePostDrawHeight;
             }
@@ -419,7 +466,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         var _surfaceGuiHeight = _windowToGuiScaleY*_surfacePostDrawHeight;
         
         ///////
-        // Final Corrections
+        // 9. Final Overscan Corrections
         ///////
         
         //Increase the actual size of the camera and view/application surface after we do all maths
@@ -427,6 +474,10 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         _outCameraHeight += 2*cameraOverscan;
         _outViewWidth    += 2*_viewOverscan;
         _outViewHeight   += 2*_viewOverscan;
+        
+        ///////
+        // 10. Export
+        ///////
         
         return {
             cameraWidth:    _outCameraWidth,
