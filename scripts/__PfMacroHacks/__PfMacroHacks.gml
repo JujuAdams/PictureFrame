@@ -112,7 +112,7 @@ function __PfDisplayGetGuiWidth()
 {
     static _system = __PfSystem();
     
-    if (not PICTURE_FRAME_FIX_NATIVE_DISPLAY_GUI_FUNCTIONS)
+    if (not PICTURE_FRAME_REPLACE_NATIVE_DISPLAY_GUI_FUNCTIONS)
     {
         return __PF_display_get_gui_width();
     }
@@ -126,7 +126,7 @@ function __PfDisplayGetGuiHeight()
 {
     static _system = __PfSystem();
     
-    if (not PICTURE_FRAME_FIX_NATIVE_DISPLAY_GUI_FUNCTIONS)
+    if (not PICTURE_FRAME_REPLACE_NATIVE_DISPLAY_GUI_FUNCTIONS)
     {
         return __PF_display_get_gui_height();
     }
