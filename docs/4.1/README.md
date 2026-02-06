@@ -20,8 +20,7 @@ PictureFrame will calculate the following output values for you:
 You can call `PfCalculate()` to read these values so you can manage the pipeline yourself ... or you can call `PfApply()` to have PictureFrame take care of it all for you.
 
 PictureFrame uses the following input parameters:
-- Target camera size
-- Camera minimum width/height (the "safe area")
+- Target camera size (the "safe area")
 - Camera maximum width/height
 - Camera overscan size (useful for smoothing pixel perfect camera movement)
 - Maximum scale for the viewport relative to the camera dimensions
