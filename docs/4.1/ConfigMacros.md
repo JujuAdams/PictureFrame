@@ -17,3 +17,11 @@ However, it is inconvenient to replace every mouse getter in your game with thes
 *Typical value:* `true`
 
 GameMaker's native GUI layer width/height getter functions have unfortunate behaviour that makes them return incorrect values after calling `display_set_gui_maximize()`. This means `display_get_gui_width()` and `display_get_gui_height()` will return inaccurate values after calling `PfApply()`. Using a similar method to above, PictureFrame can automatically fix `display_get_gui_width()` and `display_get_gui_height()` for you if you set this macro to `true`.
+
+&nbsp;
+
+## `PICTURE_FRAME_IOS_INSET_SCALE`
+
+*Typical value:* `0.66`
+
+Most modern Android and iOS devices have a display cutout ("notch"). PictureFrame can be set up to render into the area either side of the display cutout or it can be set up to avoid the cutout altogether (please see documentation for`.surfaceAvoidNotch` in `PfConfigGeneral()`). The distance from the edge of the physical screen to the safe area is an "inset". Android returns accurate values. However, iOS reports rather large values for its inset area. This macro reduces the size of the inset area so that the iOS safe area more closely matches Android.
