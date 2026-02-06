@@ -121,6 +121,11 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
 {
     with(_configurationStruct)
     {
+        if (__PF_VERBOSE)
+        {
+            __PfTrace($"`PfCalculate()` called with `tryResizeWindow` = `{_tryResizeWindow? "true" : "false"}`,  `currentFullscreen` = `{_currentFullscreen? "true" : "false"}`, window = {_currentWindowWidth} x {_currentWindowHeight}, display = {_currentDisplayWidth} x {_currentDisplayHeight}");
+        }
+        
         ///////
         // 1. Determine the inset sizes
         ///////
@@ -134,6 +139,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         var _displayMarginWidth  = _displayMarginLeft + _displayMarginRight;
         var _displayMarginHeight = _displayMarginTop + _displayMarginBottom;
         
+        if (__PF_VERBOSE) __PfTrace($"Display margins are {_displayMarginLeft}, {_displayMarginTop}, {_displayMarginRight}, {_displayMarginBottom} (size is {_displayMarginWidth} x {_displayMarginHeight})");
+        
         ///////
         // 2. Fullscreen and window size
         ///////
@@ -144,6 +151,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         //Are we going to respect the display insets? This variable is possibly unnecessary but it
         //makes later code easier to read
         var _displayHasMargins = PICTURE_FRAME_ON_MOBILE && _fullscreen;
+        if (__PF_VERBOSE) __PfTrace($"Desired fullscreen state is `{_fullscreen? "true" : "false"}`. \"Display has margins\" is `{_displayHasMargins? "true" : "false"}`");
         
         //If we're in fullscreen mode then use the whole display as the max window size
         if (_fullscreen)
@@ -153,6 +161,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             
             //Can never resize the window if we're going into fullscreen
             _tryResizeWindow = false;
+            
+            if (__PF_VERBOSE) __PfTrace($"We want to be in fullscreen so the window size is the same as the display ({_windowWidth} x {_windowHeight}) and we don't want to try to resize the window");
         }
         else
         {
@@ -161,18 +171,23 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             if (_currentFullscreen)
             {
                 _tryResizeWindow = true;
+                if (__PF_VERBOSE) __PfTrace($"We're leaving fullscreen to go to windowed mode so we need to resize the window");
             }
             
             if (_tryResizeWindow)
             {
                 var _windowWidth  = windowWidth;
                 var _windowHeight = windowHeight;
+                
+                if (__PF_VERBOSE) __PfTrace($"Target window size is {_windowWidth} x {_windowHeight}");
             }
             else
             {
                 //If we're not going to resize the window then we have to use the current window size
                 var _windowWidth  = _currentWindowWidth;
                 var _windowHeight = _currentWindowHeight;
+                
+                if (__PF_VERBOSE) __PfTrace($"Current window size is {_windowWidth} x {_windowHeight}");
             }
         }
         
@@ -192,48 +207,60 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             //width/height from the window
             var _surfaceRegionWidth  = _windowWidth  - _displayMarginWidth;
             var _surfaceRegionHeight = _windowHeight - _displayMarginHeight;
+            
+            if (__PF_VERBOSE) __PfTrace($"We're avoiding display cutouts so the available application surface area is {_surfaceRegionWidth} x {_surfaceRegionHeight}");
         }
         else
         {
             //Otherwise use the entire window
             var _surfaceRegionWidth  = _windowWidth;
             var _surfaceRegionHeight = _windowHeight;
+            
+            if (__PF_VERBOSE) __PfTrace($"We're not avoiding display cutouts so the available application surface area is {_surfaceRegionWidth} x {_surfaceRegionHeight}");
         }
         
         //Resolve the actual maximum camera width/height
         var _cameraMaxWidth  = (cameraMaxWidth  > 0)? cameraMaxWidth  : cameraTargetWidth;
         var _cameraMaxHeight = (cameraMaxHeight > 0)? cameraMaxHeight : cameraTargetHeight;
-        
-        //Find the scaling factor that fits the target camera size inside the surface region
-        var _targetScale = min(_surfaceRegionWidth/cameraTargetWidth, _surfaceRegionHeight/cameraTargetHeight);
-        
-        //Force the scale down to the nearest integer (providing we're not very squished already)
-        if (viewPixelPerfect && (_targetScale > 1))
-        {
-            _targetScale = floor(_targetScale);
-        }
+        if (__PF_VERBOSE) __PfTrace($"Camera maximum size resolved to {_cameraMaxWidth} x {_cameraMaxHeight}");
         
         if (surfacePixelPerfect)
         {
+            //Find the scaling factor that fits the target camera size inside the surface region
+            var _targetScale = min(_surfaceRegionWidth/cameraTargetWidth, _surfaceRegionHeight/cameraTargetHeight);
+            if (__PF_VERBOSE) __PfTrace($"Camera-to-window scaling factor is {_targetScale} using \"scale down\" technique");
+            
+            //Force the scale down to the nearest integer (providing we're not very squished already)
+            if (viewPixelPerfect && (_targetScale > 1))
+            {
+                _targetScale = floor(_targetScale);
+                if (__PF_VERBOSE) __PfTrace($"Camera-to-window scaling factor rounded to {floor(_targetScale)}");
+            }
+            
             //Greedily eat up extra space by expanding the camera out to its maximum extents
             var _outCameraWidth  = floor(min(_surfaceRegionWidth/_targetScale,  _cameraMaxWidth));
             var _outCameraHeight = floor(min(_surfaceRegionHeight/_targetScale, _cameraMaxHeight));
+            
+            if (__PF_VERBOSE) __PfTrace($"Camera size expanded up to the maximum and calculated as {_outCameraWidth} x {_outCameraHeight}");
         }
         else
         {
             //The surface will eventually be drawn stretched over the entire surface region. This
             //means we get better coverage by keeping the aspect ratio of the camera the same as
             //the region. To do this, we fit the surface region inside the max bounds of the camera
-            _targetScale = max(_surfaceRegionWidth/_cameraMaxWidth, _surfaceRegionHeight/_cameraMaxHeight);
+            var _targetScale = max(_surfaceRegionWidth/_cameraMaxWidth, _surfaceRegionHeight/_cameraMaxHeight);
+            if (__PF_VERBOSE) __PfTrace($"Camera-to-window scaling factor is {_targetScale} using \"similar aspect ratio\" technique");
             
             var _outCameraWidth  = floor(_surfaceRegionWidth/_targetScale);
             var _outCameraHeight = floor(_surfaceRegionHeight/_targetScale);
+            if (__PF_VERBOSE) __PfTrace($"Camera size calculated as {_outCameraWidth} x {_outCameraHeight}");
         }
         
         //Handle edge case where the generated camera dimensions violate the minimum width/height. This will
         //often give us a suboptimal solution but that's better than breaking the game design
         _outCameraWidth  = max(_outCameraWidth, cameraTargetWidth);
         _outCameraHeight = max(_outCameraHeight, cameraTargetHeight);
+        if (__PF_VERBOSE) __PfTrace($"Final camera size (after minimum size limit {cameraTargetWidth} x {cameraTargetHeight}) is {_outCameraWidth} x {_outCameraHeight}");
         
         ///////
         // 4. Viewport
@@ -253,13 +280,20 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         //If we're using pixel perfect scaling for our view then drop down to the nearest integer scale
         if (viewPixelPerfect && (_outViewScale > 1))
         {
+            if (__PF_VERBOSE) __PfTrace($"View-to-surface scaling factor is {floor(_outViewScale)} (rounded from {_outViewScale})");
             _outViewScale = floor(_outViewScale);
+        }
+        else
+        {
+            if (__PF_VERBOSE) __PfTrace($"View-to-surface scaling factor is {_outViewScale}");
         }
         
         //Scale up the view using the same aspect ratio as the camera. We round these values to ensure we
         //have an integer value
         var _outViewWidth  = round(_outViewScale*_outCameraWidth);
         var _outViewHeight = round(_outViewScale*_outCameraHeight);
+        
+        if (__PF_VERBOSE) __PfTrace($"Viewport / application surface size is {_outViewWidth} x {_outViewHeight}");
         
         //Calculate how much overscan we have in viewspace
         var _viewOverscan = cameraOverscan*_outViewScale;
@@ -276,25 +310,34 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         
         //Figure out the scaling factor that fits the application surface inside the window dimensions
         var _surfacePostDrawScale = min(_surfaceRegionWidth/_outViewWidth, _surfaceRegionHeight/_outViewHeight);
+        if (__PF_VERBOSE) __PfTrace($"Application-surface-to-window scale is {_surfacePostDrawScale}");
         
         //If we're using pixel perfect scaling then drop down to the nearest integer scale
-        if (surfacePixelPerfect && (_surfacePostDrawScale > 1)) _surfacePostDrawScale = floor(_surfacePostDrawScale);
+        if (surfacePixelPerfect && (_surfacePostDrawScale > 1))
+        {
+            _surfacePostDrawScale = floor(_surfacePostDrawScale);
+            if (__PF_VERBOSE) __PfTrace($"Application-surface-to-window scale rounded to {_surfacePostDrawScale}");
+        }
         
         //Calculate the initial windowspace size of the application surface
         var _surfacePostDrawWidth  = _surfacePostDrawScale*_outViewWidth;
         var _surfacePostDrawHeight = _surfacePostDrawScale*_outViewHeight;
+        if (__PF_VERBOSE) __PfTrace($"Application surface render size is {_surfacePostDrawWidth} x {_surfacePostDrawHeight}");
         
         //Calculate the limits of the overscan box
         var _overscanWidth  = windowOverscanScale*_surfaceRegionWidth;
         var _overscanHeight = windowOverscanScale*_surfaceRegionHeight;
+        if (__PF_VERBOSE) __PfTrace($"Window overscan scale is {windowOverscanScale} which limits the surface region to {_overscanWidth} x {_overscanHeight}");
         
         //Figure out another scaling factor if the application surface exceeds the overscan limits
         var _overscanCorrectionScale = min(1, _overscanWidth/_surfacePostDrawWidth, _overscanHeight/_surfacePostDrawHeight);
         _surfacePostDrawScale *= _overscanCorrectionScale;
+        if (__PF_VERBOSE) __PfTrace($"Overscan correction scale is {_overscanCorrectionScale}, application-surface-to-window scale is now {_surfacePostDrawScale}");
         
         //Apply the correction scale
         _surfacePostDrawWidth  = floor(_surfacePostDrawScale*_outViewWidth);
         _surfacePostDrawHeight = floor(_surfacePostDrawScale*_outViewHeight);
+        if (__PF_VERBOSE) __PfTrace($"Final application surface render size is {_surfacePostDrawWidth} x {_surfacePostDrawHeight}");
         
         ///////
         // 6. Window
@@ -306,11 +349,13 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         {
             var _outWindowWidth  = _surfacePostDrawWidth;
             var _outWindowHeight = _surfacePostDrawHeight;
+            if (__PF_VERBOSE) __PfTrace($"Window trimmed to {_outWindowWidth} x {_outWindowHeight}");
         }
         else
         {
             var _outWindowWidth  = _windowWidth;
             var _outWindowHeight = _windowHeight;
+            if (__PF_VERBOSE) __PfTrace($"Window size is {_outWindowWidth}, {_outWindowHeight}");
         }
         
         ///////
@@ -320,6 +365,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         //Centre the application surface in the window
         var _surfacePostDrawX = floor(0.5*(_outWindowWidth - _surfacePostDrawWidth));
         var _surfacePostDrawY = floor(0.5*(_outWindowHeight - _surfacePostDrawHeight));
+        
+        if (__PF_VERBOSE) __PfTrace($"Application surface centred in the window at ({_surfacePostDrawX}, {_surfacePostDrawY})");
         
         // Correct for the display margins. This code will try to keep the application surface in
         // the centre of the display, integrating the notch area into the black bars around the edge
@@ -349,6 +396,8 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
                 //We overlap the notch at the bottom, force ourselves all the way to the top
                 _surfacePostDrawY = 0;
             }
+            
+            if (__PF_VERBOSE) __PfTrace($"Application surface position avoided the display cutout at ({_surfacePostDrawX}, {_surfacePostDrawY})");
         }
         
         ///////
@@ -369,6 +418,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
                 var _outGuiY = _displayMarginTop;
                 var _guiRegionWidth  = _outWindowWidth  - _displayMarginWidth;
                 var _guiRegionHeight = _outWindowHeight - _displayMarginHeight;
+                if (__PF_VERBOSE) __PfTrace($"GUI respecting display cutout: {_guiRegionWidth} x {_guiRegionHeight} at position ({_outGuiX}, {_outGuiY})");
             }
             else
             {
@@ -377,6 +427,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
                 var _outGuiY = 0;
                 var _guiRegionWidth  = _outWindowWidth;
                 var _guiRegionHeight = _outWindowHeight;
+                if (__PF_VERBOSE) __PfTrace($"GUI region is the entire window: {_guiRegionWidth} x {_guiRegionHeight} at position (0, 0)");
             }
         }
         else
@@ -389,6 +440,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
                 var _outGuiY = max(_surfacePostDrawY, _displayMarginTop);
                 var _guiRegionWidth  = min(_surfacePostDrawX + _surfacePostDrawWidth,  _outWindowWidth  - _displayMarginRight ) - _outGuiX;
                 var _guiRegionHeight = min(_surfacePostDrawY + _surfacePostDrawHeight, _outWindowHeight - _displayMarginBottom) - _outGuiY;
+                if (__PF_VERBOSE) __PfTrace($"GUI trying to copy the application surface but dodging the display cutout: {_guiRegionWidth} x {_guiRegionHeight} at position ({_outGuiX}, {_outGuiY})");
             }
             else
             {
@@ -397,32 +449,39 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
                 var _outGuiY = _surfacePostDrawY;
                 var _guiRegionWidth  = _surfacePostDrawWidth;
                 var _guiRegionHeight = _surfacePostDrawHeight;
+                if (__PF_VERBOSE) __PfTrace($"GUI sharing the application surface region: {_guiRegionWidth} x {_guiRegionHeight} at position ({_outGuiX}, {_outGuiY})");
             }
         }
+        
+        if (__PF_VERBOSE) __PfTrace($"GUI mode is {guiMode}");
         
         if (guiMode == 0)
         {
             //Use the 1:1 region size
             var _outGuiWidth  = _guiRegionWidth;
             var _outGuiHeight = _guiRegionHeight;
+            if (__PF_VERBOSE) __PfTrace($"GUI size is the same as the available region {_outGuiWidth} x {_outGuiHeight}");
         }
         else if (guiMode == 1)
         {
             //Use the camera size
             var _outGuiWidth  = _outCameraWidth;
             var _outGuiHeight = _outCameraHeight;
+            if (__PF_VERBOSE) __PfTrace($"GUI size is the same as the camera {_outGuiWidth} x {_outGuiHeight}");
         }
         else if (guiMode == 2)
         {
             //Use the application surface / view size
             var _outGuiWidth  = _outViewWidth;
             var _outGuiHeight = _outViewHeight;
+            if (__PF_VERBOSE) __PfTrace($"GUI size is the same as the view {_outGuiWidth} x {_outGuiHeight}");
         }
         else if (guiMode == 3)
         {
             //Use the target size (which will usually stretch things)
             var _outGuiWidth  = guiTargetWidth;
             var _outGuiHeight = guiTargetHeight;
+            if (__PF_VERBOSE) __PfTrace($"GUI size is the same as the target GUI size {_outGuiWidth} x {_outGuiHeight}");
         }
         else if ((guiMode == 4) || (guiMode == 5) || (guiMode == 6))
         {
@@ -445,6 +504,29 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
                 var _outGuiWidth  = guiTargetWidth;
                 var _outGuiHeight = round((guiTargetWidth/_guiRegionWidth)*_guiRegionHeight);
             }
+            
+            if (__PF_VERBOSE)
+            {
+                if (guiMode == 4)
+                {
+                    __PfTrace($"GUI width adjusted to {_outGuiWidth} x {_outGuiHeight} (from {guiTargetWidth})");
+                }
+                else if (guiMode == 5)
+                {
+                    __PfTrace($"GUI height adjusted to {_outGuiWidth} x {_outGuiHeight} (from {guiTargetHeight})");
+                }
+                else if (guiMode == 6)
+                {
+                    if (_stretchWidth)
+                    {
+                        __PfTrace($"Decided to adjust GUI width to {_outGuiWidth} x {_outGuiHeight} (from {guiTargetWidth} x {guiTargetHeight})");
+                    }
+                    else
+                    {
+                        __PfTrace($"Decided to adjust GUI height to {_outGuiWidth} x {_outGuiHeight} (from {guiTargetWidth} x {guiTargetHeight})");
+                    }
+                }
+            }
         }
         else
         {
@@ -454,21 +536,26 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         //Apply scaling
         _outGuiWidth  /= guiScale;
         _outGuiHeight /= guiScale;
+        if (__PF_VERBOSE) __PfTrace($"GUI size after scaling factor of {guiScale} is {_outGuiWidth} x {_outGuiHeight}");
         
         //Convert window coordinates to GUI coordinates
         var _windowToGuiScaleX = _outGuiWidth/_guiRegionWidth;
         var _windowToGuiScaleY = _outGuiHeight/_guiRegionHeight;
+        if (__PF_VERBOSE) __PfTrace($"Window-to-GUI scales are ({_windowToGuiScaleX}, {_windowToGuiScaleY})");
         
         var _surfaceGuiX      = _windowToGuiScaleX*(_surfacePostDrawX - _outGuiX);
         var _surfaceGuiY      = _windowToGuiScaleY*(_surfacePostDrawY - _outGuiY);
         var _surfaceGuiWidth  = _windowToGuiScaleX*_surfacePostDrawWidth;
         var _surfaceGuiHeight = _windowToGuiScaleY*_surfacePostDrawHeight;
+        if (__PF_VERBOSE) __PfTrace($"Application surface is {_surfaceGuiWidth} x {_surfaceGuiHeight} at position ({_surfaceGuiX}, {_surfaceGuiY}) on the GUI layer");
         
         ///////
         // 9. Final Overscan Corrections
         ///////
         
         //Increase the actual size of the camera and view/application surface after we do all maths
+        if (__PF_VERBOSE) __PfTrace($"Camera overscan is {cameraOverscan}, view overscan is {_viewOverscan} (added to all edges)");
+        
         _outCameraWidth  += 2*cameraOverscan;
         _outCameraHeight += 2*cameraOverscan;
         _outViewWidth    += 2*_viewOverscan;

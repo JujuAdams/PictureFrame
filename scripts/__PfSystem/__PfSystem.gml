@@ -1,5 +1,7 @@
 // Feather disable all
 
+#macro __PF_VERBOSE  true
+
 __PfSystem();
 
 function __PfSystem()
