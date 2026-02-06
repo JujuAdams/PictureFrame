@@ -11,8 +11,6 @@
 |`targetWidth`      |number  |Target "ideal" camera width in roomspace                                                                                                                                                |
 |`targetHeight`     |number  |Target "ideal" camera height in roomspace                                                                                                                                               |
 |`[fullscreen]`     |boolean |Fullscreen state for the game. This value is only relevant on desktop platforms (Windows, MacOS, Linux). If not specified, the fullscreen state for the game will not be changed        |
-|`[cameraMinWidth]` |number  |Minimum width for the camera. This is the "safe area" that is guaranteed to be visible                                                                                                  |
-|`[cameraMinHeight]`|number  |Minimum height for the camera. This is the "safe area" that is guaranteed to be visible                                                                                                 |
 |`[cameraMaxWidth]` |number  |Maximum width for the camera. This is an expansion zone that the camera can grow into to adapt to different resolutions and aspect ratios. If not specified, the minimum width is used  |
 |`[cameraMaxHeight]`|number  |Maximum height for the camera. This is an expansion zone that the camera can grow into to adapt to different resolutions and aspect ratios. If not specified, the minimum height is used|
 
