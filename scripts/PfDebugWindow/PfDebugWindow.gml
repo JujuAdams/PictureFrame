@@ -135,8 +135,6 @@ function PfDebugWindow(_configStruct = undefined)
         dbg_text("");
         dbg_text_input(ref_create(_configStruct, "cameraTargetWidth"    ), ".cameraTargetWidth",   "f");
         dbg_text_input(ref_create(_configStruct, "cameraTargetHeight"   ), ".cameraTargetHeight",  "f");
-        dbg_text_input(ref_create(_configStruct, "cameraMinWidth"       ), ".cameraMinWidth",      "f");
-        dbg_text_input(ref_create(_configStruct, "cameraMinHeight"      ), ".cameraMinHeight",     "f");
         dbg_text_input(ref_create(_configStruct, "cameraMaxWidth"       ), ".cameraMaxWidth",      "f");
         dbg_text_input(ref_create(_configStruct, "cameraMaxHeight"      ), ".cameraMaxHeight",     "f");
         dbg_text_input(ref_create(_configStruct, "cameraOverscan"       ), ".cameraOverscan",      "i");

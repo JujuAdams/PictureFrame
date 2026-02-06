@@ -22,15 +22,11 @@
 /// 
 /// .cameraTargetWidth
 /// .cameraTargetHeight
-///     The target "ideal" camera width and height. PictureFrame will attempt to set the camera to
+///     The target camera width and height. This is the "safe area" that is required to be be
+///     visible for the game to function properly. PictureFrame will attempt to set the camera to
 ///     this width and height, adjusting the rendering pipeline within the various constraints
-///     defined in the struct.
-/// 
-/// .cameraMinWidth
-/// .cameraMinHeight
-///     The minimum width and height for the camera. This is the "safe area" that is required to be
-///     be visible for the game to function properly. Set either of these variables to a negative
-///     number to use the target width/height value.
+///     defined in the struct. If you specify a maximum width/height, the target width/height is
+///     used as the minimum.
 /// 
 /// .cameraMaxWidth
 /// .cameraMaxHeight
@@ -136,8 +132,6 @@
 function PfConfigGeneral()
 {
     var _configStruct = {
-        cameraMinWidth:  -1,
-        cameraMinHeight: -1,
         cameraMaxWidth:  -1,
         cameraMaxHeight: -1,
         cameraOverscan:   0,

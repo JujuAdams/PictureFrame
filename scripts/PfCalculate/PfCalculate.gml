@@ -200,11 +200,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
             var _surfaceRegionHeight = _windowHeight;
         }
         
-        //TODO - Remove target width/height, rename target to min
-        
         //Resolve the actual maximum camera width/height
-        var _cameraMinWidth  = (cameraMinWidth  > 0)? cameraMinWidth  : cameraTargetWidth;
-        var _cameraMinHeight = (cameraMinHeight > 0)? cameraMinHeight : cameraTargetHeight;
         var _cameraMaxWidth  = (cameraMaxWidth  > 0)? cameraMaxWidth  : cameraTargetWidth;
         var _cameraMaxHeight = (cameraMaxHeight > 0)? cameraMaxHeight : cameraTargetHeight;
         
@@ -226,15 +222,18 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         else
         {
             //The surface will eventually be drawn stretched over the entire surface region. This
-            //means we get better coverage by keeping the aspect ratio of the surface the same as
+            //means we get better coverage by keeping the aspect ratio of the camera the same as
             //the region. To do this, we fit the surface region inside the max bounds of the camera
             _targetScale = max(_surfaceRegionWidth/_cameraMaxWidth, _surfaceRegionHeight/_cameraMaxHeight);
-            
-            //TODO - Handle edge case where the generated camera dimensions violate the minimum width/height
             
             var _outCameraWidth  = floor(_surfaceRegionWidth/_targetScale);
             var _outCameraHeight = floor(_surfaceRegionHeight/_targetScale);
         }
+        
+        //Handle edge case where the generated camera dimensions violate the minimum width/height. This will
+        //often give us a suboptimal solution but that's better than breaking the game design
+        _outCameraWidth  = max(_outCameraWidth, cameraTargetWidth);
+        _outCameraHeight = max(_outCameraHeight, cameraTargetHeight);
         
         ///////
         // 4. Viewport

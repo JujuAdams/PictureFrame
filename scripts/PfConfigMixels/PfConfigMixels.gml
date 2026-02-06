@@ -13,18 +13,14 @@
 /// @param targetWidth
 /// @param targetHeight
 /// @param [fullscreen]
-/// @param [minWidth]
-/// @param [minHeight]
 /// @param [maxWidth]
 /// @param [maxHeight]
 
-function PfConfigMixels(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _minWidth = -1, _minHeight = -1, _maxWidth = -1, _maxHeight = -1)
+function PfConfigMixels(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _maxWidth = -1, _maxHeight = -1)
 {
     return {
         cameraTargetWidth:  _targetWidth,
         cameraTargetHeight: _targetHeight,
-        cameraMinWidth:     _minWidth,
-        cameraMinHeight:    _minHeight,
         cameraMaxWidth:     _maxWidth,
         cameraMaxHeight:    _maxHeight,
         
