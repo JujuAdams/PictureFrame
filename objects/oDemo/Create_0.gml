@@ -17,8 +17,3 @@ cameraX = camera_get_view_x(_camera);
 cameraY = camera_get_view_y(_camera);
 cameraTargetX = cameraX;
 cameraTargetY = cameraY;
-
-if (PICTURE_FRAME_ON_DESKTOP)
-{
-    PfDebugWindow(configStruct);
-}
