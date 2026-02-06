@@ -27,14 +27,22 @@ with(PfGetAppliedLayoutStruct())
     }
 }
 
-draw_set_color(c_red);
-draw_circle(10, 10, 10, false);
-draw_set_color(c_lime);
-draw_circle(display_get_gui_width() - 10, 10, 10, false);
-draw_set_color(c_blue);
-draw_circle(10, display_get_gui_height() - 10, 10, false);
-draw_set_color(c_yellow);
-draw_circle(display_get_gui_width() - 10, display_get_gui_height() - 10, 10, false);
-draw_set_color(c_white);
+var _scale = PfGetAppliedLayoutStruct().surfacePostDrawScale;
 
-draw_text(10, 10, $"{display_get_gui_width()},{display_get_gui_height()}\n{__PfNotchGetLeft()},{__PfNotchGetTop()},{__PfNotchGetRight()},{__PfNotchGetBottom()}");
+var _radius = _scale;
+var _top    = _radius - 1;
+var _left   = _radius - 1;
+var _right  = display_get_gui_width()  - _radius - 1;
+var _bottom = display_get_gui_height() - _radius - 1;
+
+draw_set_alpha(0.3);
+draw_set_color(c_red);
+draw_circle(_left, _top, _radius, false);
+draw_set_color(c_lime);
+draw_circle(_right, _top, _radius, false);
+draw_set_color(c_blue);
+draw_circle(_left, _bottom, _radius, false);
+draw_set_color(c_yellow);
+draw_circle(_right, _bottom, _radius, false);
+draw_set_color(c_white);
+draw_set_alpha(1);
