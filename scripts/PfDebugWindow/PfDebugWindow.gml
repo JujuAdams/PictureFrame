@@ -68,8 +68,8 @@ function PfDebugWindow(_configStruct = undefined)
                 viewY       = view_get_yport(_view);
                 viewWidth   = view_get_wport(_view);
                 viewHeight  = view_get_hport(_view);
-                viewEnabled = view_enabled;
-                viewVisible = view_get_visible(_view);
+                viewEnabled = view_enabled? "true" : "false";
+                viewVisible = view_get_visible(_view)? "true" : "false";
                 
                 appSurfWidth  = surface_get_width(application_surface);
                 appSurfHeight = surface_get_height(application_surface);
@@ -81,8 +81,8 @@ function PfDebugWindow(_configStruct = undefined)
                 windowY          = window_get_y();
                 windowWidth      = window_get_width();
                 windowHeight     = window_get_height();
-                windowFullscreen = window_get_fullscreen();
-                windowShowBorder = window_get_showborder();
+                windowFullscreen = window_get_fullscreen()? "true" : "false";
+                windowShowBorder = window_get_showborder()? "true" : "false";
                 
                 displayWidth        = display_get_width();
                 displayHeight       = display_get_height();
