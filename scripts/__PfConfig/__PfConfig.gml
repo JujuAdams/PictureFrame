@@ -1,5 +1,10 @@
 // Feather disable all
 
+/// Whether to show large amounts of information describing the decisions that PictureFrame is
+/// taking when calculating the render pipeline for your game. This is only useful for debugging
+/// and this macro should be set to `false` for production builds.
+#macro PF_VERBOSE  false
+
 /// Unfortunately, PictureFrame has some compatibility issues with GameMaker's native mouse
 /// position getters. This is due to PictureFrame taking control of GameMaker's application surface
 /// drawing. Because we're doing it ourselves, GameMaker doesn't understand the relationship
