@@ -22,8 +22,8 @@
 const config = {
 	name: 'PictureFrame',
 	description: 'Camera/view/GUI/window/application surface calculator for GameMaker',
-	latestVersion: '3.2',
-	otherVersions: ['4.1'],
+	latestVersion: '4.1',
+	otherVersions: ['3.2'],
 	favicon: 'assets/favicon.ico',
 	themeColor: '#feab6d',
 };

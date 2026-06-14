@@ -2,7 +2,7 @@
 
 &nbsp;
 
-## `PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS`
+## `PICTURE_FRAME_VERBOSE`
 
 *Typical value:* `false`
 
