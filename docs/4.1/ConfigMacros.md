@@ -4,6 +4,14 @@
 
 ## `PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS`
 
+*Typical value:* `false`
+
+Whether to show large amounts of information describing the decisions that PictureFrame is taking when calculating the render pipeline for your game. This is only useful for debugging and this macro should be set to `false` for production builds.
+
+&nbsp;
+
+## `PICTURE_FRAME_REPLACE_NATIVE_MOUSE_FUNCTIONS`
+
 *Typical value:* `true`
 
 Unfortunately, PictureFrame has some compatibility issues with GameMaker's native mouse position getters. This is due to PictureFrame taking control of GameMaker's application surface drawing. Because we're doing it ourselves, GameMaker doesn't understand the relationship between the mouse position in the window and the game camera. The PictureFrame functions `PfMouseX()` and `PfMouseY()` (see [Helper Functions](HelperFunctions)) are provided to work around this problem.
