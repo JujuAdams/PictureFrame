@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__PfConfigMacros",
+  "%Name":"PfGetWindowStateChanged",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__PfConfigMacros",
+  "name":"PfGetWindowStateChanged",
   "parent":{
     "name":"PictureFrame",
     "path":"folders/PictureFrame.yy",

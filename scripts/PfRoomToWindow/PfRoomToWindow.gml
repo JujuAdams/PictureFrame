@@ -18,7 +18,7 @@ function PfRoomToWindow(_x, _y)
         y: 0,
     };
     
-    with(_system.__resultStruct)
+    with(_system.__layoutStruct)
     {
         var _camera = (view_enabled && view_get_visible(0))? view_get_camera(0) : undefined;
         if (_camera != undefined)

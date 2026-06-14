@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"PfGetApplied",
+  "%Name":"__PfConfig",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PfGetApplied",
+  "name":"__PfConfig",
   "parent":{
     "name":"PictureFrame",
     "path":"folders/PictureFrame.yy",

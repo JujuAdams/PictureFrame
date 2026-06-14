@@ -1,43 +1,59 @@
 // Feather disable all
 
 /// Convenience function that returns a configuration struct set up for pixel-perfect rendering.
-/// You can edit values in the returned struct if you'd like and it will obey all the same rules
-/// as a configuration struct returned by PfConfigGeneral().
+/// This function will set the size of the GUI layer to be the same as the size of the camera
+/// (`.guiMode` is set to `1`).
 /// 
-/// N.B. Because PfConfigPixelArt() returns a fresh struct every time it is called, you should
+/// You can further edit values in the returned struct if you'd like and it will obey all the same
+/// rules as a configuration struct returned by `PfConfigGeneral()`.
+/// 
+/// On most platforms, the application surface will be drawn to the window such that it maintains
+/// pixel-perfect rendering (`.surfacePixelPerfect` is set to `true`). However, on mobile you'll
+/// usually want the application surface to fill the entire usable area of the screen. As a result,
+/// the `.surfacePixelPerfect` variable will be set to `false` when `PfConfigPixelArt()` is called
+/// on iOS and Android devices. You can override this behaviour yourself on any platform by setting
+/// `.surfacePixelPerfect` on the returned struct.
+/// 
+/// N.B. Because `PfConfigPixelArt()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
-/// @param cameraWidth
-/// @param cameraHeight
-/// @param [cameraMaxWidth=Min]
-/// @param [cameraMaxHeight=Min]
+/// @param targetWidth
+/// @param targetHeight
 /// @param [fullscreen]
+/// @param [maxWidth]
+/// @param [maxHeight]
 
-function PfConfigPixelArt(_cameraMinWidth, _cameraMinHeight, _cameraMaxWidth = _cameraMinWidth, _cameraMaxHeight = _cameraMinHeight, _fullscreen = window_get_fullscreen())
+function PfConfigPixelArt(_targetWidth, _targetHeight, _fullscreen = window_get_fullscreen(), _maxWidth = -1, _maxHeight = -1)
 {
     return {
-        cameraMinWidth:  _cameraMinWidth,
-        cameraMinHeight: _cameraMinHeight,
-        
-        cameraMaxWidth:  _cameraMaxWidth,
-        cameraMaxHeight: _cameraMaxHeight,
+        cameraTargetWidth:  _targetWidth,
+        cameraTargetHeight: _targetHeight,
+        cameraMaxWidth:     _maxWidth,
+        cameraMaxHeight:    _maxHeight,
         
         cameraOverscan: 0,
+        cameraIgnore:   false,
         
         viewMaxScale:     1,
         viewPixelPerfect: true,
         
         //Force "fullscreen" on non-desktop platforms
-        fullscreen: ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))? _fullscreen : true,
+        fullscreen: PICTURE_FRAME_ON_DESKTOP? _fullscreen : true,
         
-        windowWidth:  window_get_width(),
-        windowHeight: window_get_height(),
+        trimBlackBars: true,
+        windowWidth:   window_get_width(),
+        windowHeight:  window_get_height(),
         
-        guiStretchOverWindow: false,
-        guiTargetWidth:  (_cameraMinWidth < _cameraMinHeight)? _cameraMinWidth : undefined,
-        guiTargetHeight: (_cameraMinWidth < _cameraMinHeight)? undefined : _cameraMinHeight,
+        guiWindowStretch: false,
+        guiMode:          1,
+        guiTargetWidth:   _targetWidth,
+        guiTargetHeight:  _targetHeight,
+        guiScale:         1,
+        guiAvoidNotch:    true,
         
-        surfacePixelPerfect: true,
-        windowOverscanScale:  1,
+        surfaceAvoidNotch:   true,
+        surfacePixelPerfect: not PICTURE_FRAME_ON_MOBILE,
+        
+        windowOverscanScale: 1,
     }
 }

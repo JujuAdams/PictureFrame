@@ -1,69 +1,122 @@
 // Feather disable all
 
-/// Returns a template PictureFrame "configuration struct". This configuration struct can then be
-/// passed into PfCalculate() to generate various positions and sizes for each phase in GameMaker's
-/// rendering pipeline. The configuration struct is rather complex and if you're looking for easier
-/// "quick start" behaviour than you may want to consider calling either PfConfigPixelArt() or
-/// PfConfigHighRes() instead. They return a similar struct to PfConfigGeneral() but pre-configured
-/// for common use cases.
+/// Returns a template PictureFrame "configuration struct". The config struct is a set of
+/// constraints that are fed into an algorithm that determines the best parameters for rendering.
+/// A config struct can be passed into `PfApply()` to automatically set up a rendering pipeline
+/// or it can be passed into `PfCalculate()` to generate data that you can apply manually.
 /// 
-/// You should edit the returned configuration struct to reflect the needs of your game.
+/// Config structs are rather complex and if you're looking for easier "quick start" behaviour
+/// than you may want to consider calling either `PfConfigPixelArt()` or `PfConfigHighRes()` 
+/// instead. They each return a config struct pre-built for a particular common use case (which can
+/// be edited in the exact same way as a config struct returned by `PfConfigGeneral()`).
 /// 
-/// N.B. Because PfConfigGeneral() returns a fresh struct every time it is called, you should
+/// You should edit the configuration struct returned by this function to reflect the needs of your
+/// game.
+/// 
+/// N.B. Because a `PfConfigGeneral()` returns a fresh struct every time it is called, you should
 ///      avoid calling this function more often than is necessary.
 /// 
 /// 
 /// 
-/// Variables that the configuration struct hold are as follows:
+/// The following variables will be in the returned configuration struct:
 /// 
-/// .cameraMinWidth
-/// .cameraMinHeight
-///     The minimum width and height for the camera. This is the "safe area" that is guaranteed to
-///     be visible.
+/// .cameraTargetWidth
+/// .cameraTargetHeight
+///     The target camera width and height. This is the "safe area" that is required to be be
+///     visible for the game to function properly. PictureFrame will attempt to set the camera to
+///     this width and height, adjusting the rendering pipeline within the various constraints
+///     defined in the struct. If you specify a maximum width/height, the target width/height is
+///     used as the minimum.
 /// 
 /// .cameraMaxWidth
 /// .cameraMaxHeight
 ///     The maximum width and height for the camera. This is an expansion zone that the camera can
-///     grow into to adapt to different resolutions and aspect ratios.
+///     grow into to adapt to different resolutions and aspect ratios. Set either of these
+///     variables to a negative number to use the target width/height value.
 /// 
 /// .cameraOverscan
 ///     The number of extra pixels, in roomspace, to add around the edges of the camera. A value of
-///     1 will add one pixel to the left, top, right, and bottom edges leading to a 2 pixel
+///     `1` will add one pixel to the left, top, right, and bottom edges leading to a 2 pixel
 ///     increase in the overall width and height of the camera. Normally you'll want to set this
-///     variable to 0 but you may want to set it to higher values if you're implementing visual
+///     variable to `0` but you may want to set it to higher values if you're implementing visual
 ///     effects that extend beyond the limits of the camera or you're implementing a smooth scroll
-///     effect alongside pixel perfect graphics.
+///     effect alongside pixel-perfect graphics.
+/// 
+/// .cameraIgnore
+///     Whether to never set native GameMaker camera and view properties. This variable only
+///     affects what values are set by `PfApply()` and does not change any calculations (camera
+///     dimensions, view dimensions, etc.).
 /// 
 /// .viewMaxScale
 ///     Maximum scaling factor from the camera to the view. For pixel perfect games that don't want
-///     subpixelling, this value should be set to 1. If you do want subpixelling, or you're making
-///     a high res game, this value should usually be set to <infinity>. You may rarely want to set
-///     another value if you want tighter control over the view scale and subpixelling.
+///     subpixelling, this value should be set to exactly `1`. If you do want subpixelling, or
+///     you're making a high res game, this value should usually be set to `infinity`. You may
+///     rarely want to set another value if you want tighter control over the view scale and
+///     subpixelling.
 /// 
 /// .viewPixelPerfect
 ///     Whether the camera-to-view scale should be a whole number. If you're making a pixel art
 ///     game, whether you want subpixelling or not, this variable should almost certainly be set
-///     to <true>.
+///     to `true`. Games at high resolutions will likely be fine with this set to `false`.
 /// 
 /// .fullscreen
-///     The fullscreen state for the game. This value is only relevant on desktop platforms
+///     The desired fullscreen state for the game. This value is only relevant on desktop platforms
 ///     (Windows, MacOS, Linux).
 /// 
 /// .windowWidth
 /// .windowHeight
-///     The size of the game window. This value is only relevant when the game is not fullscreened
-///     and is therefore only relevant on desktop platforms (Windows, MacOS, Linux).
+///     The desired size of the game window. This value is only relevant when the game is not
+///     fullscreened and is therefore only relevant on desktop platforms. These values will only be
+///     applied when using `PfApply()` if the window needs to be resized (either the game is
+///     already windowed and the `tryResizeWindow` optional parameter is set to `true`, or the game
+///     is transitioning from fullscreen to windowed).
 /// 
-/// .guiStretchOverWindow
-///     Whether to stretch the GUI over the entire window. This is <false> by default meaning that
+/// .trimBlackBars
+///     Whether the window should be reduced in size to remove black bars if possible. Like above,
+///     this value will only be applied when using `PfApply()` if the `tryResizeWindow` optional
+///     parameter is set to `true`.
+/// 
+/// .guiWindowStretch
+///     Whether to stretch the GUI over the entire window. This is `false` by default meaning that
 ///     the GUI layer will be stretched over the application surface portion of the window.
+/// 
+/// .guiMode
+///     Selects the logic used to determine the GUI layer's coordinate space width and height. The
+///     default value is `1` which will cause the GUI layer size to be the same as the camera. This
+///     variable must be set to one of the following values:
+///         `0` = GUI size is the unadjusted windowspace size
+///         `1` = GUI size is the same as the camera
+///         `2` = GUI size is the same as the application surface / view
+///         `3` = GUI size is equal to the target camera size (this often stretches GUI graphics)
+///         `4` = GUI size stretches the target GUI width and keeps the target GUI height constant
+///         `5` = GUI size stretches the target GUI height and keeps the target GUI width constant
+///         `6` = PictureFrame decides which target GUI axis to change and keeps the other
 /// 
 /// .guiTargetWidth
 /// .guiTargetHeight
-///     The target width or height for the GUI layer dimensions. To allow PfCalculate() to adapt to
-///     different aspect ratios, set one of these variables to <undefined>. In this situation,
-///     PictureFrame will adjust the <undefined> dimension to stretch the GUI layer over the window
-///     whilst keeping the aspect ratio correct between the GUI width and height.
+///     Target GUI dimensions. These will only be used for certain GUI modes - see above.
+/// 
+/// .guiScale
+///     Scaling factor to apply to graphics drawn on the GUI layer. To apply no scaling, use a
+///     value of `1`. Increasing this value will, perhaps counter-intuitively, reduce the GUI
+///     layer's width and height.
+/// 
+/// .guiAvoidNotch
+///     Whether the GUI layer's coordinate space should avoid the device's notch or camera cut-out.
+///     You will still be able to draw GUI graphics in areas of the display around the notch if you
+///     use negative coordinates etc. so be careful with how you draw graphics on the GUI layer.
+///     
+///     N.B. If you have this variable to set `false` and are running on Android, please ensure
+///          that you have the "Display Layout" option set to `LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS`
+///          in your project's Game Options.
+/// 
+/// .surfaceAvoidNotch
+///     Whether the application surface should avoid the device's notch or camera cut-out. This
+///     will slightly reduce the available display area for the application surface.
+///     
+///     N.B. If you have this variable to set `false` and are running on Android, please ensure
+///          that you have the "Display Layout" option set to `LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS`
+///          in your project's Game Options.
 /// 
 /// .surfacePixelPerfect
 ///     Determines whether the scaling factor applied to the application surface when drawn to the
@@ -74,64 +127,61 @@
 ///     Scaling factor to apply to the application surface and GUI at the end of the render
 ///     pipeline. This is useful to adjust for overscan on old monitors and it is a compliance
 ///     requirement when releasing on some console platforms. The overscan scale will ignore
-///     .surfacePixelPerfect (see above).
+///     `.surfacePixelPerfect` (see above).
 
 function PfConfigGeneral()
 {
     var _configStruct = {
-        cameraOverscan: 0,
+        cameraMaxWidth:  -1,
+        cameraMaxHeight: -1,
+        cameraOverscan:   0,
+        cameraIgnore:     false,
         
         //Force "fullscreen" on non-desktop platforms
-        fullscreen: ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))? window_get_fullscreen() : true,
+        fullscreen: PICTURE_FRAME_ON_DESKTOP? window_get_fullscreen() : true,
         
-        windowWidth:  window_get_width(),
-        windowHeight: window_get_height(),
-        
-        guiStretchOverWindow: false,
-        
+        trimBlackBars:       true,
+        windowWidth:         window_get_width(),
+        windowHeight:        window_get_height(),
         windowOverscanScale: 1,
+        
+        guiWindowStretch: false,
+        guiMode:          6,
+        guiTargetWidth:   __PF_display_get_gui_width(),
+        guiTargetHeight:  __PF_display_get_gui_height(),
+        guiScale:         1,
+        guiAvoidNotch:    true,
+        
+        surfaceAvoidNotch: true,
     }
     
     with(_configStruct)
     {
         if (view_enabled && view_get_visible(0))
         {
+            //If there's a view already set then inherit those properties
             var _camera = view_get_camera(0);
-            cameraMinWidth  = camera_get_view_width(_camera);
-            cameraMinHeight = camera_get_view_height(_camera);
-            cameraMaxWidth  = cameraMinWidth;
-            cameraMaxHeight = cameraMinHeight;
+            cameraTargetWidth  = camera_get_view_width(_camera);
+            cameraTargetHeight = camera_get_view_height(_camera);
             
-            viewMaxScale = min(view_get_wport(0) / cameraMinWidth, view_get_hport(0) / cameraMinHeight);
+            viewMaxScale = min(view_get_wport(0) / cameraTargetWidth, view_get_hport(0) / cameraTargetHeight);
             
             //Set the view to pixel perfect if it's a whole scale of the camera
             viewPixelPerfect = (floor(viewMaxScale) == viewMaxScale);
             
-            //Application surface pixel perfect drawing follows whether the view is pixel perfect too
+            //In the general case, application surface pixel perfect drawing follows whether the view is pixel perfect too
             surfacePixelPerfect = viewPixelPerfect;
         }
         else
         {
-            cameraMinWidth  = surface_get_width(application_surface);
-            cameraMinHeight = surface_get_height(application_surface);
-            cameraMaxWidth  = cameraMinWidth;
-            cameraMaxHeight = cameraMinHeight;
+            //Otherwise use the application surface if there's no camera
+            cameraTargetWidth  = surface_get_width(application_surface);
+            cameraTargetHeight = surface_get_height(application_surface);
             
             viewMaxScale     = infinity;
             viewPixelPerfect = false;
             
             surfacePixelPerfect = false;
-        }
-        
-        if (windowWidth > windowHeight)
-        {
-            guiTargetWidth  = undefined;
-            guiTargetHeight = cameraMinWidth;
-        }
-        else
-        {
-            guiTargetWidth  = cameraMinHeight;
-            guiTargetHeight = undefined;
         }
     }
     

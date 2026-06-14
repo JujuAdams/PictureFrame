@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__PfNotchGetBottom",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__PfNotchGetBottom",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/PictureFrame/(System).yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
