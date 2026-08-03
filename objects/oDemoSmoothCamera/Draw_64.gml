@@ -26,3 +26,23 @@ with(PfGetAppliedLayoutStruct())
         draw_set_alpha(1);
     }
 }
+
+var _scale = PfGetAppliedLayoutStruct().surfacePostDrawScale;
+
+var _radius = _scale;
+var _top    = _radius - 1;
+var _left   = _radius - 1;
+var _right  = display_get_gui_width()  - _radius - 1;
+var _bottom = display_get_gui_height() - _radius - 1;
+
+draw_set_alpha(0.3);
+draw_set_color(c_red);
+draw_circle(_left, _top, _radius, false);
+draw_set_color(c_lime);
+draw_circle(_right, _top, _radius, false);
+draw_set_color(c_blue);
+draw_circle(_left, _bottom, _radius, false);
+draw_set_color(c_yellow);
+draw_circle(_right, _bottom, _radius, false);
+draw_set_color(c_white);
+draw_set_alpha(1);
