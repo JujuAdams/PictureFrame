@@ -86,10 +86,18 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
 {
     static _system = __PfSystem();
     
-    if (PICTURE_FRAME_ON_DESKTOP && (not _configStruct.fullscreen) && window_get_fullscreen())
+    if (PICTURE_FRAME_ON_DESKTOP)
     {
-        //Force a resize if we're swapping from fullscreen to window
-        _tryResizeWindow = true;
+        if ((not _configStruct.fullscreen) && window_get_fullscreen())
+        {
+            //Force a resize if we're swapping from fullscreen to window
+            _tryResizeWindow = true;
+        }
+    }
+    else
+    {
+        //Can never resize a window outside of desktop
+        _tryResizeWindow = false;
     }
     
     //Disable automatic application surface drawing

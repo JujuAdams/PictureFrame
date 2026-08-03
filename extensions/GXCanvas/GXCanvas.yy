@@ -55,7 +55,7 @@
   "packageId":"",
   "parent":{
     "name":"PictureFrame",
-    "path":"PictureFrame.yyp",
+    "path":"folders/PictureFrame.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",

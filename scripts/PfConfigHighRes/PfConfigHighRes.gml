@@ -32,7 +32,7 @@ function PfConfigHighRes(_targetWidth, _targetHeight, _fullscreen = window_get_f
         viewPixelPerfect: false,
         
         //Force "fullscreen" on non-desktop platforms
-        fullscreen: PICTURE_FRAME_ON_DESKTOP? _fullscreen : true,
+        fullscreen: (PICTURE_FRAME_ON_DESKTOP || PICTURE_FRAME_ON_GXGAMES)? _fullscreen : true,
         
         trimBlackBars: true,
         windowWidth:   __PfWindowGetWidth(),

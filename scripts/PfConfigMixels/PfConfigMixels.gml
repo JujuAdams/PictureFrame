@@ -31,7 +31,7 @@ function PfConfigMixels(_targetWidth, _targetHeight, _fullscreen = window_get_fu
         viewPixelPerfect: true,
         
         //Force "fullscreen" on non-desktop platforms
-        fullscreen: PICTURE_FRAME_ON_DESKTOP? _fullscreen : true,
+        fullscreen: (PICTURE_FRAME_ON_DESKTOP || PICTURE_FRAME_ON_GXGAMES)? _fullscreen : true,
         
         trimBlackBars: true,
         windowWidth:   __PfWindowGetWidth(),

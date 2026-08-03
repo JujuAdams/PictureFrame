@@ -138,7 +138,7 @@ function PfConfigGeneral()
         cameraIgnore:     false,
         
         //Force "fullscreen" on non-desktop platforms
-        fullscreen: PICTURE_FRAME_ON_DESKTOP? window_get_fullscreen() : true,
+        fullscreen: (PICTURE_FRAME_ON_DESKTOP || PICTURE_FRAME_ON_GXGAMES)? window_get_fullscreen() : true,
         
         trimBlackBars:       true,
         windowWidth:         __PfWindowGetWidth(),
