@@ -9,6 +9,19 @@ function __PfSystem()
     
     __PfTrace($"Welcome to PictureFrame by Juju Adams! This is version {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}");
     
+    if (PICTURE_FRAME_ON_GXGAMES)
+    {
+        if (extension_exists("GXCanvas"))
+        {
+            __PfTrace($"Found GXCanvas extension by TabularElf (version {extension_get_version("GXCanvas")}");
+            GXCanvasSetResolutionHandler(function() {});
+        }
+        else
+        {
+            __PfError($"GX.Games (WebASM) not supported without the GXCanvas extension by TabularElf\nThis can found here: ");
+        }
+    }
+    
     _system = {};
     with(_system)
     {
