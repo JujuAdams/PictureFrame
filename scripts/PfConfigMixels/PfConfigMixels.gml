@@ -34,8 +34,8 @@ function PfConfigMixels(_targetWidth, _targetHeight, _fullscreen = window_get_fu
         fullscreen: PICTURE_FRAME_ON_DESKTOP? _fullscreen : true,
         
         trimBlackBars: true,
-        windowWidth:   window_get_width(),
-        windowHeight:  window_get_height(),
+        windowWidth:   __PfWindowGetWidth(),
+        windowHeight:  __PfWindowGetHeight(),
         
         guiWindowStretch: false,
         guiMode:          1,

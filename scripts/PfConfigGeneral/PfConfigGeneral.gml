@@ -141,8 +141,8 @@ function PfConfigGeneral()
         fullscreen: PICTURE_FRAME_ON_DESKTOP? window_get_fullscreen() : true,
         
         trimBlackBars:       true,
-        windowWidth:         window_get_width(),
-        windowHeight:        window_get_height(),
+        windowWidth:         __PfWindowGetWidth(),
+        windowHeight:        __PfWindowGetHeight(),
         windowOverscanScale: 1,
         
         guiWindowStretch: false,

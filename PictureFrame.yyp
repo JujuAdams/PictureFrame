@@ -43,6 +43,8 @@
     {"id":{"name":"__PfNotchGetTop","path":"scripts/__PfNotchGetTop/__PfNotchGetTop.yy",},},
     {"id":{"name":"__PfSystem","path":"scripts/__PfSystem/__PfSystem.yy",},},
     {"id":{"name":"__PfTrace","path":"scripts/__PfTrace/__PfTrace.yy",},},
+    {"id":{"name":"__PfWindowGetHeight","path":"scripts/__PfWindowGetHeight/__PfWindowGetHeight.yy",},},
+    {"id":{"name":"__PfWindowGetWidth","path":"scripts/__PfWindowGetWidth/__PfWindowGetWidth.yy",},},
     {"id":{"name":"PfApply","path":"scripts/PfApply/PfApply.yy",},},
     {"id":{"name":"PfCalculate","path":"scripts/PfCalculate/PfCalculate.yy",},},
     {"id":{"name":"PfConfigGeneral","path":"scripts/PfConfigGeneral/PfConfigGeneral.yy",},},

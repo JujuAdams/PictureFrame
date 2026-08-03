@@ -19,8 +19,8 @@ function PfConfigSetWindowVars(_configStruct)
     with(_configStruct)
     {
         fullscreen   = window_get_fullscreen();
-        windowWidth  = window_get_width();
-        windowHeight = window_get_height();
+        windowWidth  = __PfWindowGetWidth();
+        windowHeight = __PfWindowGetHeight();
     }
     
     return _configStruct;

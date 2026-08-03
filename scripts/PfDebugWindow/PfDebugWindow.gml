@@ -79,8 +79,8 @@ function PfDebugWindow(_configStruct = undefined)
                 
                 windowX          = window_get_x();
                 windowY          = window_get_y();
-                windowWidth      = window_get_width();
-                windowHeight     = window_get_height();
+                windowWidth      = __PfWindowGetWidth();
+                windowHeight     = __PfWindowGetHeight();
                 windowFullscreen = window_get_fullscreen()? "true" : "false";
                 windowShowBorder = window_get_showborder()? "true" : "false";
                 

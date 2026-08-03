@@ -24,8 +24,8 @@ function __PfSystem()
         __mouseY = undefined;
         
         __fullscreen   = window_get_fullscreen();
-        __windowWidth  = window_get_width();
-        __windowHeight = window_get_height();
+        __windowWidth  = __PfWindowGetWidth();
+        __windowHeight = __PfWindowGetHeight();
         __windowStateChanged = false;
         
         __debugState  = {};
@@ -83,12 +83,12 @@ function __PfSystem()
                 
                 __windowStateChanged = true;
             }
-            else if (((__windowWidth != window_get_width()) || (__windowHeight != window_get_height()))
-            && (window_get_width() != 0)
-            && (window_get_height() != 0))
+            else if (((__windowWidth != __PfWindowGetWidth()) || (__windowHeight != __PfWindowGetHeight()))
+            && (__PfWindowGetWidth() != 0)
+            && (__PfWindowGetHeight() != 0))
             {
-                __windowWidth  = window_get_width();
-                __windowHeight = window_get_height();
+                __windowWidth  = __PfWindowGetWidth();
+                __windowHeight = __PfWindowGetHeight();
                 
                 __windowStateChanged = true;
             }

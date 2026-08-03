@@ -189,16 +189,15 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
                     if (PICTUREFRAME_VERBOSE) __PfTrace($"Set windowed");
                 }
                 
-                if (_tryResizeWindow && ((window_get_width() != windowWidth) || (window_get_height() != windowHeight)))
+                if (_tryResizeWindow && ((__PfWindowGetWidth() != windowWidth) || (__PfWindowGetHeight() != windowHeight)))
                 {
-                    var _oldWidth  = window_get_width();
-                    var _oldHeight = window_get_height();
+                    var _oldWidth  = __PfWindowGetWidth();
+                    var _oldHeight = __PfWindowGetHeight();
                     var _width     = windowWidth;
                     var _height    = windowHeight;
                     
                     var _x = window_get_x() - 0.5*(_width  - _oldWidth);
                     var _y = window_get_y() - 0.5*(_height - _oldHeight);
-                    
                     window_set_rectangle(_x, _y, _width, _height);
                     
                     if (PICTUREFRAME_VERBOSE) __PfTrace($"Set window rectangle to {_width} x {_height} at position ({_x}, {_y})");

@@ -117,7 +117,7 @@
 ///     Coordinates for the margins around the application surface. The coordinates are in
 ///     GUI-space.
 
-function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFullscreen = window_get_fullscreen(), _currentWindowWidth = window_get_width(), _currentWindowHeight = window_get_height(), _currentDisplayWidth = display_get_width(), _currentDisplayHeight = display_get_height())
+function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFullscreen = window_get_fullscreen(), _currentWindowWidth = __PfWindowGetWidth(), _currentWindowHeight = __PfWindowGetHeight(), _currentDisplayWidth = display_get_width(), _currentDisplayHeight = display_get_height())
 {
     with(_configurationStruct)
     {
