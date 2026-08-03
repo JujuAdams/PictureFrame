@@ -54,8 +54,8 @@
   "optionsFile":"options.json",
   "packageId":"",
   "parent":{
-    "name":"PictureFrame",
-    "path":"folders/PictureFrame.yy",
+    "name":"GXCanvas",
+    "path":"folders/GXCanvas.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",
