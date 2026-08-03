@@ -146,7 +146,7 @@ function PfCalculate(_configurationStruct, _tryResizeWindow = false, _currentFul
         ///////
         
         //Do we want to be in fullscreen? If we're not on desktop then we have to be
-        var _fullscreen = PICTURE_FRAME_ON_DESKTOP? fullscreen : true;
+        var _fullscreen = (PICTURE_FRAME_ON_DESKTOP || PICTURE_FRAME_ON_GXGAMES)? fullscreen : true;
         
         //Are we going to respect the display insets? This variable is possibly unnecessary but it
         //makes later code easier to read

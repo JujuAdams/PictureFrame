@@ -86,9 +86,9 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
 {
     static _system = __PfSystem();
     
-    //Force a resize if we're swapping from fullscreen to window
     if (PICTURE_FRAME_ON_DESKTOP && (not _configStruct.fullscreen) && window_get_fullscreen())
     {
+        //Force a resize if we're swapping from fullscreen to window
         _tryResizeWindow = true;
     }
     
@@ -170,9 +170,18 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
             if (PICTUREFRAME_VERBOSE) __PfTrace($"Set viewport to {viewWidth} x {viewHeight} at position (0, 0) on the application surface");
         }
         
-        //Handle fullscreen transition and window size on desktop
-        if (PICTURE_FRAME_ON_DESKTOP)
+        if (PICTURE_FRAME_ON_GXGAMES)
         {
+            window_set_fullscreen(fullscreen);
+            if (PICTUREFRAME_VERBOSE) __PfTrace($"Set {fullscreen? "fullscreen" : "windowed"}");
+            
+            GXCanvasSetCanvasSize(windowWidth, windowHeight);
+            GXCanvasSetCanvasCSSSize(windowWidth, windowHeight);
+            if (PICTUREFRAME_VERBOSE) __PfTrace($"Set canvas to {windowWidth} x {windowHeight}");
+        }
+        else if (PICTURE_FRAME_ON_DESKTOP)
+        {
+            //Handle fullscreen transition and window size on desktop
             if (fullscreen)
             {
                 if (not window_get_fullscreen())
