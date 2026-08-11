@@ -28,8 +28,10 @@
   "resources":[
     {"id":{"name":"__PfGXCanvas","path":"extensions/__PfGXCanvas/__PfGXCanvas.yy",},},
     {"id":{"name":"__PfNotch","path":"extensions/__PfNotch/__PfNotch.yy",},},
+    {"id":{"name":"fntDefault","path":"fonts/fntDefault/fntDefault.yy",},},
     {"id":{"name":"oDemo","path":"objects/oDemo/oDemo.yy",},},
     {"id":{"name":"oDemoSmoothCamera","path":"objects/oDemoSmoothCamera/oDemoSmoothCamera.yy",},},
+    {"id":{"name":"oDetails","path":"objects/oDetails/oDetails.yy",},},
     {"id":{"name":"oFollowCircle","path":"objects/oFollowCircle/oFollowCircle.yy",},},
     {"id":{"name":"oMarkerCircle","path":"objects/oMarkerCircle/oMarkerCircle.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
