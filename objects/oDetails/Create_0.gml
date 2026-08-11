@@ -1,8 +1,5 @@
 mode = 0;
 
-scrollY = 0;
-scrollCount = struct_names_count(PfGetAppliedLayoutStruct());
-
 funcTextbox = function(_x, _y, _string)
 {
     draw_set_alpha(0.5);

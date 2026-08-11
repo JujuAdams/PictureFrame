@@ -1,16 +1,13 @@
-if (mode == 2) return;
-
 draw_set_font(fntDefault);
 
 if (mode == 0)
 {
-    funcTextbox(3, 3, "Press [enter] or [start] for details");
+    funcTextbox(3, 3, "Press [left] and [right] to change page");
 }
 else if (mode == 1)
 {
     var _string = "";
-    _string += $"PictureFrame {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}\n";
-    _string += $"Press [enter] or [start] to hide details\n";
+    _string += $"PictureFrame {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}\nPress [left] and [right] to change page\n";
     
     var _bottom = funcTextbox(3, 3, _string);
     
@@ -59,6 +56,45 @@ else if (mode == 1)
     _string += $"guiWidth = {_layoutStruct.guiWidth}\n";
     _string += $"guiHeight = {_layoutStruct.guiHeight}\n";
     var _bottom = funcTextbox(3, _bottom+6, _string);
+}
+else if (mode == 2)
+{
+    var _string = "";
+    _string += $"PictureFrame {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}\nPress [left] and [right] to change page\n";
+    
+    var _bottom = funcTextbox(3, 3, _string);
+    
+    var _configStruct = PfGetAppliedConfigStruct();
+    
+    var _string = "";
+    _string += $"fullscreen = {_configStruct.fullscreen? "true" : "false"}\n";
+    _string += $"windowWidth = {_configStruct.windowWidth}\n";
+    _string += $"windowHeight = {_configStruct.windowHeight}\n";
+    _string += $"trimBlackBars = {_configStruct.trimBlackBars? "true" : "false"}\n";
+    _string += $"surfaceAvoidNotch = {_configStruct.surfaceAvoidNotch? "true" : "false"}\n";
+    _string += $"surfacePixelPerfect = {_configStruct.surfacePixelPerfect? "true" : "false"}\n";
+    _string += $"windowOverscanScale = {_configStruct.windowOverscanScale}\n";
+    funcTextbox(122, _bottom+6, _string);
+    
+    var _string = "";
+    _string += $"guiWindowStretch = {_configStruct.guiWindowStretch}\n";
+    _string += $"guiMode = {_configStruct.guiMode}\n";
+    _string += $"guiTargetWidth = {_configStruct.guiTargetWidth}\n";
+    _string += $"guiTargetHeight = {_configStruct.guiTargetHeight}\n";
+    _string += $"guiScale = {_configStruct.guiScale}\n";
+    _string += $"guiAvoidNotch = {_configStruct.guiAvoidNotch? "true" : "false"}\n";
+    var _bottom = funcTextbox(3, _bottom+6, _string);
+    
+    var _string = "";
+    _string += $"cameraTargetWidth = {_configStruct.cameraTargetWidth}\n";
+    _string += $"cameraTargetHeight = {_configStruct.cameraTargetHeight}\n";
+    _string += $"cameraMaxWidth = {_configStruct.cameraMaxWidth}\n";
+    _string += $"cameraMaxHeight = {_configStruct.cameraMaxHeight}\n";
+    _string += $"cameraOverscan = {_configStruct.cameraOverscan}\n";
+    _string += $"cameraIgnore = {_configStruct.cameraIgnore? "true" : "false"}\n";
+    _string += $"viewMaxScale = {_configStruct.viewMaxScale}\n";
+    _string += $"viewPixelPerfect = {_configStruct.viewPixelPerfect}\n";
+    funcTextbox(3, _bottom+6, _string);
 }
 
 draw_set_font(-1);
