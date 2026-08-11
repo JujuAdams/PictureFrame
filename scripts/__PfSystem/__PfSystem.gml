@@ -7,19 +7,11 @@ function __PfSystem()
     static _system = undefined;
     if (_system != undefined) return _system;
     
-    __PfTrace($"Welcome to PictureFrame by Juju Adams! This is version {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}");
+    __PfTrace($"Welcome to PictureFrame by Juju Adams! GX.Games solution written by TabularElf. This is version {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}");
     
-    if (PICTURE_FRAME_ON_GXGAMES)
+    if (extension_exists("GXCanvas"))
     {
-        if (extension_exists("GXCanvas"))
-        {
-            __PfTrace($"Found GXCanvas extension by TabularElf (version {extension_get_version("GXCanvas")}");
-            GXCanvasSetResolutionHandler(function() {});
-        }
-        else
-        {
-            __PfError($"GX.Games (WebASM) not supported without the GXCanvas extension by TabularElf\nThis can found here: ");
-        }
+        __PfError($"PictureFrame is not compatible with `GXCanvas`");
     }
     
     _system = {};

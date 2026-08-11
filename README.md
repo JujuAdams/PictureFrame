@@ -2,6 +2,8 @@
 
 <p align="center">Render pipeline calculator for GameMaker LTS 2026</p>
 
+<p align="center">GX.Games resolution fix contributed by <a href="https://github.com/tabularelf/GX-Extensions">TabularElf</a></p>
+
 &nbsp;
 
 &nbsp;

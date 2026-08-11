@@ -183,8 +183,8 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
             window_set_fullscreen(fullscreen);
             if (PICTUREFRAME_VERBOSE) __PfTrace($"Set {fullscreen? "fullscreen" : "windowed"}");
             
-            GXCanvasSetCanvasSize(windowWidth, windowHeight);
-            GXCanvasSetCanvasCSSSize(windowWidth, windowHeight);
+            __PfGXCanvasSetCanvasSize(windowWidth, windowHeight);
+            __PfGXCanvasSetCanvasCSSSize(windowWidth, windowHeight);
             if (PICTUREFRAME_VERBOSE) __PfTrace($"Set canvas to {windowWidth} x {windowHeight}");
         }
         else if (PICTURE_FRAME_ON_DESKTOP)
