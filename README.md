@@ -1,4 +1,4 @@
-<h1 align="center">PictureFrame 4.1.5-beta</h1>
+<h1 align="center">PictureFrame 4.2.0-alpha</h1>
 
 <p align="center">Render pipeline calculator for GameMaker LTS 2026</p>
 
