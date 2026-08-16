@@ -111,17 +111,17 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
     _system.__configStruct = variable_clone(_configStruct);
     _system.__layoutStruct = _layoutStruct;
     
-    if (PICTUREFRAME_VERBOSE) __PfTrace($"`PfApply()` called with `tryResizeWindow` = `{_tryResizeWindow? "true" : "false"}` and  `cameraIgnoreForce` = `{(_cameraIgnoreForce == undefined)? "undefined" : (_cameraIgnoreForce? "true" : "false")}`");
+    if (PICTURE_FRAME_VERBOSE) __PfTrace($"`PfApply()` called with `tryResizeWindow` = `{_tryResizeWindow? "true" : "false"}` and  `cameraIgnoreForce` = `{(_cameraIgnoreForce == undefined)? "undefined" : (_cameraIgnoreForce? "true" : "false")}`");
     
     with(_layoutStruct)
     {
         _cameraIgnoreForce ??= cameraIgnore;
-        if (PICTUREFRAME_VERBOSE) __PfTrace($"`cameraIgnoreForce` resolved to `{(_cameraIgnoreForce? "true" : "false")}`");
+        if (PICTURE_FRAME_VERBOSE) __PfTrace($"`cameraIgnoreForce` resolved to `{(_cameraIgnoreForce? "true" : "false")}`");
         
         if (not _cameraIgnoreForce)
         {
             view_enabled = true;
-            if (PICTUREFRAME_VERBOSE) __PfTrace($"Set `view_enabled` to `true` to turn on views for this room");
+            if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set `view_enabled` to `true` to turn on views for this room");
             
             var _camera = view_get_camera(0);
             if (_camera < 0)
@@ -130,7 +130,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
                 view_set_visible(0, true);
                 var _camera = camera_create_view(0, 0, cameraWidth, cameraHeight);
                 view_set_camera(0, _camera);
-                if (PICTUREFRAME_VERBOSE) __PfTrace($"Set view[0] to visible, created camera {_camera}, and set the camera size to {cameraWidth} x {cameraHeight}");
+                if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set view[0] to visible, created camera {_camera}, and set the camera size to {cameraWidth} x {cameraHeight}");
             }
             else
             {
@@ -146,7 +146,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
                     camera_set_view_pos(_camera, _x, _y);
                     camera_set_view_size(_camera, cameraWidth, cameraHeight);
                     
-                    if (PICTUREFRAME_VERBOSE) __PfTrace($"Set camera {_camera} for view[0] to {cameraWidth} x {cameraHeight} at position ({_x}, {_y})");
+                    if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set camera {_camera} for view[0] to {cameraWidth} x {cameraHeight} at position ({_x}, {_y})");
                 }
                 else
                 {
@@ -155,7 +155,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
                     camera_set_view_pos(_camera, 0, 0);
                     camera_set_view_size(_camera, cameraWidth, cameraHeight);
                     
-                    if (PICTUREFRAME_VERBOSE) __PfTrace($"Set view[0] to visible and set its camera ({_camera}) to {cameraWidth} x {cameraHeight} at position (0, 0)");
+                    if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set view[0] to visible and set its camera ({_camera}) to {cameraWidth} x {cameraHeight} at position (0, 0)");
                 }
             }
         }
@@ -164,7 +164,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
         if ((surface_get_width(application_surface) != floor(viewWidth)) || (surface_get_height(application_surface) != floor(viewHeight)))
         {
             surface_resize(application_surface, viewWidth, viewHeight);
-            if (PICTUREFRAME_VERBOSE) __PfTrace($"Resizing application surface to {viewWidth} x {viewHeight} (should be the same as the view)");
+            if (PICTURE_FRAME_VERBOSE) __PfTrace($"Resizing application surface to {viewWidth} x {viewHeight} (should be the same as the view)");
         }
         
         //Set the view position to take up the entirety of the application surface
@@ -175,17 +175,17 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
             view_set_wport(0, viewWidth);
             view_set_hport(0, viewHeight);
             
-            if (PICTUREFRAME_VERBOSE) __PfTrace($"Set viewport to {viewWidth} x {viewHeight} at position (0, 0) on the application surface");
+            if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set viewport to {viewWidth} x {viewHeight} at position (0, 0) on the application surface");
         }
         
         if (PICTURE_FRAME_ON_GXGAMES)
         {
             window_set_fullscreen(fullscreen);
-            if (PICTUREFRAME_VERBOSE) __PfTrace($"Set {fullscreen? "fullscreen" : "windowed"}");
+            if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set {fullscreen? "fullscreen" : "windowed"}");
             
             GXCanvasSetCanvasSize(windowWidth, windowHeight);
             GXCanvasSetCanvasCSSSize(windowWidth, windowHeight);
-            if (PICTUREFRAME_VERBOSE) __PfTrace($"Set canvas to {windowWidth} x {windowHeight}");
+            if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set canvas to {windowWidth} x {windowHeight}");
         }
         else if (PICTURE_FRAME_ON_DESKTOP)
         {
@@ -195,7 +195,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
                 if (not window_get_fullscreen())
                 {
                     window_set_fullscreen(true);
-                    if (PICTUREFRAME_VERBOSE) __PfTrace($"Set fullscreen");
+                    if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set fullscreen");
                 }
             }
             else
@@ -203,7 +203,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
                 if (window_get_fullscreen())
                 {
                     window_set_fullscreen(false);
-                    if (PICTUREFRAME_VERBOSE) __PfTrace($"Set windowed");
+                    if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set windowed");
                 }
                 
                 if (_tryResizeWindow && ((__PfWindowGetWidth() != windowWidth) || (__PfWindowGetHeight() != windowHeight)))
@@ -217,7 +217,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
                     var _y = window_get_y() - 0.5*(_height - _oldHeight);
                     window_set_rectangle(_x, _y, _width, _height);
                     
-                    if (PICTUREFRAME_VERBOSE) __PfTrace($"Set window rectangle to {_width} x {_height} at position ({_x}, {_y})");
+                    if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set window rectangle to {_width} x {_height} at position ({_x}, {_y})");
                 }
             }
         }
@@ -226,7 +226,7 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
         //have to use it regardless
         display_set_gui_maximize(1/windowToGuiScaleX, 1/windowToGuiScaleY, guiX, guiY);
         
-        if (PICTUREFRAME_VERBOSE)
+        if (PICTURE_FRAME_VERBOSE)
         {
             __PfTrace($"Set the GUI to {guiWidth} x {guiHeight} at position ({guiX}, {guiY})");
             __PfTrace($"Calling `display_set_gui_maximize({1/windowToGuiScaleX}, {1/windowToGuiScaleY}, {guiX}, {guiY})`");

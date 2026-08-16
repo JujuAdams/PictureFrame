@@ -3,7 +3,7 @@
 /// Whether to show large amounts of information describing the decisions that PictureFrame is
 /// taking when calculating the render pipeline for your game. This is only useful for debugging
 /// and this macro should be set to `false` for production builds.
-#macro PICTUREFRAME_VERBOSE  false
+#macro PICTURE_FRAME_VERBOSE  false
 
 /// Unfortunately, PictureFrame has some compatibility issues with GameMaker's native mouse
 /// position getters. This is due to PictureFrame taking control of GameMaker's application surface
