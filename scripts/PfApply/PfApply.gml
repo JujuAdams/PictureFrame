@@ -183,9 +183,21 @@ function PfApply(_configStruct, _tryResizeWindow = false, _cameraIgnoreForce = u
             window_set_fullscreen(fullscreen);
             if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set {fullscreen? "fullscreen" : "windowed"}");
             
-            GXCanvasSetCanvasSize(windowWidth, windowHeight);
-            GXCanvasSetCanvasCSSSize(windowWidth, windowHeight);
-            if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set canvas to {windowWidth} x {windowHeight}");
+            if (GXCanvasIsItchIo() && GXCanvasIsMobile())
+            {
+                GXCanvasSetCanvasSize(GXCanvasGetWindowInnerWidth(), GXCanvasGetWindowInnerHeight());
+                GXCanvasSetCanvasCSSSize(GXCanvasGetWindowInnerWidth(), GXCanvasGetWindowInnerHeight());
+            }
+            else
+            {
+                if (not GXCanvasIsMobile())
+                {
+                    GXCanvasSetCanvasSize(windowWidth, windowHeight);
+                }
+                
+                GXCanvasSetCanvasCSSSize(windowWidth, windowHeight);
+                if (PICTURE_FRAME_VERBOSE) __PfTrace($"Set canvas to {windowWidth} x {windowHeight}");
+            }
         }
         else if (PICTURE_FRAME_ON_DESKTOP)
         {
