@@ -1,15 +1,6 @@
-if (mode == modeCount-1)
-{
-    return;
-}
-
 draw_set_font(fntDefault);
 
-if (mode == 0)
-{
-    funcTextbox(3, 3, "Press [left] and [right] to change page");
-}
-else if (mode == 1)
+if (mode == 1)
 {
     var _bottom = funcTextbox(3, 3, $"PictureFrame {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}\nPress [left] and [right] to change page");
     var _bottom = funcTextbox(3, _bottom+6, "Layout struct");
@@ -75,7 +66,13 @@ else if (mode == 2)
     _string += $"surfaceAvoidNotch = {_configStruct.surfaceAvoidNotch? "true" : "false"}\n";
     _string += $"surfacePixelPerfect = {_configStruct.surfacePixelPerfect? "true" : "false"}\n";
     _string += $"windowOverscanScale = {_configStruct.windowOverscanScale}\n";
-    funcTextbox(122, _bottom+6, _string);
+    var _rightBottom = funcTextbox(122, _bottom+6, _string);
+    
+    var _string = "";
+    _string += $"PICTURE_FRAME_ON_DESKTOP = {PICTURE_FRAME_ON_DESKTOP? "true" : "false"}\n";
+    _string += $"PICTURE_FRAME_ON_MOBILE = {PICTURE_FRAME_ON_MOBILE? "true" : "false"}\n";
+    _string += $"PICTURE_FRAME_ON_GXGAMES = {PICTURE_FRAME_ON_GXGAMES? "true" : "false"}\n";
+    funcTextbox(122, _rightBottom+6, _string);
     
     var _string = "";
     _string += $"guiWindowStretch = {_configStruct.guiWindowStretch}\n";
@@ -102,8 +99,8 @@ else if (mode == 3)
     var _bottom = funcTextbox(3, 3, $"GX.Canvas {extension_get_version("GXCanvas")}\nPress [left] and [right] to change page");
     
     var _string = "";
-    _string += $"itch.io = {GXCanvasIsItchIO()? "true" : "false"}\n";
-    _string += $"Is Mobile = {GXCanvasIsMobile()? "true" : "false"}\n";
+    _string += $"itch.io = {GXCanvasIsItchIo()? "true" : "false"}\n";
+    _string += $"Mobile = {GXCanvasIsMobile()? "true" : "false"}\n";
     _string += $"Canvas CSS = {GXCanvasGetCanvasCSSWidth()} x {GXCanvasGetCanvasCSSHeight()}\n";
     _string += $"Canvas = {GXCanvasGetCanvasWidth()} x {GXCanvasGetCanvasHeight()}\n";
     _string += $"Window Inner = {GXCanvasGetWindowInnerWidth()} x {GXCanvasGetWindowInnerHeight()}\n";

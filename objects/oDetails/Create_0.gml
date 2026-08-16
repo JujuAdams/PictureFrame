@@ -1,5 +1,5 @@
-mode = PICTURE_FRAME_ON_GXGAMES? 3 : 0;
-modeCount = PICTURE_FRAME_ON_GXGAMES? 5 : 4;
+mode = 1;
+modeCount = PICTURE_FRAME_ON_GXGAMES? 4 : 3;
 
 funcTextbox = function(_x, _y, _string)
 {
