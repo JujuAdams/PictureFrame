@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GXCanvasItchIoGetCanvasSize",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GXCanvasItchIoGetCanvasSize",
+  "parent":{
+    "name":"GXCanvas",
+    "path":"folders/GXCanvas.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

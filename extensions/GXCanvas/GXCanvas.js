@@ -40,11 +40,32 @@ function GXCanvasGetCanvasHeight() {
 	return canvasElement.height;
 }
 
+function GXCanvasSetStyleProperty(style, value) {
+	canvasElement.style[style] = value;
+}
+
+function GXCanvasGetStyleProperty(style) {
+	return canvasElement.style[style];
+}
+
+function GXCanvasGetStyle() {
+	return canvasElement.style;
+}
+
+function GXCanvasSetStyle(style) {
+	for(entry in style) {
+		canvasElement.style[entry] = style[entry];
+	}
+}
+
 function __GXCanvasInit() {
 	console.log("GXCanvas, initialised! By TabularElf - https://tabelf.link/");
 	// Deleting aspect ratio correction
 	g_GXCanvasInit = true;
 }
 
-let output = document.getElementById("output-container");
-output.remove();
+function GXCanvasRemoveOutputContainer() {
+	var GXCanvas_output_container = document.getElementById("output-container");
+	GXCanvas_output_container.remove();
+	return true;
+}

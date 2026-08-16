@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"__GXCanvasHelper",
+  "%Name":"__GXCanvasGlobal",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__GXCanvasHelper",
+  "name":"__GXCanvasGlobal",
   "parent":{
-    "name":"GXCanvas",
-    "path":"folders/GXCanvas.yy",
+    "name":"(System)",
+    "path":"folders/GXCanvas/(System).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GXCanvasSetUseItchIoCanvasSize",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GXCanvasSetUseItchIoCanvasSize",
+  "parent":{
+    "name":"GXCanvas",
+    "path":"folders/GXCanvas.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

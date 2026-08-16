@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GXCanvasIsMobile",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GXCanvasIsMobile",
+  "parent":{
+    "name":"GXCanvas",
+    "path":"folders/GXCanvas.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

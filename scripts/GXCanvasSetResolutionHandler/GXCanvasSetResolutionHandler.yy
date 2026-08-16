@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GXCanvasSetResolutionHandler",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GXCanvasSetResolutionHandler",
+  "parent":{
+    "name":"GXCanvas",
+    "path":"folders/GXCanvas.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

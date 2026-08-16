@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__GXCanvasDefaultHandler",
+  "%Name":"__GXCanvasWASMHandler",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__GXCanvasDefaultHandler",
+  "name":"__GXCanvasWASMHandler",
   "parent":{
     "name":"Resolution Handler Examples",
     "path":"folders/GXCanvas/Resolution Handler Examples.yy",

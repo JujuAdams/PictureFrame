@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GXCanvasForceCallResolutionHandler",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GXCanvasForceCallResolutionHandler",
+  "parent":{
+    "name":"GXCanvas",
+    "path":"folders/GXCanvas.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

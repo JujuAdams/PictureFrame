@@ -1,0 +1,4 @@
+This is the default resolution handler that GXCanvas uses, over what the WASM target would normally use
+(You can find a replica implementation under __GXCanvasWASMHandler).
+You may use either one as a base to make your own resolution handler using the function
+`GXCanvasSetResolutionHandler(callback)`

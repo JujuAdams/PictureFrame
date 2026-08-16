@@ -14,7 +14,7 @@
   "copyToTargets":17179869184,
   "description":"",
   "exportToGame":true,
-  "extensionVersion":"1.0.5",
+  "extensionVersion":"1.0.6",
   "files":[
     {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":-1,"filename":"GXCanvas.js","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"GXCanvasGetCanvasCSSWidth","argCount":0,"args":[],"documentation":"","externalName":"","help":"","hidden":false,"kind":5,"name":"GXCanvasGetCanvasCSSWidth","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
@@ -55,8 +55,8 @@
   "optionsFile":"options.json",
   "packageId":"",
   "parent":{
-    "name":"GXCanvas",
-    "path":"folders/GXCanvas.yy",
+    "name":"(System)",
+    "path":"folders/GXCanvas/(System).yy",
   },
   "productId":"",
   "resourceType":"GMExtension",
