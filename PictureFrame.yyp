@@ -10,6 +10,7 @@
   },
   "defaultScriptType":1,
   "Folders":[
+    {"$GMFolder":"","%Name":"GXCanvas","folderPath":"folders/GXCanvas.yy","name":"GXCanvas","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"PictureFrame","folderPath":"folders/PictureFrame.yy","name":"PictureFrame","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"(System)","folderPath":"folders/PictureFrame/(System).yy","name":"(System)","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Config Structs","folderPath":"folders/PictureFrame/Config Structs.yy","name":"Config Structs","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -27,6 +28,7 @@
   "name":"PictureFrame",
   "resources":[
     {"id":{"name":"__PfNotch","path":"extensions/__PfNotch/__PfNotch.yy",},},
+    {"id":{"name":"GXCanvas","path":"extensions/GXCanvas/GXCanvas.yy",},},
     {"id":{"name":"fntDefault","path":"fonts/fntDefault/fntDefault.yy",},},
     {"id":{"name":"oDemo","path":"objects/oDemo/oDemo.yy",},},
     {"id":{"name":"oDemoSmoothCamera","path":"objects/oDemoSmoothCamera/oDemoSmoothCamera.yy",},},
@@ -34,6 +36,8 @@
     {"id":{"name":"oFollowCircle","path":"objects/oFollowCircle/oFollowCircle.yy",},},
     {"id":{"name":"oMarkerCircle","path":"objects/oMarkerCircle/oMarkerCircle.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
+    {"id":{"name":"__GXCanvasDefaultHandler","path":"scripts/__GXCanvasDefaultHandler/__GXCanvasDefaultHandler.yy",},},
+    {"id":{"name":"__GXCanvasHelper","path":"scripts/__GXCanvasHelper/__GXCanvasHelper.yy",},},
     {"id":{"name":"__PfConfig","path":"scripts/__PfConfig/__PfConfig.yy",},},
     {"id":{"name":"__PfConstants","path":"scripts/__PfConstants/__PfConstants.yy",},},
     {"id":{"name":"__PfError","path":"scripts/__PfError/__PfError.yy",},},
