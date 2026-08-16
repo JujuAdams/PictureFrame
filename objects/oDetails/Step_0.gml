@@ -21,4 +21,4 @@ var _funcAnyGamepadPressedStart = function()
 
 var _delta = _funcAnyGamepadPressedStart();
 _delta += keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left);
-mode = (mode + _delta + 4) mod 4;
+mode = (mode + _delta + modeCount) mod modeCount;

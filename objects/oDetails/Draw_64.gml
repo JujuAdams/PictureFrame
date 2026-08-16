@@ -1,3 +1,8 @@
+if (mode == modeCount-1)
+{
+    return;
+}
+
 draw_set_font(fntDefault);
 
 if (mode == 0)
@@ -6,10 +11,8 @@ if (mode == 0)
 }
 else if (mode == 1)
 {
-    var _string = "";
-    _string += $"PictureFrame {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}\nPress [left] and [right] to change page\n";
-    
-    var _bottom = funcTextbox(3, 3, _string);
+    var _bottom = funcTextbox(3, 3, $"PictureFrame {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}\nPress [left] and [right] to change page");
+    var _bottom = funcTextbox(3, _bottom+6, "Layout struct");
     
     var _layoutStruct = PfGetAppliedLayoutStruct();
     
@@ -59,10 +62,8 @@ else if (mode == 1)
 }
 else if (mode == 2)
 {
-    var _string = "";
-    _string += $"PictureFrame {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}\nPress [left] and [right] to change page\n";
-    
-    var _bottom = funcTextbox(3, 3, _string);
+    var _bottom = funcTextbox(3, 3, $"PictureFrame {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}\nPress [left] and [right] to change page");
+    var _bottom = funcTextbox(3, _bottom+6, "Config struct");
     
     var _configStruct = PfGetAppliedConfigStruct();
     
@@ -94,6 +95,24 @@ else if (mode == 2)
     _string += $"cameraIgnore = {_configStruct.cameraIgnore? "true" : "false"}\n";
     _string += $"viewMaxScale = {_configStruct.viewMaxScale}\n";
     _string += $"viewPixelPerfect = {_configStruct.viewPixelPerfect}\n";
+    funcTextbox(3, _bottom+6, _string);
+}
+else if (mode == 3)
+{
+    var _bottom = funcTextbox(3, 3, $"GX.Canvas {extension_get_version("GXCanvas")}\nPress [left] and [right] to change page");
+    
+    var _string = "";
+    _string += $"itch.io = {GXCanvasIsItchIO()? "true" : "false"}\n";
+    _string += $"Is Mobile = {GXCanvasIsMobile()? "true" : "false"}\n";
+    _string += $"Canvas CSS = {GXCanvasGetCanvasCSSWidth()} x {GXCanvasGetCanvasCSSHeight()}\n";
+    _string += $"Canvas = {GXCanvasGetCanvasWidth()} x {GXCanvasGetCanvasHeight()}\n";
+    _string += $"Window Inner = {GXCanvasGetWindowInnerWidth()} x {GXCanvasGetWindowInnerHeight()}\n";
+    _string += $"Screen = {GXCanvasGetScreenWidth()} x {GXCanvasGetScreenHeight()}\n";
+    var _bottom = funcTextbox(3, _bottom+6, _string);
+    
+    var _string = "";
+    _string += $"GM Native Window = {window_get_width()} x {window_get_height()}\n";
+    _string += $"PF Window = {__PfWindowGetWidth()} x {__PfWindowGetHeight()}\n";
     funcTextbox(3, _bottom+6, _string);
 }
 
