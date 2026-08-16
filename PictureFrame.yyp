@@ -26,7 +26,6 @@
   },
   "name":"PictureFrame",
   "resources":[
-    {"id":{"name":"__PfGXCanvas","path":"extensions/__PfGXCanvas/__PfGXCanvas.yy",},},
     {"id":{"name":"__PfNotch","path":"extensions/__PfNotch/__PfNotch.yy",},},
     {"id":{"name":"fntDefault","path":"fonts/fntDefault/fntDefault.yy",},},
     {"id":{"name":"oDemo","path":"objects/oDemo/oDemo.yy",},},

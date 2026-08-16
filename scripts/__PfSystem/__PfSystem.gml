@@ -9,9 +9,9 @@ function __PfSystem()
     
     __PfTrace($"Welcome to PictureFrame by Juju Adams! GX.Games solution written by TabularElf. This is version {PICTURE_FRAME_VERSION}, {PICTURE_FRAME_DATE}");
     
-    if (extension_exists("GXCanvas"))
+    if (PICTURE_FRAME_ON_GXGAMES && (not extension_exists("GXCanvas")))
     {
-        __PfError($"PictureFrame is not compatible with `GXCanvas`");
+        __PfError($"PictureFrame requires `GXCanvas` to run on GX.Games\nPlease import GX.Canvas from https://github.com/tabularelf/GX-Extensions/");
     }
     
     _system = {};
